@@ -14,9 +14,11 @@ comes with VFEP); Odyssey and other optional content load only when present. C# 
 4.7.2), Harmony, XML defs. Def prefix `OLWC_`.
 
 **State: scaffolded, first mechanics in, not yet released.** The resurrect mech ability (Biotech's
-apocriton ability on the armor, drawing on a slow-recharging core with a red gauge) and the
-overlord work trait (the pilot keeps smithing and research, so mech work and hacking) are
-implemented; the set's plating, shield and costs are the tier's standard pending a tuning pass.
+apocriton ability on the armor, drawing on a slow-recharging core with a red gauge), the
+overlord work trait (the pilot keeps smithing and research, so mech work and hacking) and the
+helmet's command range (a wearing mechanitor orders drafted mechs anywhere on the map, vanilla's
+24.9 cells lifted behind a settings section) are implemented; the set's plating, shield and
+costs are the tier's standard pending a tuning pass.
 `TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file; the sibling
 `../MedicWarcasket/` repo (same author, same VFEP base) is the worked precedent for the own-trait
 work profile, the settings idiom and the infrastructure copied here, and `../ToxinWarcasket/` for

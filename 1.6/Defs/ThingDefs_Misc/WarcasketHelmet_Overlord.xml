@@ -7,9 +7,20 @@
     Plating, tags and the market-value references follow the armor's header.
 
     Tuning, first pass: ComponentSpacer 4 / Plasteel 60, the Controller's and Brute's price for a
-    helmet with a function of its own; the function (a mechlink passive, bandwidth or
-    control groups) is the tuning
-    pass's question, in TODOs.md.
+    helmet with a function of its own; whether the command range below prices like one, or a
+    mechlink passive (bandwidth or control groups) joins it, is the tuning pass's question, in
+    TODOs.md.
+
+    Command range (the CommandRangeExtension entry, Source/1.6/CommandRange/): a mechanitor
+    wearing the helmet may order their drafted mechs anywhere on the map they share (scope
+    CurrentMap), where vanilla stops every move and attack order at 24.9 cells from the overseer.
+    The helmet carries it as the set's command visor, the piece the lore gives the pilot's
+    mechlink; the mod settings may move the entry to the shoulders, widen it to every mechanitor
+    or switch it off, and override the scope (Anywhere drops the same-map rule too; Radius keeps
+    vanilla's shape at the radius below) and the radius, which is the Radius scope's reach and
+    the settings slider's default, left at vanilla's 24.9 so switching to that scope starts from
+    vanilla. The settings write every choice back onto this entry at startup and when the window
+    closes; CommandRange's header has the vanilla call paths and the rules.
 
     Art: the helmet alone of the three pieces ships masks (_northm/_eastm/_southm for the worn
     graphic, _m for the item icon), so it draws with CutoutComplex and useWornGraphicMask, as
@@ -77,6 +88,10 @@
     <modExtensions>
       <li Class="VEF.Apparels.ApparelExtension">
         <priority>1</priority>
+      </li>
+      <li Class="OverlordWarcasket.CommandRangeExtension">
+        <scope>CurrentMap</scope>
+        <radius>24.9</radius>
       </li>
     </modExtensions>
   </VFEPirates.WarcasketDef>

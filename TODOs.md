@@ -19,13 +19,20 @@
 - **CE subdomain compat scan** Check CE for any extra related subdomains that it takes over from vanilla
 - **Set tuning pass** (`Docs/Specs/`, a Set-Tuning.md as the Medic's). The three defs carry the
   tier's standard plating, shield and costs with placeholder rationale; decide whether the core
-  prices like the Controller's drone module (12 components) and what the shoulders and helmet do
-  on their own. Candidates in the mechanitor's own vocabulary: a `MechBandwidth` offset (Biotech's
+  prices like the Controller's drone module (12 components), whether the helmet's command range
+  prices like a module of its own, and what the shoulders do on their own. Candidates in the mechanitor's own vocabulary: a `MechBandwidth` offset (Biotech's
   bandwidth pack is the price reference), a `MechControlGroups` offset, a mech-repair or
   gestation speed offset for a smithing pilot. Keep the set-wide numbers inside the tier's band.
   Also compare stats/costs against the other mods: Alpha Mechs warcasket and Mechlord Warcasket
 - **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
-- **Helmet/Shoulder passive** Drop command range limit for the mechanitor's mechs on the current map?
+- **In-game run of the mechanitor command range.** The patches build clean and the rules are
+  unit-tested, but no order has been given in game: with the helmet on, a drafted mech ordered
+  across the map by right-click move, attack and the multi-pawn drag, the white ring gone; the
+  radius scope at 29.9 and at 9.9 with the ring at that radius and the refusal back beyond it;
+  "anywhere" with the mech on a second map; "applies to" moved to the shoulders; "no one" giving
+  vanilla's "Out of command range" again. Then the settings page: the greyed second group, the
+  slider selecting its radio, the summary line, and the choices surviving a reopen and a
+  language switch (`Docs/Specs/Mechanitor-Command-Range.md`, section 5).
 - **Recharge rate.** The shipped 1% of capacity per day is one charge every ten days on a
   ten-charge core, a reserve rather than a well, taken literally from the brief; the setting
   slider spans up to a full core a day if play says otherwise.
@@ -34,7 +41,7 @@
   (`Docs/Specs/Overlord-Work-Trait.md`, section 4), autohack and the Hack gizmo included.
 - **Art.** `Docs/Art/WarcasketOverlordHelmet_east_alt.png` is the second helmet east facing the
   artist delivered (a few thousand pixels differ from the one shipped); pick one and delete the other.
-  Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
+- Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
   maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc

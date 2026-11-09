@@ -9,8 +9,11 @@
     Tuning, first pass: ComponentSpacer 2 / Plasteel 60, the Controller shoulders' price. The
     plasteel is the 10th-gen shoulder-to-armor ratio, roughly 0.4 (Siegebreaker 60/145,
     Guardian 80/200, Controller 60/150, Sarcophagus 60/145, Brute 60/160), of the armor's 150.
-    The pads carry no function of their own yet; the mechlink passives the lore hints at
-    (a bandwidth or control group offset) are the tuning pass's question, in TODOs.md.
+    The pads carry no function of their own in XML; the mechlink passives the lore hints at
+    (a bandwidth or control group offset) are the tuning pass's question, in TODOs.md. The
+    helmet's CommandRangeExtension (its header) lands here at startup when the mod settings
+    point the extended command range at the shoulders, so the pads can carry it without an
+    entry of their own.
 
     ApparelExtension priority 1, for the reason in the armor def's header: the
     VFEP_WarcasketShoulderPadBase parent carries its own, and only the highest-priority copy

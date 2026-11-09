@@ -34,6 +34,15 @@ namespace OverlordWarcasket;
 // survives a play-data reload as a plain static. The section is skipped while the mirror found
 // nothing to toggle (a broken install).
 //
+// The command range section is two radio groups and a slider (CommandRangeSetting), who the
+// set's extended mechanitor command range applies to and how far it reaches, written through
+// CommandRange.Apply onto the set's CommandRangeExtension (its scope and radius), onto the piece
+// that carries it (moved between the helmet and the shoulders) and into the state the two
+// patches read; the defaults are the extension's as the XML places it, on the helmet. Its
+// header carries that piece's icon, read off the def at draw time, and the section's own text.
+// It needs only the two pieces, so it is skipped when either is missing or neither carries the
+// extension, and shown without the ability's defs.
+//
 // The cerebrex node section is one switch that writes no def: the XML patch
 // 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml reads it by name while the patches apply
 // (PatchOperationSetting), so its row says a change takes a restart and the summary reads which
@@ -61,6 +70,7 @@ public class OverlordWarcasketSettings : ModSettings
     public readonly BoolSetting sparksOnlyDrafted = new("SparksOnlyDrafted");
     public readonly BoolSetting cerebrexArt = new("CerebrexArt") { RequiresRestart = true };
     public readonly WorkSetting work = new();
+    public readonly CommandRangeSetting commandRange = new();
 
     // The cooldown is game hours up to ten days, banded so one slider spans a gap between casts
     // in a fight and one between raids: real seconds at normal speed up to ten (quarter, then
@@ -147,13 +157,14 @@ public class OverlordWarcasketSettings : ModSettings
         sparksOnlyDrafted.ExposeData();
         cerebrexArt.ExposeData();
         work.ExposeData();
+        commandRange.ExposeData();
         foreach (Tunable tunable in All)
             tunable.ExposeData();
     }
 
     // Reads the def-backed defaults before the first ApplyToDefs overwrites them; defs must be
     // loaded, so ModInit's static constructor calls this, never the Mod constructor. The cerebrex
-    // node's come first, needing none of the set's defs.
+    // node's and the command range's come first, needing none of the ability's defs.
     public void LoadDefaultsFromDefs()
     {
         cerebrexNode = CerebrexNode.Def;
@@ -162,6 +173,7 @@ public class OverlordWarcasketSettings : ModSettings
             cerebrexLive = CerebrexNode.UsesOurArt(cerebrexNode);
             cerebrexTip = HeaderTip(cerebrexNode.LabelCap, cerebrexNode.description);
         }
+        commandRange.LoadDefaults();
         if (!TryGetDefs(out Defs defs))
             return;
         charges.DefaultValue = defs.core.maxCharges;
@@ -181,12 +193,13 @@ public class OverlordWarcasketSettings : ModSettings
         defaultsLoaded = true;
     }
 
-    // The work profile goes first: it needs none of the ability's defs, so a saved choice still
-    // holds while they are missing, though the page is unavailable to change it. The cerebrex
-    // art switch writes nothing here; its patch read it at startup.
+    // The work profile and the command range go first: they need none of the ability's defs, so
+    // a saved choice still holds while they are missing, though the page is unavailable to
+    // change it. The cerebrex art switch writes nothing here; its patch read it at startup.
     public void ApplyToDefs()
     {
         WorkProfile.Apply(work.IsOpen);
+        commandRange.Apply();
         if (!defaultsLoaded || !TryGetDefs(out Defs defs))
             return;
         defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
@@ -255,6 +268,13 @@ public class OverlordWarcasketSettings : ModSettings
             SummaryRow(listing, WorkSummary);
             work.DoRows(listing);
         }
+        if (commandRange.Available)
+        {
+            SectionHeader(listing, "OLWC_SectionCommandRange", commandRange.Icon,
+                HeaderTip("OLWC_SectionCommandRange".Translate(), "OLWC_SectionCommandRangeDesc".Translate(CommandRange.VanillaRadius.ToString("0.#"))));
+            SummaryRow(listing, commandRange.Summary);
+            commandRange.DoRows(listing);
+        }
         if (cerebrexNode != null)
         {
             SectionHeader(listing, "OLWC_SectionCerebrex", CerebrexNode.Icon, cerebrexTip);
@@ -273,6 +293,7 @@ public class OverlordWarcasketSettings : ModSettings
             sparksOnlyDrafted.Reset();
             cerebrexArt.Reset();
             work.Reset();
+            commandRange.Reset();
             foreach (Tunable tunable in All)
                 tunable.Reset();
         }

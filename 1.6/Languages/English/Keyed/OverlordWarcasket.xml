@@ -62,6 +62,38 @@
   <OLWC_WorkSummary>The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules.</OLWC_WorkSummary>
   <OLWC_WorkSummaryNone>The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules.</OLWC_WorkSummaryNone>
 
+  <!-- Mechanitor command range (Source/1.6/CommandRange/, Source/1.6/Settings/CommandRangeSetting.cs) -->
+  <OLWC_SectionCommandRange>Mechanitor command range</OLWC_SectionCommandRange>
+  <OLWC_SectionCommandRangeDesc>Normally, a mechanitor's drafted mechs can only be ordered to within {0} cells of the mechanitor. These settings let mechanitors command their mechs from further away.</OLWC_SectionCommandRangeDesc>
+
+  <OLWC_CommandRangeAppliesTo>Applies to</OLWC_CommandRangeAppliesTo>
+  <OLWC_CommandRangeAppliesToDesc>Which mechanitors get the extended command range.</OLWC_CommandRangeAppliesToDesc>
+  <OLWC_CommandRangeWearing>Mechanitors wearing the {0}</OLWC_CommandRangeWearing>
+  <OLWC_CommandRangeWearingDesc>Only mechanitors wearing the {0} will get the extended command range. Everyone else will keep the normal range.</OLWC_CommandRangeWearingDesc>
+  <OLWC_CommandRangeAllMechanitors>All mechanitors</OLWC_CommandRangeAllMechanitors>
+  <OLWC_CommandRangeAllMechanitorsDesc>Every mechanitor will get the extended command range, whatever they are wearing.</OLWC_CommandRangeAllMechanitorsDesc>
+  <OLWC_CommandRangeNone>No one</OLWC_CommandRangeNone>
+  <OLWC_CommandRangeNoneDesc>Mechanitors will keep the normal command range of {0} cells.</OLWC_CommandRangeNoneDesc>
+
+  <OLWC_CommandRangeScope>Command range</OLWC_CommandRangeScope>
+  <OLWC_CommandRangeScopeDesc>How far from their mechanitor drafted mechs can be ordered to move or attack.</OLWC_CommandRangeScopeDesc>
+  <OLWC_CommandRangeCurrentMap>Anywhere on the same map</OLWC_CommandRangeCurrentMap>
+  <OLWC_CommandRangeCurrentMapDesc>Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map.</OLWC_CommandRangeCurrentMapDesc>
+  <OLWC_CommandRangeAnywhere>Anywhere</OLWC_CommandRangeAnywhere>
+  <OLWC_CommandRangeAnywhereDesc>Drafted mechs can be ordered anywhere, even on a map their mechanitor is not on. The mechanitor must still be on a map of their own, not traveling in a caravan or a transport pod.</OLWC_CommandRangeAnywhereDesc>
+  <OLWC_CommandRangeRadius>Within {0} cells{1}</OLWC_CommandRangeRadius>
+  <OLWC_CommandRangeRadiusDesc>Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells.</OLWC_CommandRangeRadiusDesc>
+  <OLWC_CommandRangeVanillaSuffix> (vanilla)</OLWC_CommandRangeVanillaSuffix>
+  <OLWC_CommandRangeSliderSelects>Moving the slider will select this range.</OLWC_CommandRangeSliderSelects>
+  <OLWC_CommandRangeInert>This has no effect while the extended command range applies to no one.</OLWC_CommandRangeInert>
+
+  <OLWC_CommandRangeSummaryNone>Mechanitors keep the normal command range of {0} cells.</OLWC_CommandRangeSummaryNone>
+  <OLWC_CommandRangeSummaryWearing>Mechanitors wearing the {0} can order their drafted mechs {1}.</OLWC_CommandRangeSummaryWearing>
+  <OLWC_CommandRangeSummaryAll>Every mechanitor can order their drafted mechs {0}.</OLWC_CommandRangeSummaryAll>
+  <OLWC_CommandRangeReachMap>anywhere on the same map</OLWC_CommandRangeReachMap>
+  <OLWC_CommandRangeReachAnywhere>anywhere, even on another map</OLWC_CommandRangeReachAnywhere>
+  <OLWC_CommandRangeReachRadius>to within {0} cells</OLWC_CommandRangeReachRadius>
+
   <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexNode.cs; the switch gates 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) -->
   <OLWC_SectionCerebrex>Cerebrex node</OLWC_SectionCerebrex>
   <OLWC_CerebrexArt>Replace the cerebrex node's art</OLWC_CerebrexArt>
