@@ -4,7 +4,13 @@
   <author>Sam Hunt</author>
   <packageId>shunter.overlordwarcasket</packageId>
   <modVersion>0.1.0</modVersion>
-  <description>Adds the Overlord warcasket, a spacer-tier mechanitor armor set for VFE Pirates, welded at the warcasket foundry like any other. Its shell carries a resurrection core that brings your fallen mechs back, and its pilot can still gestate and repair mechs, research and hack. Compatible with SOS2, VGE and Combat Extended. Requires Biotech and Vanilla Factions Expanded - Pirates.</description>
+  <description>Adds the Overlord, a 10th generation mechanitor warcasket for Vanilla Factions Expanded - Pirates, built at the warcasket foundry like any other set.
+
+The armor carries a resurrection core that brings your recently killed mechs back with some of their wounds healed. Heavier mechs take more charges, and the core recharges slowly. The pilot can still do smithing and research, so they can gestate and repair mechs and hack.
+
+Optionally let pilots without a mechlink use the core too, and tune its charges and recharge rate in the mod settings.
+
+Requires Biotech. Supports CE, Vanilla Gravship Expanded, SOS2.</description>
   <supportedVersions>
     <li>1.6</li>
     <li>1.7</li>

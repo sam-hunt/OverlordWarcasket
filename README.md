@@ -25,8 +25,6 @@ and brings the fallen ones back.
 The mod is in development: the resurrection core and the work profile are in; the set's tuning,
 the pieces' passives and the descriptions are still being settled.
 
-Odyssey is optional.
-
 ## Features
 
 ### The Overlord Set
@@ -56,7 +54,6 @@ spacer warcaskets research.
 - **Vanilla Factions Expanded - Pirates** (required), which itself requires
   **Vanilla Expanded Framework**
 - **Harmony** (auto-download from Steam Workshop if you don't have it)
-- **Odyssey DLC** is optional
 
 ## Installation
 

@@ -20,9 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- The Overlord warcasket set: armor, shoulders and helmet on VFE Pirates' spacer chassis, welded at the foundry and unlocked by spacer warcaskets research
-- The armor grants resurrect mech: every recently killed mech of yours near the one targeted comes back, each costing charges by its weight class, as the apocriton's ability does
-- The armor's resurrection core holds ten charges, slowly recharges on its own, shows a red gauge on the pilot and crackles with the apocriton's red sparks on a drafted pilot or a raider while it holds a charge
-- The pilot keeps smithing (mech gestation, subcore encoding and mech repair) and research (hacking included), and can take on crafting, tailoring and dark study from the mod settings; every other work rule follows VFE Pirates' warcasket trait and the mods that change it
-- Mod settings for the charge capacity, the recharge rate, the corpse window, the casting time, the cooldown, the mechlink requirement, sparks only while drafted and the enabled work types
-- Save Our Ship 2, Vanilla Gravship Expanded and Combat Extended support in line with VFE Pirates' spacer sets
+- The Overlord, a spacer-tier mechanitor warcasket set for VFE Pirates
+- Resurrect mech: the armor revives your recently killed mechs around the target, as the apocriton does
+- The armor's resurrection core holds ten charges and slowly recharges, with a red gauge on the pilot
+- A charged core crackles with the apocriton's red sparks
+- The pilot can still do smithing and research, so mech gestation, mech repair and hacking stay in reach
+- More work types for the pilot can be enabled in the mod settings
+- Mod settings for the resurrection core, the ability and the pilot's work
+- Combat Extended support
+- Vanilla Gravship Expanded and Save Our Ship 2 support
