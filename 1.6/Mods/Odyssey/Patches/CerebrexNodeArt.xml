@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!--
+    Optional, off by default: the cerebrex art setting draws Odyssey's cerebrex node
+    (Apparel_CerebrexNode) with this mod's art in place of Odyssey's. The node's art is two paths
+    on the def: graphicData/texPath, the item on the ground and the icon the def resolves from
+    it, and apparel/wornGraphicPath, the pack on the wearer's back (renderUtilityAsPack, so the
+    worn path takes the facing suffixes and no body type one). Both take the one path of ours,
+    which Mods/Odyssey/Textures carries as the item (no suffix) and the three worn facings, never
+    at Odyssey's path, where it would replace the art for everyone. PatchOperationSetting reads
+    the switch while the patches apply, so a change waits for a restart and the def then builds
+    its graphic, icon and atlas entry from our path exactly as it would from Odyssey's; off, the
+    patch touches nothing and Odyssey's XML stands. The root is gated on Odyssey's package id
+    (LoadFolders.xml), so the xpaths never miss. The path here must match CerebrexNode.TexPath
+    (Source/1.6/Settings/CerebrexNode.cs), which the settings window reads off the def to show
+    which art is live; Tests/1.6/CerebrexNodeArtTests.cs holds the two together.
+  -->
+  <Operation Class="OverlordWarcasket.PatchOperationSetting">
+    <setting>cerebrexArt</setting>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/graphicData/texPath</xpath>
+          <value>
+            <texPath>Things/Pawn/Humanlike/Apparel/CerebrexNodeOverlord/CerebrexNodePack</texPath>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/apparel/wornGraphicPath</xpath>
+          <value>
+            <wornGraphicPath>Things/Pawn/Humanlike/Apparel/CerebrexNodeOverlord/CerebrexNodePack</wornGraphicPath>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

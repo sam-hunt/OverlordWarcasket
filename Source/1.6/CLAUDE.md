@@ -17,8 +17,17 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   again from the `StaticConstructorOnStartupUtility.CallAll` postfix in `Patches/`. Mod-shipped
   textures are destroyed on the same reload: resolve them through a getter that re-resolves on a
   Unity-null `== null` check, never `??` or `??=`
-  (`~/dev/PersonaWeaponsUnbound/Source/1.6/Defs/PWU_Textures.cs` is the pattern). Vanilla-path
-  textures are safe as plain statics; the one texture held here, the settings' work icon, is one.
+  (`~/dev/PersonaWeaponsUnbound/Source/1.6/Defs/PWU_Textures.cs` is the pattern;
+  `CerebrexNode.Icon` is the one here). Vanilla-path textures are safe as plain statics; the
+  settings' work icon is one.
+- **A switch an XML patch reads is a restart-time setting.** `PatchOperationSetting`
+  (`PatchOperations/`, root namespace, as the XML names it) reads a public `BoolSetting` field by
+  name while the patches apply, after the `Mod` constructor loaded the saved settings, so the
+  switch's row carries the restart suffix (`BoolSetting.RequiresRestart`) and the settings code
+  writes nothing for it. The cerebrex node's art is the one such switch
+  (`1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml`): a def's graphic, icon and atlas entry are
+  built once from its paths at load, so a runtime write would have to rebuild all three through
+  private members. `Settings/CerebrexNode.cs` only reads the def for the window.
 - **Settings override def fields, never code paths.** `OverlordWarcasketSettings.ApplyToDefs`
   writes each tunable onto its def at startup and on window close (its header lists the fields),
   so vanilla, VEF and our code read the setting through the def. Live state a write leaves behind

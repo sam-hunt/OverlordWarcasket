@@ -3,6 +3,11 @@
   <v1.6>
     <li>/</li>
     <li>1.6</li>
+    <!-- Odyssey: this mod's art for the cerebrex node at its own texture path (art only, so no
+         version root) and the patch that writes that path onto Odyssey's def behind the cerebrex
+         art setting (1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). -->
+    <li IfModActive="ludeon.rimworld.odyssey">Mods/Odyssey</li>
+    <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
     <li IfModActive="vanillaexpanded.gravship">1.6/Mods/VanillaGravshipExpanded</li>
     <!-- Combat Extended: the set's plating, bulk, carry and shield on CE's scale and the
          helmet sealed against CE's smoke. Patches only, so it needs no art root. -->
@@ -14,6 +19,8 @@
          explicitly rather than left to the game's highest-lower-version fallback. -->
     <li>/</li>
     <li>1.6</li>
+    <li IfModActive="ludeon.rimworld.odyssey">Mods/Odyssey</li>
+    <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
     <li IfModActive="vanillaexpanded.gravship">1.6/Mods/VanillaGravshipExpanded</li>
     <li IfModActive="CETeam.CombatExtended">1.6/Mods/CombatExtended</li>
   </v1.7>

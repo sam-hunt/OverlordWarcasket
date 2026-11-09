@@ -27,5 +27,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The pilot can still do smithing and research, so mech gestation, mech repair and hacking stay in reach
 - More work types for the pilot can be enabled in the mod settings
 - Mod settings for the resurrection core, the ability and the pilot's work
+- With Odyssey, a mod setting redraws the cerebrex node with the mod's own art
 - Combat Extended support
 - Vanilla Gravship Expanded and Save Our Ship 2 support

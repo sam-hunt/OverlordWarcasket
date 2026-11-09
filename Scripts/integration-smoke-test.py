@@ -11,6 +11,7 @@
 #   python3 Scripts/integration-smoke-test.py              # boot + scan
 #   python3 Scripts/integration-smoke-test.py --no-launch  # rescan last log
 #   python3 Scripts/integration-smoke-test.py --strict     # any error fails
+#   python3 Scripts/integration-smoke-test.py --cerebrex-art  # cerebrex art on
 
 import sys
 from pathlib import Path
@@ -25,7 +26,12 @@ engine.PACKAGE_ID = "shunter.overlordwarcasket"
 # RATIONALE: the first six entries are the l10n CANONICAL_ACTIVE_MODS (the
 # refresh shim explains them: VFE Pirates and Biotech are the hard deps, VEF
 # and Harmony are VFEP's deps, Odyssey rides along for Vanilla Gravship
-# Expanded). Then the optional mods this repo integrates with. Vanilla
+# Expanded and opens the 1.6/Mods/Odyssey root, whose cerebrex art patch
+# branches on a setting the engine's default boot leaves off: boot once
+# plain and once with --cerebrex-art, which forces the setting on through
+# Scripts/cerebrex_art_boot.py, since the setting is a restart-time patch
+# gate and a failed operation there surfaces only in its own boot). Then
+# the optional mods this repo integrates with. Vanilla
 # Gravship Expanded (chapter 1): LoadFolders.xml opens the
 # 1.6/Mods/VanillaGravshipExpanded root on its package id, and that root's
 # vacuum-resistance patch only ever runs with it active. Combat Extended:
@@ -67,4 +73,10 @@ engine.INTEGRATION_PATTERNS = {
     "CE": ["CombatExtended"],
 }
 
+# Our own flag, taken off argv before the engine's argparse sees it.
+if "--cerebrex-art" in sys.argv:
+    sys.argv.remove("--cerebrex-art")
+    from cerebrex_art_boot import force_cerebrex_art_on  # noqa: E402
+
+    force_cerebrex_art_on()
 raise SystemExit(engine.main())

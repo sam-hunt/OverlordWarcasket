@@ -42,6 +42,8 @@ spacer warcaskets research.
   everything else follows VFE Pirates' rules and the mods that change them
 - **Mod settings** for the charge capacity, the recharge rate, how fresh a mech must be, the
   casting time, the cooldown, whether a mechlink is required and which work the pilot may take on
+- **A new look for the cerebrex node** (Odyssey): a setting redraws Odyssey's mechanitor utility
+  pack with the mod's own art, on the ground and on the wearer's back; off by default
 - **Priced like its peers**: spacer-tier plating and shield, costs in the tier's band, and the
   set's unlock is VFE Pirates' spacer warcaskets research
 - **Built on VFE Pirates** rather than beside it: the foundry, entombing, customization and

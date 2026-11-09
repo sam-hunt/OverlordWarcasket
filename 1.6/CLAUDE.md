@@ -45,8 +45,15 @@ manifest globs, so new files and subfolders need no build change.
   `1.6/Mods/<Mod>/` for version-specific content, root-level `Mods/<Mod>/` for art. The def's own
   `MayRequire` is then redundant and dropped. A patch in a gated root, or behind a
   `PatchOperationFindMod` gate, fails silently for everyone but that mod's players, so
-  `Tests/1.6/CompatPatchTests.cs` resolves every patch's xpaths against the main tree; keep every
-  xpath to one node per `defName` it names, or zero for a `PatchOperationConditional` probe.
+  `Tests/1.6/CompatPatchTests.cs` resolves every patch's xpaths against the main tree (joined by
+  the DLC's own defs from the local install for a root that patches a DLC def, its `DlcRoots`
+  table); keep every xpath to one node per `defName` it names, or zero for a
+  `PatchOperationConditional` probe.
+- **A patch that branches on a mod setting** wraps its operations in
+  `OverlordWarcasket.PatchOperationSetting` naming the switch (`Source/1.6/CLAUDE.md`); a change
+  then takes a restart, and the smoke test needs a boot with the setting forced on
+  (`Scripts/integration-smoke-test.py --cerebrex-art`), since the default boot never runs the
+  `match` branch.
 - **Compat roots sit beside the well-known folders, never inside them.** Anything under
   `1.6/Defs/**` or `1.6/Languages/**` loads unconditionally at any depth.
 - **An injection is gated by the root that contains it, never by the def it targets.** A main-tree
@@ -56,6 +63,9 @@ manifest globs, so new files and subfolders need no build change.
   silently skips one whole file. Suffix the filename with the gate's name (`Apparel_Odyssey.xml`).
 - **A compat art variant goes at the main tree's exact texture path** inside the gated root, not
   under a new name behind a patch. A later-listed load folder wins a shared path, so the gated
-  root stays below `/` in `LoadFolders.xml`.
+  root stays below `/` in `LoadFolders.xml`. The exception is an opt-in replacement of another
+  mod's art (`Mods/Odyssey/Textures`, the cerebrex node): at the original's path it would replace
+  that art for everyone, so it sits at its own path and a setting-gated patch in the matching
+  version root (`1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml`) writes that path onto the def.
 - **Gate on the package id** (`ludeon.rimworld.odyssey`), never `PatchOperationFindMod` (display
   names), unless the patch mirrors an upstream patch and copies its gate so both fire together.

@@ -6,9 +6,11 @@ namespace OverlordWarcasket;
 // One player-tunable switch, what a Tunable is for a number: until the player flips it, it is
 // DefaultValue, read from the def field it overrides when defs load (the settings'
 // LoadDefaultsFromDefs), so the def and its header stay the record and another mod's XML patch
-// moves the default too. Only an override is saved, under the key; flipping the box back to its
-// default clears it. The row's label and tooltip are "OLWC_" + key and that with "Desc", as a
-// Tunable's are, the tooltip taking the default's word in the box's colour.
+// moves the default too; a switch an XML patch reads instead (PatchOperationSetting) keeps the
+// default off, the XML's own state, and says a change takes a restart (RequiresRestart). Only an
+// override is saved, under the key; flipping the box back to its default clears it. The row's
+// label and tooltip are "OLWC_" + key and that with "Desc", as a Tunable's are, the tooltip
+// taking the default's word in the box's colour.
 public sealed class BoolSetting
 {
     // The default's word in the tooltip, in the colours of the box's states: pure green for the
@@ -25,6 +27,9 @@ public sealed class BoolSetting
     }
 
     public bool DefaultValue { get; set; }
+
+    // Read at startup only, so the row's label carries the restart suffix.
+    public bool RequiresRestart { get; set; }
 
     public bool Value => value ?? DefaultValue;
 
@@ -55,8 +60,11 @@ public sealed class BoolSetting
             : "OLWC_SwitchOff".Translate().Colorize(DisabledColor);
         TooltipHandler.TipRegion(row, ("OLWC_" + key + "Desc").Translate().Resolve() + "\n\n" + "OLWC_SwitchDefault".Translate(state).Resolve());
 
+        string label = ("OLWC_" + key).Translate();
+        if (RequiresRestart)
+            label += "OLWC_RequiresRestartSuffix".Translate();
         bool on = Value;
-        Widgets.CheckboxLabeled(row, ("OLWC_" + key).Translate(), ref on);
+        Widgets.CheckboxLabeled(row, label, ref on);
         value = on == DefaultValue ? null : on;
         listing.Gap(Tunable.RowGap);
     }

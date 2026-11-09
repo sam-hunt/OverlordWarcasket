@@ -62,10 +62,19 @@
   <OLWC_WorkSummary>The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules.</OLWC_WorkSummary>
   <OLWC_WorkSummaryNone>The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules.</OLWC_WorkSummaryNone>
 
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexNode.cs; the switch gates 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) -->
+  <OLWC_SectionCerebrex>Cerebrex node</OLWC_SectionCerebrex>
+  <OLWC_CerebrexArt>Replace the cerebrex node's art</OLWC_CerebrexArt>
+  <OLWC_CerebrexArtDesc>When enabled, Odyssey's cerebrex node will be drawn with Overlord Warcasket's own art, on the ground and on the wearer's back. When disabled, it will keep Odyssey's art.</OLWC_CerebrexArtDesc>
+  <OLWC_CerebrexSummaryOurs>The cerebrex node uses Overlord Warcasket's art.</OLWC_CerebrexSummaryOurs>
+  <OLWC_CerebrexSummaryVanilla>The cerebrex node uses Odyssey's own art.</OLWC_CerebrexSummaryVanilla>
+  <OLWC_CerebrexSummaryRestart>The change will take effect after a restart.</OLWC_CerebrexSummaryRestart>
+
   <OLWC_SwitchDefault>Default: {0}.</OLWC_SwitchDefault>
   <OLWC_SwitchOn>on</OLWC_SwitchOn>
   <OLWC_SwitchOff>off</OLWC_SwitchOff>
 
   <OLWC_DefaultSuffix> (default)</OLWC_DefaultSuffix>
+  <OLWC_RequiresRestartSuffix> (requires restart)</OLWC_RequiresRestartSuffix>
 
 </LanguageData>

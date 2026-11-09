@@ -29,6 +29,7 @@ The charge capacity, the recharge rate, how fresh a mech must be, the casting ti
 [*]Safe to add to existing saves.
 [*]Not safe to remove while a pawn is welded into the set.
 [*]Biotech: required.
+[*]Odyssey: optional. A mod setting redraws the cerebrex node with Overlord Warcasket's own art.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: required.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: EVA rated under the same rules as VFE Pirates' own sets.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: follows its vacuum-resistance rules for warcaskets.
