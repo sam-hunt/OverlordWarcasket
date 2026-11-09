@@ -34,10 +34,7 @@
   (`Docs/Specs/Overlord-Work-Trait.md`, section 4), autohack and the Hack gizmo included.
 - **Art.** `Docs/Art/WarcasketOverlordHelmet_east_alt.png` is the second helmet east facing the
   artist delivered (a few thousand pixels differ from the one shipped); pick one and delete the other.
-- **About art and size.** `About/ModIcon.png` position should be tweaked a little higher within the frame
-  The version badge on `About/Preview.png` and `.steamworkshop/Preview.gif` moves with the
-  `gif-patch` skill, never a re-export. Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the
-  first release.
+  Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
   maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
