@@ -5,7 +5,13 @@ namespace OverlordWarcasket;
 
 // Red sparks on the wearer while the armor's resurrection core holds a charge: the apocriton's
 // always-on crackle (its CompEffecter playing ApocrionAttached), gated on the charge. The cheapest
-// resurrection costs one charge, so "holds a charge" is "can resurrect something". With
+// resurrection costs one charge, so "holds a charge" is "can resurrect something", and the
+// wearer must be able to act on it too: alive, not downed and awake, the states in which a pilot
+// can cast. The apocriton's own effecter checks only that it is spawned, so it crackles while
+// downed; the core is a pilot's readied tool, not a mech's hum. A dead wearer is already
+// unspawned (Pawn.Kill despawns the pawn before spawning its corpse, 1.7.4990 decompile), so the
+// Dead check only states the rule, and Notify_WearerDied (Apparel.Notify_PawnKilled) tears the
+// effecter down at the death itself rather than at the armor's next tick. With
 // Props.onlyWhileDrafted (a mod setting) a wearer who can be drafted must also be drafted. One
 // who cannot is exempt and shows the sparks on the charge alone: PawnComponentsUtility gives a
 // Pawn_DraftController only to the player's spawned humanlikes and colony mechs, so a raider or
@@ -34,8 +40,9 @@ public class CompCoreSparks : ThingComp
     private Pawn Wearer => (parent as Apparel)?.Wearer;
 
     private bool ShouldShow(Pawn wearer) =>
-        wearer is { Spawned: true }
+        wearer is { Spawned: true, Dead: false, Downed: false }
         && wearer.Map == Find.CurrentMap
+        && wearer.Awake()
         && (!Props.onlyWhileDrafted || wearer.drafter == null || wearer.Drafted)
         && Core is { Charges: > 0 };
 
@@ -55,6 +62,12 @@ public class CompCoreSparks : ThingComp
     public override void Notify_Equipped(Pawn pawn)
     {
         base.Notify_Equipped(pawn);
+        Stop();
+    }
+
+    public override void Notify_WearerDied()
+    {
+        base.Notify_WearerDied();
         Stop();
     }
 

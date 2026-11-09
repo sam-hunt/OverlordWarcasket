@@ -39,7 +39,7 @@
 
     Core sparks: OverlordWarcasket.CompProperties_CoreSparks plays OLWC_CoreSparks (Effects/
     CoreSparks.xml), the apocriton's idle red crackle, on the wearer while the core holds a
-    charge. onlyWhileDrafted true also requires a player's pilot to be drafted, so the crackle
+    charge and the wearer is alive, not downed and awake (CompCoreSparks' header). onlyWhileDrafted true also requires a player's pilot to be drafted, so the crackle
     reads as the core readied for battle rather than the apocriton's constant hum; an AI pilot
     has no draft to wait on and shows it on the charge alone, as the apocriton does, until AI
     casting gives raiders a reason to spend charges. false plays it whenever the core is

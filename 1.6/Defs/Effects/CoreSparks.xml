@@ -6,7 +6,7 @@
     its second child, the Mote_ApocritonPulse psychic wave, which is the apocriton's hatred
     aura and no part of a resurrection core. Played on the armor's wearer by
     OverlordWarcasket.CompCoreSparks (Source/1.6/Comps/), which gates it on the core holding a
-    charge; its header has the tick path.
+    charge and the wearer being able to cast; its header has the conditions and the tick path.
 
     The spark child is the apocriton's, two fields scaled to a pawn: Biotech draws the
     apocriton at drawSize 2, a humanlike body at 1.5, so positionRadius 0.7 becomes 0.55 and

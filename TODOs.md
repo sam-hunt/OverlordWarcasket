@@ -2,7 +2,6 @@
 
 ## Before v1.0.0
 
-- **Create the remote repo**
 - **Cerebrex node retexture** mod settings toggle gated patch
 - **In-game run of the resurrect mech ability.** The code mirrors the apocriton's rules from
   the 1.7.4990 decompile and builds clean, but no cast has been watched yet: check the walk to
@@ -12,7 +11,8 @@
   Also the core's red sparks on the pilot: their size and spread against the warcasket's art,
   that they stop at zero charges and come back with the next one, and that they follow
   the draft with the drafted-only setting on and play undrafted with it off, and that a raider
-  in the set (dev spawn) shows them while its core is charged.
+  in the set (dev spawn) shows them while its core is charged. That they stop while the pilot
+  is downed or asleep, come back when it gets up, and stop at its death, the corpse silent.
 - **CE subdomain compat scan** Check CE for any extra related subdomains that it takes over from vanilla
 - **Set tuning pass** (`Docs/Specs/`, a Set-Tuning.md as the Medic's). The three defs carry the
   tier's standard plating, shield and costs with placeholder rationale; decide whether the core
@@ -35,7 +35,6 @@
   The version badge on `About/Preview.png` and `.steamworkshop/Preview.gif` moves with the
   `gif-patch` skill, never a re-export. Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the
   first release.
-- Ensure dead mechanitors in the suit don't play the sparks effect
 - Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
   maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
