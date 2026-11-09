@@ -6,7 +6,7 @@
 - **Cerebrex node retexture** mod settings toggle gated patch
 - **In-game run of the resurrect mech ability.** The code mirrors the apocriton's rules from
   the 1.7.4990 decompile and builds clean, but no cast has been watched yet: check the walk to
-  the corpse, the warmup effecter on the corpse, the area pickup of the corpses around it, the
+  the corpse, the warmup effecter on the corpse, that only the clicked mech comes back, the
   charge spend per weight class, the gauge's red bar and tooltip, the dev gizmos, and the
   "needs a mechlink" and "no charges" disabled reasons. Then the settings page end to end.
   Also the core's red sparks on the pilot: their size and spread against the warcasket's art,
@@ -36,7 +36,6 @@
   `gif-patch` skill, never a re-export. Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the
   first release.
 - Ensure dead mechanitors in the suit don't play the sparks effect
-- Check whether ressurect ability is single-target (intended) or aoe (biotech's apocriton)
 - Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
   maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc

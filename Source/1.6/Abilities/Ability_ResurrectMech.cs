@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using RimWorld;
 using RimWorld.Planet;
-using UnityEngine;
 using Verse;
 using Ability = VEF.Abilities.Ability;
 using Command_Ability = VEF.Abilities.Command_Ability;
@@ -15,19 +13,19 @@ namespace OverlordWarcasket;
 // The rules are the apocriton's, verified against RimWorld 1.7.4990's decompile: a corpse is
 // resurrectable when its pawn is a mechanoid of a weight class that allows it, of the pilot's own
 // faction, not of a kind that itself resurrects mechs, dead for at most the extension's
-// maxCorpseAgeTicks, and of a weight class the cost table prices within the charges held. Every
-// such corpse within the def's radius of the clicked one comes back, nearest first, each paid
-// from the core as the apocriton pays its charges; the applied effecter plays on each, the
-// centre effecter once at the targets' middle, and each mech staggers for a second.
+// maxCorpseAgeTicks, and of a weight class the cost table prices within the charges held. Unlike
+// the apocriton's area cast, only the clicked corpse comes back (the def header has the why),
+// paid from the core as the apocriton pays its charges; the applied effecter plays on the mech,
+// the centre effecter at its corpse, and the mech staggers for a second.
 //
-// Targeting: the click is a mech corpse (targetMode Thing, corpse-only parameters) and VEF's
-// AoE collects the corpses around it (hasAoE, radius, targetingParametersForAoE) through
-// ValidateTarget asked quietly; the clicked one is validated with messages. The click is not
+// Targeting: the click is a mech corpse (targetMode Thing, corpse-only parameters), validated
+// with messages through ValidateTarget; the def sets no hasAoE, so VEF's ModifyTargets leaves
+// it the only target. The click is not
 // range-limited (GetRangeForPawn returns a number VEF treats as unlimited) because the goto job
 // (VFEA_GotoTargetAndUseAbility) walks the pilot to within the def's distanceToTarget, the
 // apocriton's cast range, before the warmup; requireLineOfSight is off, as on the apocriton,
-// and the walk enforces sight itself. The corpses are re-checked at cast time, since the walk
-// may outlast the corpse window or another core may have spent its charges.
+// and the walk enforces sight itself. The corpse is re-checked at cast time, since the walk
+// may outlast the corpse window or the charges may have changed meanwhile.
 //
 // Enabled only for a mechanitor while the extension's requireMechlink holds (a mod setting), and
 // only while the core holds a charge; the disabled reason names which. Autocast is pinned off:
@@ -158,8 +156,8 @@ public class Ability_ResurrectMech : Ability
         return false;
     }
 
-    // base.Cast first: the cooldown, the cast sound and the extension hooks. Then the corpses,
-    // nearest the clicked one first, each re-checked and paid before it comes back.
+    // base.Cast first: the cooldown, the cast sound and the extension hooks. Then the one
+    // corpse, re-checked and paid before it comes back.
     public override void Cast(params GlobalTargetInfo[] targets)
     {
         base.Cast(targets);
@@ -168,34 +166,24 @@ public class Ability_ResurrectMech : Ability
         Map map = pawn?.Map;
         if (c == null || extension == null || map == null || targets.Length == 0)
             return;
-        IntVec3 center = firstTarget.IsValid ? firstTarget.Cell : targets[0].Cell;
-        var corpses = targets
-            .Select(target => target.Thing as Corpse)
-            .Where(corpse => corpse != null && corpse.Spawned && corpse.Map == map)
-            .OrderBy(corpse => corpse.Position.DistanceToSquared(center))
-            .ToList();
-        foreach (Corpse corpse in corpses)
+        if (targets[0].Thing is not Corpse corpse || !corpse.Spawned || corpse.Map != map)
+            return;
+        if (!CanResurrect(corpse, out _, out int cost) || !c.TryConsume(cost))
+            return;
+        IntVec3 cell = corpse.Position;
+        Pawn mech = corpse.InnerPawn;
+        ResurrectionUtility.TryResurrect(mech);
+        if (extension.appliedEffecterDef != null && mech.MapHeld != null)
         {
-            if (!CanResurrect(corpse, out _, out int cost) || !c.TryConsume(cost))
-                continue;
-            Pawn mech = corpse.InnerPawn;
-            ResurrectionUtility.TryResurrect(mech);
-            if (extension.appliedEffecterDef != null && mech.MapHeld != null)
-            {
-                Effecter effecter = extension.appliedEffecterDef.SpawnAttached(mech, mech.MapHeld);
-                effecter.Trigger(mech, mech);
-                effecter.Cleanup();
-            }
-            mech.stances?.stagger.StaggerFor(StaggerTicks);
+            Effecter effecter = extension.appliedEffecterDef.SpawnAttached(mech, mech.MapHeld);
+            effecter.Trigger(mech, mech);
+            effecter.Cleanup();
         }
+        mech.stances?.stagger.StaggerFor(StaggerTicks);
         if (extension.centerEffecterDef == null)
             return;
-        Vector3 sum = Vector3.zero;
-        foreach (GlobalTargetInfo target in targets)
-            sum += target.Cell.ToVector3Shifted();
-        IntVec3 middle = (sum / targets.Length).ToIntVec3();
-        var at = new TargetInfo(middle, map);
-        Effecter centre = extension.centerEffecterDef.Spawn(middle, map);
+        var at = new TargetInfo(cell, map);
+        Effecter centre = extension.centerEffecterDef.Spawn(cell, map);
         centre.EffectTick(at, at);
         centre.Cleanup();
     }

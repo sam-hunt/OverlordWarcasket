@@ -68,16 +68,16 @@ class and the corpse window.
 ### 3.4 The cast
 
 - Click a mech corpse (`targetMode` Thing, corpse-only `targetingParametersList` with
-  `canTargetMechs`, which vanilla's corpse rule reads for a mechanoid corpse). VEF's
-  `hasAoE` + `radius` 5 + `targetingParametersForAoE` collects every corpse within 5 cells
-  through `ValidateTarget(thing, false)`; the clicked one is validated with messages.
+  `canTargetMechs`, which vanilla's corpse rule reads for a mechanoid corpse), validated with
+  messages. Single-target: no `hasAoE`, so only the clicked corpse comes back, not the
+  apocriton's 5 cell area; each charge spent is a choice of which mech matters.
 - The click is not range-limited (`GetRangeForPawn` returns 10000, the Medic's idiom); the
   goto job (`VFEA_GotoTargetAndUseAbility`, `distanceToTarget` 9.9) walks the pilot to the
   apocriton's cast range with line of sight, then VEF's warmup (`castTime` 240) with the
   warmup effecter through `AbilityExtension_WarmupEffecter`, then `Cast`.
-- `Cast`: `base.Cast` (cooldown, cast sound), then each corpse nearest the clicked cell first,
-  re-checked through `CanResurrect` and paid through `TryConsume` before `TryResurrect`, the
-  applied effecter and the stagger; the centre effecter once at the targets' average cell.
+- `Cast`: `base.Cast` (cooldown, cast sound), then the corpse re-checked through
+  `CanResurrect` and paid through `TryConsume` before `TryResurrect`, the applied effecter and
+  the stagger; the centre effecter at the corpse's cell.
 - Enabled only for a mechanitor (`requireMechlink`, a setting) with a charge in the core.
   Autocast pinned off (VEF never fires an apparel ability's).
 
@@ -91,6 +91,8 @@ require a mechlink; written onto the comp props, the extension and the def by
 
 - Which mechs: the pilot's faction, as the apocriton; not only the mechs the pilot oversees.
 - An UltraHeavy mech cannot be brought back, as for the apocriton.
+- One mech per cast, not the apocriton's 5 cell area: the core's few charges are spent one
+  chosen mech at a time.
 - A resurrected mech comes back as `ResurrectionUtility.TryResurrect` leaves it: missing
   parts restored, wounds partly healed, no weapon regenerated beyond `MechRepairUtility`.
 - The pilot's own death does not spend or drop the core's charges; they stay with the armor.

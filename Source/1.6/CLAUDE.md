@@ -30,9 +30,8 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   Charges are whole and the regen keeps a fraction; `CompResurrectionCore`'s header has the
   arithmetic and the trim rules.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
-  `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on). VEF
-  collects the area targets through `ValidateTarget` asked quietly, so every rule lives in
-  `CanResurrect`, with messages only on the clicked corpse.
+  `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
+  single-target: every rule lives in `CanResurrect`, which the cast re-runs on the corpse.
 - **The overlord trait is mirrored from VFEP's at startup** by `WorkProfile.Mirror`, first in
   `Startup.Run`, so editing or patching its work tags, work types, degree effects or VEF
   extension on our def does not stick, and VFEP's 1.6/1.7 differences need no version check.

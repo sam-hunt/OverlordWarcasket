@@ -12,14 +12,17 @@
     240), a 2 second cooldown (cooldownTime 120; a mod setting), the 60 second corpse window
     (maxCorpseAgeTicks 3600; a mod setting), the costs of 1 / 3 / 5 charges for a light, medium
     and heavy mech (an ultraheavy has no entry and cannot be brought back, as for the
-    apocriton), the 5 cell radius around the clicked corpse (radius; VEF's hasAoE collects every
-    corpse within it through targetingParametersForAoE) and the 9.9 cell cast range, here the
-    distanceToTarget the goto job (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is
-    unset on purpose: the click is not range-limited, the pilot walks. The warmup, cast and
-    resolve effects are Biotech's own (MechResurrect_Warmup, MechResurrect_Cast, the
-    ApocrionAoeWarmup warmup effecter through VEF's extension, MechResurrected on each mech and
-    ApocrionAoeResolve at the targets' centre), and so is the icon, UI/Abilities/MechResurrection;
-    Biotech is a hard dependency, so none needs a fallback.
+    apocriton) and the 9.9 cell cast range, here the distanceToTarget the goto job
+    (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is unset on purpose: the click is
+    not range-limited, the pilot walks. The warmup, cast and resolve effects are Biotech's own
+    (MechResurrect_Warmup, MechResurrect_Cast, the ApocrionAoeWarmup warmup effecter through
+    VEF's extension, MechResurrected on the mech and ApocrionAoeResolve at its corpse), and so is
+    the icon, UI/Abilities/MechResurrection; Biotech is a hard dependency, so none needs a
+    fallback.
+
+    Single-target, unlike the apocriton's 5 cell area: one cast brings back the one clicked mech,
+    so each charge spent is a choice of which mech matters. hasAoE, radius and
+    targetingParametersForAoE stay unset (VEF's defaults: no area pickup, no radius ring).
 
     Targeting: corpse-only parameters with canTargetMechs, which vanilla's corpse rule reads for
     a mechanoid corpse. The faction, the weight class, the window and the charges are decided in
@@ -32,7 +35,7 @@
   <VEF.Abilities.AbilityDef>
     <defName>OLWC_ResurrectMech</defName>
     <label>resurrect mech</label>
-    <description>Resurrect recently killed mechanoids by externally supercharging their self-repair processes. Every eligible mech near the target will come back with some but not all of its wounds healed. Each mech costs some of the armor's charges, and heavier mechs cost more.</description>
+    <description>Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back with some but not all of its wounds healed. Each resurrection costs some of the armor's charges, and heavier mechs cost more.</description>
     <abilityClass>OverlordWarcasket.Ability_ResurrectMech</abilityClass>
     <gizmoClass>OverlordWarcasket.Command_ResurrectMech</gizmoClass>
     <iconPath>UI/Abilities/MechResurrection</iconPath>
@@ -49,16 +52,6 @@
         <canTargetMechs>true</canTargetMechs>
       </li>
     </targetingParametersList>
-    <hasAoE>true</hasAoE>
-    <radius>5</radius>
-    <targetingParametersForAoE>
-      <canTargetPawns>false</canTargetPawns>
-      <canTargetBuildings>false</canTargetBuildings>
-      <canTargetItems>false</canTargetItems>
-      <canTargetLocations>false</canTargetLocations>
-      <canTargetCorpses>true</canTargetCorpses>
-      <canTargetMechs>true</canTargetMechs>
-    </targetingParametersForAoE>
     <distanceToTarget>9.9</distanceToTarget>
     <requireLineOfSight>false</requireLineOfSight>
     <castTime>240</castTime>
