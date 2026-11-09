@@ -32,7 +32,7 @@
   <VEF.Abilities.AbilityDef>
     <defName>OLWC_ResurrectMech</defName>
     <label>resurrect mech</label>
-    <description>Resurrect your recently killed mechanoids by externally supercharging their self-repair processes, spending the armor's resurrection charges by each mech's weight class. Every eligible mech near the one targeted comes back with some but not all of its wounds healed.</description>
+    <description>Resurrect recently killed mechanoids by externally supercharging their self-repair processes. Every eligible mech near the target will come back with some but not all of its wounds healed. Each mech costs some of the armor's charges, and heavier mechs cost more.</description>
     <abilityClass>OverlordWarcasket.Ability_ResurrectMech</abilityClass>
     <gizmoClass>OverlordWarcasket.Command_ResurrectMech</gizmoClass>
     <iconPath>UI/Abilities/MechResurrection</iconPath>

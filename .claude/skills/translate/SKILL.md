@@ -176,9 +176,8 @@ Terms that MUST be grounded before use:
   verbatim where the game prints them), corpse;
 - from vanilla Odyssey (ground against the Odyssey tar): vacuum;
 - this mod's own vocabulary, coined once and recorded in the glossary:
-  resurrection core (the armor's charge store), pulse (a cast, in the
-  settings' prose), the uplink and command visor (the pauldrons' and
-  helmet's lore), bench work (the settings' word for the opened work).
+  resurrection core (the armor's charge store), the command visor and
+  signal processors (the helmet's and pauldrons' lore).
 
 Grep the tars for just this handful of terms; never extract or read a
 whole tar. The vanilla-grounded answers for common words live in

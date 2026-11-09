@@ -19,7 +19,7 @@
 Vanilla Factions Expanded - Pirates lets you weld a pawn into a warcasket: a steel shell,
 customized part by part at the foundry, with a range of sets that carries a colony from the
 industrial era into the late game. This mod adds one more set to that range: the Overlord, a
-10th-generation spacer-tier warcasket built for a mechanitor who leads mechs from behind the line
+10th-generation spacer-tier warcasket built for a mechanitor who leads mechs from the front line
 and brings the fallen ones back.
 
 The mod is in development: the resurrection core and the work profile are in; the set's tuning,

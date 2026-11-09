@@ -35,6 +35,10 @@
   The version badge on `About/Preview.png` and `.steamworkshop/Preview.gif` moves with the
   `gif-patch` skill, never a re-export. Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the
   first release.
+- Ensure dead mechanitors in the suit don't play the sparks effect
+- Check whether ressurect ability is single-target (intended) or aoe (biotech's apocriton)
+- Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
+  maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
   booted with the full compat list, and a boot on 1.6.

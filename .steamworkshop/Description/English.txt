@@ -11,8 +11,8 @@ The Overlord is a 10th-generation mechanitor warcasket, built to lead mechs from
 Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by Spacer Warcaskets research. Mix and match the pieces with VFE Pirates' own sets as you please.
 [list]
 [*][b]Armor:[/b] Grants resurrect mech, and leaves the pilot able to smith, research and hack
-[*][b]Shoulders:[/b] The relay antennae of the pilot's mechanitor uplink
-[*][b]Helmet:[/b] The command visor of the pilot's mechanitor uplink
+[*][b]Shoulders:[/b] Signal processors that support the pilot's mechlink
+[*][b]Helmet:[/b] A command visor for the pilot's mechlink
 [/list]
 
 [h2]Resurrect mech[/h2]

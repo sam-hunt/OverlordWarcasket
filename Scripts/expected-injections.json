@@ -1,6 +1,6 @@
 {
   "meta": {
-    "gameBuild": "1.7.4990 rev1069",
+    "gameBuild": "1.7.5000 rev1275",
     "activeDlcs": [
       "Core",
       "Biotech",
@@ -22,7 +22,7 @@
   "defInjections": {
     "ThingDef": {
       "OLWC_WarcasketHelmet_Overlord.description": {
-        "english": "Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "english": "Specialized spacer-tech warcasket helmet with standard protection, equipped with a command visor for the pilot's mechlink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.",
         "required": true
       },
       "OLWC_WarcasketHelmet_Overlord.label": {
@@ -30,11 +30,11 @@
         "required": true
       },
       "OLWC_WarcasketHelmet_Overlord.shortDescription": {
-        "english": "Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.",
+        "english": "Specialized spacer-tech warcasket helmet with standard protection, equipped with a command visor for the pilot's mechlink.",
         "required": true
       },
       "OLWC_WarcasketShoulders_Overlord.description": {
-        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, equipped with signal processors that support the pilot's mechlink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.",
         "required": true
       },
       "OLWC_WarcasketShoulders_Overlord.label": {
@@ -42,15 +42,15 @@
         "required": true
       },
       "OLWC_WarcasketShoulders_Overlord.shortDescription": {
-        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.",
+        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, equipped with signal processors that support the pilot's mechlink.",
         "required": true
       },
       "OLWC_Warcasket_Overlord.comps.CompShieldBubble.shieldTexPath": {
         "english": "Other/ShieldBubble",
-        "normalized": "OLWC_Warcasket_Overlord.comps.5.shieldTexPath"
+        "normalized": "OLWC_Warcasket_Overlord.comps.6.shieldTexPath"
       },
       "OLWC_Warcasket_Overlord.description": {
-        "english": "Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "english": "Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.",
         "required": true
       },
       "OLWC_Warcasket_Overlord.label": {
@@ -58,13 +58,13 @@
         "required": true
       },
       "OLWC_Warcasket_Overlord.shortDescription": {
-        "english": "Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.",
+        "english": "Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.",
         "required": true
       }
     },
     "TraitDef": {
       "OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description": {
-        "english": "{PAWN_nameDef} is entombed in a warcasket. Pain has no effect on {PAWN_objective}, and {PAWN_pronoun} can never go into pain shock or drop unconscious from it.\n\nBuilt for a mechanitor, the suit leaves {PAWN_possessive} arms free for bench work, but it is too bulky for most other labor.",
+        "english": "{PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do smithing and hacking.",
         "required": true,
         "normalized": "OLWC_WarcasketTrait_Overlord.degreeDatas.0.description"
       },
@@ -76,7 +76,7 @@
     },
     "VEF.Abilities.AbilityDef": {
       "OLWC_ResurrectMech.description": {
-        "english": "Resurrect your recently killed mechanoids by externally supercharging their self-repair processes, spending the armor's resurrection charges by each mech's weight class. Every eligible mech near the one targeted comes back with some but not all of its wounds healed.",
+        "english": "Resurrect recently killed mechanoids by externally supercharging their self-repair processes. Every eligible mech near the target will come back with some but not all of its wounds healed. Each mech costs some of the armor's charges, and heavier mechs cost more.",
         "required": true
       },
       "OLWC_ResurrectMech.iconPath": {

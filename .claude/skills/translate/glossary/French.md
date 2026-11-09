@@ -71,8 +71,8 @@ is the worked example for this language.
   label, which this ability reuses) and "Mech resurrection charges" (Biotech's
   Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
 - resurrection core (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the uplink (the pauldrons' and helmet's lore), bench
-  work and the work-type names the settings quote (Core's work-tab labels).
+  "Charges" Keyed word), the command visor and signal processors (the
+  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
 - Core work vocabulary for the settings window: crafting, smithing, the Work
   tab's labelShort forms as the language's Core files render them.
 - This mod's coinages, once the descriptions are final.
