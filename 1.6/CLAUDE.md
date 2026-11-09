@@ -51,9 +51,11 @@ manifest globs, so new files and subfolders need no build change.
   `PatchOperationConditional` probe.
 - **A patch that branches on a mod setting** wraps its operations in
   `OverlordWarcasket.PatchOperationSetting` naming the switch (`Source/1.6/CLAUDE.md`); a change
-  then takes a restart, and the smoke test needs a boot with the setting forced on
-  (`Scripts/integration-smoke-test.py --cerebrex-art`), since the default boot never runs the
-  `match` branch.
+  then takes a restart. The smoke test boots on default settings, so its `match` branch never
+  runs there: the static xpath test is its coverage, enough for a cosmetic gate like the
+  cerebrex art; a gate that changes stats or composes with another patch (Toxin Warcasket's
+  spacer tier is the model) needs a boot with the setting forced on, as that repo's
+  `Scripts/spacer_tier_boot.py` does.
 - **Compat roots sit beside the well-known folders, never inside them.** Anything under
   `1.6/Defs/**` or `1.6/Languages/**` loads unconditionally at any depth.
 - **An injection is gated by the root that contains it, never by the def it targets.** A main-tree

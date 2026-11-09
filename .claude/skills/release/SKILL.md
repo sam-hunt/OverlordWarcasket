@@ -175,7 +175,6 @@ client and rerun):
 
 ```bash
 python3 Scripts/integration-smoke-test.py
-python3 Scripts/integration-smoke-test.py --cerebrex-art
 ```
 
 - Boots the freshly deployed build once on a pinned list of Overlord
@@ -190,9 +189,9 @@ python3 Scripts/integration-smoke-test.py --cerebrex-art
     stat patch runs.
   - Biotech is on the list as a hard dependency: the resurrect mech ability
     is built from its defs.
-  - **Odyssey**, so the `1.6/Mods/Odyssey` root opens; its cerebrex art
-    patch only runs with the setting on, which the second boot forces
-    (`Scripts/cerebrex_art_boot.py`). Both boots must pass.
+  - Odyssey is on the list for Vanilla Gravship Expanded; the
+    `1.6/Mods/Odyssey` root's cerebrex art patch stays off on this
+    default-settings boot and is covered statically by the tests instead.
 
   A failed PatchOperation or a broken compat-root def is exactly the kind of
   error only a boot with the mod active can surface, and this is the only

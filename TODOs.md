@@ -2,10 +2,10 @@
 
 ## Before v1.0.0
 
-- **In-game look at the cerebrex node art.** The patch is checked statically and by the forced
-  smoke boot, but nobody has seen the art in game: with the setting on, check the item on the
-  ground, its icon in the inventory and the pack on the wearer's back on each facing, and that
-  the settings summary reads the live art and the pending change correctly.
+- **In-game look at the cerebrex node art.** The patch is checked statically, but nobody has
+  seen the art in game, the one live check a cosmetic patch gets: with the setting on, check the
+  item on the ground, its icon in the inventory and the pack on the wearer's back on each facing,
+  and that the settings summary reads the live art and the pending change correctly.
 - **In-game run of the resurrect mech ability.** The code mirrors the apocriton's rules from
   the 1.7.4990 decompile and builds clean, but no cast has been watched yet: check the walk to
   the corpse, the warmup effecter on the corpse, that only the clicked mech comes back, the

@@ -21,10 +21,9 @@ are on the smoke list); the engines live in the `l10n/` submodule. Nothing here 
 - **`integration-smoke-test.py`** (game closed, pre-release) boots the deployed mod on a pinned
   list (the VFEP chain, Biotech, Odyssey, Vanilla Gravship Expanded and Combat Extended so their
   compat roots open), then fails on any logged error attributed to this mod or a VFEP/VEF/VGE/CE
-  seam. `--cerebrex-art` boots again with the cerebrex art setting forced on through
-  `cerebrex_art_boot.py`, the only boot that runs the Odyssey root's patch (a restart-time gate
-  the engine's default-settings boot leaves off). Save Our Ship 2 is deliberately off the list:
-  its patch is best-effort.
+  seam. The Odyssey root's cerebrex art patch stays off on this default-settings boot and gets
+  no forced boot: it is cosmetic and its xpaths are checked statically. Save Our Ship 2 is
+  deliberately off the list: its patch is best-effort.
   Sibling-mod "dump WILL fail" warnings at launch are expected: the probe is ticked for every
   family mod but each boot loads only its own list.
 - **`preview-gif.py`** turns the artist's animated `Preview.mp4` into the Workshop
