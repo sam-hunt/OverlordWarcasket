@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The resurrection core's idle crackle: the red sparks of Biotech's ApocrionAttached (sic,
+    Biotech Defs/Effects/Effecter_Misc.xml), the apocriton's always-on CompEffecter, without
+    its second child, the Mote_ApocritonPulse psychic wave, which is the apocriton's hatred
+    aura and no part of a resurrection core. Played on the armor's wearer by
+    OverlordWarcasket.CompCoreSparks (Source/1.6/Comps/), which gates it on the core holding a
+    charge; its header has the tick path.
+
+    The spark child is the apocriton's, two fields scaled to a pawn: Biotech draws the
+    apocriton at drawSize 2, a humanlike body at 1.5, so positionRadius 0.7 becomes 0.55 and
+    the spark scale 1.0~1.2 becomes 0.8~1.0. chancePerTick 0.015 at a burst of 1~2 is the
+    apocriton's rate, a burst every 67 ticks on average at random gaps.
+  -->
+  <EffecterDef>
+    <defName>OLWC_CoreSparks</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
+        <moteDef>Mote_MechSparkSimple</moteDef>
+        <burstCount>1~2</burstCount>
+        <chancePerTick>0.015</chancePerTick>
+        <rotation>-150~-150</rotation>
+        <spawnLocType>OnTarget</spawnLocType>
+        <scale>0.8~1.0</scale>
+        <positionRadius>0.55</positionRadius>
+        <attachToSpawnThing>true</attachToSpawnThing>
+        <rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

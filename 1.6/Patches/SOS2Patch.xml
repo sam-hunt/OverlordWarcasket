@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!--
+    Save Our Ship 2 / Universum parity. VFEP's own SOS2Patch.xml gives its warcasket armor and
+    helmets the EVA apparel tag and a flat Insulation_Cold 100, matching by defName, so it never
+    reaches ours; this applies the same two operations to the Overlord armor and helmet.
+    Shoulder pads are left alone, as in VFEP. These two are all that needs mirroring: SOS2's own
+    VFEP patch (its Patches/patch_mod.xml) puts its CompEVA, DecompressionResistance 0.75 / 0.25
+    and the helmet's HypoxiaResistance 1 on VFEP's abstract armor and helmet bases, which our defs
+    inherit exactly as VFEP's sets do. Tests/1.6/CompatPatchTests.cs resolves the xpaths here
+    against the main tree, as it does for the gated roots.
+
+    The gate is PatchOperationFindMod on display names, copied verbatim from VFEP's patch on
+    purpose: this must fire under exactly VFEP's condition so the two sets never disagree about
+    being EVA-rated. If VFEP changes its gate, change this one to match.
+    Best-effort: SOS2 is sparsely maintained upstream and off the release smoke list, so nothing
+    boots this file against a live SOS2; the xpath check in Tests/1.6/CompatPatchTests.cs is the
+    only coverage it gets.
+  -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Save Our Ship 2</li>
+      <li>Universum</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/VFEPirates.WarcasketDef[defName = "OLWC_Warcasket_Overlord" or defName = "OLWC_WarcasketHelmet_Overlord"]/apparel/tags</xpath>
+          <value>
+            <li>EVA</li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>/Defs/VFEPirates.WarcasketDef[defName = "OLWC_Warcasket_Overlord" or defName = "OLWC_WarcasketHelmet_Overlord"]/statBases/Insulation_Cold</xpath>
+          <value>
+            <Insulation_Cold>100</Insulation_Cold>
+          </value>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+</Patch>

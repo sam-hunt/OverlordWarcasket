@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Overlord Warcasket</name>
+  <author>Sam Hunt</author>
+  <packageId>shunter.overlordwarcasket</packageId>
+  <modVersion>0.1.0</modVersion>
+  <description>Adds the Overlord warcasket, a spacer-tier mechanitor armor set for VFE Pirates, welded at the warcasket foundry like any other. Its shell carries a resurrection core that brings your fallen mechs back, and its pilot can still gestate and repair mechs, research and hack. Compatible with SOS2, VGE and Combat Extended. Requires Biotech and Vanilla Factions Expanded - Pirates.</description>
+  <supportedVersions>
+    <li>1.6</li>
+    <li>1.7</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>ludeon.rimworld.biotech</packageId>
+      <displayName>Biotech</displayName>
+    </li>
+    <li>
+      <packageId>OskarPotocki.VFE.Pirates</packageId>
+      <displayName>Vanilla Factions Expanded - Pirates</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2723801948</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>ludeon.rimworld</li>
+    <li>ludeon.rimworld.royalty</li>
+    <li>ludeon.rimworld.ideology</li>
+    <li>ludeon.rimworld.biotech</li>
+    <li>ludeon.rimworld.anomaly</li>
+    <li>ludeon.rimworld.odyssey</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>OskarPotocki.VFE.Pirates</li>
+  </loadAfter>
+</ModMetaData>

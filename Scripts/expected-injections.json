@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "gameBuild": "1.7.4990 rev1069",
+    "activeDlcs": [
+      "Core",
+      "Biotech",
+      "Odyssey"
+    ],
+    "modPackageId": "shunter.overlordwarcasket",
+    "modName": "Overlord Warcasket",
+    "activeMods": [
+      "brrainz.harmony",
+      "ludeon.rimworld",
+      "ludeon.rimworld.biotech",
+      "ludeon.rimworld.odyssey",
+      "oskarpotocki.vanillafactionsexpanded.core",
+      "oskarpotocki.vfe.pirates",
+      "shunter.overlordwarcasket",
+      "shunter.l10nprobe"
+    ]
+  },
+  "defInjections": {
+    "ThingDef": {
+      "OLWC_WarcasketHelmet_Overlord.description": {
+        "english": "Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "required": true
+      },
+      "OLWC_WarcasketHelmet_Overlord.label": {
+        "english": "overlord warcasket helmet",
+        "required": true
+      },
+      "OLWC_WarcasketHelmet_Overlord.shortDescription": {
+        "english": "Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.",
+        "required": true
+      },
+      "OLWC_WarcasketShoulders_Overlord.description": {
+        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "required": true
+      },
+      "OLWC_WarcasketShoulders_Overlord.label": {
+        "english": "overlord warcasket shoulders",
+        "required": true
+      },
+      "OLWC_WarcasketShoulders_Overlord.shortDescription": {
+        "english": "Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.",
+        "required": true
+      },
+      "OLWC_Warcasket_Overlord.comps.CompShieldBubble.shieldTexPath": {
+        "english": "Other/ShieldBubble",
+        "normalized": "OLWC_Warcasket_Overlord.comps.5.shieldTexPath"
+      },
+      "OLWC_Warcasket_Overlord.description": {
+        "english": "Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.",
+        "required": true
+      },
+      "OLWC_Warcasket_Overlord.label": {
+        "english": "overlord warcasket",
+        "required": true
+      },
+      "OLWC_Warcasket_Overlord.shortDescription": {
+        "english": "Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.",
+        "required": true
+      }
+    },
+    "TraitDef": {
+      "OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description": {
+        "english": "{PAWN_nameDef} is entombed in a warcasket. Pain has no effect on {PAWN_objective}, and {PAWN_pronoun} can never go into pain shock or drop unconscious from it.\n\nBuilt for a mechanitor, the suit leaves {PAWN_possessive} arms free for bench work, but it is too bulky for most other labor.",
+        "required": true,
+        "normalized": "OLWC_WarcasketTrait_Overlord.degreeDatas.0.description"
+      },
+      "OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label": {
+        "english": "warcasket",
+        "required": true,
+        "normalized": "OLWC_WarcasketTrait_Overlord.degreeDatas.0.label"
+      }
+    },
+    "VEF.Abilities.AbilityDef": {
+      "OLWC_ResurrectMech.description": {
+        "english": "Resurrect your recently killed mechanoids by externally supercharging their self-repair processes, spending the armor's resurrection charges by each mech's weight class. Every eligible mech near the one targeted comes back with some but not all of its wounds healed.",
+        "required": true
+      },
+      "OLWC_ResurrectMech.iconPath": {
+        "english": "UI/Abilities/MechResurrection"
+      },
+      "OLWC_ResurrectMech.jobReportString": {
+        "english": "Resurrecting mechs.",
+        "required": true
+      },
+      "OLWC_ResurrectMech.label": {
+        "english": "resurrect mech",
+        "required": true
+      },
+      "OLWC_ResurrectMech.verbProperties.label": {
+        "english": "resurrect mech",
+        "required": true
+      }
+    }
+  }
+}

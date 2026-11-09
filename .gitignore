@@ -1,0 +1,59 @@
+# Claude Code (skills are shared with contributors; local settings/hooks stay private)
+.claude/*
+!.claude/skills/
+!.claude/hooks/
+!.claude/settings.json
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Build results
+**/bin/
+**/obj/
+*.cache
+*.zip
+
+# Debug symbols
+*.pdb
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Build artifacts (the compiled DLL RimWorld loads is built, not committed;
+# releases ship it via the StageMod target / CI zip)
+*/Assemblies/*.dll
+*/Assemblies/*.pdb
+
+# RimWorld local testing
+*.rws
+*.rws.old
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Backup files
+*~
+*.bak
+*.orig
+
+# Temporary debug/test files
+debug_*.cs
+debug_*.exe
+test_*.cs
+test_*.exe
+
+# Logs
+*.log
+
+# Python bytecode (translation-checker tooling, once adopted)
+__pycache__/
+*.py[cod]

@@ -1,0 +1,356 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
+using UnityEngine;
+using Verse;
+using AbilityDef = VEF.Abilities.AbilityDef;
+
+namespace OverlordWarcasket;
+
+// The set's mod settings. Each setting overrides a def field, written onto the def by
+// ApplyToDefs (at startup, then whenever the window closes), so every reader of those fields,
+// vanilla's and VEF's included, sees the setting with no code of its own. The defaults, and the
+// rationale for them, are the defs'. Nothing here is saved into a game: a save loads the same
+// with any settings, and with none.
+//
+// On the armor's CompProperties_ResurrectionCore entry, the charge capacity overrides maxCharges
+// and the recharge rate regenPerDay (stored here as a percentage of the capacity per day, a
+// fraction on the def). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
+// override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
+// in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
+// corpse window overrides maxCorpseAgeTicks (in seconds, like the casting time) and the mechlink
+// switch requireMechlink. On the armor's CompProperties_CoreSparks entry, the sparks switch
+// overrides onlyWhileDrafted; its row sits in the ability's section, the core being the
+// ability's. The weight class costs are def-only. A line of what the rows amount
+// to opens the section, under its header, which carries the ability's icon and tooltip, read off
+// the def at draw time: VEF resolves def.icon from iconPath in a deferred step at the end of
+// loading, and a play-data reload replaces the def and its texture together.
+//
+// The work section is one checkbox per work type the trait mirror leaves to the player
+// (WorkSetting over WorkProfile.Toggleable), written onto the overlord trait's disabledWorkTypes
+// through WorkProfile.Apply, which also refreshes every entombed pilot; the mirror's own rule is
+// each box's default. Its header's icon is vanilla's mining work site, a Core texture, so it
+// survives a play-data reload as a plain static. The section is skipped while the mirror found
+// nothing to toggle (a broken install).
+//
+// What a write leaves on live instances is caught up by them: a running cooldown on the next
+// gizmo request, keyed on Generation (Ability_ResurrectMech.ReconcileSettings); charges above a
+// lowered capacity are trimmed off the worn cores at once (TrimWornCores), and a changed rate
+// reaches a core on its next regen step, its part charge kept.
+public class OverlordWarcasketSettings : ModSettings
+{
+    private const string AbilityDefName = "OLWC_ResurrectMech";
+    private const string ArmorDefName = "OLWC_Warcasket_Overlord";
+
+    // The whitespace above every section header but the first, and below the last row.
+    private const float SectionGap = 28f;
+
+    // Bumped by every ApplyToDefs, including the one at startup.
+    public static int Generation { get; private set; }
+
+    public readonly BoolSetting requireMechlink = new("RequireMechlink");
+    public readonly BoolSetting sparksOnlyDrafted = new("SparksOnlyDrafted");
+    public readonly WorkSetting work = new();
+
+    // The cooldown is game hours up to ten days, banded so one slider spans a gap between casts
+    // in a fight and one between raids: real seconds at normal speed up to ten (quarter, then
+    // half, then whole seconds), then half hours to 3 h, hours to 12 h, quarter days to a day,
+    // half days to three, and whole days. The slider gives every stop the same width.
+    private const float CooldownMax = 10f * GenDate.HoursPerDay;
+    private static readonly (float upTo, float step)[] CooldownBands =
+    [
+        (Seconds(3f), Seconds(0.25f)), (Seconds(5f), Seconds(0.5f)), (Seconds(10f), Seconds(1f)),
+        (3f, 0.5f), (12f, 1f), (24f, 6f), (72f, 12f), (CooldownMax, GenDate.HoursPerDay),
+    ];
+
+    // The capacity in charges; the recharge in percent of it per day, fine at the slow end where
+    // the shipped rate sits, coarser up to a full core a day; the corpse window in real seconds,
+    // five-second steps to a minute, then quarter minutes, then minutes to ten; the casting time
+    // banded as the Medic's is.
+    public readonly Tunable charges = new("Charges", 1f, 30f, 1f, Whole);
+    public readonly Tunable regen = new("Regen", 0f, 100f, 0.25f, Percent)
+    {
+        StepBands = [(5f, 0.25f), (20f, 1f), (100f, 5f)],
+    };
+    public readonly Tunable corpseAge = new("CorpseAge", 5f, 600f, 5f, RealSeconds)
+    {
+        StepBands = [(60f, 5f), (180f, 15f), (600f, 60f)],
+    };
+    public readonly Tunable castTime = new("CastTime", 0f, 10f, 0.25f, RealSeconds)
+    {
+        StepBands = [(3f, 0.25f), (6f, 0.5f), (10f, 1f)],
+    };
+    public readonly Tunable cooldown = new("Cooldown", 0f, CooldownMax, 0.25f, Period) { StepBands = CooldownBands };
+
+    private bool defaultsLoaded;
+    private Vector2 scrollPosition;
+    private float contentHeight;
+
+    // The tooltip over the ability section's header: the ability, its name as VEF titles an
+    // ability's tooltip over the description its command shows in game.
+    private string abilityTip;
+
+    // The ability def, for its header icon; see the class header.
+    private AbilityDef abilityDef;
+
+    // The cost lines the summary quotes, read when the defaults are.
+    private string costs;
+
+    // The work section's header icon, vanilla's mining work site. Its art is in the base game's
+    // Resources, not Ideology's, so it loads whatever DLCs are active and survives a reload.
+    private Texture2D workIcon;
+
+    private IEnumerable<Tunable> All => [charges, regen, corpseAge, castTime, cooldown];
+
+    private static string Whole(float v) => Mathf.RoundToInt(v).ToString();
+
+    private static string Percent(float v) => v.ToString("0.##") + "%";
+
+    // Game hours from real seconds at normal speed.
+    private static float Seconds(float s) => s * GenTicks.TicksPerRealSecond / GenDate.TicksPerHour;
+
+    // Every time a row or summary shows carries its unit as vanilla's short period form does
+    // (GenDate.ToStringTicksToPeriod with shortForm): the number, then the unit letter, no space.
+    private static string RealSeconds(float s) => s.ToString("0.##") + "LetterSecond".Translate();
+
+    // A period in game hours, in the unit of the cooldown band it falls in: seconds below the
+    // half hour, hours below a day, days from there.
+    private static string Period(float hours)
+    {
+        if (hours < 0.5f)
+            return RealSeconds(hours * GenDate.TicksPerHour / GenTicks.TicksPerRealSecond);
+        if (hours < GenDate.HoursPerDay)
+            return hours.ToString("0.##") + "LetterHour".Translate();
+        return (hours / GenDate.HoursPerDay).ToString("0.##") + "LetterDay".Translate();
+    }
+
+    public override void ExposeData()
+    {
+        base.ExposeData();
+        requireMechlink.ExposeData();
+        sparksOnlyDrafted.ExposeData();
+        work.ExposeData();
+        foreach (Tunable tunable in All)
+            tunable.ExposeData();
+    }
+
+    // Reads the def-backed defaults before the first ApplyToDefs overwrites them; defs must be
+    // loaded, so ModInit's static constructor calls this, never the Mod constructor.
+    public void LoadDefaultsFromDefs()
+    {
+        if (!TryGetDefs(out Defs defs))
+            return;
+        charges.DefaultValue = defs.core.maxCharges;
+        regen.DefaultValue = defs.core.regenPerDay * 100f;
+        corpseAge.DefaultValue = (float)defs.extension.maxCorpseAgeTicks / GenTicks.TicksPerRealSecond;
+        castTime.DefaultValue = (float)defs.ability.castTime / GenTicks.TicksPerRealSecond;
+        cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
+        requireMechlink.DefaultValue = defs.extension.requireMechlink;
+        sparksOnlyDrafted.DefaultValue = defs.sparks.onlyWhileDrafted;
+        abilityTip = HeaderTip(defs.ability.LabelCap, defs.ability.description);
+        abilityDef = defs.ability;
+        costs = defs.extension.costs
+            .Where(cost => cost.weightClass != null)
+            .Select(cost => "OLWC_SummaryCost".Translate(cost.weightClass.label, cost.cost).Resolve())
+            .ToCommaList(useAnd: true);
+        workIcon = ContentFinder<Texture2D>.Get("World/WorldObjects/Expanding/Sites/MiningWorkSite");
+        defaultsLoaded = true;
+    }
+
+    // The work profile goes first: it needs none of the ability's defs, so a saved choice still
+    // holds while they are missing, though the page is unavailable to change it.
+    public void ApplyToDefs()
+    {
+        WorkProfile.Apply(work.IsOpen);
+        if (!defaultsLoaded || !TryGetDefs(out Defs defs))
+            return;
+        defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
+        defs.core.regenPerDay = Mathf.Max(0f, regen.Value) / 100f;
+        defs.extension.maxCorpseAgeTicks = Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenTicks.TicksPerRealSecond));
+        defs.extension.requireMechlink = requireMechlink.Value;
+        defs.sparks.onlyWhileDrafted = sparksOnlyDrafted.Value;
+        defs.ability.castTime = Mathf.RoundToInt(castTime.Value * GenTicks.TicksPerRealSecond);
+        defs.ability.cooldownTime = Mathf.RoundToInt(cooldown.Value * GenDate.TicksPerHour);
+        Generation++;
+        TrimWornCores();
+    }
+
+    // A lowered capacity leaves worn cores above it; every live pawn, since a caravan or
+    // transporter pawn spawns with no hook of its own.
+    private static void TrimWornCores()
+    {
+        if (Current.ProgramState != ProgramState.Playing)
+            return;
+        foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive)
+        {
+            if (pawn.apparel == null)
+                continue;
+            foreach (Apparel apparel in pawn.apparel.WornApparel)
+                apparel.TryGetComp<CompResurrectionCore>()?.Trim();
+        }
+    }
+
+    // Each section opens on its summary under its header, then one row per setting, and a reset
+    // button sits below the list. The section is headed by whitespace and a medium-font header
+    // rather than a rule, which reads as another slider, and the rows sit indented under it; it
+    // closes on the same gap so the list does not end flush on its last row. The list scrolls
+    // once it outgrows the window's height, sized from the previous frame's listing height; the
+    // scrollbar only takes its width once it is needed. maxOneColumn keeps the listing growing
+    // downward. While the defs were not found there is nothing to tune, so the page says so
+    // instead of drawing rows around the -1 the defaults never got.
+    public void DoWindowContents(Rect inRect)
+    {
+        if (!defaultsLoaded)
+        {
+            Widgets.Label(inRect, "OLWC_SettingsUnavailable".Translate());
+            return;
+        }
+
+        const float buttonHeight = 30f;
+        const float buttonWidth = 200f;
+        const float scrollbarWidth = 16f;
+        var outRect = new Rect(inRect.x, inRect.y, inRect.width, inRect.height - buttonHeight - Listing.DefaultGap);
+        float viewWidth = contentHeight > outRect.height ? outRect.width - scrollbarWidth : outRect.width;
+        var viewRect = new Rect(0f, 0f, viewWidth, Mathf.Max(contentHeight, outRect.height));
+        Widgets.BeginScrollView(outRect, ref scrollPosition, viewRect);
+        var listing = new Listing_Standard { maxOneColumn = true };
+        listing.Begin(viewRect);
+        SectionHeader(listing, "OLWC_SectionResurrect", abilityDef.icon, abilityTip, first: true);
+        SummaryRow(listing, ResurrectSummary);
+        charges.DoRow(listing);
+        regen.DoRow(listing);
+        corpseAge.DoRow(listing);
+        castTime.DoRow(listing);
+        cooldown.DoRow(listing);
+        requireMechlink.DoRow(listing);
+        sparksOnlyDrafted.DoRow(listing);
+        if (WorkProfile.Toggleable.Count > 0)
+        {
+            SectionHeader(listing, "OLWC_SectionWork", workIcon, HeaderTip("OLWC_SectionWork".Translate(), "OLWC_SectionWorkDesc".Translate()));
+            SummaryRow(listing, WorkSummary);
+            work.DoRows(listing);
+        }
+        listing.Gap(SectionGap);
+        contentHeight = listing.CurHeight;
+        listing.End();
+        Widgets.EndScrollView();
+
+        if (Widgets.ButtonText(new Rect(inRect.x, inRect.yMax - buttonHeight, buttonWidth, buttonHeight),
+                "RestoreToDefaultSettings".Translate()))
+        {
+            requireMechlink.Reset();
+            sparksOnlyDrafted.Reset();
+            work.Reset();
+            foreach (Tunable tunable in All)
+                tunable.Reset();
+        }
+    }
+
+    // What the section's rows amount to: the core's capacity and rate (a rate of 0 ends the
+    // clause on never), the costs, the corpse window and the cast's timings, in the formats
+    // their rows show; a cooldown of 0 ends the line on its own clause.
+    private string ResurrectSummary()
+    {
+        string rate = regen.Value > 0f
+            ? "OLWC_SummaryRegen".Translate(Percent(regen.Value)).Resolve()
+            : "OLWC_SummaryNoRegen".Translate().Resolve();
+        string window = RealSeconds(corpseAge.Value);
+        string casting = RealSeconds(castTime.Value);
+        if (cooldown.Value <= 0f)
+            return "OLWC_ResurrectSummaryNoCooldown".Translate(charges.IntValue, rate, costs, window, casting);
+        return "OLWC_ResurrectSummary".Translate(charges.IntValue, rate, costs, window, casting, Period(cooldown.Value));
+    }
+
+    // What the work section's boxes amount to: the work the pilot may take on, named as the
+    // work tab names it, or that there is none; the rest is VFEP's rule either way.
+    private string WorkSummary()
+    {
+        List<string> open = work.Open.Select(WorkSetting.Name).ToList();
+        if (open.Count == 0)
+            return "OLWC_WorkSummaryNone".Translate();
+        return "OLWC_WorkSummary".Translate(open.ToCommaList(useAnd: true));
+    }
+
+    // A muted line in a section, indented and padded as its rows are, as tall as its text, with
+    // a row's gap below it.
+    private static void SummaryRow(Listing_Standard listing, Func<string> summary)
+    {
+        string text = summary();
+        float width = listing.ColumnWidth - Tunable.RowIndent - Tunable.RowEndPad;
+        Rect rect = listing.GetRect(Text.CalcHeight(text, width));
+        rect.xMin += Tunable.RowIndent;
+        rect.xMax -= Tunable.RowEndPad;
+        GUI.color = ColoredText.SubtleGrayColor;
+        Widgets.Label(rect, text);
+        GUI.color = Color.white;
+        listing.Gap(Tunable.RowGap);
+    }
+
+    // The header's text in the medium font after its icon, a square as tall as the header; a
+    // header whose texture is missing starts its text at the left edge rather than after an
+    // empty slot. The tooltip covers the icon and the text only, not the empty width after them.
+    private static void SectionHeader(Listing_Standard listing, string key, Texture2D icon, string tooltip, bool first = false)
+    {
+        const float headerGap = 4f;
+        const float headerHeight = 32f;
+        const float iconPad = 8f;
+        if (!first)
+            listing.Gap(SectionGap);
+        Rect rect = listing.GetRect(headerHeight);
+        float left = rect.xMin;
+        if (icon != null && icon != BaseContent.BadTex)
+        {
+            GUI.DrawTexture(rect.LeftPartPixels(headerHeight), icon);
+            rect.xMin += headerHeight + iconPad;
+        }
+        GameFont font = Text.Font;
+        TextAnchor anchor = Text.Anchor;
+        Text.Font = GameFont.Medium;
+        Text.Anchor = TextAnchor.MiddleLeft;
+        string label = key.Translate();
+        Widgets.Label(rect, label);
+        if (!tooltip.NullOrEmpty())
+            TooltipHandler.TipRegion(new Rect(left, rect.y, rect.xMin - left + Text.CalcSize(label).x, rect.height), tooltip);
+        Text.Anchor = anchor;
+        Text.Font = font;
+        listing.Gap(headerGap);
+    }
+
+    // An ability's tooltip as VEF opens one: its name in vanilla's tip title colour over its
+    // description. VEF's stat lines are left out; the rows above the summary quote those numbers.
+    private static string HeaderTip(string label, string description) =>
+        description.NullOrEmpty() ? null : label.Colorize(ColoredText.TipSectionTitleColor) + "\n\n" + description;
+
+    private struct Defs
+    {
+        public AbilityDef ability;
+        public ResurrectMechExtension extension;
+        public CompProperties_ResurrectionCore core;
+        public CompProperties_CoreSparks sparks;
+    }
+
+    // All or nothing: with any target missing (another mod patched it away) the settings leave
+    // every def at its XML values and say so once, as a warning, since the set itself still
+    // works.
+    private static bool warned;
+
+    private static bool TryGetDefs(out Defs defs)
+    {
+        AbilityDef ability = DefDatabase<AbilityDef>.GetNamedSilentFail(AbilityDefName);
+        ThingDef armor = DefDatabase<ThingDef>.GetNamedSilentFail(ArmorDefName);
+        defs = new Defs
+        {
+            ability = ability,
+            extension = ability?.GetModExtension<ResurrectMechExtension>(),
+            core = armor?.GetCompProperties<CompProperties_ResurrectionCore>(),
+            sparks = armor?.GetCompProperties<CompProperties_CoreSparks>(),
+        };
+        if (defs.ability != null && defs.extension != null && defs.core != null && defs.sparks != null)
+            return true;
+        if (!warned)
+            Log.Warning("[Overlord Warcasket] Settings could not find the resurrect mech ability, its extension, or the armor's resurrection core or core sparks; the set keeps its XML values.");
+        warned = true;
+        return false;
+    }
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    Templated from VFEP's VFEP_WarcasketShoulders_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml); fields not discussed here are the
+    Controller's, its spider mine module left off. Plating, tags and the market-value references
+    follow the armor's header, as does the art note.
+
+    Tuning, first pass: ComponentSpacer 2 / Plasteel 60, the Controller shoulders' price. The
+    plasteel is the 10th-gen shoulder-to-armor ratio, roughly 0.4 (Siegebreaker 60/145,
+    Guardian 80/200, Controller 60/150, Sarcophagus 60/145, Brute 60/160), of the armor's 150.
+    The pads carry no function of their own yet; the uplink passives the lore promises (a
+    bandwidth or control offset) are the tuning pass's question, in TODOs.md.
+
+    ApparelExtension priority 1, for the reason in the armor def's header: the
+    VFEP_WarcasketShoulderPadBase parent carries its own, and only the highest-priority copy
+    keeps its fields whole (Merge still ORs the parent's isUnifiedApparel in). Any new
+    ApparelExtension field for this piece goes on this entry.
+
+    Compat: SOS2Patch.xml and the VGE vacuum patch leave shoulder pads alone, as VFEP's and
+    VGE1's own patches do for VFEP's. The 1.6/Mods/CombatExtended/Patches/ root rescales the
+    plating and adds bulk, as CE's does for VFEP's.
+
+    Draw order: a worn apparel node's altitude is its drawData offset y (added verbatim by
+    PawnRenderTree.TryGetMatrix) plus PawnRenderUtility.AltitudeForLayer(layer), 0.000366 per
+    layer unit, the layer being the parent's base (ApparelBody 20, ApparelHead 70) plus the
+    piece's index among that parent's apparel; the y offsets on VFEP's bases are what order the
+    pieces. Only this piece moves, so every helmet and armor, ours or VFEP's, keeps its VFEP
+    altitude and foundry mix-and-match stays consistent.
+    - South 0.014 (base 0.02, which lands at 0.027 to 0.028, just over the helmets' 0.027):
+      the art wants the helmet over the pauldron edges, so 0.021 to 0.022, at least 0.004 under
+      any helmet and 0.003 over the shell (0.017 to 0.018), above post-apparel wounds (layer
+      30, 0.011) and firefoam (40, 0.015). Hair and beard (about 0.022) can draw over them on a
+      bare head, as hair does over shoulders anyway.
+    North, east and west inherit the base's 0.2, 0.02 and 0.02: XmlInheritance merges
+    same-named elements recursively, so only the changed facing is listed.
+  -->
+  <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketShoulderPadBase">
+    <defName>OLWC_WarcasketShoulders_Overlord</defName>
+    <label>overlord warcasket shoulders</label>
+    <shortDescription>Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.</shortDescription>
+    <description>Specialized spacer-tech warcasket pauldrons with standard protection, carrying the relay antennae of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.</description>
+    <graphicData>
+      <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordShoulders</texPath>
+    </graphicData>
+    <statBases>
+      <Mass>20</Mass>
+      <ArmorRating_Sharp>2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Heat>1</ArmorRating_Heat>
+      <Insulation_Cold>22</Insulation_Cold>
+      <Insulation_Heat>22</Insulation_Heat>
+      <EquipDelay>1</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.2</SlaveSuppressionOffset>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.1</VacuumResistance>
+    </equippedStatOffsets>
+    <costList>
+      <ComponentSpacer>2</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>VFEP_SpacerWarcaskets</li>
+    </researchPrerequisites>
+    <apparel>
+      <bodyPartGroups>
+        <li>Shoulders</li>
+        <li>Arms</li>
+        <li>Hands</li>
+        <li>Neck</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordShoulders</wornGraphicPath>
+      <!-- Under the helmet facing south; see "Draw order" in the header. -->
+      <drawData>
+        <dataSouth><offset>(0, 0.014, 0)</offset></dataSouth>
+      </drawData>
+      <layers>
+        <li>OnSkin</li>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>WarcasketVeteran</li>
+        <li>WarcasketAll</li>
+      </tags>
+    </apparel>
+    <modExtensions>
+      <li Class="VEF.Apparels.ApparelExtension">
+        <priority>1</priority>
+      </li>
+    </modExtensions>
+  </VFEPirates.WarcasketDef>
+</Defs>

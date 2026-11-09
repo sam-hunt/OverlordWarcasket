@@ -1,0 +1,261 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <!-- Release-only: 1.6/Assemblies/ holds the shipped DLL that StageMod globs.
+         Debug builds stay in the default bin/ so they can't swap a Debug DLL
+         into the mod layout. -->
+    <OutputPath Condition="'$(Configuration)' == 'Release'">../../1.6/Assemblies/</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <!-- Every warning (compiler and analyzer) fails the build. Nothing else in the toolchain
+         surfaces a warning to an agent: the Stop hook only reports a failed exit, the LSP
+         exposes no diagnostics, and a passing build log is never read. -->
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <!-- RimWorld install path: decides deployment only (DeployToModFolder below), never
+       what the build compiles against. Override with the RIMWORLD_PATH environment
+       variable or -p:RimWorldPath=...; the platform defaults cover a stock Steam install. -->
+  <PropertyGroup>
+    <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(RIMWORLD_PATH)</RimWorldPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RimWorldPath)' == '' And $([MSBuild]::IsOSPlatform('Windows'))">
+    <RimWorldPath>C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RimWorldPath)' == '' And $([MSBuild]::IsOSPlatform('Linux'))">
+    <RimWorldPath>$(HOME)/.local/share/Steam/steamapps/common/RimWorld</RimWorldPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(RimWorldPath)' == '' And $([MSBuild]::IsOSPlatform('OSX'))">
+    <RimWorldPath>$(HOME)/Library/Application Support/Steam/steamapps/common/RimWorld</RimWorldPath>
+  </PropertyGroup>
+
+  <!-- Deployment needs a game to deploy into, whatever its layout: 1.6 keeps its
+       assemblies under <Platform>_Data/Managed/, 1.7 (Waylith) has them flat in the
+       install root, and both have Mods/. Gating on the layout would skip the deploy
+       on 1.7 while the build still succeeds, leaving a stale DLL in the Mods folder. -->
+  <PropertyGroup>
+    <RimWorldInstalled Condition="Exists('$(RimWorldPath)/Mods')">true</RimWorldInstalled>
+  </PropertyGroup>
+
+  <!-- The 1.6 build compiles against the published reference assemblies, never the
+       local install: since 1.7 the install carries no 1.6 assemblies (and no Managed/
+       folder at all), and CI has always used this package, so local and CI builds
+       now reference the same bits. The local game is only the decompile target. -->
+  <ItemGroup>
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4871" />
+  </ItemGroup>
+
+  <!-- ===== Dependency-mod assemblies (compile-only) =====
+       This mod extends Vanilla Factions Expanded - Pirates, so C# may reference
+       VFEPirates.dll (WarcasketDef, Apparel_Warcasket, ...) and, through it, VEF.dll
+       from Vanilla Expanded Framework. Each mod folder is resolved in priority order:
+         1. an explicit override: -p:VfePiratesDir=... / -p:VefDir=..., or the
+            VFEP_PATH / VEF_PATH environment variables
+         2. the Steam Workshop copy beside the RimWorld install (what players run
+            against, so it is the compile contract)
+         3. the sibling source checkout under ../VanillaExpanded/ (may hold a locally
+            rebuilt branch DLL; see that repo's CLAUDE.md before trusting a signature)
+         4. a manual copy in the RimWorld Mods folder
+       Private="false": the DLLs are never copied into 1.6/Assemblies/; the game loads
+       the real ones from the dependency mods. Both references are conditioned on the
+       file existing, so a machine without them still builds as long as no code uses
+       their types. The release workflow fetches both Workshop items with SteamCMD
+       (anonymous login) and passes their folders in via the VEF_PATH / VFEP_PATH
+       environment variables (see .github/workflows/release.yml). -->
+  <PropertyGroup>
+    <SteamWorkshopContent>$([System.IO.Path]::GetFullPath('$(RimWorldPath)/../../workshop/content/294100'))</SteamWorkshopContent>
+    <SiblingVanillaExpanded>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/../../../VanillaExpanded'))</SiblingVanillaExpanded>
+
+    <VfePiratesDir Condition="'$(VfePiratesDir)' == ''">$(VFEP_PATH)</VfePiratesDir>
+    <VfePiratesDir Condition="'$(VfePiratesDir)' == '' And Exists('$(SteamWorkshopContent)/2723801948/1.6/Assemblies/VFEPirates.dll')">$(SteamWorkshopContent)/2723801948</VfePiratesDir>
+    <VfePiratesDir Condition="'$(VfePiratesDir)' == '' And Exists('$(SiblingVanillaExpanded)/VanillaFactionsExpanded-Pirates/1.6/Assemblies/VFEPirates.dll')">$(SiblingVanillaExpanded)/VanillaFactionsExpanded-Pirates</VfePiratesDir>
+    <VfePiratesDir Condition="'$(VfePiratesDir)' == '' And Exists('$(RimWorldPath)/Mods/VanillaFactionsExpanded-Pirates/1.6/Assemblies/VFEPirates.dll')">$(RimWorldPath)/Mods/VanillaFactionsExpanded-Pirates</VfePiratesDir>
+    <VfePiratesDll>$(VfePiratesDir)/1.6/Assemblies/VFEPirates.dll</VfePiratesDll>
+
+    <VefDir Condition="'$(VefDir)' == ''">$(VEF_PATH)</VefDir>
+    <VefDir Condition="'$(VefDir)' == '' And Exists('$(SteamWorkshopContent)/2023507013/1.6/Assemblies/VEF.dll')">$(SteamWorkshopContent)/2023507013</VefDir>
+    <VefDir Condition="'$(VefDir)' == '' And Exists('$(SiblingVanillaExpanded)/VanillaExpandedFramework/1.6/Assemblies/VEF.dll')">$(SiblingVanillaExpanded)/VanillaExpandedFramework</VefDir>
+    <VefDir Condition="'$(VefDir)' == '' And Exists('$(RimWorldPath)/Mods/VanillaExpandedFramework/1.6/Assemblies/VEF.dll')">$(RimWorldPath)/Mods/VanillaExpandedFramework</VefDir>
+    <VefDll>$(VefDir)/1.6/Assemblies/VEF.dll</VefDll>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(VfePiratesDir)' != '' And Exists('$(VfePiratesDll)')">
+    <Reference Include="VFEPirates" Private="false">
+      <HintPath>$(VfePiratesDll)</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup Condition="'$(VefDir)' != '' And Exists('$(VefDll)')">
+    <Reference Include="VEF" Private="false">
+      <HintPath>$(VefDll)</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.*">
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- Build-time code analysis (never ships; with TreatWarningsAsErrors every analyzer warning fails the build). Roslynator's analyzers run
+       on every build and surface in the IDE + build log; PrivateAssets="all" keeps them
+       out of the compiled DLL and out of any downstream reference. The global
+       `roslynator` CLI (installed separately) handles bulk fixes and CI gating.
+       Invoke the CLI against this csproj, never the .sln: roslynator 0.12's workspace
+       assemblies clash with current SDKs' Microsoft.Build in the solution-file parser
+       (MissingFieldException: MSBuildConstants.InvalidPathChars); loading a csproj
+       directly bypasses SolutionFile.Parse and works fine. -->
+  <ItemGroup>
+    <PackageReference Include="Roslynator.Analyzers" Version="4.16.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <!-- Guards against Roslynator's RCS1146 fixer (and anyone else) rewriting
+         null checks into ?. on UnityEngine.Object-derived receivers, where the
+         overloaded == (destroyed => "null") makes the rewrite change behavior.
+         UNT0008 flags null propagation on Unity objects; UNT0007 the same for
+         null coalescing and UNT0023 for coalescing assignment (??=). See the
+         RCS1146 note in .editorconfig. -->
+    <PackageReference Include="Microsoft.Unity.Analyzers" Version="1.28.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!-- ===== Mod packaging / deployment =====
+       The ItemGroup inside StageMod below is the SINGLE source of truth for what
+       files constitute the deployable mod. It feeds BOTH the post-build deploy into
+       the local RimWorld Mods folder AND the CI release (which invokes StageMod with
+       a -p:StageDir pointing at its staging dir). Add/remove shipped files here only. -->
+  <PropertyGroup>
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)/../..'))</RepoRoot>
+    <ModDeployPath>$(RimWorldPath)/Mods/$(MSBuildProjectName)</ModDeployPath>
+    <!-- StageMod writes here. Defaults to the local Mods folder; CI overrides with -p:StageDir=... -->
+    <StageDir Condition="'$(StageDir)' == ''">$(ModDeployPath)</StageDir>
+  </PropertyGroup>
+
+  <!-- Wipe $(StageDir) then recopy the full mod from source: atomic and self-cleaning,
+       so renamed/deleted Defs/Patches/Textures never linger. Invoke directly for CI:
+         dotnet build Source/1.6/OverlordWarcasket.csproj -c Release \
+           -t:StageMod -p:StageDir=/path/to/release/OverlordWarcasket -->
+  <Target Name="StageMod">
+    <Error Condition="'$(StageDir)' == ''" Text="StageMod requires a non-empty -p:StageDir." />
+    <ItemGroup>
+      <!-- The deployable mod = the well-known RimWorld content folders, whitelisted to
+           only the file types the game loads at runtime (+ Workshop release metadata in
+           About/). Each content folder is matched at the mod root AND under any one
+           top-level subfolder ("$(RepoRoot)/*/<Folder>"), i.e. version folders (1.6/,
+           a future 1.7/), so content deploys wherever it lives and new version
+           folders need no change here. Source layout is mirrored verbatim into
+           $(StageDir), so e.g. the root Textures/ stays at the root and 1.6/Defs/
+           stays under 1.6/.
+
+           To support a new content type, add ONE <_ModFiles Include="..."/> line below.
+
+           Deliberately lean: ModContentLoader lists .psd/.dds among acceptable texture
+           extensions, but the runtime decode path (Texture2D.LoadImage) only handles
+           PNG/JPEG, so a shipped .psd/.dds would fail to render AND bloat the download;
+           only .png/.jpg/.jpeg are whitelisted. The DLL ships without its .pdb. OS junk,
+           editor backups (incl. .kra art sources), dev notes, and Source/ never match. -->
+
+      <!-- Root-only metadata -->
+      <_ModFiles Include="$(RepoRoot)/LoadFolders.xml" />
+      <_ModFiles Include="$(RepoRoot)/About/**/*.xml;$(RepoRoot)/About/**/*.png;$(RepoRoot)/About/**/*.txt" />
+
+      <!-- Code + content (matched at root and under any version folder) -->
+      <_ModFiles Include="$(RepoRoot)/Assemblies/**/*.dll;$(RepoRoot)/*/Assemblies/**/*.dll" />
+      <_ModFiles Include="$(RepoRoot)/Defs/**/*.xml;$(RepoRoot)/*/Defs/**/*.xml;$(RepoRoot)/*/Mods/*/Defs/**/*.xml" />
+      <_ModFiles Include="$(RepoRoot)/Patches/**/*.xml;$(RepoRoot)/*/Patches/**/*.xml;$(RepoRoot)/*/Mods/*/Patches/**/*.xml" />
+      <_ModFiles Include="$(RepoRoot)/Textures/**/*.png;$(RepoRoot)/Textures/**/*.jpg;$(RepoRoot)/Textures/**/*.jpeg;$(RepoRoot)/*/Textures/**/*.png;$(RepoRoot)/*/Textures/**/*.jpg;$(RepoRoot)/*/Textures/**/*.jpeg;$(RepoRoot)/Mods/*/Textures/**/*.png;$(RepoRoot)/Mods/*/Textures/**/*.jpg;$(RepoRoot)/Mods/*/Textures/**/*.jpeg" />
+      <_ModFiles Include="$(RepoRoot)/Sounds/**/*.wav;$(RepoRoot)/Sounds/**/*.mp3;$(RepoRoot)/Sounds/**/*.ogg;$(RepoRoot)/*/Sounds/**/*.wav;$(RepoRoot)/*/Sounds/**/*.mp3;$(RepoRoot)/*/Sounds/**/*.ogg" />
+      <_ModFiles Include="$(RepoRoot)/Languages/**/*.xml;$(RepoRoot)/Languages/**/*.txt;$(RepoRoot)/*/Languages/**/*.xml;$(RepoRoot)/*/Languages/**/*.txt;$(RepoRoot)/*/Mods/*/Languages/**/*.xml;$(RepoRoot)/*/Mods/*/Languages/**/*.txt" />
+      <!-- Asset bundles are EXTENSIONLESS files (ModAssetBundlesHandler loads every extensionless
+           file directly under AssetBundles/, and only the _win/_mac/_linux one matching the OS), so
+           this is the one glob that can't whitelist by extension: it takes the folder's direct
+           children and excludes Unity's .manifest sidecars, which must never be copied in anyway.
+           Bundles are committed binaries built outside this build (CI has no Unity); see
+           UniqueMeleeWeapons' Source/UnityShaders/ for the family's Unity project and build script. -->
+      <_ModFiles Include="$(RepoRoot)/AssetBundles/*;$(RepoRoot)/*/AssetBundles/*;$(RepoRoot)/*/Mods/*/AssetBundles/*" Exclude="$(RepoRoot)/AssetBundles/*.manifest;$(RepoRoot)/*/AssetBundles/*.manifest;$(RepoRoot)/*/Mods/*/AssetBundles/*.manifest" />
+      <!-- The lines above also match under the gated compat load roots (see
+           LoadFolders.xml), which come in two flavors: version-specific ones nest
+           inside the version folder as <version>/Mods/<Mod Name>/ (Defs, Patches,
+           Languages), and version-independent ones sit at the mod root as
+           Mods/<Mod Name>/ (art, which is not version-scoped). Neither is reached by
+           the "$(RepoRoot)/*/<Folder>" wildcard, since both put <Folder> two levels
+           deep, so each needs its own explicit pattern. If a compat root ever ships
+           another content type (Sounds, ...), extend that type's line the same way;
+           a miss deploys nothing and fails silently in-game (missing textures render
+           as pink boxes), not at build. -->
+    </ItemGroup>
+    <!-- Mirror each file's path relative to the repo root into $(StageDir). Computed as
+         per-item metadata (MakeRelative inside a transform string evaluates only once,
+         not per item). %(FullPath) is concrete, so the version folder (1.6/) matched by
+         the "*/" wildcards is recovered here verbatim. -->
+    <ItemGroup>
+      <_ModFiles>
+        <Dest>$(StageDir)/$([MSBuild]::MakeRelative('$(RepoRoot)', '%(FullPath)'))</Dest>
+      </_ModFiles>
+    </ItemGroup>
+    <RemoveDir Directories="$(StageDir)" />
+    <Copy SourceFiles="@(_ModFiles)" DestinationFiles="@(_ModFiles->'%(Dest)')" />
+    <!-- Comments never ship. Every staged .xml is rewritten without its comment nodes
+         (the def headers, the patch rationale, the EN: lines the translation checker
+         keys on), which is the bulk of the XML bytes the Workshop page counts. Only the
+         staged copy changes: the checker, the probe and the tests read the repo, and the
+         smoke test boots this stripped copy, so it is what gets exercised. A file with
+         no comment is copied byte-for-byte; a stripped file is re-indented by the
+         writer, which the game's XmlDocument loader does not care about. -->
+    <StripXmlComments Files="@(_ModFiles->'%(Dest)')">
+      <Output TaskParameter="Stripped" PropertyName="_StrippedXmlCount" />
+    </StripXmlComments>
+    <Message Text="Staged @(_ModFiles->Count()) mod files ($(_StrippedXmlCount) XML files stripped of comments) -> $(StageDir)" Importance="high" />
+  </Target>
+
+  <!-- Inline task behind StageMod's comment strip: XDocument in, comment nodes removed,
+       written back as UTF-8 without a BOM and with Unix newlines. Whitespace-only text
+       between elements is dropped by the loader and recreated by the indenting writer;
+       text inside an element is kept verbatim, so every value the game reads is
+       unchanged. Nothing but .xml is touched. -->
+  <UsingTask TaskName="StripXmlComments" TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <Stripped ParameterType="System.Int32" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System" />
+      <Using Namespace="System.Linq" />
+      <Using Namespace="System.Text" />
+      <Using Namespace="System.Xml" />
+      <Using Namespace="System.Xml.Linq" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        var settings = new XmlWriterSettings
+        {
+            Indent = true,
+            IndentChars = "  ",
+            NewLineChars = "\n",
+            Encoding = new UTF8Encoding(false),
+        };
+        foreach (var item in Files)
+        {
+            var path = item.ItemSpec;
+            if (!path.EndsWith(".xml", StringComparison.OrdinalIgnoreCase)) continue;
+            var doc = XDocument.Load(path);
+            var comments = doc.DescendantNodes().OfType<XComment>().ToList();
+            if (comments.Count == 0) continue;
+            foreach (var c in comments) c.Remove();
+            using (var writer = XmlWriter.Create(path, settings)) doc.Save(writer);
+            Stripped++;
+        }
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <!-- After every local Release build, atomically redeploy into the RimWorld Mods
+       folder. Release-only: an ungated deploy would silently swap the played mod's
+       DLL for a Debug build (e.g. if a future Tests project's ProjectReference
+       builds Debug under `dotnet test`). -->
+  <Target Name="DeployToModFolder" AfterTargets="Build"
+          Condition="'$(RimWorldInstalled)' == 'true' And '$(Configuration)' == 'Release'">
+    <CallTarget Targets="StageMod" />
+  </Target>
+</Project>

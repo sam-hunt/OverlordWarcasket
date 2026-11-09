@@ -1,0 +1,50 @@
+Overlord Warcasket
+
+A new spacer-tier warcasket for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url].
+
+[h1]About[/h1]
+
+The Overlord is a 10th-generation mechanitor warcasket, built to lead mechs from the frontline and bring fallen ones back.
+
+[hr][/hr]
+[h2]The Set[/h2]
+Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by Spacer Warcaskets research. Mix and match the pieces with VFE Pirates' own sets as you please.
+[list]
+[*][b]Armor:[/b] Grants resurrect mech, and leaves the pilot able to smith, research and hack
+[*][b]Shoulders:[/b] The relay antennae of the pilot's mechanitor uplink
+[*][b]Helmet:[/b] The command visor of the pilot's mechanitor uplink
+[/list]
+
+[h2]Resurrect mech[/h2]
+The armor carries a resurrection core. Point it at one of your fallen mechs and the pilot supercharges its self-repair, bringing it and every other recently fallen mech around it back to its feet, each costing charges by its weight class. The core recharges slowly on its own, and its red gauge on the pilot shows what is left. A mechlink is required, unless you turn that off.
+
+[h2]A pilot who still works[/h2]
+VFE Pirates' warcaskets block all skilled and intellectual labor. The Overlord's pilot keeps smithing, for mech gestation, subcore encoding and mech repair, and research, which hacking needs. Crafting, tailoring and dark study can be enabled in the mod settings. Everything else follows VFE Pirates' warcasket rules and the mods that change them.
+
+The charge capacity, the recharge rate, how fresh a mech must be, the casting time, the cooldown, the mechlink requirement and which work the pilot may do can be changed in the mod settings.
+
+[hr][/hr]
+[h1]Mod Compatibility[/h1]
+[list]
+[*]Safe to add to existing saves.
+[*]Not safe to remove while a pawn is welded into the set.
+[*]Biotech: required.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: required.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: EVA rated under the same rules as VFE Pirates' own sets.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: follows its vacuum-resistance rules for warcaskets.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: Yes.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: built-in patch, with armor, bulk and carry capacity in line with VFE Pirates' spacer sets.
+[/list]
+
+[hr][/hr]
+[h1]FAQ[/h1]
+
+[b]Q: How do I get it?[/b]
+A: Research spacer warcaskets, then weld it on at the warcasket foundry like any other set.
+
+[b]Q: Does the pilot need to be a mechanitor?[/b]
+A: By default, yes: the core answers to a mechlink. A mod setting lets any pilot use it.
+
+[hr][/hr]
+[h1]Links[/h1]
+Source code, manual downloads and issue tracker: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]

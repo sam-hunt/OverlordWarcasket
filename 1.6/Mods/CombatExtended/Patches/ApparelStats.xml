@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Combat Extended parity for the three pieces. CE reads ArmorRating_Sharp as millimetres of
+  RHA and ArmorRating_Blunt as megapascals and rescales nothing it has not patched by defName
+  (its apparel autopatcher is off by default and matches no multi-layer warcasket preset), so
+  the main tree's 2 / 1 is, under CE, its flak jacket. CE's own VFE Pirates patch
+  (ModPatches/Vanilla Factions Expanded - Pirates/.../Apparel_Warcaskets_Spacer.xml) reaches
+  only VFEP's defNames; from its base-class patches ours inherit Flammability 0.25 and the
+  helmet and shoulder PartialArmorExt alone. Every number here is CE's for the spacer tier the
+  set is templated on (the armor def header; the Medic Warcasket repo's copy of this file is
+  the worked precedent), so a mixed set stays a mixed set:
+  - Plating 36 / 90 on armor and shoulders, 32 / 72 on the helmet; heat is untouched, as in
+    every CE patch. Bulk / WornBulk 275 / 35, 15 / 5, 20 / 10.
+  - CarryWeight +250 and CarryBulk +225 on the armor: CE charges a worn item's full Mass
+    against a 40 kg CarryWeight, so without them the 78 kg set moves at half speed.
+    Suppressability -100 is the spacer frames' immunity to suppression.
+  - Shield 2.25 / 0.015, CE's x1.5 on the tier's 1.5 / 0.01 baseline (the Guardian's,
+    Controller's and Sarcophagus's number; VEF's CompShieldBubble absorbs CE projectiles
+    unpatched, only the numbers move).
+  - The helmet: SmokeSensitivity -1 makes the wearer immune to CE's smoke, whose inhalation
+    hediff scales by that stat and Breathing alone and never reads immuneToToxGasExposure or
+    ToxicResistance; immuneToToxGasExposure and NightVisionEfficiency_Apparel 0.75 are what CE
+    gives every sealed spacer helmet. The tox immunity is added only when absent, CE's own
+    guard against a second patch producing a duplicate node.
+  - Costs on CE's spacer rescale: plasteel x1.5 and two more spacer components on the armor
+    and helmet (the armor's 150 / 6 to 225 / 8; the helmet's 60 / 4 to the Controller helmet's
+    90 / 6; shoulders 60 to 90). Uranium is not touched, as CE leaves VFEP's uranium.
+  The resurrection core needs nothing from CE: it spends charges on a corpse and touches no
+  damage, armor or projectile path.
+  Patches in this root apply before the main tree's and the VGE root's; none of the three
+  touch the same nodes. Tests/1.6/CompatPatchTests.cs checks every xpath here against the
+  main tree.
+-->
+<Patch>
+
+  <!-- Armor -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/statBases</xpath>
+    <value>
+      <Bulk>275</Bulk>
+      <WornBulk>35</WornBulk>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/statBases/ArmorRating_Sharp</xpath>
+    <value>
+      <ArmorRating_Sharp>36</ArmorRating_Sharp>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/statBases/ArmorRating_Blunt</xpath>
+    <value>
+      <ArmorRating_Blunt>90</ArmorRating_Blunt>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/statBases/EnergyShieldEnergyMax</xpath>
+    <value>
+      <EnergyShieldEnergyMax>2.25</EnergyShieldEnergyMax>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/statBases/EnergyShieldRechargeRate</xpath>
+    <value>
+      <EnergyShieldRechargeRate>0.015</EnergyShieldRechargeRate>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/equippedStatOffsets</xpath>
+    <value>
+      <CarryWeight>250</CarryWeight>
+      <CarryBulk>225</CarryBulk>
+      <Suppressability>-100</Suppressability>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/costList/ComponentSpacer</xpath>
+    <value>
+      <ComponentSpacer>8</ComponentSpacer>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/costList/Plasteel</xpath>
+    <value>
+      <Plasteel>225</Plasteel>
+    </value>
+  </Operation>
+
+  <!-- Shoulders -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketShoulders_Overlord"]/statBases</xpath>
+    <value>
+      <Bulk>15</Bulk>
+      <WornBulk>5</WornBulk>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketShoulders_Overlord"]/statBases/ArmorRating_Sharp</xpath>
+    <value>
+      <ArmorRating_Sharp>36</ArmorRating_Sharp>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketShoulders_Overlord"]/statBases/ArmorRating_Blunt</xpath>
+    <value>
+      <ArmorRating_Blunt>90</ArmorRating_Blunt>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketShoulders_Overlord"]/costList/Plasteel</xpath>
+    <value>
+      <Plasteel>90</Plasteel>
+    </value>
+  </Operation>
+
+  <!-- Helmet -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/statBases</xpath>
+    <value>
+      <Bulk>20</Bulk>
+      <WornBulk>10</WornBulk>
+      <NightVisionEfficiency_Apparel>0.75</NightVisionEfficiency_Apparel>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/statBases/ArmorRating_Sharp</xpath>
+    <value>
+      <ArmorRating_Sharp>32</ArmorRating_Sharp>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/statBases/ArmorRating_Blunt</xpath>
+    <value>
+      <ArmorRating_Blunt>72</ArmorRating_Blunt>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/equippedStatOffsets</xpath>
+    <value>
+      <SmokeSensitivity>-1</SmokeSensitivity>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/apparel/immuneToToxGasExposure</xpath>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/apparel</xpath>
+      <value>
+        <immuneToToxGasExposure>true</immuneToToxGasExposure>
+      </value>
+    </nomatch>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/costList/ComponentSpacer</xpath>
+    <value>
+      <ComponentSpacer>6</ComponentSpacer>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/costList/Plasteel</xpath>
+    <value>
+      <Plasteel>90</Plasteel>
+    </value>
+  </Operation>
+
+</Patch>

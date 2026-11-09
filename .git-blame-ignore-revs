@@ -1,0 +1,4 @@
+# Revisions git blame should skip (formatting-only sweeps).
+# Only bulk, mechanical, no-logic-change commits belong here.
+# GitHub picks this file up automatically; for local blame, run once:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs

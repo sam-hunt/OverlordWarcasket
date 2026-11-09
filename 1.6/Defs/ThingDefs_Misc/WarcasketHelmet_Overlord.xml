@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    Templated from VFEP's VFEP_WarcasketHelmet_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Headgear.xml); fields not discussed here, uiIconScale and
+    the psychic and toxic offsets included, are the Controller's, its drone module left off.
+    Plating, tags and the market-value references follow the armor's header.
+
+    Tuning, first pass: ComponentSpacer 4 / Plasteel 60, the Controller's and Brute's price for a
+    helmet with a function of its own; the function (a mechanitor uplink passive) is the tuning
+    pass's question, in TODOs.md.
+
+    Art: the helmet alone of the three pieces ships masks (_northm/_eastm/_southm for the worn
+    graphic, _m for the item icon), so it draws with CutoutComplex and useWornGraphicMask, as
+    VFEP's Controller helmet does and as vanilla's prestige armors are the pattern: the
+    CompColorable colour paints the mask's red areas and the black-masked trim keeps its painted
+    colour (apparel graphics pass white as colorTwo). Mask names differ by graphic class:
+    Graphic_Multi reads <path>_northm, Graphic_Single <path>_m.
+
+    ApparelExtension priority 1, for the reason in the armor def's header: the
+    VFEP_WarcasketHelmetBase parent carries its own, and only the highest-priority copy keeps
+    its fields whole (Merge still ORs the parent's isUnifiedApparel and hideHead in). Any new
+    ApparelExtension field for this piece goes on this entry.
+
+    Compat: SOS2Patch.xml gives it the EVA tag and Insulation_Cold 100 alongside the armor;
+    the VGE vacuum patch lowers its VacuumResistance to VGE1's warcasket-helmet value; the
+    1.6/Mods/CombatExtended/Patches/ root rescales its plating and seals it against CE's
+    smoke, which reads no tox immunity.
+  -->
+  <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketHelmetBase">
+    <defName>OLWC_WarcasketHelmet_Overlord</defName>
+    <label>overlord warcasket helmet</label>
+    <shortDescription>Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.</shortDescription>
+    <description>Specialized spacer-tech warcasket helmet with standard protection, fitted with the command visor of the pilot's mechanitor uplink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.</description>
+    <graphicData>
+      <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordHelmet</texPath>
+      <shaderType>CutoutComplex</shaderType>
+    </graphicData>
+    <uiIconScale>1.25</uiIconScale>
+    <statBases>
+      <Mass>8</Mass>
+      <ArmorRating_Sharp>2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Heat>1</ArmorRating_Heat>
+      <Insulation_Cold>10</Insulation_Cold>
+      <Insulation_Heat>10</Insulation_Heat>
+      <EquipDelay>1</EquipDelay>
+    </statBases>
+    <equippedStatOffsets>
+      <PsychicSensitivity>-0.5</PsychicSensitivity>
+      <ToxicResistance>0.5</ToxicResistance>
+      <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.1</SlaveSuppressionOffset>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.7</VacuumResistance>
+    </equippedStatOffsets>
+    <costList>
+      <ComponentSpacer>4</ComponentSpacer>
+      <Plasteel>60</Plasteel>
+    </costList>
+    <researchPrerequisites>
+      <li>VFEP_SpacerWarcaskets</li>
+    </researchPrerequisites>
+    <apparel>
+      <bodyPartGroups>
+        <li>FullHead</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordHelmet</wornGraphicPath>
+      <useWornGraphicMask>true</useWornGraphicMask>
+      <layers>
+        <li>Overhead</li>
+      </layers>
+      <tags>
+        <li>WarcasketVeteran</li>
+        <li>WarcasketAll</li>
+      </tags>
+    </apparel>
+    <modExtensions>
+      <li Class="VEF.Apparels.ApparelExtension">
+        <priority>1</priority>
+      </li>
+    </modExtensions>
+  </VFEPirates.WarcasketDef>
+</Defs>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    Templated from VFEP's VFEP_Warcasket_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml), the tier's computing-heavy set; fields not
+    discussed here are the Controller's, VFEP_SpacerWarcaskets research prereq included.
+    Docs/Research/VFEP_WARCASKET_STATS.md tabulates the sets it sits beside.
+
+    Tuning, first pass (the set-tuning pass is a TODOs.md item). Reference numbers are VFEP's
+    10th-generation sets (Siegebreaker, Guardian, Controller, Sarcophagus, Brute). A command
+    suit on the tier's shared chassis, its budget spent on the resurrection core rather than on
+    the pilot's own protection:
+    - Sharp 2 / Blunt 1 / Heat 1 on all three pieces, the tier's shared values. Blunt 1.5 is
+      Guardian's and Brute's, paid for in plasteel; this set has no claim to it.
+    - EnergyShieldEnergyMax 1.5 at EnergyShieldRechargeRate 0.01, the tier's baseline
+      (Guardian, Controller, Sarcophagus); Siegebreaker's 2.5 and Brute's 5.0 are their
+      specialties. The bubble blocks ranged fire only.
+    - costList ComponentSpacer 6 / Plasteel 150 / Uranium 50, the utility sets' band: the
+      components are VFEP's tech-complexity dial (the utility sets 6, Controller 12, Brute 4),
+      the plasteel the utility sets' 145 to 150. Whether a resurrection core prices like the
+      Controller's drone module (12) is the tuning pass's question. Parts are untradeable and
+      destroyed on drop, so market value is colony wealth and raid points only.
+
+    apparel tags: WarcasketVeteran (VFEP's 10th-gen tag) puts the set on the veteran raid
+    pawnkinds of both VFEP factions and Odyssey's VFEP_Salvager_Warcasket; WarcasketAll is
+    VFEP_General. Threat and flavor only: AI pawns never cast apparel abilities, so a raider
+    in the set is a Controller with the baseline shield and no drones.
+
+    Resurrect mech: VEF CompAbilitiesApparel grants OLWC_ResurrectMech (AbilityDefs/
+    ResurrectMech.xml), fed by the resurrection core beside it. The ability reads the core off
+    the apparel that grants it, so both comps must sit on this one def. The core is
+    OverlordWarcasket.CompProperties_ResurrectionCore (Source/1.6/Comps/), a plain comp whose
+    props class sets the compClass, so none is declared here: maxCharges 10 is the charges held
+    when full (the apocriton holds 30; a suit of armor holds a third), regenPerDay 0.01 the
+    recharge as a fraction of the capacity per day, one percent, a whole charge every ten days,
+    so the core is a reserve the pilot rations between raids rather than a well. Both are mod
+    settings defaulting to these values. The core starts full. CompDevResetCooldowns is a
+    dev-mode cooldown reset for the ability (Toxin's idiom) and ships nothing in play.
+
+    Core sparks: OverlordWarcasket.CompProperties_CoreSparks plays OLWC_CoreSparks (Effects/
+    CoreSparks.xml), the apocriton's idle red crackle, on the wearer while the core holds a
+    charge. onlyWhileDrafted true also requires a player's pilot to be drafted, so the crackle
+    reads as the core readied for battle rather than the apocriton's constant hum; an AI pilot
+    has no draft to wait on and shows it on the charge alone, as the apocriton does, until AI
+    casting gives raiders a reason to spend charges. false plays it whenever the core is
+    charged. A mod setting defaulting to this value. The comp reads the core off this
+    def, so it sits beside it.
+
+    Art: Textures/Things/Pawn/Warcasketlike/WarcasketOverlord/, laid out as VFEP's sets are.
+    The worn graphic is Graphic_Multi (the _north/_east/_south facings); the item icon is the
+    parent's Graphic_Single, read from the bare-named file, which is a copy of the _south
+    facing. No mask on the shell or the shoulders: as VFEP's Controller, the CompColorable
+    colour paints the whole piece. The helmet alone carries masks; see its header.
+
+    Own trait on equip: traitsOnEquip grants OLWC_WarcasketTrait_Overlord (TraitDefs/
+    WarcasketTrait_Overlord.xml), not VFEP_WarcasketTrait, because the Overlord's work profile
+    must differ from VFEP's (Crafting open) and a child ApparelExtension can only add to what a
+    granted trait blocks, never subtract; the trait is mirrored from VFEP's at startup so the
+    patch mods that reshape VFEP's profile reshape ours. traitsOnUnequip keeps VFEP_Shellcasket,
+    the shared "cut out of a warcasket" state every add-on set uses, so removal surgery and
+    re-entombing in any warcasket behave as for VFEP's own sets.
+
+    ApparelExtension priority 1: VFEP_WarcasketArmorBase carries its own ApparelExtension and
+    inheritance appends list items, so this def resolves with two. VEF merges duplicate
+    extensions in a Def.ResolveReferences prefix, highest priority surviving, and
+    ApparelExtension.Merge does not copy every field; at equal priority the parent's copy
+    would win. At priority 1 every field of ours, from any load root, is kept. Any new
+    ApparelExtension field for this piece goes on this entry.
+
+    Compat patches reach this def from 1.6/Patches/SOS2Patch.xml (EVA tag, cold insulation),
+    1.6/Mods/VanillaGravshipExpanded/Patches/VacuumResistance.xml and the
+    1.6/Mods/CombatExtended/Patches/ root (plating on CE's scale, bulk, carry capacity,
+    shield, costs); see their headers.
+  -->
+  <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketArmorBase">
+    <defName>OLWC_Warcasket_Overlord</defName>
+    <label>overlord warcasket</label>
+    <shortDescription>Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.</shortDescription>
+    <description>Specialized spacer-tech warcasket shell with standard protection, built around a mechanoid resurrection core that supercharges the self-repair of a fallen mech and brings it back to its feet.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for the mechanitors who had marched with them.\n\nThe shell's core holds a slow-charging reserve of resurrection pulses, the pauldrons and helmet carry the uplink that lets the pilot keep commanding, and the suit's arms are left free for bench work. Plating and shield are the generation's standard, so an Overlord fights behind its mechs, and a squad that fields one loses far fewer of them for good.</description>
+    <graphicData>
+      <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlord</texPath>
+    </graphicData>
+    <statBases>
+      <Mass>50</Mass>
+      <ArmorRating_Sharp>2</ArmorRating_Sharp>
+      <ArmorRating_Blunt>1</ArmorRating_Blunt>
+      <ArmorRating_Heat>1</ArmorRating_Heat>
+      <Insulation_Cold>80</Insulation_Cold>
+      <Insulation_Heat>80</Insulation_Heat>
+      <EquipDelay>1</EquipDelay>
+      <EnergyShieldRechargeRate>0.01</EnergyShieldRechargeRate>
+      <EnergyShieldEnergyMax>1.5</EnergyShieldEnergyMax>
+    </statBases>
+    <equippedStatOffsets>
+      <PsychicSensitivity>-0.5</PsychicSensitivity>
+      <ToxicResistance>0.5</ToxicResistance>
+      <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.3</SlaveSuppressionOffset>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.2</VacuumResistance>
+    </equippedStatOffsets>
+    <costList>
+      <ComponentSpacer>6</ComponentSpacer>
+      <Plasteel>150</Plasteel>
+      <Uranium>50</Uranium>
+    </costList>
+    <researchPrerequisites>
+      <li>VFEP_SpacerWarcaskets</li>
+    </researchPrerequisites>
+    <apparel>
+      <bodyPartGroups>
+        <li>Torso</li>
+        <li>Legs</li>
+        <li>Feet</li>
+      </bodyPartGroups>
+      <wornGraphicPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlord</wornGraphicPath>
+      <layers>
+        <li>OnSkin</li>
+        <li>Middle</li>
+        <li>Shell</li>
+      </layers>
+      <tags>
+        <li>WarcasketVeteran</li>
+        <li>WarcasketAll</li>
+      </tags>
+    </apparel>
+    <comps>
+      <li Class="OverlordWarcasket.CompProperties_ResurrectionCore">
+        <maxCharges>10</maxCharges>
+        <regenPerDay>0.01</regenPerDay>
+      </li>
+      <li Class="OverlordWarcasket.CompProperties_CoreSparks">
+        <effecterDef>OLWC_CoreSparks</effecterDef>
+        <onlyWhileDrafted>true</onlyWhileDrafted>
+      </li>
+      <li Class="VEF.Abilities.CompProperties_AbilitiesApparel">
+        <abilities>
+          <li>OLWC_ResurrectMech</li>
+        </abilities>
+      </li>
+      <li>
+        <compClass>OverlordWarcasket.CompDevResetCooldowns</compClass>
+      </li>
+      <li Class="VEF.Apparels.CompProperties_ShieldBubble">
+        <compClass>VEF.Apparels.CompShieldBubble</compClass>
+        <blockRangedAttack>true</blockRangedAttack>
+        <blockMeleeAttack>false</blockMeleeAttack>
+        <showWhenDrafted>true</showWhenDrafted>
+        <showOnHostiles>true</showOnHostiles>
+        <showOnNeutralInCombat>true</showOnNeutralInCombat>
+        <shieldTexPath>Other/ShieldBubble</shieldTexPath>
+        <chargeFullyWhenMade>true</chargeFullyWhenMade>
+        <minShieldSize>2.1</minShieldSize>
+        <maxShieldSize>2.7</maxShieldSize>
+        <disableRotation>true</disableRotation>
+      </li>
+    </comps>
+    <modExtensions>
+      <li Class="VEF.Apparels.ApparelExtension">
+        <priority>1</priority>
+        <traitsOnEquip>
+          <li>OLWC_WarcasketTrait_Overlord</li>
+        </traitsOnEquip>
+        <traitsOnUnequip>
+          <li>VFEP_Shellcasket</li>
+        </traitsOnUnequip>
+        <pawnCapacityMinLevels>
+          <li>
+            <capacity>Moving</capacity>
+            <minLevel>0.7</minLevel>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <minLevel>0.7</minLevel>
+          </li>
+        </pawnCapacityMinLevels>
+      </li>
+    </modExtensions>
+  </VFEPirates.WarcasketDef>
+</Defs>

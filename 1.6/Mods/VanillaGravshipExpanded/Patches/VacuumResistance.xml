@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Vanilla Gravship Expanded (chapter 1) parity for vacuum resistance. VGE1's
+  ArmorVacuumResistancePatch.xml lowers vacuum-rated suits so no armor and helmet reach 1.0
+  without an oxygen source, and covers VFEP's five spacer warcaskets by defName: armor 0.22,
+  helmet 0.65, shoulders left at 0.1, a 0.97 set. This mirrors the armor and helmet numbers
+  onto ours so the Overlord is not the one warcasket at 1.0. VGE1's 1.7 folder carries the same
+  patch, so this root is listed under both versions. VGE1 requires Odyssey, so the stat always
+  exists here; MayRequire on the values only matches the source defs.
+-->
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/equippedStatOffsets/VacuumResistance</xpath>
+    <value>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.22</VacuumResistance>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/equippedStatOffsets/VacuumResistance</xpath>
+    <value>
+      <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.65</VacuumResistance>
+    </value>
+  </Operation>
+</Patch>

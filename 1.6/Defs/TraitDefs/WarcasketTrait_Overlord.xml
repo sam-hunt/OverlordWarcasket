@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The trait the Overlord armor grants on equip (its ApparelExtension.traitsOnEquip), in the
+    Medic Warcasket idiom of an own trait beside VFEP_WarcasketTrait: VFEP's trait blocks
+    ManualSkilled and Intellectual, which cover Smithing and Research, and a child apparel extension can only add to what a
+    granted trait blocks, never subtract. Docs/Specs/Overlord-Work-Trait.md is the design record.
+
+    Mirrored at startup, do not tune here. WorkProfile.Mirror (Source/1.6/WorkProfile.cs, run
+    first in Startup.Run on every play-data load) overwrites this def from VFEP_WarcasketTrait
+    as the full mod list leaves it, so "Warcaskets can work!", "can haul!" and Hardworking
+    Warcaskets shape the Overlord exactly as they shape a Controller pilot without knowing we
+    exist. The contract:
+      - disabledWorkTags = VFEP's, with ManualDumb swapped for Cleaning (VFEP's hauling
+        exemption is a Harmony postfix keyed on its own def, so a copied ManualDumb would lose
+        hauling; ManualDumb covers only Hauling and Cleaning) and every tag an openable work
+        type carries removed: ManualSkilled, for Smithing, Crafting and Tailoring, and
+        Intellectual, for Research and Anomaly's Dark study.
+      - disabledWorkTypes = VFEP's, plus every work type the removed tags covered that is not
+        openable (Cooking, Construction, Growing, Mining, PlantCutting), plus each openable one
+        the mod settings block. The settings default to the fixed rule: Research open, as
+        Core's hacking is Research work and needs the Intellectual tag open; Smithing open, as
+        Biotech's mech gestation, subcore encoding and mech repair are Smithing work; Crafting,
+        Tailoring and Dark study blocked; and any of them open regardless once VFEP's trait, as
+        patched, blocks neither its tags nor the type. Written by the settings' ApplyToDefs on
+        every load and settings close.
+      - degreeDatas[0]: every public field but the text, degree and commonality copied from
+        VFEP's degree, and the TraitExtension's fields copied from VFEP's extension. Both copies
+        are full overwrites, nulls included, so the Overlord carries exactly what VFEP's trait
+        carries on the running game version: on 1.7, painFactor 0 and RestFallRateFactor 1.3 on
+        the degree; on 1.6, painFactor 0 on the extension and no stat factors.
+    The values below are the mirror's result from an unpatched VFEP trait on 1.7, so the def
+    reads correctly on its own. Every field used exists on 1.6 as
+    well.
+
+    The extension omits painFactor on purpose, as VFEP's 1.7 copy does: VEF's TraitExtension
+    leaves the float uninitialised and its CalculatePain postfix multiplies pain by any value
+    other than 1, so an omitted painFactor is zero pain. The mirror overwrites it from VFEP's
+    extension before any pawn exists; the XML value would only ever apply if VFEP's trait had no
+    extension at all. apparelExclusiveTrait keeps trait-adding mods and the trait-rolling code
+    paths from handing this trait to a pawn outside the suit (VEF's TraitSet.GainTrait prefix
+    admits it only while a worn apparel lists it in traitsOnEquip).
+
+    The label is VFEP's own, so the Bio tab names the state as it does for every warcasket pilot.
+    The description must hold under every profile a patch mod can leave, so it states the suit's
+    intent rather than listing work types. It stays short because the tooltip lists the work
+    disables beneath it, and on 1.7 the pain and rest-fall factors too.
+  -->
+  <TraitDef>
+    <defName>OLWC_WarcasketTrait_Overlord</defName>
+    <commonality>0</commonality>
+    <disabledWorkTags>
+      <li>Cleaning</li>
+      <li>Animals</li>
+      <li>Artistic</li>
+      <li>Caring</li>
+    </disabledWorkTags>
+    <disabledWorkTypes>
+      <li>Cooking</li>
+      <li>Construction</li>
+      <li>Growing</li>
+      <li>Mining</li>
+      <li>PlantCutting</li>
+      <li>Tailoring</li>
+      <li>Crafting</li>
+      <li MayRequire="Ludeon.RimWorld.Anomaly">DarkStudy</li>
+    </disabledWorkTypes>
+    <degreeDatas>
+      <li>
+        <label>warcasket</label>
+        <description>{PAWN_nameDef} is entombed in a warcasket. Pain has no effect on {PAWN_objective}, and {PAWN_pronoun} can never go into pain shock or drop unconscious from it.\n\nBuilt for a mechanitor, the suit leaves {PAWN_possessive} arms free for bench work, but it is too bulky for most other labor.</description>
+        <painFactor>0</painFactor>
+        <statFactors>
+          <RestFallRateFactor>1.3</RestFallRateFactor>
+        </statFactors>
+      </li>
+    </degreeDatas>
+    <modExtensions>
+      <li Class="VEF.Pawns.TraitExtension">
+        <apparelExclusiveTrait>true</apparelExclusiveTrait>
+      </li>
+    </modExtensions>
+  </TraitDef>
+</Defs>
