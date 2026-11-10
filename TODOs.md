@@ -2,12 +2,6 @@
 
 ## Features
 
-- **Set tuning in play.** The pieces are tuned against Biotech's mechlord helmet and suit (the
-  def headers have the numbers): check in game that the foundry lists the set only once both
-  spacer warcaskets and ultra mechtech are done, that the chips are charged, that a full-set
-  pilot reads 20 bandwidth, a control group and 80% psychic sensitivity and can still install a
-  mechlink, and how the helmet's -3 shooting plays with a warcasket weapon.
-  Still to compare: the Mechlord Warcasket mod's stats and costs.
 - **CE subdomain compat scan** Check CE for any extra related subdomains that it takes over from vanilla
 - **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
 - **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
@@ -49,6 +43,11 @@
   vanilla's "Out of command range" again. Then the settings page: the greyed second group, the
   slider selecting its radio, the summary line, and the choices surviving a reopen and a
   language switch (`Docs/Specs/Mechanitor-Command-Range.md`, section 5).
+- **Set tuning in play.** The pieces are tuned against Biotech's mechlord helmet and suit (the
+  def headers have the numbers): check in game that the foundry lists the set only once both
+  spacer warcaskets and ultra mechtech are done, that the chips are charged, that a full-set
+  pilot reads 20 bandwidth, a control group and 80% psychic sensitivity and can still install a
+  mechlink, and how the helmet's -3 shooting plays with a warcasket weapon.
 - **In-game run of the core's recharge and reload.** Nobody has watched either in game: the core
   gaining a charge a day and the tooltip's wait; the handle at zero fetching nothing; the handle
   raised making an undrafted pilot fetch advanced components up to that level and no further; a
