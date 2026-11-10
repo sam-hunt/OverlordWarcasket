@@ -11,12 +11,14 @@
   <OLWC_NotEnoughCharges>Resurrecting {0} needs {1} charges, but only {2} are left.</OLWC_NotEnoughCharges>
   <OLWC_ChargesLabel>Charges: {0} / {1}</OLWC_ChargesLabel>
   <OLWC_TargetCost>{0}: {1} charges</OLWC_TargetCost>
+  <OLWC_TargetTimeLeft>Can be resurrected for another {0}.</OLWC_TargetTimeLeft>
   <OLWC_GaugeRegen>The core recharges {0} of its capacity each day. The next charge will be ready in {1}.</OLWC_GaugeRegen>
   <OLWC_GaugeFull>The core is fully charged and recharges {0} of its capacity each day.</OLWC_GaugeFull>
   <OLWC_GaugeNoRegen>The core does not recharge.</OLWC_GaugeNoRegen>
   <OLWC_GaugeCosts>Charges per mech:</OLWC_GaugeCosts>
   <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
   <OLWC_GaugeCorpseAge>Mechs dead for up to {0} can be resurrected.</OLWC_GaugeCorpseAge>
+  <OLWC_GaugeNoCorpseAge>Mechs can be resurrected no matter how long they have been dead.</OLWC_GaugeNoCorpseAge>
 
   <!-- Mod settings (Source/1.6/Settings/) -->
   <OLWC_SettingsCategory>Overlord Warcasket</OLWC_SettingsCategory>
@@ -31,7 +33,8 @@
   <OLWC_RegenDesc>The percentage of the armor's charge capacity that recharges each day. At 0%, it will never recharge. Default: {0}.</OLWC_RegenDesc>
 
   <OLWC_CorpseAge>Maximum corpse age</OLWC_CorpseAge>
-  <OLWC_CorpseAgeDesc>How long after a mech's death it can still be resurrected, in real seconds at normal speed. Default: {0}.</OLWC_CorpseAgeDesc>
+  <OLWC_CorpseAgeDesc>How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}.</OLWC_CorpseAgeDesc>
+  <OLWC_Unlimited>Unlimited</OLWC_Unlimited>
 
   <OLWC_CastTime>Casting time</OLWC_CastTime>
   <OLWC_CastTimeDesc>How long the pilot takes to start a resurrection. Default: {0}.</OLWC_CastTimeDesc>
@@ -48,8 +51,10 @@
   <OLWC_SummaryCost>{1} for a {0} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>
   <OLWC_SummaryNoRegen>never recharges</OLWC_SummaryNoRegen>
-  <OLWC_ResurrectSummary>The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, as long as it died within the last {3}. Resurrection takes {4} to cast, and the cooldown after is {5}.</OLWC_ResurrectSummary>
-  <OLWC_ResurrectSummaryNoCooldown>The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, as long as it died within the last {3}. Resurrection takes {4} to cast, and the next can start at once.</OLWC_ResurrectSummaryNoCooldown>
+  <OLWC_SummaryWindow>as long as it died within the last {0}</OLWC_SummaryWindow>
+  <OLWC_SummaryNoWindow>no matter how long ago it died</OLWC_SummaryNoWindow>
+  <OLWC_ResurrectSummary>The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}.</OLWC_ResurrectSummary>
+  <OLWC_ResurrectSummaryNoCooldown>The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once.</OLWC_ResurrectSummaryNoCooldown>
 
   <OLWC_SectionWork>Enabled work types</OLWC_SectionWork>
   <OLWC_SectionWorkDesc>The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too.</OLWC_SectionWorkDesc>

@@ -89,7 +89,9 @@ public class Gizmo_ResurrectionCore : Gizmo_Slider
             if (cost.weightClass != null)
                 tip.Append('\n').Append("OLWC_GaugeCost".Translate(cost.weightClass.LabelCap, cost.cost).Resolve());
         }
-        tip.Append('\n').Append("OLWC_GaugeCorpseAge".Translate(extension.maxCorpseAgeTicks.ToStringTicksToPeriod()).Resolve());
+        tip.Append('\n').Append(extension.LimitsCorpseAge
+            ? "OLWC_GaugeCorpseAge".Translate(Ability_ResurrectMech.PeriodText(extension.maxCorpseAgeTicks)).Resolve()
+            : "OLWC_GaugeNoCorpseAge".Translate().Resolve());
         return tip.ToString();
     }
 }

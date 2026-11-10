@@ -42,7 +42,7 @@ public class TunableTests
         Assert.Equal(20 + 15 + 16 + 1, stops.Length);
     }
 
-    // The corpse window's minimum sits off its band's grid: five seconds, then the fives.
+    // A minimum may sit off its band's grid: five, then the multiples of five.
     [Fact]
     public void Stops_KeepAnOffGridMinimum()
     {

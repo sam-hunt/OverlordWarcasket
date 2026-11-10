@@ -9,8 +9,7 @@
     Docs/Specs/Mech-Resurrection.md.
 
     The apocriton's numbers, kept where they still mean the same: a 4 second warmup (castTime
-    240), a 2 second cooldown (cooldownTime 120; a mod setting), the 60 second corpse window
-    (maxCorpseAgeTicks 3600; a mod setting), the costs of 1 / 3 / 5 charges for a light, medium
+    240), a 2 second cooldown (cooldownTime 120; a mod setting), the costs of 1 / 3 / 5 charges for a light, medium
     and heavy mech (an ultraheavy has no entry and cannot be brought back, as for the
     apocriton) and the 9.9 cell cast range, here the distanceToTarget the goto job
     (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is unset on purpose: the click is
@@ -19,6 +18,17 @@
     VEF's extension, MechResurrected on the mech and ApocrionAoeResolve at its corpse), and so is
     the icon, UI/Abilities/MechResurrection; Biotech is a hard dependency, so none needs a
     fallback.
+
+    The corpse window is not the apocriton's: one game day (maxCorpseAgeTicks 60000; a mod
+    setting, whose last stop writes 0 here, no limit) against its 1.44 hours (3600 ticks, a real
+    minute at normal speed and 20 seconds at triple). That minute suits a raid's apocriton, which
+    stands among its mechs, casts by itself the moment one falls and has 30 charges to spend. A
+    pilot has to notice the death, walk a warcasket to within cast range and stand through the
+    warmup, often from across the map now that the helmet lets the mechs fight there. The window
+    is not what limits the ability: the core's charges are, and a longer window spends them no
+    faster. A day is the one age the player can read off a corpse, whose inspect pane says "Dead
+    for less than a day" until exactly this many ticks have passed, so a mech is resurrectable
+    for as long as its corpse says so; the cursor label over a corpse gives the time it has left.
 
     Single-target, unlike the apocriton's 5 cell area: one cast brings back the one clicked mech,
     so each charge spent is a choice of which mech matters. hasAoE, radius and
@@ -61,7 +71,7 @@
     <castSound>MechResurrect_Cast</castSound>
     <modExtensions>
       <li Class="OverlordWarcasket.ResurrectMechExtension">
-        <maxCorpseAgeTicks>3600</maxCorpseAgeTicks>
+        <maxCorpseAgeTicks>60000</maxCorpseAgeTicks>
         <costs>
           <li>
             <weightClass>Light</weightClass>

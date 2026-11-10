@@ -83,7 +83,7 @@ class and the corpse window.
 
 ### 3.5 Settings
 
-Charge capacity, recharge per day (percent), corpse window (seconds), casting time, cooldown,
+Charge capacity, recharge per day (percent), corpse window (game hours), casting time, cooldown,
 require a mechlink; written onto the comp props, the extension and the def by
 `OverlordWarcasketSettings.ApplyToDefs`.
 

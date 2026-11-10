@@ -13,7 +13,7 @@ namespace OverlordWarcasket;
 // The rules are the apocriton's, verified against RimWorld 1.7.4990's decompile: a corpse is
 // resurrectable when its pawn is a mechanoid of a weight class that allows it, of the pilot's own
 // faction, not of a kind that itself resurrects mechs, dead for at most the extension's
-// maxCorpseAgeTicks, and of a weight class the cost table prices within the charges held. Unlike
+// maxCorpseAgeTicks (when it sets a limit), and of a weight class the cost table prices within the charges held. Unlike
 // the apocriton's area cast, only the clicked corpse comes back (the def header has the why),
 // paid from the core as the apocriton pays its charges; the applied effecter plays on the mech,
 // the centre effecter at its corpse, and the mech staggers for a second.
@@ -129,7 +129,7 @@ public class Ability_ResurrectMech : Ability
             reason = "OLWC_NotOurMech".Translate(mech.LabelShortCap);
             return false;
         }
-        if (corpse.timeOfDeath < Find.TickManager.TicksGame - extension.maxCorpseAgeTicks)
+        if (extension.LimitsCorpseAge && corpse.timeOfDeath < Find.TickManager.TicksGame - extension.maxCorpseAgeTicks)
         {
             reason = "OLWC_CorpseTooOld".Translate(mech.LabelShortCap);
             return false;
@@ -188,8 +188,20 @@ public class Ability_ResurrectMech : Ability
         centre.Cleanup();
     }
 
+    // A length of game time as vanilla's ToStringTicksToPeriod words it, but with a decimal on
+    // the hours between one hour and a day, which vanilla rounds whole (a 1.5 hour window would
+    // read "2 hours").
+    internal static string PeriodText(int ticks)
+    {
+        if (ticks < GenDate.TicksPerHour || ticks >= GenDate.TicksPerDay)
+            return ticks.ToStringTicksToPeriod();
+        string hours = ((float)ticks / GenDate.TicksPerHour).ToString("0.#");
+        return hours == "1" ? "Period1Hour".Translate() : "PeriodHours".Translate(hours);
+    }
+
     // The label beside the cursor: the charges held and, over a resurrectable corpse, what it
-    // costs; over a refused one, why.
+    // costs and how much of the corpse window it has left, which the corpse's own inspect pane
+    // (vanilla's "Dead for less than a day") never tells; over a refused one, why.
     public override string ExtraLabelMouseAttachment(LocalTargetInfo target)
     {
         CompResurrectionCore c = Core;
@@ -199,7 +211,13 @@ public class Ability_ResurrectMech : Ability
         if (target.Thing is not Corpse corpse)
             return first;
         if (CanResurrect(corpse, out string reason, out int cost))
-            return first + "\n" + "OLWC_TargetCost".Translate(corpse.InnerPawn.LabelShortCap, cost);
+        {
+            ResurrectMechExtension extension = Extension;
+            string label = first + "\n" + "OLWC_TargetCost".Translate(corpse.InnerPawn.LabelShortCap, cost);
+            if (extension.LimitsCorpseAge)
+                label += "\n" + "OLWC_TargetTimeLeft".Translate(PeriodText(extension.maxCorpseAgeTicks - corpse.Age));
+            return label;
+        }
         return reason == null ? first : first + "\n" + reason;
     }
 

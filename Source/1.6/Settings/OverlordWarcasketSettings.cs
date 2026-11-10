@@ -19,7 +19,8 @@ namespace OverlordWarcasket;
 // fraction on the def). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
 // override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
 // in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
-// corpse window overrides maxCorpseAgeTicks (in seconds, like the casting time) and the mechlink
+// corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day up;
+// ticks on the def, 0 for the slider's last stop, no limit) and the mechlink
 // switch requireMechlink. On the armor's CompProperties_CoreSparks entry, the sparks switch
 // overrides onlyWhileDrafted; its row sits in the ability's section, the core being the
 // ability's. The weight class costs are def-only. A line of what the rows amount
@@ -83,18 +84,24 @@ public class OverlordWarcasketSettings : ModSettings
         (3f, 0.5f), (12f, 1f), (24f, 6f), (72f, 12f), (CooldownMax, GenDate.HoursPerDay),
     ];
 
+    // The corpse window is game hours from half an hour to ten days, the unit the player's clock
+    // runs in at any speed: half hours to 3 h, hours to 12 h, quarter days to a day, half days to
+    // three, and whole days, the cooldown's bands above its seconds. One more stop a day past
+    // the longest window is no limit, shown as the word and written to the def as 0.
+    private const float CorpseAgeMax = 10f * GenDate.HoursPerDay;
+    private const float CorpseAgeNoLimit = CorpseAgeMax + GenDate.HoursPerDay;
+
     // The capacity in charges; the recharge in percent of it per day, fine at the slow end where
-    // the shipped rate sits, coarser up to a full core a day; the corpse window in real seconds,
-    // five-second steps to a minute, then quarter minutes, then minutes to ten; the casting time
-    // banded as the Medic's is.
+    // the shipped rate sits, coarser up to a full core a day; the casting time banded as the
+    // Medic's is.
     public readonly Tunable charges = new("Charges", 1f, 30f, 1f, Whole);
     public readonly Tunable regen = new("Regen", 0f, 100f, 0.25f, Percent)
     {
         StepBands = [(5f, 0.25f), (20f, 1f), (100f, 5f)],
     };
-    public readonly Tunable corpseAge = new("CorpseAge", 5f, 600f, 5f, RealSeconds)
+    public readonly Tunable corpseAge = new("CorpseAge", 0.5f, CorpseAgeNoLimit, 0.5f, CorpseWindow)
     {
-        StepBands = [(60f, 5f), (180f, 15f), (600f, 60f)],
+        StepBands = [(3f, 0.5f), (12f, 1f), (24f, 6f), (72f, 12f), (CorpseAgeNoLimit, GenDate.HoursPerDay)],
     };
     public readonly Tunable castTime = new("CastTime", 0f, 10f, 0.25f, RealSeconds)
     {
@@ -150,6 +157,12 @@ public class OverlordWarcasketSettings : ModSettings
         return (hours / GenDate.HoursPerDay).ToString("0.##") + "LetterDay".Translate();
     }
 
+    // The corpse window's value: a period, or the word for the stop past the longest one.
+    private static bool NoCorpseLimit(float hours) => hours > CorpseAgeMax;
+
+    private static string CorpseWindow(float hours) =>
+        NoCorpseLimit(hours) ? "OLWC_Unlimited".Translate().Resolve() : Period(hours);
+
     public override void ExposeData()
     {
         base.ExposeData();
@@ -178,7 +191,9 @@ public class OverlordWarcasketSettings : ModSettings
             return;
         charges.DefaultValue = defs.core.maxCharges;
         regen.DefaultValue = defs.core.regenPerDay * 100f;
-        corpseAge.DefaultValue = (float)defs.extension.maxCorpseAgeTicks / GenTicks.TicksPerRealSecond;
+        corpseAge.DefaultValue = defs.extension.LimitsCorpseAge
+            ? (float)defs.extension.maxCorpseAgeTicks / GenDate.TicksPerHour
+            : CorpseAgeNoLimit;
         castTime.DefaultValue = (float)defs.ability.castTime / GenTicks.TicksPerRealSecond;
         cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
         requireMechlink.DefaultValue = defs.extension.requireMechlink;
@@ -204,7 +219,9 @@ public class OverlordWarcasketSettings : ModSettings
             return;
         defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
         defs.core.regenPerDay = Mathf.Max(0f, regen.Value) / 100f;
-        defs.extension.maxCorpseAgeTicks = Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenTicks.TicksPerRealSecond));
+        defs.extension.maxCorpseAgeTicks = NoCorpseLimit(corpseAge.Value)
+            ? 0
+            : Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenDate.TicksPerHour));
         defs.extension.requireMechlink = requireMechlink.Value;
         defs.sparks.onlyWhileDrafted = sparksOnlyDrafted.Value;
         defs.ability.castTime = Mathf.RoundToInt(castTime.Value * GenTicks.TicksPerRealSecond);
@@ -300,14 +317,16 @@ public class OverlordWarcasketSettings : ModSettings
     }
 
     // What the section's rows amount to: the core's capacity and rate (a rate of 0 ends the
-    // clause on never), the costs, the corpse window and the cast's timings, in the formats
+    // clause on never), the costs, the corpse window (its own clause, or that there is none) and the cast's timings, in the formats
     // their rows show; a cooldown of 0 ends the line on its own clause.
     private string ResurrectSummary()
     {
         string rate = regen.Value > 0f
             ? "OLWC_SummaryRegen".Translate(Percent(regen.Value)).Resolve()
             : "OLWC_SummaryNoRegen".Translate().Resolve();
-        string window = RealSeconds(corpseAge.Value);
+        string window = NoCorpseLimit(corpseAge.Value)
+            ? "OLWC_SummaryNoWindow".Translate().Resolve()
+            : "OLWC_SummaryWindow".Translate(Period(corpseAge.Value)).Resolve();
         string casting = RealSeconds(castTime.Value);
         if (cooldown.Value <= 0f)
             return "OLWC_ResurrectSummaryNoCooldown".Translate(charges.IntValue, rate, costs, window, casting);

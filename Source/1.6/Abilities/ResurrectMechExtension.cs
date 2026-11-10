@@ -10,8 +10,10 @@ namespace OverlordWarcasket;
 // requireMechlink are mod settings defaulting to them, written back here.
 public class ResurrectMechExtension : DefModExtension
 {
-    // How long after death a mech can still be resurrected.
-    public int maxCorpseAgeTicks = 3600;
+    // How long after death a mech can still be resurrected; 0 or less is no limit.
+    public int maxCorpseAgeTicks = 60000;
+
+    public bool LimitsCorpseAge => maxCorpseAgeTicks > 0;
 
     // Charges each mech weight class costs; a class absent here cannot be resurrected. Vanilla's
     // own entry type, so the XML reads as the apocriton's.
