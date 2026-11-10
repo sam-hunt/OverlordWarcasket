@@ -14,9 +14,10 @@ namespace OverlordWarcasket;
 // rationale for them, are the defs'. Nothing here is saved into a game: a save loads the same
 // with any settings, and with none.
 //
-// On the armor's CompProperties_ResurrectionCore entry, the charge capacity overrides maxCharges
-// and the recharge rate regenPerDay (stored here as a percentage of the capacity per day, a
-// fraction on the def). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
+// On the armor's CompProperties_ResurrectionCore entry, the charge capacity overrides maxCharges,
+// the recharge rate chargesPerDay and the reload cost ammoCountPerCharge, vanilla's reload field;
+// that row is skipped, and the field left alone, while the def does not reload by the charge
+// (another mod's patch). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
 // override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
 // in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
 // corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day up;
@@ -91,14 +92,15 @@ public class OverlordWarcasketSettings : ModSettings
     private const float CorpseAgeMax = 10f * GenDate.HoursPerDay;
     private const float CorpseAgeNoLimit = CorpseAgeMax + GenDate.HoursPerDay;
 
-    // The capacity in charges; the recharge in percent of it per day, fine at the slow end where
-    // the shipped rate sits, coarser up to a full core a day; the casting time banded as the
-    // Medic's is.
+    // The capacity in charges; the recharge in charges per day, fine at the slow end around the
+    // shipped rate, coarser up to the shipped core in a day; the reload cost in items of the
+    // def's ammo per charge; the casting time banded as the Medic's is.
     public readonly Tunable charges = new("Charges", 1f, 30f, 1f, Whole);
-    public readonly Tunable regen = new("Regen", 0f, 100f, 0.25f, Percent)
+    public readonly Tunable recharge = new("ChargesPerDay", 0f, 10f, 0.25f, Decimal)
     {
-        StepBands = [(5f, 0.25f), (20f, 1f), (100f, 5f)],
+        StepBands = [(2f, 0.25f), (5f, 0.5f), (10f, 1f)],
     };
+    public readonly Tunable reloadCost = new("ReloadCost", 1f, 10f, 1f, Whole);
     public readonly Tunable corpseAge = new("CorpseAge", 0.5f, CorpseAgeNoLimit, 0.5f, CorpseWindow)
     {
         StepBands = [(3f, 0.5f), (12f, 1f), (24f, 6f), (72f, 12f), (CorpseAgeNoLimit, GenDate.HoursPerDay)],
@@ -123,6 +125,10 @@ public class OverlordWarcasketSettings : ModSettings
     // The cost lines the summary quotes, read when the defaults are.
     private string costs;
 
+    // The core's reload item, while the def reloads by the charge; null hides the reload cost
+    // row and the summary's reload clause.
+    private ThingDef reloadItem;
+
     // The work section's header icon, vanilla's mining work site. Its art is in the base game's
     // Resources, not Ideology's, so it loads whatever DLCs are active and survives a reload.
     private Texture2D workIcon;
@@ -133,11 +139,11 @@ public class OverlordWarcasketSettings : ModSettings
     private bool cerebrexLive;
     private string cerebrexTip;
 
-    private IEnumerable<Tunable> All => [charges, regen, corpseAge, castTime, cooldown];
+    private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown];
 
     private static string Whole(float v) => Mathf.RoundToInt(v).ToString();
 
-    private static string Percent(float v) => v.ToString("0.##") + "%";
+    private static string Decimal(float v) => v.ToString("0.##");
 
     // Game hours from real seconds at normal speed.
     private static float Seconds(float s) => s * GenTicks.TicksPerRealSecond / GenDate.TicksPerHour;
@@ -190,7 +196,17 @@ public class OverlordWarcasketSettings : ModSettings
         if (!TryGetDefs(out Defs defs))
             return;
         charges.DefaultValue = defs.core.maxCharges;
-        regen.DefaultValue = defs.core.regenPerDay * 100f;
+        recharge.DefaultValue = defs.core.chargesPerDay;
+        if (defs.core.ammoDef != null && defs.core.ammoCountPerCharge > 0 && defs.core.ammoCountToRefill == 0)
+        {
+            reloadItem = defs.core.ammoDef;
+            reloadCost.DefaultValue = defs.core.ammoCountPerCharge;
+            reloadCost.DescArgs = [Find.ActiveLanguageWorker.Pluralize(reloadItem.label)];
+        }
+        else
+        {
+            reloadItem = null;
+        }
         corpseAge.DefaultValue = defs.extension.LimitsCorpseAge
             ? (float)defs.extension.maxCorpseAgeTicks / GenDate.TicksPerHour
             : CorpseAgeNoLimit;
@@ -218,7 +234,9 @@ public class OverlordWarcasketSettings : ModSettings
         if (!defaultsLoaded || !TryGetDefs(out Defs defs))
             return;
         defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
-        defs.core.regenPerDay = Mathf.Max(0f, regen.Value) / 100f;
+        defs.core.chargesPerDay = Mathf.Max(0f, recharge.Value);
+        if (reloadItem != null)
+            defs.core.ammoCountPerCharge = Mathf.Max(1, reloadCost.IntValue);
         defs.extension.maxCorpseAgeTicks = NoCorpseLimit(corpseAge.Value)
             ? 0
             : Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenDate.TicksPerHour));
@@ -273,7 +291,9 @@ public class OverlordWarcasketSettings : ModSettings
         SectionHeader(listing, "OLWC_SectionResurrect", abilityDef.icon, abilityTip, first: true);
         SummaryRow(listing, ResurrectSummary);
         charges.DoRow(listing);
-        regen.DoRow(listing);
+        recharge.DoRow(listing);
+        if (reloadItem != null)
+            reloadCost.DoRow(listing);
         corpseAge.DoRow(listing);
         castTime.DoRow(listing);
         cooldown.DoRow(listing);
@@ -317,13 +337,15 @@ public class OverlordWarcasketSettings : ModSettings
     }
 
     // What the section's rows amount to: the core's capacity and rate (a rate of 0 ends the
-    // clause on never), the costs, the corpse window (its own clause, or that there is none) and the cast's timings, in the formats
+    // clause on never) with what a charge reloads for, the costs, the corpse window (its own clause, or that there is none) and the cast's timings, in the formats
     // their rows show; a cooldown of 0 ends the line on its own clause.
     private string ResurrectSummary()
     {
-        string rate = regen.Value > 0f
-            ? "OLWC_SummaryRegen".Translate(Percent(regen.Value)).Resolve()
+        string rate = recharge.Value > 0f
+            ? "OLWC_SummaryRegen".Translate(Decimal(recharge.Value)).Resolve()
             : "OLWC_SummaryNoRegen".Translate().Resolve();
+        if (reloadItem != null)
+            rate = "OLWC_SummaryReload".Translate(rate, Command_LoadCore.CostLabel(reloadItem, reloadCost.IntValue)).Resolve();
         string window = NoCorpseLimit(corpseAge.Value)
             ? "OLWC_SummaryNoWindow".Translate().Resolve()
             : "OLWC_SummaryWindow".Translate(Period(corpseAge.Value)).Resolve();

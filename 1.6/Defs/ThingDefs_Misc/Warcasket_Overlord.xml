@@ -44,13 +44,38 @@
     Resurrect mech: VEF CompAbilitiesApparel grants OLWC_ResurrectMech (AbilityDefs/
     ResurrectMech.xml), fed by the resurrection core beside it. The ability reads the core off
     the apparel that grants it, so both comps must sit on this one def. The core is
-    OverlordWarcasket.CompProperties_ResurrectionCore (Source/1.6/Comps/), a plain comp whose
-    props class sets the compClass, so none is declared here: maxCharges 10 is the charges held
-    when full (the apocriton holds 30; a suit of armor holds a third), regenPerDay 0.01 the
-    recharge as a fraction of the capacity per day, one percent, a whole charge every ten days,
-    so the core is a reserve the pilot rations between raids rather than a well. Both are mod
-    settings defaulting to these values. The core starts full. CompDevResetCooldowns is a
-    dev-mode cooldown reset for the ability (Toxin's idiom) and ships nothing in play.
+    OverlordWarcasket.CompProperties_ResurrectionCore (Source/1.6/Comps/), vanilla's
+    CompProperties_ApparelReloadable with a recharge of its own, whose props class sets the
+    compClass, so none is declared here. It declares no verbs, so vanilla draws no command for
+    it. The core starts full, vanilla's first fill. CompDevResetCooldowns is a dev-mode cooldown
+    reset for the ability (Toxin's idiom) and ships nothing in play.
+
+    The core's numbers, all three mod settings defaulting to these values:
+    - maxCharges 10, the charges held when full: the apocriton holds 30, a suit of armor a
+      third. With the costs of 1 / 3 / 5 that is two heavy mechs, or three medium and a light,
+      in one fight, and the capacity is what limits a fight.
+    - chargesPerDay 1, the recharge: the main supply, free and unattended. Measured against the
+      vanilla route it competes with, the mech gestator's resurrect bills (Biotech/Defs/
+      RecipeDefs/Recipes_MechResurrection.xml: 25 / 50 / 100 steel and one gestation cycle of
+      two days for a light, medium or heavy mech, any corpse age, fully healed), a charge a day
+      pays for a light mech in one day, a medium in three and a heavy in five: quicker than the
+      gestator for a light mech and slower for the rest, so the gestator keeps its place and
+      what the core adds is the mech back on its feet during the fight. The rate is meant to
+      bring a core spent in one raid most of the way back by the next; whether that is too
+      generous is an open entry in TODOs.md.
+    - ammoDef ComponentSpacer at ammoCountPerCharge 1, the reload: the costly shortcut for the
+      raid that follows too soon or the fight that outlasts ten charges. The item is the
+      Controller's, which this set is templated from (VFEP_Warcasket_Controller reloads its
+      drones with one advanced component a deployment), where vanilla's own reloadables take
+      chemfuel, steel or bioferrite. At 200 silver and a fabrication bench's work each, a heavy
+      mech brought back on components costs about five times its gestator bill, so components
+      stay the exception. Per charge rather than ammoCountToRefill, so a part-empty core
+      reloads for what it lacks. baseReloadTicks, soundReload and chargeNoun are the family's
+      values (the Medic's suite); chargeNoun is vanilla's default, spelled out because the
+      stat sheet and the gauge's tooltip print it.
+    A pilot never fetches components unasked: the gauge's drag handle sets the level an
+    automatic reload fills to and starts at zero (CompResurrectionCore's header has the three
+    ways a reload happens).
 
     Core sparks: OverlordWarcasket.CompProperties_CoreSparks plays OLWC_CoreSparks (Effects/
     CoreSparks.xml), the apocriton's idle red crackle, on the wearer while the core holds a
@@ -91,7 +116,7 @@
     <defName>OLWC_Warcasket_Overlord</defName>
     <label>overlord warcasket</label>
     <shortDescription>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.</shortDescription>
-    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and regains them slowly, so they are best saved for the mechs that matter most. When a fight cannot wait, it can be reloaded with advanced components. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlord</texPath>
     </graphicData>
@@ -144,7 +169,12 @@
     <comps>
       <li Class="OverlordWarcasket.CompProperties_ResurrectionCore">
         <maxCharges>10</maxCharges>
-        <regenPerDay>0.01</regenPerDay>
+        <chargesPerDay>1</chargesPerDay>
+        <ammoDef>ComponentSpacer</ammoDef>
+        <ammoCountPerCharge>1</ammoCountPerCharge>
+        <baseReloadTicks>60</baseReloadTicks>
+        <soundReload>Standard_Reload</soundReload>
+        <chargeNoun>charge</chargeNoun>
       </li>
       <li Class="OverlordWarcasket.CompProperties_CoreSparks">
         <effecterDef>OLWC_CoreSparks</effecterDef>

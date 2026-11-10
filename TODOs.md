@@ -8,9 +8,6 @@
   pilot reads 20 bandwidth, a control group and 80% psychic sensitivity and can still install a
   mechlink, and how the helmet's -3 shooting plays with a warcasket weapon.
   Still to compare: the Mechlord Warcasket mod's stats and costs.
-- **Recharge rate.** The shipped 1% of capacity per day is one charge every ten days on a
-  ten-charge core, a reserve rather than a well, taken literally from the brief; the setting
-  slider spans up to a full core a day if play says otherwise.
 - **CE subdomain compat scan** Check CE for any extra related subdomains that it takes over from vanilla
 - **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
 - **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
@@ -52,6 +49,16 @@
   vanilla's "Out of command range" again. Then the settings page: the greyed second group, the
   slider selecting its radio, the summary line, and the choices surviving a reopen and a
   language switch (`Docs/Specs/Mechanitor-Command-Range.md`, section 5).
+- **In-game run of the core's recharge and reload.** Nobody has watched either in game: the core
+  gaining a charge a day and the tooltip's wait; the handle at zero fetching nothing; the handle
+  raised making an undrafted pilot fetch advanced components up to that level and no further; a
+  right-click on components reloading drafted and undrafted, past the handle; the load button
+  appearing only while the pilot carries components (picked up with vanilla's pick up order), its
+  icon, red background and count, its disabled reasons when the core is full and when too few are
+  carried, and the load taking the components out of the inventory; the reload cost and recharge
+  sliders reaching a worn core; the armor's stat sheet showing the reload cost. Also whether one
+  charge a day is too generous in play (the core usually meets each raid full), with 0.5 as the
+  fallback.
 
 ## Later
 

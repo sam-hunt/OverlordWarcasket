@@ -34,14 +34,15 @@ spacer warcaskets research together with Biotech's ultra mechtech.
 
 - **Resurrect mech**: the armor's resurrection core brings your recently killed mechs back on
   their feet, every eligible one near the mech you target, each costing charges by its weight
-  class, exactly as the apocriton's own ability does. The core holds ten charges, slowly
-  recharges on its own and shows a red gauge on the pilot
+  class, exactly as the apocriton's own ability does. The core holds ten charges, recharges
+  on its own, can be reloaded with advanced components and shows a red gauge on the pilot
 - **A pilot who still works**: where VFE Pirates' warcaskets block all skilled and intellectual
   labor, the suit's trait keeps smithing open (mech gestation, subcore encoding and mech repair)
   and research (which carries hacking), with crafting, tailoring and dark study a setting away;
   everything else follows VFE Pirates' rules and the mods that change them
-- **Mod settings** for the charge capacity, the recharge rate, how fresh a mech must be, the
-  casting time, the cooldown, whether a mechlink is required and which work the pilot may take on
+- **Mod settings** for the charge capacity, the recharge rate, the reload cost, how fresh a mech
+  must be, the casting time, the cooldown, whether a mechlink is required and which work the
+  pilot may take on
 - **A new look for the cerebrex node** (Odyssey): a setting redraws Odyssey's mechanitor utility
   pack with the mod's own art, on the ground and on the wearer's back; off by default
 - **Mechanitor gear on a warcasket**: the helmet adds 12 bandwidth at some cost to the pilot's

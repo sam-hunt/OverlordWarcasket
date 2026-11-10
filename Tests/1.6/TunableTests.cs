@@ -25,21 +25,21 @@ public class TunableTests
         Assert.Equal(4f, Tunable.StoredStep(3f, 2f));
     }
 
-    // The recharge row's bands: quarter percents to five, whole to twenty, fives to a hundred,
+    // The recharge row's bands: quarter charges to two a day, halves to five, whole to ten,
     // the minimum first and each band's end a stop.
     [Fact]
     public void Stops_FollowTheBands()
     {
-        float[] stops = Tunable.Stops(0f, 100f, [(5f, 0.25f), (20f, 1f), (100f, 5f)]);
+        float[] stops = Tunable.Stops(0f, 10f, [(2f, 0.25f), (5f, 0.5f), (10f, 1f)]);
         Assert.Equal(0f, stops[0]);
         Assert.Equal(0.25f, stops[1]);
-        Assert.Contains(5f, stops);
+        Assert.Contains(2f, stops);
+        Assert.Contains(2.5f, stops);
+        Assert.DoesNotContain(2.25f, stops);
         Assert.Contains(6f, stops);
         Assert.DoesNotContain(5.5f, stops);
-        Assert.Contains(25f, stops);
-        Assert.DoesNotContain(21f, stops);
-        Assert.Equal(100f, stops[^1]);
-        Assert.Equal(20 + 15 + 16 + 1, stops.Length);
+        Assert.Equal(10f, stops[^1]);
+        Assert.Equal(8 + 6 + 5 + 1, stops.Length);
     }
 
     // A minimum may sit off its band's grid: five, then the multiples of five.

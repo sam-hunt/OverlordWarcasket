@@ -40,11 +40,12 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   rule above holds; the two choices no def can express, every mechanitor and off, are the one
   piece of static settings state (`CommandRange.AppliesTo`). `CommandRange`'s header carries the
   vanilla call paths; the ring cap it quotes is read from `GenRadial` at runtime, never hard-coded.
-- **The resurrection core is a plain `ThingComp` on the armor**, not a `CompApparelReloadable`:
-  nothing reloads it. The ability reads it off `holder` and `CompCoreSparks` off its own
-  parent, so all three comps share the armor def.
-  Charges are whole and the regen keeps a fraction; `CompResurrectionCore`'s header has the
-  arithmetic and the trim rules.
+- **The resurrection core is a `CompApparelReloadable` subclass on the armor**, with a recharge
+  of its own. Vanilla's reload queries are not virtual, so two patch classes bend them for this
+  comp only: `CompApparelReloadable_Reload` and `JobGiver_Reload_TryGiveJob` (their headers have
+  the call paths). The ability reads the core off `holder` and `CompCoreSparks` off its own
+  parent, so all three comps share the armor def. `CompResurrectionCore`'s header has the
+  arithmetic, the three reloads and the trim rules.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target: every rule lives in `CanResurrect`, which the cast re-runs on the corpse.

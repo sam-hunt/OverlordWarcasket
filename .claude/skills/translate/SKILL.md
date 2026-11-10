@@ -65,16 +65,20 @@ notes for the shim or flow edit this repo owes before continuing.
   - the mod settings window: `OLWC_SettingsCategory` (its header),
     `OLWC_SettingsUnavailable`, the section headers (`OLWC_SectionResurrect`,
     `OLWC_SectionWork`), and each setting's label and `...Desc` tooltip
-    (charge capacity, recharge per day, corpse window, casting time (Core's
-    `AbilityCastingTime`), cooldown, the mechlink switch). Labels carry no
-    unit: the row's value shows it, as Core's short period form does
-    (`LetterSecond`, `LetterHour`, `LetterDay`; a percentage as "1%"). Each
-    tooltip takes one `{0}`, the default value as the row shows it; keep it.
+    (charge capacity, charges recharged per day, reload cost per charge,
+    corpse window, casting time (Core's `AbilityCastingTime`), cooldown, the
+    mechlink switch). Labels carry no unit: the row's value shows it, as
+    Core's short period form does (`LetterSecond`, `LetterHour`,
+    `LetterDay`; a count as "1"). Each tooltip takes one `{0}`, the default
+    value as the row shows it; keep it. The reload cost's also takes `{1}`,
+    the reload item's plural label.
     The switch's tooltip takes none; `OLWC_SwitchDefault` takes `{0}`, the
     `OLWC_SwitchOn` / `OLWC_SwitchOff` word already coloured.
     `OLWC_ResurrectSummary` takes `{0}` the charge capacity, `{1}` the
-    recharge clause (`OLWC_SummaryRegen` with `{0}` the percentage, or
-    `OLWC_SummaryNoRegen`), `{2}` the cost list (each `OLWC_SummaryCost` with
+    recharge clause (`OLWC_SummaryRegen` with `{0}` the charges per day, or
+    `OLWC_SummaryNoRegen`, either one then wrapped by `OLWC_SummaryReload`
+    with `{0}` that clause and `{1}` the reload cost, such as "1 advanced
+    component"), `{2}` the cost list (each `OLWC_SummaryCost` with
     `{0}` the weight class label, lowercase, in the game's own translation,
     and `{1}` the charges, joined with Core's comma-and list), `{3}` the
     corpse window, `{4}` the casting time and `{5}` the cooldown, each
@@ -90,11 +94,21 @@ notes for the shim or flow edit this repo owes before continuing.
     `OLWC_TargetCost` (its second line) `{0}` the mech's name and `{1}` the
     cost; the gauge's tooltip is label lines under Biotech's own
     `MechResurrectionCharges` header (never re-rendered here):
-    `OLWC_GaugeRegen` takes `{0}` the rate, already a percentage, and `{1}`
-    the wait for the next charge, already a period; `OLWC_GaugeFull` `{0}`
-    the rate; `OLWC_GaugeNoRegen` none; `OLWC_GaugeCosts` none, then one
+    `OLWC_GaugeRegen` takes `{0}` the charges per day, a plain number, and
+    `{1}` the wait for the next charge, already a period; `OLWC_GaugeFull`
+    `{0}` the charges per day; `OLWC_GaugeNoRegen` none; the reload cost
+    line between them and the next is Core's own
+    `Stat_Thing_ReloadPerCharge_Name` (never re-rendered here);
+    `OLWC_GaugeAutoReload` `{0}` the charges the drag handle is set to and
+    `OLWC_GaugeNoAutoReload` none; `OLWC_GaugeCosts` none, then one
     `OLWC_GaugeCost` per weight class with `{0}` its capitalised label and
     `{1}` the charges; `OLWC_GaugeCorpseAge` `{0}` the window as a period.
+  - the carried reload's command beside the gauge: `OLWC_LoadCarried` (its
+    label) takes `{0}` the reload item's plural label, as the language's own
+    pluraliser gives it; `OLWC_LoadCarriedDesc` `{0}` that label and `{1}`
+    the cost per charge, a count and the item's label ("1 advanced
+    component"); `OLWC_CoreFull` none; `OLWC_NotEnoughCarried` `{0}` the
+    pilot's name and `{1}` that cost.
   Name the set's things with the same renderings as the DefInjected text
   (resurrection core, charge, mechanitor, warcasket).
 - **Enumerate the key set from `Scripts/expected-injections.json`, never

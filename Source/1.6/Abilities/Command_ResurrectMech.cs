@@ -14,5 +14,5 @@ public class Command_ResurrectMech : Command_Ability
     {
     }
 
-    public override string TopRightLabel => (ability as Ability_ResurrectMech)?.Core?.LabelCharges;
+    public override string TopRightLabel => (ability as Ability_ResurrectMech)?.Core?.LabelRemaining;
 }

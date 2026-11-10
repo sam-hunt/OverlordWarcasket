@@ -12,13 +12,21 @@
   <OLWC_ChargesLabel>Charges: {0} / {1}</OLWC_ChargesLabel>
   <OLWC_TargetCost>{0}: {1} charges</OLWC_TargetCost>
   <OLWC_TargetTimeLeft>Can be resurrected for another {0}.</OLWC_TargetTimeLeft>
-  <OLWC_GaugeRegen>The core recharges {0} of its capacity each day. The next charge will be ready in {1}.</OLWC_GaugeRegen>
-  <OLWC_GaugeFull>The core is fully charged and recharges {0} of its capacity each day.</OLWC_GaugeFull>
-  <OLWC_GaugeNoRegen>The core does not recharge.</OLWC_GaugeNoRegen>
+  <OLWC_GaugeRegen>The core recharges at a rate of {0} per day. The next charge will be ready in {1}.</OLWC_GaugeRegen>
+  <OLWC_GaugeFull>The core is fully charged. It recharges at a rate of {0} per day.</OLWC_GaugeFull>
+  <OLWC_GaugeNoRegen>The core does not recharge on its own.</OLWC_GaugeNoRegen>
+  <OLWC_GaugeAutoReload>Automatic reload level: {0}</OLWC_GaugeAutoReload>
+  <OLWC_GaugeNoAutoReload>Automatic reload is off. Drag the bar to set a level.</OLWC_GaugeNoAutoReload>
   <OLWC_GaugeCosts>Charges per mech:</OLWC_GaugeCosts>
   <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
   <OLWC_GaugeCorpseAge>Mechs dead for up to {0} can be resurrected.</OLWC_GaugeCorpseAge>
   <OLWC_GaugeNoCorpseAge>Mechs can be resurrected no matter how long they have been dead.</OLWC_GaugeNoCorpseAge>
+
+  <!-- The carried reload's command (Source/1.6/Gizmos/Command_LoadCore.cs) -->
+  <OLWC_LoadCarried>Load carried {0}</OLWC_LoadCarried>
+  <OLWC_LoadCarriedDesc>Reload the resurrection core with the {0} the pilot is carrying. Each charge takes {1}.</OLWC_LoadCarriedDesc>
+  <OLWC_CoreFull>The resurrection core is full.</OLWC_CoreFull>
+  <OLWC_NotEnoughCarried>{0} is carrying less than the {1} a charge takes.</OLWC_NotEnoughCarried>
 
   <!-- Mod settings (Source/1.6/Settings/) -->
   <OLWC_SettingsCategory>Overlord Warcasket</OLWC_SettingsCategory>
@@ -29,8 +37,11 @@
   <OLWC_Charges>Charge capacity</OLWC_Charges>
   <OLWC_ChargesDesc>The number of resurrection charges the armor holds when full. Default: {0}.</OLWC_ChargesDesc>
 
-  <OLWC_Regen>Recharge per day</OLWC_Regen>
-  <OLWC_RegenDesc>The percentage of the armor's charge capacity that recharges each day. At 0%, it will never recharge. Default: {0}.</OLWC_RegenDesc>
+  <OLWC_ChargesPerDay>Charges recharged per day</OLWC_ChargesPerDay>
+  <OLWC_ChargesPerDayDesc>The number of charges the armor recharges on its own each day. At 0, it will only gain charges by reloading. Default: {0}.</OLWC_ChargesPerDayDesc>
+
+  <OLWC_ReloadCost>Reload cost per charge</OLWC_ReloadCost>
+  <OLWC_ReloadCostDesc>The number of {1} it takes to reload one charge. Default: {0}.</OLWC_ReloadCostDesc>
 
   <OLWC_CorpseAge>Maximum corpse age</OLWC_CorpseAge>
   <OLWC_CorpseAgeDesc>How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}.</OLWC_CorpseAgeDesc>
@@ -51,6 +62,7 @@
   <OLWC_SummaryCost>{1} for a {0} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>
   <OLWC_SummaryNoRegen>never recharges</OLWC_SummaryNoRegen>
+  <OLWC_SummaryReload>{0}, and each one can be reloaded with {1}</OLWC_SummaryReload>
   <OLWC_SummaryWindow>as long as it died within the last {0}</OLWC_SummaryWindow>
   <OLWC_SummaryNoWindow>no matter how long ago it died</OLWC_SummaryNoWindow>
   <OLWC_ResurrectSummary>The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}.</OLWC_ResurrectSummary>

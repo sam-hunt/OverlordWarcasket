@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The Overlord, a spacer-tier mechanitor warcasket set for VFE Pirates
 - Resurrect mech: the armor revives one of your recently killed mechs, as the apocriton does
-- The armor's resurrection core holds ten charges and slowly recharges, with a red gauge on the pilot
+- The armor's resurrection core holds ten charges, recharges on its own and can be reloaded with advanced components, with a red gauge on the pilot
 - A charged core crackles with the apocriton's red sparks
 - A mechanitor wearing the shoulders can order drafted mechs anywhere on the map, not just within 24.9 cells
 - The helmet and armor add mech bandwidth, and the shoulders add a control group and hacking speed

@@ -49,21 +49,39 @@ as the apocriton's.
 
 ### 3.2 The core
 
-`CompResurrectionCore` on the armor, a plain `ThingComp` (nothing reloads it; the family's
-`CompApparelReloadable` gauges carry a reload target this one has no use for). `maxCharges`
-10, starts full. Regen: `regenPerDay` is a fraction of the capacity per day (0.01), accrued
-every 150 ticks into a saved fraction and banked as whole charges; a full core holds no
-fraction, so a lowered capacity never strands one. "1% per day" is read literally as 1% of the
-capacity: a charge every ten days, a reserve rationed between raids. Both numbers are mod
-settings.
+`CompResurrectionCore` on the armor, a `CompApparelReloadable` subclass as the family's gauges
+are (props `CompProperties_ResurrectionCore : CompProperties_ApparelReloadable`); the charges
+are the base's `remainingCharges`. `maxCharges` 10, starts full. Two supplies, so the recharge
+never competes with the reload:
+
+- Recharge: `chargesPerDay` (1), accrued every 150 ticks into a saved fraction of the next
+  charge and banked whole; a full core holds no fraction, so a lowered capacity never strands
+  one. This is the main supply.
+- Reload: `ammoCountPerCharge` advanced components (`ComponentSpacer`) per charge, the costly
+  shortcut (VFE Pirates' Controller warcasket reloads its drones with one advanced component).
+
+A reload happens three ways. Automatic: the pilot fetches components on their own (vanilla's
+`JobGiver_Reload`) only while the core is below the gauge's drag handle, which starts at zero,
+so a pilot never spends the colony's components unasked. Ordered: right-clicking components
+(vanilla's float menu, drafted too) reloads as far as the clicked stack goes, ignoring the
+handle. Carried: a command beside the gauge loads the core from the pilot's inventory (job
+`OLWC_LoadCore`), since vanilla's reload never looks there. Two Harmony patches bend vanilla's
+queries for this comp only: `CompApparelReloadable_Reload` (`NeedsReload` and `MaxAmmoNeeded`,
+branching on `allowForcedReload`: false answers for the handle's target, true for the whole
+core) and `JobGiver_Reload_TryGiveJob` (caps the automatic job's count at the target). The
+capacity, the recharge and the reload cost are mod settings.
 
 ### 3.3 The gauge
 
 `Gizmo_ResurrectionCore : Gizmo_Slider` (Toxin's `Gizmo_ToxTank` shape): Biotech's
-`MechResurrectionCharges` as the title, "3 / 10" on the bar, a tick per charge, not draggable.
+`MechResurrectionCharges` as the title, "3 / 10" on the bar, a tick per charge, draggable for
+the player's pilots to set the automatic reload level, which starts at zero.
 Red: fill (0.62, 0.12, 0.12), hover (0.85, 0.30, 0.30), handle (0.40, 0.07, 0.07). The
-tooltip: the count, the recharge line (rate and wait, or full, or never), the cost per weight
-class and the corpse window.
+tooltip: the count, the recharge line (rate and wait, or full, or never), vanilla's reload per
+charge line, the automatic reload level line (or that it is off), the cost per weight class and
+the corpse window. Beside the gauge, `Command_LoadCore` shows only while the pilot carries the
+components: the component's icon on a red background with the count carried, disabled with a
+reason when the core is full or too few are carried.
 
 ### 3.4 The cast
 
@@ -83,9 +101,9 @@ class and the corpse window.
 
 ### 3.5 Settings
 
-Charge capacity, recharge per day (percent), corpse window (game hours), casting time, cooldown,
-require a mechlink; written onto the comp props, the extension and the def by
-`OverlordWarcasketSettings.ApplyToDefs`.
+Charge capacity, charges recharged per day, reload cost per charge, corpse window (game hours),
+casting time, cooldown, require a mechlink; written onto the comp props, the extension and the
+def by `OverlordWarcasketSettings.ApplyToDefs`.
 
 ## 4. Residuals
 
@@ -104,3 +122,12 @@ other, cast on one; expect all three back, 9 charges spent, the warmup sparks on
 corpse, the glow on each mech, the resolve burst at their centre. Wait past a minute and
 expect "has been dead too long". Remove the mechlink and expect the gizmo disabled with the
 mechlink reason. Lower the capacity in settings to 5 and expect the gauge trimmed at once.
+
+Reload: with the handle at zero and the core below full, expect no pilot to fetch components;
+raise the handle and expect an undrafted pilot to fetch advanced components up to that level and
+no further. Right-click components drafted and undrafted and expect a reload past the handle.
+Pick components up with vanilla's pick up order and expect the load button, with the component's
+icon on a red background and the count; expect it gone with none carried, disabled when the core
+is full and when too few are carried, and the load to take the components out of the inventory.
+Expect the charge-per-day and reload cost sliders to reach a worn core, the tooltip to show the
+wait for the next charge, and the armor's stat sheet to show the reload cost.
