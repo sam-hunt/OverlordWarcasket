@@ -3,23 +3,38 @@
   <!--
     Templated from VFEP's VFEP_Warcasket_Controller (VFEP v4.03,
     1.6/Defs/ThingDefs_Misc/Apparel_Various.xml), the tier's computing-heavy set; fields not
-    discussed here are the Controller's, VFEP_SpacerWarcaskets research prereq included.
-    Docs/Research/VFEP_WARCASKET_STATS.md tabulates the sets it sits beside.
+    discussed here are the Controller's. Docs/Research/VFEP_WARCASKET_STATS.md tabulates the
+    sets it sits beside.
 
-    Tuning, first pass (the set-tuning pass is a TODOs.md item). Reference numbers are VFEP's
-    10th-generation sets (Siegebreaker, Guardian, Controller, Sarcophagus, Brute). A command
-    suit on the tier's shared chassis, its budget spent on the resurrection core rather than on
-    the pilot's own protection:
+    Tuning. The set is designed against vanilla: VFEP's 10th-generation chassis (Siegebreaker,
+    Guardian, Controller, Sarcophagus, Brute are the reference numbers) carrying what Biotech's
+    top mechanitor gear carries, the mechlord helmet and suit (MechBandwidth 12 each,
+    ShootingAccuracyPawn -5 and MeleeHitChance -0.5 each; the suit Plasteel 120,
+    ComponentSpacer 8, NanostructuringChip 2, PowerfocusChip 1; both UltraMechtech), whose
+    slots the helmet and this shell take. The resurrection is at or past the top of what
+    vanilla and VFEP offer, so the set is gated and priced as vanilla's top tier is:
+    - researchPrerequisites VFEP_SpacerWarcaskets and UltraMechtech on all three pieces
+      (BuildableDef.IsResearchFinished, which VFEP's foundry lists by, wants every entry).
+      UltraMechtech needs a NanostructuringChip analyzed, so the set comes after the first
+      apocriton, whose ability the core copies.
+    - MechBandwidth 8 here and 12 on the helmet, 20 against the mechlord pair's 24: the shell
+      pays the suit's chips for two thirds of its bandwidth and the core.
+    - PsychicSensitivity -0.2, where the Controller's armor has -0.5: the helmet's header has
+      why a mechanitor's suit cannot deafen its pilot. The set leaves a baseline pilot at 80%.
+    - The helmet alone carries the aim penalty (its header); the shoulders the command range,
+      a control group and hacking speed (theirs).
     - Sharp 2 / Blunt 1 / Heat 1 on all three pieces, the tier's shared values. Blunt 1.5 is
       Guardian's and Brute's, paid for in plasteel; this set has no claim to it.
     - EnergyShieldEnergyMax 1.5 at EnergyShieldRechargeRate 0.01, the tier's baseline
       (Guardian, Controller, Sarcophagus); Siegebreaker's 2.5 and Brute's 5.0 are their
       specialties. The bubble blocks ranged fire only.
-    - costList ComponentSpacer 6 / Plasteel 150 / Uranium 50, the utility sets' band: the
-      components are VFEP's tech-complexity dial (the utility sets 6, Controller 12, Brute 4),
-      the plasteel the utility sets' 145 to 150. Whether a resurrection core prices like the
-      Controller's drone module (12) is the tuning pass's question. Parts are untradeable and
-      destroyed on drop, so market value is colony wealth and raid points only.
+    - costList ComponentSpacer 8 / Plasteel 150 / Uranium 50 / NanostructuringChip 2 /
+      PowerfocusChip 1: the plasteel and uranium are the utility sets' band (145 to 150); the
+      components and chips are the mechlord suit's, the components sitting inside VFEP's
+      tech-complexity dial (the utility sets 6, Controller 12, Brute 4). Set-wide that is four
+      NanostructuringChips, two PowerfocusChips and a SignalChip against the mechlord pair's
+      four and one. Parts are untradeable and destroyed on drop, so market value, the chips'
+      1500 and 1000 each included, is colony wealth and raid points only.
 
     apparel tags: WarcasketVeteran (VFEP's 10th-gen tag) puts the set on the veteran raid
     pawnkinds of both VFEP factions and Odyssey's VFEP_Salvager_Warcasket; WarcasketAll is
@@ -76,7 +91,7 @@
     <defName>OLWC_Warcasket_Overlord</defName>
     <label>overlord warcasket</label>
     <shortDescription>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.</shortDescription>
-    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mechanoid resurrection core that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlord</texPath>
     </graphicData>
@@ -92,18 +107,22 @@
       <EnergyShieldEnergyMax>1.5</EnergyShieldEnergyMax>
     </statBases>
     <equippedStatOffsets>
-      <PsychicSensitivity>-0.5</PsychicSensitivity>
+      <MechBandwidth>8</MechBandwidth>
+      <PsychicSensitivity>-0.2</PsychicSensitivity>
       <ToxicResistance>0.5</ToxicResistance>
       <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.3</SlaveSuppressionOffset>
       <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.2</VacuumResistance>
     </equippedStatOffsets>
     <costList>
-      <ComponentSpacer>6</ComponentSpacer>
+      <ComponentSpacer>8</ComponentSpacer>
       <Plasteel>150</Plasteel>
       <Uranium>50</Uranium>
+      <NanostructuringChip>2</NanostructuringChip>
+      <PowerfocusChip>1</PowerfocusChip>
     </costList>
     <researchPrerequisites>
       <li>VFEP_SpacerWarcaskets</li>
+      <li>UltraMechtech</li>
     </researchPrerequisites>
     <apparel>
       <bodyPartGroups>

@@ -3,17 +3,34 @@
   <!--
     Templated from VFEP's VFEP_WarcasketShoulders_Controller (VFEP v4.03,
     1.6/Defs/ThingDefs_Misc/Apparel_Various.xml); fields not discussed here are the
-    Controller's, its spider mine module left off. Plating, tags and the market-value references
-    follow the armor's header, as does the art note.
+    Controller's, its spider mine module left off. Plating, tags, the market-value references
+    and the UltraMechtech gate follow the armor's header, as does the art note.
 
-    Tuning, first pass: ComponentSpacer 2 / Plasteel 60, the Controller shoulders' price. The
-    plasteel is the 10th-gen shoulder-to-armor ratio, roughly 0.4 (Siegebreaker 60/145,
-    Guardian 80/200, Controller 60/150, Sarcophagus 60/145, Brute 60/160), of the armor's 150.
-    The pads carry no function of their own in XML; the mechlink passives the lore hints at
-    (a bandwidth or control group offset) are the tuning pass's question, in TODOs.md. The
-    helmet's CommandRangeExtension (its header) lands here at startup when the mod settings
-    point the extended command range at the shoulders, so the pads can carry it without an
-    entry of their own.
+    Tuning: the pads are the set's command piece, the one a mechanitor's vanilla utility gear
+    has no single answer to.
+    - MechControlGroups 1, Biotech's control pack (Steel 100, ComponentIndustrial 6).
+    - HackingSpeed 0.2, a fifth faster at the hacking the overlord trait leaves the pilot
+      (Research). No vanilla apparel carries it; it is the pads' processors turned on a
+      terminal, and it keeps the set's bandwidth on the helmet and the armor.
+    - No MechBandwidth: the helmet's 12 and the armor's 8 are the set's 20.
+    - costList ComponentSpacer 2 / Plasteel 60 / PowerfocusChip 1 / SignalChip 1. The first two
+      are the Controller shoulders' price, the plasteel the 10th-gen shoulder-to-armor ratio,
+      roughly 0.4 (Siegebreaker 60/145, Guardian 80/200, Controller 60/150, Sarcophagus 60/145,
+      Brute 60/160), of the armor's 150. The chips are the war queen's and the diabolus's
+      drops, the grade of Biotech's integrator headset (one PowerfocusChip) and bandwidth pack
+      (SignalChip), so the set spends all three mech bosses' chips and the command range has a
+      price.
+
+    Command range (the CommandRangeExtension entry, Source/1.6/CommandRange/): a mechanitor
+    wearing the pads may order their drafted mechs anywhere on the map they share (scope
+    CurrentMap), where vanilla stops every move and attack order at 24.9 cells from the overseer.
+    The pads carry it as the set's command relays, leaving the helmet the bandwidth; the mod
+    settings may move the entry to the helmet, widen it to every mechanitor or switch it off,
+    and override the scope (Anywhere drops the same-map rule too; Radius keeps vanilla's shape
+    at the radius below) and the radius, which is the Radius scope's reach and the settings
+    slider's default, left at vanilla's 24.9 so switching to that scope starts from vanilla.
+    The settings write every choice back onto this entry at startup and when the window closes;
+    CommandRange's header has the vanilla call paths and the rules.
 
     ApparelExtension priority 1, for the reason in the armor def's header: the
     VFEP_WarcasketShoulderPadBase parent carries its own, and only the highest-priority copy
@@ -41,8 +58,8 @@
   <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketShoulderPadBase">
     <defName>OLWC_WarcasketShoulders_Overlord</defName>
     <label>overlord warcasket shoulders</label>
-    <shortDescription>Specialized spacer-tech warcasket pauldrons with standard protection, equipped with signal processors that support the pilot's mechlink.</shortDescription>
-    <description>Specialized spacer-tech warcasket pauldrons with standard protection, equipped with signal processors that support the pilot's mechlink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <shortDescription>Specialized spacer-tech warcasket pauldrons with standard protection, equipped with command relays that let the pilot order mechs anywhere on the map.</shortDescription>
+    <description>Specialized spacer-tech warcasket pauldrons with standard protection, equipped with command relays that let the pilot order mechs anywhere on the map.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordShoulders</texPath>
     </graphicData>
@@ -56,15 +73,20 @@
       <EquipDelay>1</EquipDelay>
     </statBases>
     <equippedStatOffsets>
+      <MechControlGroups>1</MechControlGroups>
+      <HackingSpeed>0.2</HackingSpeed>
       <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.2</SlaveSuppressionOffset>
       <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.1</VacuumResistance>
     </equippedStatOffsets>
     <costList>
       <ComponentSpacer>2</ComponentSpacer>
       <Plasteel>60</Plasteel>
+      <PowerfocusChip>1</PowerfocusChip>
+      <SignalChip>1</SignalChip>
     </costList>
     <researchPrerequisites>
       <li>VFEP_SpacerWarcaskets</li>
+      <li>UltraMechtech</li>
     </researchPrerequisites>
     <apparel>
       <bodyPartGroups>
@@ -91,6 +113,10 @@
     <modExtensions>
       <li Class="VEF.Apparels.ApparelExtension">
         <priority>1</priority>
+      </li>
+      <li Class="OverlordWarcasket.CommandRangeExtension">
+        <scope>CurrentMap</scope>
+        <radius>24.9</radius>
       </li>
     </modExtensions>
   </VFEPirates.WarcasketDef>

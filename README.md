@@ -22,15 +22,15 @@ industrial era into the late game. This mod adds one more set to that range: the
 10th-generation spacer-tier warcasket built for a mechanitor who leads mechs from the front line
 and brings the fallen ones back.
 
-The mod is in development: the resurrection core and the work profile are in; the set's tuning,
-the pieces' passives and the descriptions are still being settled.
+The mod is in development: the resurrection core, the work profile and the pieces' mechanitor
+stats are in; the set's numbers have not been play-tested yet.
 
 ## Features
 
 ### The Overlord Set
 
 Armor, shoulder pads and helmet, welded on at VFE Pirates' warcasket foundry and unlocked by its
-spacer warcaskets research.
+spacer warcaskets research together with Biotech's ultra mechtech.
 
 - **Resurrect mech**: the armor's resurrection core brings your recently killed mechs back on
   their feet, every eligible one near the mech you target, each costing charges by its weight
@@ -44,8 +44,12 @@ spacer warcaskets research.
   casting time, the cooldown, whether a mechlink is required and which work the pilot may take on
 - **A new look for the cerebrex node** (Odyssey): a setting redraws Odyssey's mechanitor utility
   pack with the mod's own art, on the ground and on the wearer's back; off by default
-- **Priced like its peers**: spacer-tier plating and shield, costs in the tier's band, and the
-  set's unlock is VFE Pirates' spacer warcaskets research
+- **Mechanitor gear on a warcasket**: the helmet adds 12 bandwidth at some cost to the pilot's
+  aim, the armor 8 more, and the shoulders a control group, faster hacking and the reach to
+  order drafted mechs anywhere on the map
+- **Priced like vanilla's top mechanitor gear**: spacer-tier plating and shield on VFE Pirates'
+  chassis, with the mechlord helmet and suit as the cost reference: every piece takes chips
+  from Biotech's mech bosses, and the set needs ultra mechtech as well as spacer warcaskets
 - **Built on VFE Pirates** rather than beside it: the foundry, entombing, customization and
   removal surgery all apply unchanged, and the pieces mix and match with VFE Pirates' own sets
 

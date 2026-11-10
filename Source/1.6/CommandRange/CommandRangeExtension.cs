@@ -7,8 +7,8 @@ namespace OverlordWarcasket;
 // move and attack order for a colony mech at 24.9 cells from its overseer; the piece carrying
 // this extension lifts that to the scope below, through the patch on
 // MechanitorUtility.InMechanitorCommandRange (CommandRange has the rules). The XML puts it on the
-// helmet (ThingDefs_Misc/WarcasketHelmet_Overlord.xml, whose header has the rationale); the
-// settings move it to the shoulders, widen it to every mechanitor or switch it off, and override
+// shoulders (ThingDefs_Misc/WarcasketShoulders_Overlord.xml, whose header has the rationale); the
+// settings move it to the helmet, widen it to every mechanitor or switch it off, and override
 // scope and radius, all written back here by CommandRange.Apply.
 public class CommandRangeExtension : DefModExtension
 {

@@ -10,7 +10,7 @@ namespace OverlordWarcasket.Tests;
 // The command range's pure rules (CommandRange): the distance comparison against vanilla's own
 // constant and the slider ladder against the ring cap; and the def wiring the settings read
 // before any Apply, checked off the XML since the WarcasketDef type pulls in VFEP, which the
-// test output never carries: the helmet alone carries the extension, with the scope the code
+// test output never carries: the shoulders alone carry the extension, with the scope the code
 // names and vanilla's radius as the slider's default.
 public class CommandRangeTests
 {
@@ -101,15 +101,15 @@ public class CommandRangeTests
     }
 
     [Fact]
-    public void HelmetCarriesTheExtensionAndTheShouldersDoNot()
+    public void ShouldersCarryTheExtensionAndTheHelmetDoesNot()
     {
-        var helmet = Extensions(HelmetPath).ToList();
-        Assert.Single(helmet);
-        Assert.Empty(Extensions(ShouldersPath));
+        var shoulders = Extensions(ShouldersPath).ToList();
+        Assert.Single(shoulders);
+        Assert.Empty(Extensions(HelmetPath));
 
-        XElement extension = helmet[0];
+        XElement extension = shoulders[0];
         string scope = extension.Element("scope")?.Value;
-        Assert.True(Enum.TryParse(scope, out CommandRangeScope _), $"{HelmetPath}: scope '{scope}' is not a CommandRangeScope");
+        Assert.True(Enum.TryParse(scope, out CommandRangeScope _), $"{ShouldersPath}: scope '{scope}' is not a CommandRangeScope");
         Assert.Equal(CommandRange.VanillaRadius, float.Parse(extension.Element("radius")?.Value ?? "0", System.Globalization.CultureInfo.InvariantCulture));
     }
 

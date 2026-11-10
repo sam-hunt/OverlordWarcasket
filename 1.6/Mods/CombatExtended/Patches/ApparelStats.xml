@@ -23,8 +23,9 @@
     gives every sealed spacer helmet. The tox immunity is added only when absent, CE's own
     guard against a second patch producing a duplicate node.
   - Costs on CE's spacer rescale: plasteel x1.5 and two more spacer components on the armor
-    and helmet (the armor's 150 / 6 to 225 / 8; the helmet's 60 / 4 to the Controller helmet's
-    90 / 6; shoulders 60 to 90). Uranium is not touched, as CE leaves VFEP's uranium.
+    and helmet (the armor's 150 / 8 to 225 / 10; the helmet's 80 / 6 to 120 / 8; shoulders 60
+    to 90). Uranium and the mech boss chips are not touched, as CE leaves VFEP's uranium and
+    the mechlord pair's chips.
   The resurrection core needs nothing from CE: it spends charges on a corpse and touches no
   damage, armor or projectile path.
   Patches in this root apply before the main tree's and the VGE root's; none of the three
@@ -76,7 +77,7 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_Warcasket_Overlord"]/costList/ComponentSpacer</xpath>
     <value>
-      <ComponentSpacer>8</ComponentSpacer>
+      <ComponentSpacer>10</ComponentSpacer>
     </value>
   </Operation>
   <Operation Class="PatchOperationReplace">
@@ -152,13 +153,13 @@
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/costList/ComponentSpacer</xpath>
     <value>
-      <ComponentSpacer>6</ComponentSpacer>
+      <ComponentSpacer>8</ComponentSpacer>
     </value>
   </Operation>
   <Operation Class="PatchOperationReplace">
     <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/costList/Plasteel</xpath>
     <value>
-      <Plasteel>90</Plasteel>
+      <Plasteel>120</Plasteel>
     </value>
   </Operation>
 

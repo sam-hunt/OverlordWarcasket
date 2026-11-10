@@ -25,8 +25,8 @@ manifest globs, so new files and subfolders need no build change.
   cache and draw-order traps; read its CLAUDE.md bullet before adding one here.
 - **Tunables are def fields** the mod settings write at startup (`Source/1.6/CLAUDE.md`); the XML
   value is the default and the header stays the record.
-- **The helmet's `CommandRangeExtension` is the only entry that moves between defs**: the
-  settings carry it to the shoulders at startup when the player points the command range there,
+- **The shoulders' `CommandRangeExtension` is the only entry that moves between defs**: the
+  settings carry it to the helmet at startup when the player points the command range there,
   so neither piece's XML should ever declare a second one, and a patch that wants the range on
   its own apparel adds the extension to that apparel, which `CommandRange.For` honours.
 

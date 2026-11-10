@@ -24,7 +24,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resurrect mech: the armor revives one of your recently killed mechs, as the apocriton does
 - The armor's resurrection core holds ten charges and slowly recharges, with a red gauge on the pilot
 - A charged core crackles with the apocriton's red sparks
-- A mechanitor wearing the helmet can order drafted mechs anywhere on the map, not just within 24.9 cells
+- A mechanitor wearing the shoulders can order drafted mechs anywhere on the map, not just within 24.9 cells
+- The helmet and armor add mech bandwidth, and the shoulders add a control group and hacking speed
 - Mod settings choose who gets the extended command range and how far it reaches, down to a radius slider
 - The pilot can still do smithing and research, so mech gestation, mech repair and hacking stay in reach
 - More work types for the pilot can be enabled in the mod settings

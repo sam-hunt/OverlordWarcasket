@@ -38,7 +38,7 @@ namespace OverlordWarcasket;
 // set's extended mechanitor command range applies to and how far it reaches, written through
 // CommandRange.Apply onto the set's CommandRangeExtension (its scope and radius), onto the piece
 // that carries it (moved between the helmet and the shoulders) and into the state the two
-// patches read; the defaults are the extension's as the XML places it, on the helmet. Its
+// patches read; the defaults are the extension's as the XML places it, on the shoulders. Its
 // header carries that piece's icon, read off the def at draw time, and the section's own text.
 // It needs only the two pieces, so it is skipped when either is missing or neither carries the
 // extension, and shown without the ability's defs.

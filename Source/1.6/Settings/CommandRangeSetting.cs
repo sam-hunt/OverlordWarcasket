@@ -7,7 +7,7 @@ namespace OverlordWarcasket;
 // The mechanitor command range as the settings window offers it: two radio groups, who it
 // applies to (CommandRangeAppliesTo) and how far it reaches (CommandRangeScope), the Radius
 // scope's rung a slider under its own radio. Until the player picks, each is the def's: the
-// piece the CommandRangeExtension sits on in XML (the helmet), its scope and its radius, read by
+// piece the CommandRangeExtension sits on in XML (the shoulders), its scope and its radius, read by
 // LoadDefaults on every fresh load before Apply moves anything, so the def and its header stay
 // the record and another mod's XML patch moves the defaults too. Only an override is saved, the
 // choices by name (so a name this version does not know reads as the default) and the radius as

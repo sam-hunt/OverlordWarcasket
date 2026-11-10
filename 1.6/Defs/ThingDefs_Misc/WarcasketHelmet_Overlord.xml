@@ -3,24 +3,33 @@
   <!--
     Templated from VFEP's VFEP_WarcasketHelmet_Controller (VFEP v4.03,
     1.6/Defs/ThingDefs_Misc/Apparel_Headgear.xml); fields not discussed here, uiIconScale and
-    the psychic and toxic offsets included, are the Controller's, its drone module left off.
-    Plating, tags and the market-value references follow the armor's header.
+    the toxic offset included, are the Controller's, its drone module left off. Plating, tags,
+    the market-value references and the UltraMechtech gate follow the armor's header.
 
-    Tuning, first pass: ComponentSpacer 4 / Plasteel 60, the Controller's and Brute's price for a
-    helmet with a function of its own; whether the command range below prices like one, or a
-    mechlink passive (bandwidth or control groups) joins it, is the tuning pass's question, in
-    TODOs.md.
+    Tuning: the piece is the set's answer to Biotech's mechlord helmet (MechBandwidth 12,
+    ShootingAccuracyPawn -5, MeleeHitChance -0.5; Plasteel 120, ComponentSpacer 6,
+    NanostructuringChip 2; UltraMechtech), which it replaces on a mechanitor's head, on the
+    tier's plating and vacuum seal in place of the mechlord's recon-grade shell.
+    - MechBandwidth 12, the mechlord helmet's. With the armor's 8 the set gives 20 against the
+      mechlord pair's 24, the gap being what the resurrection core costs.
+    - ShootingAccuracyPawn -3 / MeleeHitChance -1, vanilla's price for the bandwidth, leaned
+      away from its -5 / -0.5. Both are skill levels added before the stat's curve, not
+      percentages: the pilot shoots as if three Shooting levels lower and swings as if one Melee
+      level lower. A warcasket pilot still fights, where the mechlord pair (-10 shooting) makes
+      a commander who does not, so the shooting cost is lighter and the melee one heavier.
+    - No PsychicSensitivity offset, where the Controller's helmet has -0.5. A mechlink needs a
+      psychically sensitive brain: CompUseEffect_InstallImplant refuses the mechlink
+      (requiresPsychicallySensitive) to a pawn at zero sensitivity, which the Controller's -0.5
+      on helmet and armor together make of a baseline pilot. The lore has the link's psychic
+      half engineered into the helmet; the armor keeps -0.2.
+    - costList ComponentSpacer 6 / Plasteel 80 / NanostructuringChip 2: the mechlord helmet's
+      components and chips (the apocriton's drop); the plasteel is the tier's helmet 60 plus 20
+      for the mechanitor hardware, short of the mechlord's 120 because the shell is the
+      chassis's own.
 
-    Command range (the CommandRangeExtension entry, Source/1.6/CommandRange/): a mechanitor
-    wearing the helmet may order their drafted mechs anywhere on the map they share (scope
-    CurrentMap), where vanilla stops every move and attack order at 24.9 cells from the overseer.
-    The helmet carries it as the set's command visor, the piece the lore gives the pilot's
-    mechlink; the mod settings may move the entry to the shoulders, widen it to every mechanitor
-    or switch it off, and override the scope (Anywhere drops the same-map rule too; Radius keeps
-    vanilla's shape at the radius below) and the radius, which is the Radius scope's reach and
-    the settings slider's default, left at vanilla's 24.9 so switching to that scope starts from
-    vanilla. The settings write every choice back onto this entry at startup and when the window
-    closes; CommandRange's header has the vanilla call paths and the rules.
+    Command range: the helmet declares no CommandRangeExtension. The shoulders carry it in XML
+    (their header); it lands here at startup when the mod settings point the extended command
+    range at the helmet.
 
     Art: the helmet alone of the three pieces ships masks (_northm/_eastm/_southm for the worn
     graphic, _m for the item icon), so it draws with CutoutComplex and useWornGraphicMask, as
@@ -42,8 +51,8 @@
   <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketHelmetBase">
     <defName>OLWC_WarcasketHelmet_Overlord</defName>
     <label>overlord warcasket helmet</label>
-    <shortDescription>Specialized spacer-tech warcasket helmet with standard protection, equipped with a command visor for the pilot's mechlink.</shortDescription>
-    <description>Specialized spacer-tech warcasket helmet with standard protection, equipped with a command visor for the pilot's mechlink.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The shoulders and helmet carry processors that support the pilot's mechlink, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <shortDescription>Specialized spacer-tech warcasket helmet with standard protection, equipped with signal enhancers that greatly increase the pilot's control bandwidth.</shortDescription>
+    <description>Specialized spacer-tech warcasket helmet with standard protection, equipped with signal enhancers that greatly increase the pilot's control bandwidth.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and recharges very slowly, so they are best saved for the mechs that matter most. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordHelmet</texPath>
       <shaderType>CutoutComplex</shaderType>
@@ -59,17 +68,21 @@
       <EquipDelay>1</EquipDelay>
     </statBases>
     <equippedStatOffsets>
-      <PsychicSensitivity>-0.5</PsychicSensitivity>
+      <MechBandwidth>12</MechBandwidth>
+      <ShootingAccuracyPawn>-3</ShootingAccuracyPawn>
+      <MeleeHitChance>-1</MeleeHitChance>
       <ToxicResistance>0.5</ToxicResistance>
       <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.1</SlaveSuppressionOffset>
       <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.7</VacuumResistance>
     </equippedStatOffsets>
     <costList>
-      <ComponentSpacer>4</ComponentSpacer>
-      <Plasteel>60</Plasteel>
+      <ComponentSpacer>6</ComponentSpacer>
+      <Plasteel>80</Plasteel>
+      <NanostructuringChip>2</NanostructuringChip>
     </costList>
     <researchPrerequisites>
       <li>VFEP_SpacerWarcaskets</li>
+      <li>UltraMechtech</li>
     </researchPrerequisites>
     <apparel>
       <bodyPartGroups>
@@ -88,10 +101,6 @@
     <modExtensions>
       <li Class="VEF.Apparels.ApparelExtension">
         <priority>1</priority>
-      </li>
-      <li Class="OverlordWarcasket.CommandRangeExtension">
-        <scope>CurrentMap</scope>
-        <radius>24.9</radius>
       </li>
     </modExtensions>
   </VFEPirates.WarcasketDef>
