@@ -22,12 +22,20 @@ public class CommandRangeExtension : DefModExtension
     // distance, as 24.9 excludes those at exactly 25.
     public float radius = CommandRange.VanillaRadius;
 
+    // The range a mechanitor has without the set, in cells: what the settings window calls the
+    // normal range. Text only, no rule reads it. Vanilla's, unless a mod that moves the range
+    // for everyone is running, whose compat root then writes that mod's number here and onto
+    // radius (Combat Extended's 43.9: 1.6/Mods/CombatExtended/Patches/CommandRange.xml).
+    public float normalRadius = CommandRange.VanillaRadius;
+
     public override IEnumerable<string> ConfigErrors()
     {
         foreach (string error in base.ConfigErrors())
             yield return error;
         if (radius <= 0f)
             yield return $"radius must be positive, is {radius}";
+        if (normalRadius <= 0f)
+            yield return $"normalRadius must be positive, is {normalRadius}";
     }
 }
 

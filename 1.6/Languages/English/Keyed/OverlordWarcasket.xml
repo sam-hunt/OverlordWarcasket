@@ -100,7 +100,7 @@
   <OLWC_CommandRangeAnywhereDesc>Drafted mechs can be ordered anywhere, even on a map their mechanitor is not on. The mechanitor must still be on a map of their own, not traveling in a caravan or a transport pod.</OLWC_CommandRangeAnywhereDesc>
   <OLWC_CommandRangeRadius>Within {0} cells{1}</OLWC_CommandRangeRadius>
   <OLWC_CommandRangeRadiusDesc>Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells.</OLWC_CommandRangeRadiusDesc>
-  <OLWC_CommandRangeVanillaSuffix> (vanilla)</OLWC_CommandRangeVanillaSuffix>
+  <OLWC_CommandRangeNormalSuffix> (normal)</OLWC_CommandRangeNormalSuffix>
   <OLWC_CommandRangeSliderSelects>Moving the slider will select this range.</OLWC_CommandRangeSliderSelects>
   <OLWC_CommandRangeInert>This has no effect while the extended command range applies to no one.</OLWC_CommandRangeInert>
 

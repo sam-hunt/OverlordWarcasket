@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Combat Extended's mechanitor command range. CE lengthens vanilla's 24.9 cells to 43.9 for
+  every mechanitor, in C# with the number as a literal (CE 16.7.4: a postfix on
+  Pawn_MechanitorTracker.CanCommandTo comparing the squared distance with 1927.21, and a prefix
+  on DrawCommandRadius that draws its own ring at 43.9 and always skips vanilla's), so under CE
+  the range without the set is 43.9, not the 24.9 the main tree records.
+
+  This writes that onto the shoulders' CommandRangeExtension: normalRadius, the number the
+  settings window quotes as the normal range and marks on the slider, and radius, the Radius
+  scope's reach and the slider's default, so switching to that scope starts from the range the
+  player already has rather than shrinking it. 43.9 sits between the slider's rungs (39.9 and
+  44.9), which CommandRangeSetting allows a default: it rests on the nearest rung and that rung
+  gives it back. The set's default scope, CurrentMap, needs nothing here.
+
+  The two patches themselves need no XML. The order check is settled after CE's: our postfix
+  on MechanitorUtility.InMechanitorCommandRange wraps CanCommandTo, so the set's rule replaces
+  CE's answer where it governs and CE's stands everywhere else. The ring is a matter of prefix
+  order, handled in Source/1.6/Patches/Pawn_MechanitorTracker_DrawCommandRadius.cs. CE also
+  swaps GenRadial's pattern for one reaching 119 cells, which CommandRange.RingCap reads at
+  runtime, so under CE the slider runs that far.
+
+  If CE changes its number, both values here follow it.
+-->
+<Patch>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketShoulders_Overlord"]/modExtensions/li[@Class="OverlordWarcasket.CommandRangeExtension"]/radius</xpath>
+    <value>
+      <radius>43.9</radius>
+      <normalRadius>43.9</normalRadius>
+    </value>
+  </Operation>
+</Patch>

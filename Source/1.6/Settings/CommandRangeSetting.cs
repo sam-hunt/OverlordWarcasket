@@ -22,8 +22,9 @@ namespace OverlordWarcasket;
 // its stored choices kept for when the first group turns it back on. The slider runs over the
 // rungs of CommandRange.Ladder, each as wide as the next, is live whenever the group is, and
 // pressing or moving it also selects the Radius scope so the player need not click the radio
-// first. Its radio's label doubles as its value, "Within 24.9 cells", with vanilla's rung named
-// as such.
+// first. Its radio's label doubles as its value, "Within 24.9 cells", with the normal range's
+// rung named as such: the extension's normalRadius, vanilla's 24.9 unless a compat root moved it,
+// which every text here that quotes the range without the set reads too.
 public sealed class CommandRangeSetting
 {
     private const string Key = "CommandRange";
@@ -55,6 +56,9 @@ public sealed class CommandRangeSetting
     public CommandRangeAppliesTo DefaultAppliesTo { get; private set; }
     public CommandRangeScope DefaultScope { get; private set; }
     public float DefaultRadius { get; private set; }
+
+    // The range without the set, for the texts: the extension's normalRadius.
+    public float NormalRadius { get; private set; } = CommandRange.VanillaRadius;
 
     public CommandRangeAppliesTo AppliesTo =>
         appliesToName != null && Enum.TryParse(appliesToName, out CommandRangeAppliesTo value) ? value : DefaultAppliesTo;
@@ -93,6 +97,7 @@ public sealed class CommandRangeSetting
         DefaultAppliesTo = bearer;
         DefaultScope = extension.scope;
         DefaultRadius = extension.radius;
+        NormalRadius = extension.normalRadius;
     }
 
     public void Apply()
@@ -103,14 +108,13 @@ public sealed class CommandRangeSetting
             CommandRange.Clear();
     }
 
-    // What the groups amount to: who may order their mechs how far, or that vanilla's range
+    // What the groups amount to: who may order their mechs how far, or that the normal range
     // stands.
     public string Summary()
     {
-        string vanilla = CellsText(CommandRange.VanillaRadius);
         CommandRangeAppliesTo appliesTo = AppliesTo;
         if (appliesTo == CommandRangeAppliesTo.None)
-            return "OLWC_CommandRangeSummaryNone".Translate(vanilla);
+            return "OLWC_CommandRangeSummaryNone".Translate(CellsText(NormalRadius));
         string reach = Scope switch
         {
             CommandRangeScope.Anywhere => "OLWC_CommandRangeReachAnywhere".Translate(),
@@ -142,10 +146,10 @@ public sealed class CommandRangeSetting
         ScopeOption(listing, CommandRangeScope.Anywhere, "OLWC_CommandRangeAnywhere".Translate(),
             enabled ? "OLWC_CommandRangeAnywhereDesc".Translate() : inert, enabled);
 
-        string vanillaSuffix = Mathf.Abs(Radius - CommandRange.VanillaRadius) < 0.05f ? "OLWC_CommandRangeVanillaSuffix".Translate() : "";
-        string radiusLabel = "OLWC_CommandRangeRadius".Translate(CellsText(Radius), vanillaSuffix);
+        string normalSuffix = Mathf.Abs(Radius - NormalRadius) < 0.05f ? "OLWC_CommandRangeNormalSuffix".Translate() : "";
+        string radiusLabel = "OLWC_CommandRangeRadius".Translate(CellsText(Radius), normalSuffix);
         string radiusDesc = enabled
-            ? "OLWC_CommandRangeRadiusDesc".Translate(CellsText(CommandRange.VanillaRadius), CellsText(DefaultRadius))
+            ? "OLWC_CommandRangeRadiusDesc".Translate(CellsText(NormalRadius), CellsText(DefaultRadius))
             : inert;
         ScopeOption(listing, CommandRangeScope.Radius, radiusLabel, radiusDesc, enabled);
         Slider(listing, enabled, inert);
@@ -225,7 +229,7 @@ public sealed class CommandRangeSetting
     {
         CommandRangeAppliesTo.Helmet or CommandRangeAppliesTo.Shoulders => "OLWC_CommandRangeWearingDesc".Translate(PieceLabel(option)),
         CommandRangeAppliesTo.AllMechanitors => "OLWC_CommandRangeAllMechanitorsDesc".Translate(),
-        _ => "OLWC_CommandRangeNoneDesc".Translate(CellsText(CommandRange.VanillaRadius)),
+        _ => "OLWC_CommandRangeNoneDesc".Translate(CellsText(NormalRadius)),
     };
 
     // The piece's own label, so a rename or a translation reaches the rows.

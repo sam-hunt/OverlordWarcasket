@@ -9,8 +9,9 @@
     <li IfModActive="ludeon.rimworld.odyssey">Mods/Odyssey</li>
     <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
     <li IfModActive="vanillaexpanded.gravship">1.6/Mods/VanillaGravshipExpanded</li>
-    <!-- Combat Extended: the set's plating, bulk, carry and shield on CE's scale and the
-         helmet sealed against CE's smoke. Patches only, so it needs no art root. -->
+    <!-- Combat Extended: the set's plating, bulk, carry, shield and shooting price on CE's
+         scale, the helmet sealed against CE's smoke, and CE's longer command range as the
+         settings' normal one. Patches only, so it needs no art root. -->
     <li IfModActive="CETeam.CombatExtended">1.6/Mods/CombatExtended</li>
   </v1.6>
   <v1.7>

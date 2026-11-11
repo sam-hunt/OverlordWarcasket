@@ -308,7 +308,7 @@ public class OverlordWarcasketSettings : ModSettings
         if (commandRange.Available)
         {
             SectionHeader(listing, "OLWC_SectionCommandRange", commandRange.Icon,
-                HeaderTip("OLWC_SectionCommandRange".Translate(), "OLWC_SectionCommandRangeDesc".Translate(CommandRange.VanillaRadius.ToString("0.#"))));
+                HeaderTip("OLWC_SectionCommandRange".Translate(), "OLWC_SectionCommandRangeDesc".Translate(commandRange.NormalRadius.ToString("0.#"))));
             SummaryRow(listing, commandRange.Summary);
             commandRange.DoRows(listing);
         }

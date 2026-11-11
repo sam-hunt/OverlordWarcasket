@@ -29,6 +29,9 @@
     and override the scope (Anywhere drops the same-map rule too; Radius keeps vanilla's shape
     at the radius below) and the radius, which is the Radius scope's reach and the settings
     slider's default, left at vanilla's 24.9 so switching to that scope starts from vanilla.
+    normalRadius, unset here and so vanilla's too, is the range without the set as the settings
+    window quotes it; a mod that moves the range for everyone has both written by its compat
+    root (Combat Extended's 43.9, 1.6/Mods/CombatExtended/Patches/CommandRange.xml).
     The settings write every choice back onto this entry at startup and when the window closes;
     CommandRange's header has the vanilla call paths and the rules.
 
