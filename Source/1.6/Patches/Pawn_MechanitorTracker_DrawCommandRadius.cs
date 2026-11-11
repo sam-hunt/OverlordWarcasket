@@ -12,9 +12,17 @@ namespace OverlordWarcasket.Patches;
 // its predicate the same rule the order check applies. A radius the game cannot draw
 // (CommandRange.RingCap) draws nothing rather than the error DrawRadiusRing would log. Vanilla's
 // own method runs untouched for everyone else.
+//
+// First among the prefixes: Harmony skips every later bool prefix once one returns false, and
+// another mod's ring is a prefix that always does. Combat Extended's is the known one
+// (Harmony_MechanitorTracker_DrawCommandRadius, CE 16.7.4: its own 43.9 ring, applied from the
+// Mod constructor and so ahead of ours at equal priority), which would draw its ring over a
+// range of ours and never let this one run. Run first, this one hands on to it wherever the
+// set's range does not govern.
 [HarmonyPatch(typeof(Pawn_MechanitorTracker), nameof(Pawn_MechanitorTracker.DrawCommandRadius))]
 public static class Pawn_MechanitorTracker_DrawCommandRadius
 {
+    [HarmonyPriority(Priority.First)]
     public static bool Prefix(Pawn_MechanitorTracker __instance)
     {
         if (CommandRange.AppliesTo == CommandRangeAppliesTo.None)

@@ -12,6 +12,12 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   detour on a VFEP method applied before defs load runs that type's static ctor early and breaks
   it for good (the BetterTradersGuild v1.1.0 CWTL incident). `ModInit`'s header has the
   rationale; `Settings/OverlordWarcasketMod.cs` owns settings only.
+- **A prefix that answers in vanilla's place takes `Priority.First` where another mod prefixes
+  the same method.** Harmony skips every later bool prefix once one returns false, and a mod
+  that patches from its `Mod` constructor (Combat Extended does) sits ahead of ours at equal
+  priority, so its prefix would answer for our case too. Ours runs first and returns true
+  wherever the set does not govern, which hands the call on to theirs. The ring and the
+  automatic reload are the two such prefixes; their headers name the CE patch each one meets.
 - **Startup def-derived state must survive an in-process play-data reload** (a language switch
   reloads every def). It goes in the idempotent `Startup.Run`, called once from `ModInit` and
   again from the `StaticConstructorOnStartupUtility.CallAll` postfix in `Patches/`. Mod-shipped

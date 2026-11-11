@@ -27,7 +27,9 @@ namespace OverlordWarcasket;
 //   far as the clicked stack goes, whatever the handle says.
 // - Carried reload. Vanilla's reload only looks for ammo lying on the map, so ammo in the
 //   pilot's own inventory gets a command beside the gauge (Command_LoadCore), yielded only
-//   while the pilot carries some, which orders JobDriver_LoadCore.
+//   while the pilot carries some, which orders JobDriver_LoadCore. Combat Extended adds a reload
+//   button of its own to every worn reloadable (ForeignReloadCommand), dropped here: the
+//   carried reload is ours.
 //
 // The core starts full (vanilla's PostPostMake), as the apocriton starts with its thirty. A
 // capacity lowered by the settings trims a core above it on the next tick, on equip and on load
@@ -42,6 +44,13 @@ public class CompResurrectionCore : CompApparelReloadable
 {
     // Ticks between regen steps; a charge takes a day, so finer steps buy nothing.
     private const int RegenInterval = 150;
+
+    // Combat Extended's "Reload worn armor" (CE 16.7.4), which its postfix on
+    // CompApparelVerbOwner_Charged.CompGetWornGizmosExtra appends for every player pawn. It
+    // runs CE's own automatic reload (Patches/JobGiver_Reload_TryGiveJob has what that does), so
+    // on the core it is a button that does nothing until the handle is raised and then drops
+    // the carried ammo to reload from the floor. Matched by name: CE is not a reference.
+    private const string ForeignReloadCommand = "CombatExtended.Command_ReloadArmor";
 
     private float regenProgress;
 
@@ -214,7 +223,10 @@ public class CompResurrectionCore : CompApparelReloadable
     public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
     {
         foreach (Gizmo gizmo in base.CompGetWornGizmosExtra())
-            yield return gizmo;
+        {
+            if (gizmo.GetType().FullName != ForeignReloadCommand)
+                yield return gizmo;
+        }
         if (gauge == null || gaugeMaxCharges != MaxCharges || gaugeGeneration != OverlordWarcasketSettings.Generation)
         {
             gauge = new Gizmo_ResurrectionCore(this);
