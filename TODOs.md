@@ -2,11 +2,6 @@
 
 ## Features
 
-- **Automatic reload from the pilot's own inventory?** With the handle raised the pilot fetches
-  components from the map and never touches the ones carried, with Combat Extended as without
-  (`Patches/JobGiver_Reload_TryGiveJob`). CE players carry reload ammo in the loadout and expect
-  it used, so loading the carried ones first, up to the handle, is the open design choice; it
-  would change the game without CE too.
 - **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
 - **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
   Crafting, Tailoring and Dark study behind settings toggles; run the spec's verification
@@ -45,7 +40,8 @@
   radius scope at 29.9 and at 9.9 with the ring at that radius and the refusal back beyond it;
   "anywhere" with the mech on a second map; "applies to" moved to the shoulders; "no one" giving
   vanilla's "Out of command range" again. Then the settings page: the greyed second group, the
-  slider selecting its radio, the summary line, and the choices surviving a reopen and a
+  slider selecting its radio and naming the 24.9 rung "(vanilla)" and the 43.9 one "(Combat
+  Extended)", the summary line, and the choices surviving a reopen and a
   language switch (`Docs/Specs/Mechanitor-Command-Range.md`, section 5).
 - **Set tuning in play.** The pieces are tuned against Biotech's mechlord helmet and suit (the
   def headers have the numbers): check in game that the foundry lists the set only once both
@@ -59,7 +55,9 @@
   appearing only while the pilot carries components (picked up with vanilla's pick up order), its
   icon, red background and count, its disabled reasons when the core is full and when too few are
   carried, and the load taking the components out of the inventory; the reload cost and recharge
-  sliders reaching a worn core; the armor's stat sheet showing the reload cost. Also whether one
+  sliders reaching a worn core; the armor's stat sheet showing the reload cost; with the
+  automatic reload from inventory setting on, a pilot below the handle loading carried
+  components up to it and no further, then fetching the rest. Also whether one
   charge a day is too generous in play (the core usually meets each raid full), with 0.5 as the
   fallback.
 
@@ -68,19 +66,17 @@
   sheet reading AimingAccuracy -15% and weapon handling -0.75; a pilot ordering a drafted mech
   across the map with no white ring, the ring at the chosen radius under the radius scope, and
   CE's 43.9 ring back for a mechanitor without the set; the settings window quoting 43.9 as the
-  normal range, the slider's default and its "(normal)" rung, and running out to 119; no
-  "Reload worn armor" button beside the gauge; a pilot below the handle with components in the
-  inventory fetching from the map and dropping nothing; the load button after CE's own pick up
-  order. Also a mech raised by the core: by the code it stands up with a freshly generated,
+  normal range and as the slider's default, and the slider running out to 119; no "Reload worn
+  armor" button beside the gauge; a pilot below the handle with components in the inventory
+  loading them up to the handle and dropping nothing, and fetching from the map instead with
+  the automatic reload from inventory setting off; the load button after CE's own pick up
+  order; the helmet's stat sheet listing the long range radio. Also a mech raised by the core: by the code it stands up with a freshly generated,
   loaded weapon and spare magazines, as an apocriton's does (vanilla regenerates the weapon and
   CE loads whatever that generates).
 
 ## Later
 
 - **Sometimes spawn vanilla pod/crash mechanitors in the warcasket?**
-- **CE's long range radio on the helmet?** CE marks the mechlord and mech commander helmets
-  `isRadioPack`, which lets a pawn holding a marking tool call artillery; none of VFEP's
-  warcasket helmets get it, so ours follows the tier and has none.
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for
   giving raiders an ability, so a raider mechanitor resurrecting its escort is possible later.

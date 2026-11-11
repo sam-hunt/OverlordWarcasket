@@ -3,7 +3,8 @@
 Guidance for Claude Code when working in this repository. This file holds only what applies
 across the whole repo. Folder guides load on their own when work touches them: `1.6/CLAUDE.md`
 (defs, patches, languages, gating), `Source/1.6/CLAUDE.md` (C#), `Scripts/CLAUDE.md` (l10n and
-release tooling), `.steamworkshop/CLAUDE.md` (Workshop page).
+release tooling), `.steamworkshop/CLAUDE.md` (Workshop page), `1.6/Mods/CombatExtended/CLAUDE.md`
+(what Combat Extended takes over and where each answer lives).
 
 ## Project
 
