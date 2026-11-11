@@ -2,7 +2,6 @@
 
 ## Features
 
-- **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
 - **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
   Crafting, Tailoring and Dark study behind settings toggles; run the spec's verification
   (`Docs/Specs/Overlord-Work-Trait.md`, section 4), autohack and the Hack gizmo included.
@@ -73,9 +72,23 @@
   order; the helmet's stat sheet listing the long range radio. Also a mech raised by the core: by the code it stands up with a freshly generated,
   loaded weapon and spare magazines, as an apocriton's does (vanilla regenerates the weapon and
   CE loads whatever that generates).
+- **In-game run with Alpha Mechs.** The scan found nothing to patch (the armor and ability def
+  headers have the findings) and nothing has been seen in game: the core raising one of its
+  light, medium and heavy mechs for 1, 3 and 5 charges and refusing an ultraheavy (a
+  siegebreaker) with the weight class message; a mech turned by the Mech Master helmet's IFF
+  scrambler refused as not ours once dead; an entombed pilot analyzing a tier 4 chip and using
+  a boss call building; the "(tier N)" chip labels on the foundry's cost list; this armor and
+  helmet under Mech Master shoulders reading 44 bandwidth, with the command range moved to the
+  helmet in the settings. Also a blitzkrieg, its suicide mech, raised after it detonates, if
+  the corpse survives the blast: the gestator's resurrect bills leave it out, so a charge
+  buying the bomb back may want an answer.
 
 ## Later
 
+- **Reprice the set for Alpha Mechs?** Left at vanilla's top tier, which Alpha Mechs numbers
+  tier 3 (the armor def's header has the comparison with its Mech Master warcasket). The one
+  fitting change, if play shows the set crowding its tier 4 gear, is the shoulders' command
+  relays taking a hyper-linkage chip, its beamcasting tier, in place of the SignalChip.
 - **Sometimes spawn vanilla pod/crash mechanitors in the warcasket?**
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for

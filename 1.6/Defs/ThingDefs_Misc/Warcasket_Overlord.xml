@@ -36,6 +36,21 @@
       four and one. Parts are untradeable and destroyed on drop, so market value, the chips'
       1500 and 1000 each included, is colony wealth and raid points only.
 
+    Alpha Mechs (sarg.alphamechs, Workshop 2973169158) leaves the tuning above standing and
+    gets no compat root. It numbers the three vanilla chips tiers 1 to 3 and adds tiers 4 to 6
+    behind three bosses of its own, all past UltraMechtech; the tier in each chip's label
+    aside, it changes neither the mechlord pair nor any def or method this set reads, so the
+    set is its tier 3 gear, tuned against the same pair as without it. Its Mech Master warcasket (VFEP_Warcasket_MechController with
+    its shoulders and helmet, in its VFEP root) is the tier 6 counterpart rather than a peer:
+    one chip a piece from the infernus, the war empress and the apoptosis, for MechBandwidth
+    48, a 2.5 shield at twice the recharge, Blunt 1.5, a pilot who keeps most work at
+    WorkSpeedGlobal -0.6 and a helmet ability that turns a hostile mech for a day. In
+    ordinary materials it is the cheaper set (ComponentSpacer 7 and three chips against 16 and
+    seven), so pricing this set beside it could only mean its bosses, which would move the
+    apocriton's ability, tier 3 in its numbering, to tier 6. The pieces mix at the foundry as
+    any VFEP sets do: this armor and helmet under its shoulders read MechBandwidth 44 with the
+    core kept.
+
     apparel tags: WarcasketVeteran (VFEP's 10th-gen tag) puts the set on the veteran raid
     pawnkinds of both VFEP factions and Odyssey's VFEP_Salvager_Warcasket; WarcasketAll is
     VFEP_General. Threat and flavor only: AI pawns never cast apparel abilities, so a raider
