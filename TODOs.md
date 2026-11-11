@@ -47,7 +47,7 @@
 - **Set tuning in play.** The pieces are tuned against Biotech's mechlord helmet and suit (the
   def headers have the numbers): check in game that the foundry lists the set only once both
   spacer warcaskets and ultra mechtech are done, that the chips are charged, that a full-set
-  pilot reads 20 bandwidth, a control group and 80% psychic sensitivity and can still install a
+  pilot reads 20 bandwidth, a control group and 50% psychic sensitivity and can still install a
   mechlink, and how the helmet's -3 shooting plays with a warcasket weapon.
 - **In-game run of the core's recharge and reload.** Nobody has watched either in game: the core
   gaining a charge a day and the tooltip's wait; the handle at zero fetching nothing; the handle
@@ -89,7 +89,7 @@
 - **Reprice the set for Alpha Mechs?** Left at vanilla's top tier, which Alpha Mechs numbers
   tier 3 (the armor def's header has the comparison with its Mech Master warcasket). The one
   fitting change, if play shows the set crowding its tier 4 gear, is the shoulders' command
-  relays taking a hyper-linkage chip, its beamcasting tier, in place of the SignalChip.
+  relays taking a hyper-linkage chip, its beamcasting tier, in place of one SignalChip.
 - **Sometimes spawn vanilla pod/crash mechanitors in the warcasket?**
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for

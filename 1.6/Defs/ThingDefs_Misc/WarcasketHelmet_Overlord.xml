@@ -12,20 +12,23 @@
     tier's plating and vacuum seal in place of the mechlord's recon-grade shell.
     - MechBandwidth 12, the mechlord helmet's. With the armor's 8 the set gives 20 against the
       mechlord pair's 24, the gap being what the resurrection core costs.
-    - ShootingAccuracyPawn -3 / MeleeHitChance -1, vanilla's price for the bandwidth, leaned
-      away from its -5 / -0.5. Both are skill levels added before the stat's curve, not
-      percentages: the pilot shoots as if three Shooting levels lower and swings as if one Melee
-      level lower. A warcasket pilot still fights, where the mechlord pair (-10 shooting) makes
-      a commander who does not, so the shooting cost is lighter and the melee one heavier.
+    - ShootingAccuracyPawn -3 and no MeleeHitChance, vanilla's price for the bandwidth at
+      three fifths of its -5 with its -0.5 left off. The offset is skill levels added before
+      the stat's curve, not a percentage: the pilot shoots as if three Shooting levels lower.
+      A warcasket pilot still fights, at the front and within reach of whatever charges it,
+      where the mechlord pair (-10 shooting, -1 melee) makes a commander who does not, so the
+      shooting cost is lighter and the melee one is gone.
     - No PsychicSensitivity offset, where the Controller's helmet has -0.5. A mechlink needs a
       psychically sensitive brain: CompUseEffect_InstallImplant refuses the mechlink
       (requiresPsychicallySensitive) to a pawn at zero sensitivity, which the Controller's -0.5
       on helmet and armor together make of a baseline pilot. The lore has the link's psychic
       half engineered into the helmet; the armor keeps -0.2.
-    - costList ComponentSpacer 6 / Plasteel 80 / NanostructuringChip 2: the mechlord helmet's
-      components and chips (the apocriton's drop); the plasteel is the tier's helmet 60 plus 20
-      for the mechanitor hardware, short of the mechlord's 120 because the shell is the
-      chassis's own.
+    - costList ComponentSpacer 6 / Plasteel 80 / NanostructuringChip 1 / PowerfocusChip 1: the
+      mechlord helmet's components, and its two chips with one of the apocriton's traded for
+      the war queen's, the chip Biotech's integrator headset pays for its bandwidth (9 for
+      one). The trade is what keeps the set from asking the apocriton four times (the armor's
+      header has the set's count). The plasteel is the tier's helmet 60 plus 20 for the
+      mechanitor hardware, short of the mechlord's 120 because the shell is the chassis's own.
 
     Command range: the helmet declares no CommandRangeExtension. The shoulders carry it in XML
     (their header); it lands here at startup when the mod settings point the extended command
@@ -70,7 +73,6 @@
     <equippedStatOffsets>
       <MechBandwidth>12</MechBandwidth>
       <ShootingAccuracyPawn>-3</ShootingAccuracyPawn>
-      <MeleeHitChance>-1</MeleeHitChance>
       <ToxicResistance>0.5</ToxicResistance>
       <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.1</SlaveSuppressionOffset>
       <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.7</VacuumResistance>
@@ -78,7 +80,8 @@
     <costList>
       <ComponentSpacer>6</ComponentSpacer>
       <Plasteel>80</Plasteel>
-      <NanostructuringChip>2</NanostructuringChip>
+      <NanostructuringChip>1</NanostructuringChip>
+      <PowerfocusChip>1</PowerfocusChip>
     </costList>
     <researchPrerequisites>
       <li>VFEP_SpacerWarcaskets</li>

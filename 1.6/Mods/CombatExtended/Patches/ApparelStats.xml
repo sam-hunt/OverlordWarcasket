@@ -29,8 +29,7 @@
     helmet's -5 (Biotech/Patches/Biotech/ThingDefs_Misc/Apparel_BiotechHeadgear.xml) is
     AimingAccuracy -0.25 and ShootingAccuracyPawn -1.25, a twentieth and a quarter a level, and
     the same rate on -3 keeps the helmet at three fifths of the mechlord's as the def header
-    means it. MeleeHitChance is untouched: CE still counts it in levels and leaves the
-    mechlord's alone.
+    means it.
   - The helmet's long range radio, CE's ApparelDefExtension with isRadioPack: a wearer's
     marking tool works with no friendly mortar on the map, the other thing that lets it mark
     (Verb_MarkForArtillery.MarkingConditionsMet), and the stat sheet lists the radio. CE gives

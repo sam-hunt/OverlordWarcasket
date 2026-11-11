@@ -19,8 +19,10 @@
       apocriton, whose ability the core copies.
     - MechBandwidth 8 here and 12 on the helmet, 20 against the mechlord pair's 24: the shell
       pays the suit's chips for two thirds of its bandwidth and the core.
-    - PsychicSensitivity -0.2, where the Controller's armor has -0.5: the helmet's header has
-      why a mechanitor's suit cannot deafen its pilot. The set leaves a baseline pilot at 80%.
+    - PsychicSensitivity -0.5, the Controller's armor's and the tier's. The helmet carries
+      none (its header has why a mechanitor's suit cannot deafen its pilot), so the set leaves
+      a baseline pilot at 50% where the tier's sets leave none. A psychically dull pilot
+      (-0.5 of their own) reaches zero and can take no mechlink while suited.
     - The helmet alone carries the aim penalty (its header); the shoulders the command range,
       a control group and hacking speed (theirs).
     - Sharp 2 / Blunt 1 / Heat 1 on all three pieces, the tier's shared values. Blunt 1.5 is
@@ -31,9 +33,12 @@
     - costList ComponentSpacer 8 / Plasteel 150 / Uranium 50 / NanostructuringChip 2 /
       PowerfocusChip 1: the plasteel and uranium are the utility sets' band (145 to 150); the
       components and chips are the mechlord suit's, the components sitting inside VFEP's
-      tech-complexity dial (the utility sets 6, Controller 12, Brute 4). Set-wide that is four
-      NanostructuringChips, two PowerfocusChips and a SignalChip against the mechlord pair's
-      four and one. Parts are untradeable and destroyed on drop, so market value, the chips'
+      tech-complexity dial (the utility sets 6, Controller 12, Brute 4). Set-wide that is three
+      NanostructuringChips, two PowerfocusChips and two SignalChips, seven kills spread over
+      the apocriton, the war queen and the diabolus, against the mechlord pair's four and one,
+      which ask the apocriton four times. This piece keeps the suit's chips whole because the
+      core is the apocriton's; the helmet and shoulders carry the spread (their headers).
+      Parts are untradeable and destroyed on drop, so market value, the chips'
       1500 and 1000 each included, is colony wealth and raid points only.
 
     Alpha Mechs (sarg.alphamechs, Workshop 2973169158) leaves the tuning above standing and
@@ -156,7 +161,7 @@
     </statBases>
     <equippedStatOffsets>
       <MechBandwidth>8</MechBandwidth>
-      <PsychicSensitivity>-0.2</PsychicSensitivity>
+      <PsychicSensitivity>-0.5</PsychicSensitivity>
       <ToxicResistance>0.5</ToxicResistance>
       <SlaveSuppressionOffset MayRequire="Ludeon.RimWorld.Ideology">0.3</SlaveSuppressionOffset>
       <VacuumResistance MayRequire="Ludeon.RimWorld.Odyssey">0.2</VacuumResistance>

@@ -13,13 +13,13 @@
       (Research). No vanilla apparel carries it; it is the pads' processors turned on a
       terminal, and it keeps the set's bandwidth on the helmet and the armor.
     - No MechBandwidth: the helmet's 12 and the armor's 8 are the set's 20.
-    - costList ComponentSpacer 2 / Plasteel 60 / PowerfocusChip 1 / SignalChip 1. The first two
-      are the Controller shoulders' price, the plasteel the 10th-gen shoulder-to-armor ratio,
-      roughly 0.4 (Siegebreaker 60/145, Guardian 80/200, Controller 60/150, Sarcophagus 60/145,
-      Brute 60/160), of the armor's 150. The chips are the war queen's and the diabolus's
-      drops, the grade of Biotech's integrator headset (one PowerfocusChip) and bandwidth pack
-      (SignalChip), so the set spends all three mech bosses' chips and the command range has a
-      price.
+    - costList ComponentSpacer 2 / Plasteel 60 / SignalChip 2. The first two are the
+      Controller shoulders' price, the plasteel the 10th-gen shoulder-to-armor ratio, roughly
+      0.4 (Siegebreaker 60/145, Guardian 80/200, Controller 60/150, Sarcophagus 60/145, Brute
+      60/160), of the armor's 150. The chips are the diabolus's drop at the price of Biotech's
+      bandwidth pack (SignalChip 2), the command gear a mechanitor straps on outside a
+      warcasket, so the command range has a price and the set's chips climb from the
+      diabolus's here through the war queen's on the helmet to the apocriton's on the armor.
 
     Command range (the CommandRangeExtension entry, Source/1.6/CommandRange/): a mechanitor
     wearing the pads may order their drafted mechs anywhere on the map they share (scope
@@ -84,8 +84,7 @@
     <costList>
       <ComponentSpacer>2</ComponentSpacer>
       <Plasteel>60</Plasteel>
-      <PowerfocusChip>1</PowerfocusChip>
-      <SignalChip>1</SignalChip>
+      <SignalChip>2</SignalChip>
     </costList>
     <researchPrerequisites>
       <li>VFEP_SpacerWarcaskets</li>
