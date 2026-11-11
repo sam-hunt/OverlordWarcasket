@@ -59,6 +59,13 @@ public static class CommandRange
     // Vanilla's command range, Pawn_MechanitorTracker's MechCommandRange.
     public const float VanillaRadius = 24.9f;
 
+    // Combat Extended's command range, the literal in its patches on Pawn_MechanitorTracker
+    // (CE 16.7.4). Known here whether or not CE is running: the slider carries it as a rung
+    // beside vanilla's and names both, so a player on either side can pick the other's range.
+    // 1.6/Mods/CombatExtended/Patches/CommandRange.xml writes the same number onto the def as
+    // the range without the set, and CommandRangeTests holds the two together.
+    public const float CombatExtendedRadius = 43.9f;
+
     // The slider's rungs: five cells apart, each a tenth short of the whole as vanilla's is.
     private const int LadderStep = 5;
 
@@ -181,7 +188,8 @@ public static class CommandRange
 
     // The settings slider's stops for a ring cap: 4.9, 9.9, ... while they fit under the cap,
     // then the cap itself rounded down to a tenth where the last rung falls short of it, so
-    // the slider ends on the widest ring the game draws (79.8 today) rather than below it.
+    // the slider ends on the widest ring the game draws (79.8 today) rather than below it, and
+    // Combat Extended's range in its place among them, the one named range the step misses.
     // Pure, for the tests.
     public static float[] Ladder(float cap)
     {
@@ -196,6 +204,11 @@ public static class CommandRange
         }
         if (stops.Count == 0 || top - stops[stops.Count - 1] > 1e-3f)
             stops.Add(top);
+        if (CombatExtendedRadius <= top + 1e-3f && !stops.Exists(stop => Mathf.Abs(stop - CombatExtendedRadius) < 1e-3f))
+        {
+            stops.Add(CombatExtendedRadius);
+            stops.Sort();
+        }
         return stops.ToArray();
     }
 

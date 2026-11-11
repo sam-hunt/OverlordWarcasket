@@ -22,9 +22,10 @@ namespace OverlordWarcasket;
 // its stored choices kept for when the first group turns it back on. The slider runs over the
 // rungs of CommandRange.Ladder, each as wide as the next, is live whenever the group is, and
 // pressing or moving it also selects the Radius scope so the player need not click the radio
-// first. Its radio's label doubles as its value, "Within 24.9 cells", with the normal range's
-// rung named as such: the extension's normalRadius, vanilla's 24.9 unless a compat root moved it,
-// which every text here that quotes the range without the set reads too.
+// first. Its radio's label doubles as its value, "Within 24.9 cells", with vanilla's rung and
+// Combat Extended's each named as such whichever game is running, the two ranges a player is
+// likely to have played with. The range the texts quote as the normal one, what a mechanitor
+// has without the set, is the extension's normalRadius: vanilla's unless a compat root moved it.
 public sealed class CommandRangeSetting
 {
     private const string Key = "CommandRange";
@@ -146,8 +147,7 @@ public sealed class CommandRangeSetting
         ScopeOption(listing, CommandRangeScope.Anywhere, "OLWC_CommandRangeAnywhere".Translate(),
             enabled ? "OLWC_CommandRangeAnywhereDesc".Translate() : inert, enabled);
 
-        string normalSuffix = Mathf.Abs(Radius - NormalRadius) < 0.05f ? "OLWC_CommandRangeNormalSuffix".Translate() : "";
-        string radiusLabel = "OLWC_CommandRangeRadius".Translate(CellsText(Radius), normalSuffix);
+        string radiusLabel = "OLWC_CommandRangeRadius".Translate(CellsText(Radius), RungName(Radius));
         string radiusDesc = enabled
             ? "OLWC_CommandRangeRadiusDesc".Translate(CellsText(NormalRadius), CellsText(DefaultRadius))
             : inert;
@@ -231,6 +231,16 @@ public sealed class CommandRangeSetting
         CommandRangeAppliesTo.AllMechanitors => "OLWC_CommandRangeAllMechanitorsDesc".Translate(),
         _ => "OLWC_CommandRangeNoneDesc".Translate(CellsText(NormalRadius)),
     };
+
+    // The suffix of a rung that is some game's own range, empty for every other.
+    private static string RungName(float radius)
+    {
+        if (Mathf.Abs(radius - CommandRange.VanillaRadius) < 0.05f)
+            return "OLWC_CommandRangeVanillaSuffix".Translate();
+        if (Mathf.Abs(radius - CommandRange.CombatExtendedRadius) < 0.05f)
+            return "OLWC_CommandRangeCombatExtendedSuffix".Translate();
+        return "";
+    }
 
     // The piece's own label, so a rename or a translation reaches the rows.
     private string PieceLabel(CommandRangeAppliesTo option) =>

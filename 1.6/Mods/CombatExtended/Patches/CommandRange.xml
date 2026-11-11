@@ -7,11 +7,11 @@
   the range without the set is 43.9, not the 24.9 the main tree records.
 
   This writes that onto the shoulders' CommandRangeExtension: normalRadius, the number the
-  settings window quotes as the normal range and marks on the slider, and radius, the Radius
-  scope's reach and the slider's default, so switching to that scope starts from the range the
-  player already has rather than shrinking it. 43.9 sits between the slider's rungs (39.9 and
-  44.9), which CommandRangeSetting allows a default: it rests on the nearest rung and that rung
-  gives it back. The set's default scope, CurrentMap, needs nothing here.
+  settings window quotes as the normal range, and radius, the Radius scope's reach and the
+  slider's default, so switching to that scope starts from the range the player already has
+  rather than shrinking it. The slider carries 43.9 as a rung in every game, named as CE's
+  beside vanilla's (CommandRange.CombatExtendedRadius, which Tests/1.6/CommandRangeTests.cs
+  holds to the two values here). The set's default scope, CurrentMap, needs nothing here.
 
   The two patches themselves need no XML. The order check is settled after CE's: our postfix
   on MechanitorUtility.InMechanitorCommandRange wraps CanCommandTo, so the set's rule replaces
@@ -20,7 +20,7 @@
   swaps GenRadial's pattern for one reaching 119 cells, which CommandRange.RingCap reads at
   runtime, so under CE the slider runs that far.
 
-  If CE changes its number, both values here follow it.
+  If CE changes its number, both values here and the constant follow it.
 -->
 <Patch>
   <Operation Class="PatchOperationReplace">

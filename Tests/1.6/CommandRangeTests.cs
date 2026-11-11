@@ -11,11 +11,13 @@ namespace OverlordWarcasket.Tests;
 // constant and the slider ladder against the ring cap; and the def wiring the settings read
 // before any Apply, checked off the XML since the WarcasketDef type pulls in VFEP, which the
 // test output never carries: the shoulders alone carry the extension, with the scope the code
-// names and vanilla's radius as the slider's default.
+// names and vanilla's radius as the slider's default; and Combat Extended's range, a constant
+// in code and two values in the CE root's patch, held together.
 public class CommandRangeTests
 {
     private const string HelmetPath = "1.6/Defs/ThingDefs_Misc/WarcasketHelmet_Overlord.xml";
     private const string ShouldersPath = "1.6/Defs/ThingDefs_Misc/WarcasketShoulders_Overlord.xml";
+    private const string CombatExtendedPatchPath = "1.6/Mods/CombatExtended/Patches/CommandRange.xml";
     private const string ExtensionClass = "OverlordWarcasket.CommandRangeExtension";
 
     // The 20,000th precalculated radial cell on 1.6 and 1.7 lies at squared distance 6370.
@@ -66,20 +68,46 @@ public class CommandRangeTests
     public void Ladder_EndsOnTheCapRoundedDown()
     {
         float[] stops = CommandRange.Ladder(RingCap);
-        Assert.Equal(16, stops.Length);
+        Assert.Equal(17, stops.Length);
         Assert.Equal(4.9f, stops[0]);
         Assert.Contains(CommandRange.VanillaRadius, stops);
-        Assert.Equal(74.9f, stops[14]);
-        Assert.Equal(79.8f, stops[15]);
+        Assert.Equal(74.9f, stops[15]);
+        Assert.Equal(79.8f, stops[16]);
         Assert.True(stops.SequenceEqual(stops.OrderBy(s => s)));
+    }
+
+    // The one named range the five-cell step misses sits between its neighbours, once, and is
+    // left out where the cap falls short of it.
+    [Fact]
+    public void Ladder_CarriesCombatExtendedsRangeInItsPlace()
+    {
+        float[] stops = CommandRange.Ladder(RingCap);
+        int index = Array.IndexOf(stops, CommandRange.CombatExtendedRadius);
+        Assert.Equal(39.9f, stops[index - 1]);
+        Assert.Equal(44.9f, stops[index + 1]);
+        Assert.Single(stops, s => s == CommandRange.CombatExtendedRadius);
+        Assert.DoesNotContain(CommandRange.CombatExtendedRadius, CommandRange.Ladder(40f));
+    }
+
+    // The CE root writes the range without the set and the slider's default; both are the
+    // number the slider names as Combat Extended's.
+    [Fact]
+    public void CombatExtendedPatchWritesTheNamedRung()
+    {
+        XElement value = XDocument.Load(Path.Combine(RepoRoot, CombatExtendedPatchPath)).Descendants("value").Single();
+        foreach (string field in new[] { "radius", "normalRadius" })
+        {
+            Assert.Equal(CommandRange.CombatExtendedRadius,
+                float.Parse(value.Element(field)?.Value ?? "0", System.Globalization.CultureInfo.InvariantCulture));
+        }
     }
 
     [Fact]
     public void Ladder_KeepsARungThatSitsOnTheCap()
     {
         float[] stops = CommandRange.Ladder(79.9f);
-        Assert.Equal(16, stops.Length);
-        Assert.Equal(79.9f, stops[15]);
+        Assert.Equal(17, stops.Length);
+        Assert.Equal(79.9f, stops[16]);
     }
 
     [Fact]
