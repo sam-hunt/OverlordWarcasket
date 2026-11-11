@@ -22,6 +22,15 @@
     ToxicResistance; immuneToToxGasExposure and NightVisionEfficiency_Apparel 0.75 are what CE
     gives every sealed spacer helmet. The tox immunity is added only when absent, CE's own
     guard against a second patch producing a duplicate node.
+  - The helmet's shooting price, AimingAccuracy -0.15 and ShootingAccuracyPawn -0.75 for the
+    main tree's -3. CE turns ShootingAccuracyPawn into weapon handling, 1 plus 0.2 a Shooting
+    level (its Patches/Core/Stats/Stats.xml), where vanilla counts it in levels, so an
+    unconverted -3 would cost fifteen levels of handling. CE's own conversion of the mechlord
+    helmet's -5 (Biotech/Patches/Biotech/ThingDefs_Misc/Apparel_BiotechHeadgear.xml) is
+    AimingAccuracy -0.25 and ShootingAccuracyPawn -1.25, a twentieth and a quarter a level, and
+    the same rate on -3 keeps the helmet at three fifths of the mechlord's as the def header
+    means it. MeleeHitChance is untouched: CE still counts it in levels and leaves the
+    mechlord's alone.
   - Costs on CE's spacer rescale: plasteel x1.5 and two more spacer components on the armor
     and helmet (the armor's 150 / 8 to 225 / 10; the helmet's 80 / 6 to 120 / 8; shoulders 60
     to 90). Uranium and the mech boss chips are not touched, as CE leaves VFEP's uranium and
@@ -139,6 +148,13 @@
     <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/equippedStatOffsets</xpath>
     <value>
       <SmokeSensitivity>-1</SmokeSensitivity>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationReplace">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]/equippedStatOffsets/ShootingAccuracyPawn</xpath>
+    <value>
+      <AimingAccuracy>-0.15</AimingAccuracy>
+      <ShootingAccuracyPawn>-0.75</ShootingAccuracyPawn>
     </value>
   </Operation>
   <Operation Class="PatchOperationConditional">
