@@ -7,12 +7,17 @@ namespace OverlordWarcasket;
 // The armor's resurrection core (see CompResurrectionCore): the charge store the resurrect mech
 // ability spends. The reload fields (maxCharges, ammoDef, ammoCountPerCharge, baseReloadTicks,
 // chargeNoun, ...) are vanilla CompApparelReloadable's; a charge is one resurrection charge.
-// Values live in the armor def, rationale in its header; maxCharges, chargesPerDay and
-// ammoCountPerCharge are mod settings defaulting to them, written back here.
+// Values live in the armor def, rationale in its header; maxCharges, chargesPerDay,
+// ammoCountPerCharge and autoReloadFromInventory are mod settings defaulting to them, written
+// back here.
 public class CompProperties_ResurrectionCore : CompProperties_ApparelReloadable
 {
     // Charges the core recharges on its own per day, at any capacity. Zero never recharges.
     public float chargesPerDay = 1f;
+
+    // An automatic reload loads the ammo the wearer carries before it fetches any from the map;
+    // false leaves the carried ammo to an order.
+    public bool autoReloadFromInventory;
 
     public CompProperties_ResurrectionCore()
     {

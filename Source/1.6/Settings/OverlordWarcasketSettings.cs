@@ -17,7 +17,8 @@ namespace OverlordWarcasket;
 // On the armor's CompProperties_ResurrectionCore entry, the charge capacity overrides maxCharges,
 // the recharge rate chargesPerDay and the reload cost ammoCountPerCharge, vanilla's reload field;
 // that row is skipped, and the field left alone, while the def does not reload by the charge
-// (another mod's patch). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
+// (another mod's patch), and so is the switch for the automatic reload taking the carried ammo
+// first, which overrides autoReloadFromInventory and closes the ability's section. On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
 // override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
 // in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
 // corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day up;
@@ -70,6 +71,7 @@ public class OverlordWarcasketSettings : ModSettings
 
     public readonly BoolSetting requireMechlink = new("RequireMechlink");
     public readonly BoolSetting sparksOnlyDrafted = new("SparksOnlyDrafted");
+    public readonly BoolSetting autoReloadFromInventory = new("AutoReloadFromInventory");
     public readonly BoolSetting cerebrexArt = new("CerebrexArt") { RequiresRestart = true };
     public readonly WorkSetting work = new();
     public readonly CommandRangeSetting commandRange = new();
@@ -174,6 +176,7 @@ public class OverlordWarcasketSettings : ModSettings
         base.ExposeData();
         requireMechlink.ExposeData();
         sparksOnlyDrafted.ExposeData();
+        autoReloadFromInventory.ExposeData();
         cerebrexArt.ExposeData();
         work.ExposeData();
         commandRange.ExposeData();
@@ -214,6 +217,7 @@ public class OverlordWarcasketSettings : ModSettings
         cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
         requireMechlink.DefaultValue = defs.extension.requireMechlink;
         sparksOnlyDrafted.DefaultValue = defs.sparks.onlyWhileDrafted;
+        autoReloadFromInventory.DefaultValue = defs.core.autoReloadFromInventory;
         abilityTip = HeaderTip(defs.ability.LabelCap, defs.ability.description);
         abilityDef = defs.ability;
         costs = defs.extension.costs
@@ -236,7 +240,10 @@ public class OverlordWarcasketSettings : ModSettings
         defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
         defs.core.chargesPerDay = Mathf.Max(0f, recharge.Value);
         if (reloadItem != null)
+        {
             defs.core.ammoCountPerCharge = Mathf.Max(1, reloadCost.IntValue);
+            defs.core.autoReloadFromInventory = autoReloadFromInventory.Value;
+        }
         defs.extension.maxCorpseAgeTicks = NoCorpseLimit(corpseAge.Value)
             ? 0
             : Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenDate.TicksPerHour));
@@ -299,6 +306,8 @@ public class OverlordWarcasketSettings : ModSettings
         cooldown.DoRow(listing);
         requireMechlink.DoRow(listing);
         sparksOnlyDrafted.DoRow(listing);
+        if (reloadItem != null)
+            autoReloadFromInventory.DoRow(listing);
         if (WorkProfile.Toggleable.Count > 0)
         {
             SectionHeader(listing, "OLWC_SectionWork", workIcon, HeaderTip("OLWC_SectionWork".Translate(), "OLWC_SectionWorkDesc".Translate()));
@@ -328,6 +337,7 @@ public class OverlordWarcasketSettings : ModSettings
         {
             requireMechlink.Reset();
             sparksOnlyDrafted.Reset();
+            autoReloadFromInventory.Reset();
             cerebrexArt.Reset();
             work.Reset();
             commandRange.Reset();

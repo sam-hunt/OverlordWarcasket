@@ -76,6 +76,11 @@
     A pilot never fetches components unasked: the gauge's drag handle sets the level an
     automatic reload fills to and starts at zero (CompResurrectionCore's header has the three
     ways a reload happens).
+    - autoReloadFromInventory false: an automatic reload fetches from the map and leaves the
+      components the pilot carries to the load button, as vanilla's reload never looks in an
+      inventory and a carried stock reads as the player's reserve. A mod setting defaulting to
+      this value. The Combat Extended root turns it on, CE's players carrying their reload
+      ammo to have it used (1.6/Mods/CombatExtended/Patches/ResurrectionCore.xml).
 
     Core sparks: OverlordWarcasket.CompProperties_CoreSparks plays OLWC_CoreSparks (Effects/
     CoreSparks.xml), the apocriton's idle red crackle, on the wearer while the core holds a
@@ -172,6 +177,7 @@
         <chargesPerDay>1</chargesPerDay>
         <ammoDef>ComponentSpacer</ammoDef>
         <ammoCountPerCharge>1</ammoCountPerCharge>
+        <autoReloadFromInventory>false</autoReloadFromInventory>
         <baseReloadTicks>60</baseReloadTicks>
         <soundReload>Standard_Reload</soundReload>
         <chargeNoun>charge</chargeNoun>

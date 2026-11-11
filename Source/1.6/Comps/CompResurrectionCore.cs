@@ -22,12 +22,15 @@ namespace OverlordWarcasket;
 // - Automatic reload. A colonist fetches ammo on their own (vanilla's JobGiver_Reload) only
 //   while the core sits below TargetCharges, the gauge's drag handle, which starts at zero: a
 //   pilot never spends the colony's ammo unasked. Patches/CompApparelReloadable_Reload has how
-//   vanilla's queries are bent to that.
+//   vanilla's queries are bent to that. With Props.autoReloadFromInventory it loads the ammo
+//   the pilot carries first, up to the handle and by the carried reload's job, and fetches
+//   only for what is still missing (Patches/JobGiver_Reload_TryGiveJob).
 // - Ordered reload. Right-clicking the ammo (vanilla's float menu, drafted or not) reloads as
 //   far as the clicked stack goes, whatever the handle says.
 // - Carried reload. Vanilla's reload only looks for ammo lying on the map, so ammo in the
 //   pilot's own inventory gets a command beside the gauge (Command_LoadCore), yielded only
-//   while the pilot carries some, which orders JobDriver_LoadCore. Combat Extended adds a reload
+//   while the pilot carries some, which orders JobDriver_LoadCore; ordered, it fills the core
+//   past the handle as the float menu's does. Combat Extended adds a reload
 //   button of its own to every worn reloadable (ForeignReloadCommand), dropped here: the
 //   carried reload is ours.
 //
@@ -138,19 +141,48 @@ public class CompResurrectionCore : CompApparelReloadable
         return count;
     }
 
-    // Reloads from the ammo in pawn's inventory, stack by stack, until the core is full or the
-    // ammo runs out. ReloadFrom splits what it loads off the stack, which takes a spent stack
-    // out of the inventory itself, hence the walk from the end.
-    public void ReloadFromInventory(Pawn pawn)
+    // Whether pawn carries a stack that holds a charge's worth: what a carried reload can load,
+    // since ReloadFrom takes one stack at a time. The automatic reload asks before it gives the
+    // job, so a job that could load nothing is never given over and over.
+    public bool CarriesACharge(Pawn pawn)
+    {
+        ThingDef ammo = AmmoDef;
+        ThingOwner<Thing> carried = pawn?.inventory?.innerContainer;
+        if (ammo == null || carried == null)
+            return false;
+        for (int i = 0; i < carried.Count; i++)
+        {
+            if (carried[i].def == ammo && carried[i].stackCount >= Props.ammoCountPerCharge)
+                return true;
+        }
+        return false;
+    }
+
+    // Reloads from the ammo in pawn's inventory, stack by stack, until the charges wanted are
+    // loaded (the whole core for an ordered reload, up to the target for an automatic one) or
+    // the ammo runs out. ReloadFrom loads all a stack can give the core, so a stack holding more
+    // than is wanted has that much split off first, and whatever ReloadFrom leaves of the split
+    // goes back. It splits what it loads off the stack, which takes a spent stack out of the
+    // inventory itself, hence the walk from the end.
+    public void ReloadFromInventory(Pawn pawn, bool ordered)
     {
         ThingDef ammo = AmmoDef;
         ThingOwner<Thing> carried = pawn?.inventory?.innerContainer;
         if (ammo == null || carried == null)
             return;
-        for (int i = carried.Count - 1; i >= 0 && !Full; i--)
+        for (int i = carried.Count - 1; i >= 0; i--)
         {
-            if (carried[i].def == ammo)
-                ReloadFrom(carried[i]);
+            int wanted = ChargesWanted(ordered);
+            if (wanted <= 0)
+                return;
+            Thing stack = carried[i];
+            if (stack.def != ammo)
+                continue;
+            int most = wanted * Props.ammoCountPerCharge;
+            Thing part = stack.stackCount > most ? stack.SplitOff(most) : stack;
+            ReloadFrom(part);
+            if (part != stack && !part.Destroyed)
+                carried.TryAdd(part);
         }
     }
 

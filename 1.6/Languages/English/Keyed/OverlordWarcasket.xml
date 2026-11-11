@@ -59,6 +59,9 @@
   <OLWC_SparksOnlyDrafted>Sparks only while drafted</OLWC_SparksOnlyDrafted>
   <OLWC_SparksOnlyDraftedDesc>When enabled, your pilots' armor will only crackle with red sparks while drafted. When disabled, the sparks will play whenever the armor holds a charge, as on an apocriton.</OLWC_SparksOnlyDraftedDesc>
 
+  <OLWC_AutoReloadFromInventory>Automatic reload from inventory</OLWC_AutoReloadFromInventory>
+  <OLWC_AutoReloadFromInventoryDesc>When enabled, an automatic reload will use what the pilot is carrying before fetching more. When disabled, it will only fetch from elsewhere, and what the pilot is carrying will be loaded when you order it.</OLWC_AutoReloadFromInventoryDesc>
+
   <OLWC_SummaryCost>{1} for a {0} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>
   <OLWC_SummaryNoRegen>never recharges</OLWC_SummaryNoRegen>
