@@ -31,12 +31,19 @@
     the same rate on -3 keeps the helmet at three fifths of the mechlord's as the def header
     means it. MeleeHitChance is untouched: CE still counts it in levels and leaves the
     mechlord's alone.
+  - The helmet's long range radio, CE's ApparelDefExtension with isRadioPack: a wearer's
+    marking tool works with no friendly mortar on the map, the other thing that lets it mark
+    (Verb_MarkForArtillery.MarkingConditionsMet), and the stat sheet lists the radio. CE gives
+    it to the mechlord helmet, which this piece replaces on a mechanitor's head, and to the
+    mech commander and recon helmets; none of VFEP's warcasket helmets have it, so this is the
+    one place the piece follows the mechlord's helmet over its tier.
   - Costs on CE's spacer rescale: plasteel x1.5 and two more spacer components on the armor
     and helmet (the armor's 150 / 8 to 225 / 10; the helmet's 80 / 6 to 120 / 8; shoulders 60
     to 90). Uranium and the mech boss chips are not touched, as CE leaves VFEP's uranium and
     the mechlord pair's chips.
-  The resurrection core needs nothing from CE: it spends charges on a corpse and touches no
-  damage, armor or projectile path.
+  The resurrection core spends charges on a corpse and touches no damage, armor or projectile
+  path, so it has no stats here; its reload has a file of its own beside this one
+  (ResurrectionCore.xml), as the command range has (CommandRange.xml).
   Patches in this root apply before the main tree's and the VGE root's; none of the three
   touch the same nodes. Tests/1.6/CompatPatchTests.cs checks every xpath here against the
   main tree.
@@ -155,6 +162,14 @@
     <value>
       <AimingAccuracy>-0.15</AimingAccuracy>
       <ShootingAccuracyPawn>-0.75</ShootingAccuracyPawn>
+    </value>
+  </Operation>
+  <Operation Class="PatchOperationAddModExtension">
+    <xpath>Defs/VFEPirates.WarcasketDef[defName="OLWC_WarcasketHelmet_Overlord"]</xpath>
+    <value>
+      <li Class="CombatExtended.ApparelDefExtension">
+        <isRadioPack>true</isRadioPack>
+      </li>
     </value>
   </Operation>
   <Operation Class="PatchOperationConditional">
