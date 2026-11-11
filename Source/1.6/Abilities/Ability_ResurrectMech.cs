@@ -11,9 +11,12 @@ namespace OverlordWarcasket;
 // and its def, ResurrectionMech) as a VEF apparel ability drawing on the armor's resurrection
 // core (CompResurrectionCore, read off holder, which is why the two comps share the armor def).
 // The rules are the apocriton's, verified against RimWorld 1.7.4990's decompile: a corpse is
-// resurrectable when its pawn is a mechanoid of a weight class that allows it, of the pilot's own
-// faction, not of a kind that itself resurrects mechs, dead for at most the extension's
-// maxCorpseAgeTicks (when it sets a limit), and of a weight class the cost table prices within the charges held. Unlike
+// resurrectable when its pawn is a mechanoid of the pilot's own faction, not of a kind that
+// itself resurrects mechs, dead for at most the extension's maxCorpseAgeTicks (when it sets a
+// limit), and of a weight class the cost table prices within the charges held. The table alone
+// says which classes come back: the apocriton also reads MechWeightClassDef.canResurrect, which
+// vanilla clears on the ultraheavy class, and this ability does not, since its table prices
+// that class (the def header has the why). Unlike
 // the apocriton's area cast, only the clicked corpse comes back (the def header has the why),
 // paid from the core as the apocriton pays its charges; the applied effecter plays on the mech,
 // the centre effecter at its corpse, and the mech staggers for a second.
@@ -100,8 +103,8 @@ public class Ability_ResurrectMech : Ability
         return false;
     }
 
-    // The apocriton's CanResurrect, with the reason each refusal shows; cost is the charges the
-    // corpse's weight class takes when it passes.
+    // The apocriton's CanResurrect less its canResurrect check, with the reason each refusal
+    // shows; cost is the charges the corpse's weight class takes when it passes.
     public bool CanResurrect(Corpse corpse, out string reason, out int cost)
     {
         reason = null;
@@ -117,9 +120,9 @@ public class Ability_ResurrectMech : Ability
             return false;
         }
         MechWeightClassDef weightClass = mech.RaceProps.mechWeightClass;
-        if (weightClass == null || !weightClass.canResurrect
+        if (weightClass == null
             || (mech.kindDef.abilities != null && mech.kindDef.abilities.Contains(AbilityDefOf.ResurrectionMech))
-            || !TryGetCost(extension, weightClass, out cost))
+            || !extension.TryGetCost(weightClass, out cost))
         {
             reason = "OLWC_CannotResurrectClass".Translate(mech.LabelShortCap);
             return false;
@@ -140,20 +143,6 @@ public class Ability_ResurrectMech : Ability
             return false;
         }
         return true;
-    }
-
-    private static bool TryGetCost(ResurrectMechExtension extension, MechWeightClassDef weightClass, out int cost)
-    {
-        foreach (MechChargeCosts entry in extension.costs)
-        {
-            if (entry.weightClass == weightClass)
-            {
-                cost = entry.cost;
-                return true;
-            }
-        }
-        cost = -1;
-        return false;
     }
 
     // base.Cast first: the cooldown, the cast sound and the extension hooks. Then the one

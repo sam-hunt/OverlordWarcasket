@@ -108,7 +108,8 @@ def by `OverlordWarcasketSettings.ApplyToDefs`.
 ## 4. Residuals
 
 - Which mechs: the pilot's faction, as the apocriton; not only the mechs the pilot oversees.
-- An UltraHeavy mech cannot be brought back, as for the apocriton.
+- An UltraHeavy mech costs 8 charges, where the apocriton refuses the class: the cost table
+  alone decides which classes come back (the ability def's header has why).
 - One mech per cast, not the apocriton's 5 cell area: the core's few charges are spent one
   chosen mech at a time.
 - A resurrected mech comes back as `ResurrectionUtility.TryResurrect` leaves it: missing

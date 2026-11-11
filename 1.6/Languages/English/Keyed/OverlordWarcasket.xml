@@ -62,7 +62,7 @@
   <OLWC_AutoReloadFromInventory>Automatic reload from inventory</OLWC_AutoReloadFromInventory>
   <OLWC_AutoReloadFromInventoryDesc>When enabled, an automatic reload will use what the pilot is carrying before fetching more. When disabled, it will only fetch from elsewhere, and what the pilot is carrying will be loaded when you order it.</OLWC_AutoReloadFromInventoryDesc>
 
-  <OLWC_SummaryCost>{1} for a {0} mech</OLWC_SummaryCost>
+  <OLWC_SummaryCost>{1} for {0_indefinite} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>
   <OLWC_SummaryNoRegen>never recharges</OLWC_SummaryNoRegen>
   <OLWC_SummaryReload>{0}, and each one can be reloaded with {1}</OLWC_SummaryReload>

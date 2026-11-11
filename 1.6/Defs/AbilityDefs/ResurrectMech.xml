@@ -9,9 +9,9 @@
     Docs/Specs/Mech-Resurrection.md.
 
     The apocriton's numbers, kept where they still mean the same: a 4 second warmup (castTime
-    240), a 2 second cooldown (cooldownTime 120; a mod setting), the costs of 1 / 3 / 5 charges for a light, medium
-    and heavy mech (an ultraheavy has no entry and cannot be brought back, as for the
-    apocriton) and the 9.9 cell cast range, here the distanceToTarget the goto job
+    240), a 2 second cooldown (cooldownTime 120; a mod setting), the costs of 1 / 3 / 5
+    charges for a light, medium and heavy mech and the 9.9 cell cast range, here the
+    distanceToTarget the goto job
     (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is unset on purpose: the click is
     not range-limited, the pilot walks. The warmup, cast and resolve effects are Biotech's own
     (MechResurrect_Warmup, MechResurrect_Cast, the ApocrionAoeWarmup warmup effecter through
@@ -19,11 +19,21 @@
     the icon, UI/Abilities/MechResurrection; Biotech is a hard dependency, so none needs a
     fallback.
 
+    The ultraheavy entry, 8 charges, is this ability's own. The apocriton has none, and vanilla
+    clears MechWeightClassDef.canResurrect on the class besides, so that a raid's apocriton
+    never stands its war queen back up. That rule keeps a boss the player has killed dead; a
+    pilot raising the colony's own ultraheavy is what the mech gestator's
+    ResurrectUltraheavyMech bill already does for 150 steel. The ability therefore reads this
+    table alone and not the flag (Ability_ResurrectMech's header). 8 of the core's 10 charges
+    is one ultraheavy a fight with two charges over, where 10 would lock the cast whenever the
+    core is short of full, and eight days of recharge or eight advanced components to earn
+    back.
+
     Alpha Mechs' mechs need no entries of their own: every one sits in the four vanilla weight
-    classes and leaves an ordinary corpse, so its light, medium and heavy mechs cost 1 / 3 / 5
-    and its many ultraheavies stay down, as they do for its own resurrecting boss, the
-    apoptosis (AlphaMechs.CompResurrectMechMinor refuses the class too). A mech turned by its
-    IFF scrambler goes back to the mechanoid faction when it dies
+    classes and leaves an ordinary corpse, so they cost 1 / 3 / 5 / 8 as vanilla's do, its
+    boss-size ultraheavies included and its blitzkrieg, a light mech built to blow itself up,
+    at a light mech's 1, as an apocriton would raise it. A mech turned by its IFF scrambler
+    goes back to the mechanoid faction when it dies
     (HediffComp_DeleteAfterTime.Notify_PawnDied), so its corpse is not the pilot's to raise.
 
     The corpse window is not the apocriton's: one game day (maxCorpseAgeTicks 60000; a mod
@@ -91,6 +101,10 @@
           <li>
             <weightClass>Heavy</weightClass>
             <cost>5</cost>
+          </li>
+          <li>
+            <weightClass>UltraHeavy</weightClass>
+            <cost>8</cost>
           </li>
         </costs>
         <appliedEffecterDef>MechResurrected</appliedEffecterDef>

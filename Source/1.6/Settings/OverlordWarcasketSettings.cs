@@ -222,7 +222,7 @@ public class OverlordWarcasketSettings : ModSettings
         abilityDef = defs.ability;
         costs = defs.extension.costs
             .Where(cost => cost.weightClass != null)
-            .Select(cost => "OLWC_SummaryCost".Translate(cost.weightClass.label, cost.cost).Resolve())
+            .Select(cost => "OLWC_SummaryCost".Translate(cost.weightClass, cost.cost).Resolve())
             .ToCommaList(useAnd: true);
         workIcon = ContentFinder<Texture2D>.Get("World/WorldObjects/Expanding/Sites/MiningWorkSite");
         defaultsLoaded = true;

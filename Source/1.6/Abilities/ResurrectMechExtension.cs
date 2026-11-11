@@ -15,8 +15,10 @@ public class ResurrectMechExtension : DefModExtension
 
     public bool LimitsCorpseAge => maxCorpseAgeTicks > 0;
 
-    // Charges each mech weight class costs; a class absent here cannot be resurrected. Vanilla's
-    // own entry type, so the XML reads as the apocriton's.
+    // Charges each mech weight class costs; a class absent here cannot be resurrected, and a
+    // class listed here can, whatever its canResurrect says (the ability def's header has why
+    // the ultraheavy class is listed). Vanilla's own entry type, so the XML reads as the
+    // apocriton's.
     public List<MechChargeCosts> costs = [];
 
     // Played on each resurrected mech, and once at the targets' centre after the cast.
@@ -25,6 +27,20 @@ public class ResurrectMechExtension : DefModExtension
 
     // Whether the pilot must be a mechanitor (carry a mechlink) to use the core.
     public bool requireMechlink = true;
+
+    public bool TryGetCost(MechWeightClassDef weightClass, out int cost)
+    {
+        foreach (MechChargeCosts entry in costs)
+        {
+            if (entry.weightClass == weightClass)
+            {
+                cost = entry.cost;
+                return true;
+            }
+        }
+        cost = -1;
+        return false;
+    }
 
     public override IEnumerable<string> ConfigErrors()
     {

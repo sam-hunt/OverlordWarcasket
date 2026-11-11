@@ -67,14 +67,16 @@
 
     The core's numbers, all three mod settings defaulting to these values:
     - maxCharges 10, the charges held when full: the apocriton holds 30, a suit of armor a
-      third. With the costs of 1 / 3 / 5 that is two heavy mechs, or three medium and a light,
-      in one fight, and the capacity is what limits a fight.
+      third. With the costs of 1 / 3 / 5 / 8 that is two heavy mechs, three medium and a
+      light, or an ultraheavy and two light, in one fight, and the capacity is what limits a
+      fight.
     - chargesPerDay 1, the recharge: the main supply, free and unattended. Measured against the
       vanilla route it competes with, the mech gestator's resurrect bills (Biotech/Defs/
-      RecipeDefs/Recipes_MechResurrection.xml: 25 / 50 / 100 steel and one gestation cycle of
-      two days for a light, medium or heavy mech, any corpse age, fully healed), a charge a day
-      pays for a light mech in one day, a medium in three and a heavy in five: quicker than the
-      gestator for a light mech and slower for the rest, so the gestator keeps its place and
+      RecipeDefs/Recipes_MechResurrection.xml: 25 / 50 / 100 / 150 steel and one gestation
+      cycle of two days for a light, medium, heavy or ultraheavy mech, any corpse age, fully
+      healed), a charge a day pays for a light mech in one day, a medium in three, a heavy in
+      five and an ultraheavy in eight: quicker than the gestator for a light mech and slower
+      for the rest, so the gestator keeps its place and
       what the core adds is the mech back on its feet during the fight. The rate is meant to
       bring a core spent in one raid most of the way back by the next; whether that is too
       generous is an open entry in TODOs.md.
@@ -83,8 +85,9 @@
       Controller's, which this set is templated from (VFEP_Warcasket_Controller reloads its
       drones with one advanced component a deployment), where vanilla's own reloadables take
       chemfuel, steel or bioferrite. At 200 silver and a fabrication bench's work each, a heavy
-      mech brought back on components costs about five times its gestator bill, so components
-      stay the exception. Per charge rather than ammoCountToRefill, so a part-empty core
+      mech brought back on components costs about five times its gestator bill and an
+      ultraheavy about five times its own, so components stay the exception.
+      Per charge rather than ammoCountToRefill, so a part-empty core
       reloads for what it lacks. baseReloadTicks, soundReload and chargeNoun are the family's
       values (the Medic's suite); chargeNoun is vanilla's default, spelled out because the
       stat sheet and the gauge's tooltip print it.

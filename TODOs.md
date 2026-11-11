@@ -26,8 +26,10 @@
 - **In-game run of the resurrect mech ability.** The code mirrors the apocriton's rules from
   the 1.7.4990 decompile and builds clean, but no cast has been watched yet: check the walk to
   the corpse, the warmup effecter on the corpse, that only the clicked mech comes back, the
-  charge spend per weight class, the gauge's red bar and tooltip, the dev gizmos, and the
-  "needs a mechlink" and "no charges" disabled reasons. Then the settings page end to end.
+  charge spend per weight class, an ultraheavy (a centurion) included at 8 and refused below
+  that, the gauge's red bar and tooltip, the dev gizmos, and the "needs a mechlink" and "no
+  charges" disabled reasons. Then the settings page end to end, the summary's "8 for an
+  ultraheavy mech" included.
   Also the core's red sparks on the pilot: their size and spread against the warcasket's art,
   that they stop at zero charges and come back with the next one, and that they follow
   the draft with the drafted-only setting on and play undrafted with it off, and that a raider
@@ -74,14 +76,13 @@
   CE loads whatever that generates).
 - **In-game run with Alpha Mechs.** The scan found nothing to patch (the armor and ability def
   headers have the findings) and nothing has been seen in game: the core raising one of its
-  light, medium and heavy mechs for 1, 3 and 5 charges and refusing an ultraheavy (a
-  siegebreaker) with the weight class message; a mech turned by the Mech Master helmet's IFF
+  light, medium and heavy mechs for 1, 3 and 5 charges and an ultraheavy (a siegebreaker)
+  for 8; a mech turned by the Mech Master helmet's IFF
   scrambler refused as not ours once dead; an entombed pilot analyzing a tier 4 chip and using
   a boss call building; the "(tier N)" chip labels on the foundry's cost list; this armor and
   helmet under Mech Master shoulders reading 44 bandwidth, with the command range moved to the
   helmet in the settings. Also a blitzkrieg, its suicide mech, raised after it detonates, if
-  the corpse survives the blast: the gestator's resurrect bills leave it out, so a charge
-  buying the bomb back may want an answer.
+  the corpse survives the blast: it costs a light mech's 1 charge, as it would an apocriton.
 
 ## Later
 
@@ -93,4 +94,6 @@
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for
   giving raiders an ability, so a raider mechanitor resurrecting its escort is possible later.
+  The cost table prices ultraheavies, so a raider's cast would have to refuse the class, as
+  the apocriton does.
   Probably also worth considering whether overlords raiders would spawn with a small mech contingent too
