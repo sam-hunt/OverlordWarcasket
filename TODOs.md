@@ -2,7 +2,11 @@
 
 ## Features
 
-- **CE subdomain compat scan** Check CE for any extra related subdomains that it takes over from vanilla
+- **Automatic reload from the pilot's own inventory?** With the handle raised the pilot fetches
+  components from the map and never touches the ones carried, with Combat Extended as without
+  (`Patches/JobGiver_Reload_TryGiveJob`). CE players carry reload ammo in the loadout and expect
+  it used, so loading the carried ones first, up to the handle, is the open design choice; it
+  would change the game without CE too.
 - **Patch for Alpha Mechs players** our warcasket should probably cost more, similar to Mech Master
 - **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
   Crafting, Tailoring and Dark study behind settings toggles; run the spec's verification
@@ -59,9 +63,24 @@
   charge a day is too generous in play (the core usually meets each raid full), with 0.5 as the
   fallback.
 
+- **In-game run with Combat Extended.** The CE root is checked statically and the three C#
+  answers to CE's patches build clean, but nothing has been seen in game: the helmet's stat
+  sheet reading AimingAccuracy -15% and weapon handling -0.75; a pilot ordering a drafted mech
+  across the map with no white ring, the ring at the chosen radius under the radius scope, and
+  CE's 43.9 ring back for a mechanitor without the set; the settings window quoting 43.9 as the
+  normal range, the slider's default and its "(normal)" rung, and running out to 119; no
+  "Reload worn armor" button beside the gauge; a pilot below the handle with components in the
+  inventory fetching from the map and dropping nothing; the load button after CE's own pick up
+  order. Also a mech raised by the core: by the code it stands up with a freshly generated,
+  loaded weapon and spare magazines, as an apocriton's does (vanilla regenerates the weapon and
+  CE loads whatever that generates).
+
 ## Later
 
 - **Sometimes spawn vanilla pod/crash mechanitors in the warcasket?**
+- **CE's long range radio on the helmet?** CE marks the mechlord and mech commander helmets
+  `isRadioPack`, which lets a pawn holding a marking tool call artillery; none of VFEP's
+  warcasket helmets get it, so ours follows the tier and has none.
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for
   giving raiders an ability, so a raider mechanitor resurrecting its escort is possible later.
