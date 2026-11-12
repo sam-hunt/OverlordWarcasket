@@ -20,14 +20,25 @@ namespace OverlordWarcasket;
 // Openable names the work types the suit opens, by defName, each with the fixed rule's default:
 // Research open, as it carries hacking (Core's Hack work giver is Research work, and every hack
 // path, the autohack work giver, the Hack gizmo and the float menu, asks
-// HackUtility.IsCapableOfHacking, which refuses an Intellectual-blocked pawn); Smithing open, as
-// Biotech files mech gestation, subcore encoding and the mechanitor-only mech repair there;
-// Crafting, Tailoring and Anomaly's DarkStudy blocked until the player opens them, the last
-// skipped silently without Anomaly. Mirror records which of them the loaded game has
-// (Toggleable) and what the rule makes of each (OpenByDefault: its own default, or open whenever
-// VFEP's trait blocks neither its tags nor the type itself), writes that default profile, and
-// Apply writes the profile the settings choose, on every ApplyToDefs. A pawn caches its disabled
-// work types, so Apply refreshes every live pawn carrying the trait; at startup there is none.
+// HackUtility.IsCapableOfHacking, which refuses an Intellectual-blocked pawn) and keeps the
+// Intellectual skill alive for the mech boss chips (their study is no work giver but an order
+// off the chip, and CompAnalyzable.CanInteract refuses a pawn whose ResearchSpeed stat is
+// disabled, which a totally disabled Intellectual skill does; verified on 1.7); Smithing open,
+// as Biotech files mech gestation, subcore encoding and the mechanitor-only mech repair there
+// and Core the machining table, where mechanoids are shredded (the Crafting spot's smash recipe
+// is Crafting work); Crafting, Tailoring and Anomaly's DarkStudy blocked until the player opens
+// them, the last skipped silently without Anomaly. Resolve, pure and tested, sorts the loaded
+// game's work types into the trait's tags, the types blocked by name whatever the settings say
+// and the toggleables, with what the rule makes of each (OpenByDefault: its own default, or
+// open whenever VFEP's trait blocks neither its tags nor the type itself). Mirror writes that
+// default profile and Apply the profile the settings choose, on every ApplyToDefs. A pawn
+// caches its disabled work types, so Apply refreshes every live pawn carrying the trait; at
+// startup there is none.
+//
+// No tag an openable work type carries may stay on the trait: a trait blocks a work type on any
+// shared tag (Trait.AllowsWorkType), and Smithing carries the Crafting tag as well as
+// ManualSkilled, so a Crafting tag left behind would close Smithing and, with Crafting and
+// Tailoring blocked, disable the Crafting skill the mech work's speed stats need.
 //
 // Opening a work type that VFEP blocks by tag means dropping that tag (ManualSkilled, for
 // Smithing, Crafting and Tailoring; Intellectual, for Research and DarkStudy) and re-blocking by
@@ -118,6 +129,67 @@ public static class WorkProfile
         return tags & ~removed;
     }
 
+    // The fixed rule's default for an openable work type, by defName; null for every other.
+    public static bool? OpenableDefault(string defName)
+    {
+        foreach ((string name, bool open) in Openable)
+        {
+            if (name == defName)
+                return open;
+        }
+        return null;
+    }
+
+    // What Resolve makes of a game's work types: the trait's tags, the work types blocked by
+    // name whatever the settings say, and the toggleables with those the fixed rule opens.
+    public sealed class Resolved<T>
+    {
+        public WorkTags Tags { get; set; }
+        public List<T> BaseTypes { get; } = [];
+        public List<T> Toggleable { get; set; } = [];
+        public HashSet<T> OpenByDefault { get; } = [];
+    }
+
+    // Sorts workTypes, in the work tab's order, against VFEP's trait: its tags through
+    // ResolveTags with every openable work type's tags as the ones to free; every work type the
+    // freed tags covered that is not openable, and every one VFEP lists by name, into the base;
+    // each openable one into the toggleables, open by default when its own default says so or
+    // VFEP blocks neither its tags nor the type, and those open by default first. Pure and
+    // generic over the work type, for the tests.
+    public static Resolved<T> Resolve<T>(
+        IReadOnlyList<T> workTypes,
+        Func<T, WorkTags> tagsOf,
+        Func<T, bool?> openableDefault,
+        WorkTags vfepTags,
+        ICollection<T> vfepTypes)
+    {
+        WorkTags openableTags = WorkTags.None;
+        foreach (T work in workTypes)
+        {
+            if (openableDefault(work) != null)
+                openableTags |= tagsOf(work);
+        }
+
+        var profile = new Resolved<T> { Tags = ResolveTags(vfepTags, openableTags, out WorkTags removed) };
+        foreach (T work in workTypes)
+        {
+            WorkTags workTags = tagsOf(work);
+            bool vfepBlocks = (vfepTags & workTags) != 0 || vfepTypes.Contains(work);
+            if (openableDefault(work) is bool open)
+            {
+                profile.Toggleable.Add(work);
+                if (open || !vfepBlocks)
+                    profile.OpenByDefault.Add(work);
+            }
+            else if ((removed & workTags) != 0 || vfepTypes.Contains(work))
+            {
+                profile.BaseTypes.Add(work);
+            }
+        }
+        profile.Toggleable = profile.Toggleable.OrderBy(work => !profile.OpenByDefault.Contains(work)).ToList();
+        return profile;
+    }
+
     private static void MirrorFromVfep()
     {
         TraitDef vfep = DefDatabase<TraitDef>.GetNamedSilentFail(VfepTraitName);
@@ -128,43 +200,19 @@ public static class WorkProfile
             return;
         }
 
-        // The openable work types the loaded game has, each with its default.
-        var openable = new Dictionary<WorkTypeDef, bool>();
-        foreach (WorkTypeDef work in WorkTypeDefsUtility.WorkTypeDefsInPriorityOrder)
-        {
-            foreach ((string defName, bool open) in Openable)
-            {
-                if (work.defName == defName)
-                    openable[work] = open;
-            }
-        }
-        WorkTags openableTags = WorkTags.None;
-        foreach (WorkTypeDef work in openable.Keys)
-            openableTags |= work.workTags;
-
-        WorkTags tags = ResolveTags(vfep.disabledWorkTags, openableTags, out WorkTags removed);
-        ours.disabledWorkTags = tags;
-
-        // Work types: VFEP's own list by value, never aliased, plus every work type the removed
-        // tags no longer block, split into the base the settings never touch and the toggleables.
+        // VFEP's own list by value, never aliased.
         var vfepTypes = new List<WorkTypeDef>(vfep.disabledWorkTypes ?? Enumerable.Empty<WorkTypeDef>());
-        var types = new List<WorkTypeDef>();
-        foreach (WorkTypeDef work in WorkTypeDefsUtility.WorkTypeDefsInPriorityOrder)
-        {
-            bool vfepBlocks = (vfep.disabledWorkTags & work.workTags) != 0 || vfepTypes.Contains(work);
-            if (openable.TryGetValue(work, out bool open))
-            {
-                toggleable.Add(work);
-                if (open || !vfepBlocks)
-                    openByDefault.Add(work);
-            }
-            else if ((removed & work.workTags) != 0 || vfepTypes.Contains(work))
-            {
-                types.Add(work);
-            }
-        }
-        baseTypes = types;
-        toggleable = toggleable.OrderBy(work => !openByDefault.Contains(work)).ToList();
+        Resolved<WorkTypeDef> profile = Resolve(
+            WorkTypeDefsUtility.WorkTypeDefsInPriorityOrder.ToList(),
+            work => work.workTags,
+            work => OpenableDefault(work.defName),
+            vfep.disabledWorkTags,
+            vfepTypes);
+        WorkTags tags = profile.Tags;
+        ours.disabledWorkTags = tags;
+        baseTypes = profile.BaseTypes;
+        toggleable = profile.Toggleable;
+        openByDefault = profile.OpenByDefault;
         overlord = ours;
         Write(OpenByDefault);
 

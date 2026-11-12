@@ -67,7 +67,7 @@ stays green but every test touching game types fails. `CompatPatchTests` resolve
 the DLC's defs in the local install), the only check a gated root gets short of a boot with that
 mod active; `CerebrexNodeArtTests` ties that root's patch to its switch, the path constant and
 the shipped textures; the other two files cover the settings slider arithmetic and the trait
-mirror's tag rule.
+mirror's tag and work type rules.
 
 ## Layout
 
