@@ -19,8 +19,10 @@
       - disabledWorkTypes = VFEP's, plus every work type the removed tags covered that is not
         openable (Cooking, Construction, Growing, Mining, PlantCutting), plus each openable one
         the mod settings block. The settings default to the fixed rule: Research open, as
-        Core's hacking is Research work and needs the Intellectual tag open; Smithing open, as
-        Biotech's mech gestation, subcore encoding and mech repair are Smithing work; Crafting,
+        Core's hacking is Research work and needs the Intellectual tag open, and studying a
+        mech boss chip needs the Intellectual skill Research keeps alive; Smithing open, as
+        Biotech's mech gestation, subcore encoding and mech repair are Smithing work, and so
+        is the machining table, where mechanoids are shredded; Crafting,
         Tailoring and Dark study blocked; and any of them open regardless once VFEP's trait, as
         patched, blocks neither its tags nor the type. Written by the settings' ApplyToDefs on
         every load and settings close.
@@ -44,8 +46,9 @@
     The label is VFEP's own, so the Bio tab names the state as it does for every warcasket pilot.
     The description is VFEP's own trait text with only the work clause changed, as Medic
     Warcasket's is, so the two read alike in the Bio tab. That clause names the work the suit is
-    built for (smithing for mech gestation and repair, hacking) rather than the live profile,
-    which settings and patch mods can widen; the tooltip lists the actual work disables beneath
+    built for (research for the mechtech projects and their chips, smithing for mech gestation,
+    repair and shredding, hacking) rather than the live profile, which settings and patch mods
+    can widen or narrow; the tooltip lists the actual work disables beneath
     it, and on 1.7 the pain and rest-fall factors too.
   -->
   <TraitDef>
@@ -70,7 +73,7 @@
     <degreeDatas>
       <li>
         <label>warcasket</label>
-        <description>{PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do smithing and hacking.</description>
+        <description>{PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do research, smithing and hacking.</description>
         <painFactor>0</painFactor>
         <statFactors>
           <RestFallRateFactor>1.3</RestFallRateFactor>

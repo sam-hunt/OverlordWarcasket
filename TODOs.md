@@ -2,14 +2,9 @@
 
 ## Features
 
-- **Work profile in game.** Research (for hacking) and Smithing (for the mech work) open,
-  Crafting, Tailoring and Dark study behind settings toggles; run the spec's verification
-  (`Docs/Specs/Overlord-Work-Trait.md`, section 4), autohack and the Hack gizmo included.
 - **Art.** `Docs/Art/WarcasketOverlordHelmet_east_alt.png` is the second helmet east facing the
   artist delivered (a few thousand pixels differ from the one shipped); pick one and delete the other.
 - Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
-- Tweak trait text, currently "…is not capable of most work, but can still do smithing and hacking."
-  maybe to something like "except mech-related/adjacent work" etc
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
   booted with the full compat list, and a boot on 1.6.

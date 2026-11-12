@@ -4,7 +4,7 @@
 
 Status: IMPLEMENTED on the shared `1.6/` tree (`Source/1.6/WorkProfile.cs`,
 `1.6/Defs/TraitDefs/WarcasketTrait_Overlord.xml`, `Source/1.6/Settings/WorkSetting.cs`), not yet
-run in game (`TODOs.md`). The mechanism is the Medic Warcasket repo's
+run in game (section 4). The mechanism is the Medic Warcasket repo's
 (`../MedicWarcasket/Docs/Specs/Medic-Work-Trait.md`, sections 2 to 4, verified there against
 RimWorld 1.7.4984 and VFEP v4.02); this spec records only what differs for the Overlord.
 
@@ -56,8 +56,11 @@ types, read from `Data/*/Defs/WorkTypeDefs`; no DLC adds another), so the mirror
 ## 4. Verification (pending)
 
 Dev mode, a pawn welded into the set: the work tab offers Smithing and Research and withholds
-Crafting, Tailoring, Cooking and the rest; the pilot gestates and repairs mechs, and both
-autohack and the Hack gizmo accept them. Flip Crafting in the settings and it appears at once,
-unassigned; block Research and the Hack gizmo reports the pilot incapable. With "Warcaskets can
-work!" active, the skilled toggleables are open by default. The startup log line names the
+Crafting, Tailoring, Cooking and the rest; the pilot gestates and repairs mechs, encodes a
+subcore, shreds a mechanoid corpse at the machining table (the crafting spot's smash bill
+refuses them), and both autohack and the Hack gizmo accept them. The pilot studies a signal
+chip from its Analyze button, carrying it to a research bench, and then researches standard
+mechtech. Flip Crafting in the settings and it appears at once, unassigned; block Research and
+the Hack gizmo reports the pilot incapable and the chip's Analyze order refuses them too. With
+"Warcaskets can work!" active, the skilled toggleables are open by default. The startup log line names the
 toggleables and the defaults.

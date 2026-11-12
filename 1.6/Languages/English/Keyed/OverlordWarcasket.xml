@@ -74,8 +74,8 @@
   <OLWC_SectionWork>Enabled work types</OLWC_SectionWork>
   <OLWC_SectionWorkDesc>The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too.</OLWC_SectionWorkDesc>
   <OLWC_WorkDesc>When enabled, overlord pilots can do this work, though you will need to assign it in the Work tab. When disabled, they cannot.</OLWC_WorkDesc>
-  <OLWC_WorkNote_Research>Hacking is research work, so a pilot who cannot research cannot hack either.</OLWC_WorkNote_Research>
-  <OLWC_WorkNote_Smithing>Mech gestation, subcore encoding and mech repair are smithing work.</OLWC_WorkNote_Smithing>
+  <OLWC_WorkNote_Research>Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either.</OLWC_WorkNote_Research>
+  <OLWC_WorkNote_Smithing>Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work.</OLWC_WorkNote_Smithing>
   <OLWC_WorkDefault>Default: {0}.</OLWC_WorkDefault>
   <OLWC_WorkOpen>enabled</OLWC_WorkOpen>
   <OLWC_WorkBlocked>disabled</OLWC_WorkBlocked>

@@ -122,9 +122,10 @@
 
     Own trait on equip: traitsOnEquip grants OLWC_WarcasketTrait_Overlord (TraitDefs/
     WarcasketTrait_Overlord.xml), not VFEP_WarcasketTrait, because the Overlord's work profile
-    must differ from VFEP's (Crafting open) and a child ApparelExtension can only add to what a
-    granted trait blocks, never subtract; the trait is mirrored from VFEP's at startup so the
-    patch mods that reshape VFEP's profile reshape ours. traitsOnUnequip keeps VFEP_Shellcasket,
+    must differ from VFEP's (Research and Smithing open) and a child ApparelExtension can only
+    add to what a granted trait blocks, never subtract; the trait is mirrored from VFEP's at
+    startup so the patch mods that reshape VFEP's profile reshape ours. traitsOnUnequip keeps
+    VFEP_Shellcasket,
     the shared "cut out of a warcasket" state every add-on set uses, so removal surgery and
     re-entombing in any warcasket behave as for VFEP's own sets.
 
