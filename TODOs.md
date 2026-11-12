@@ -2,8 +2,6 @@
 
 ## Features
 
-- **Art.** `Docs/Art/WarcasketOverlordHelmet_east_alt.png` is the second helmet east facing the
-  artist delivered (a few thousand pixels differ from the one shipped); pick one and delete the other.
 - Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
