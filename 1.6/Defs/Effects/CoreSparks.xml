@@ -8,10 +8,17 @@
     OverlordWarcasket.CompCoreSparks (Source/1.6/Comps/), which gates it on the core holding a
     charge and the wearer being able to cast; its header has the conditions and the tick path.
 
-    The spark child is the apocriton's, two fields scaled to a pawn: Biotech draws the
-    apocriton at drawSize 2, a humanlike body at 1.5, so positionRadius 0.7 becomes 0.55 and
-    the spark scale 1.0~1.2 becomes 0.8~1.0. chancePerTick 0.015 at a burst of 1~2 is the
-    apocriton's rate, a burst every 67 ticks on average at random gaps.
+    The spark child is the apocriton's with four fields changed. Biotech draws the apocriton
+    at drawSize 2 and a humanlike body at 1.5, so the spark scale 1.0~1.2 becomes 0.8~1.0.
+    positionRadius is set by the art, not the mesh: SubEffecter_Sprayer places each spark
+    uniformly in a disc of that radius around the wearer (Rand.InsideAnnulusVector3, 1.7.4990
+    decompile), and the Overlord's shell fills nearly its whole 1.5-cell canvas, about 0.68
+    cells from the centre to its sides and 0.83 to the shoulder pads' tips. 0.8 lets the sparks
+    reach the silhouette's edge, where they read against the ground, while most still land on
+    the plating. positionRadiusMin 0.2 keeps them off the wearer's centre, where a spark is
+    lost against the chest plate. chancePerTick 0.01 at a burst of 1~2 is a burst every 100
+    ticks on average at random gaps, two thirds of the apocriton's 0.015: a pilot's readied
+    core crackles less than a mech built around one.
   -->
   <EffecterDef>
     <defName>OLWC_CoreSparks</defName>
@@ -20,11 +27,12 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <moteDef>Mote_MechSparkSimple</moteDef>
         <burstCount>1~2</burstCount>
-        <chancePerTick>0.015</chancePerTick>
+        <chancePerTick>0.01</chancePerTick>
         <rotation>-150~-150</rotation>
         <spawnLocType>OnTarget</spawnLocType>
         <scale>0.8~1.0</scale>
-        <positionRadius>0.55</positionRadius>
+        <positionRadiusMin>0.2</positionRadiusMin>
+        <positionRadius>0.8</positionRadius>
         <attachToSpawnThing>true</attachToSpawnThing>
         <rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
       </li>
