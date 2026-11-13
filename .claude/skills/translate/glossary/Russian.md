@@ -35,10 +35,16 @@ adjective and its 10th-generation paragraph.
 
 ## Charge nouns
 
-This set has no reloadable today and so no `chargeNoun` of its own: the
-mech resurrector recharges on its own and its charges are counted by Biotech's
-own strings. If a reloadable piece is ever added, its noun is shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots (see the
-skill), and the Russian worker reads the `plural` table and the genitive slots go through `case` lookups, so every coined noun ships a `plural.txt` line and `case.txt` rows for both numbers under `1.6/Languages/Russian/WordInfo/`. Shipcracker's "fuel unit" row in its glossary
+The armor's mech resurrector is a reloadable (`CompMechResurrector`, a subclass
+of vanilla's `CompApparelReloadable`), so the set has one `chargeNoun` to
+translate: `OLWC_Warcasket_Overlord.comps.CompMechResurrector.chargeNoun`,
+"charge". That is vanilla's own noun (Core's `Apparel_PsychicShockLance`
+carries the same `chargeNoun`), so copy the language's vanilla rendering of it
+rather than coining one: the same word resolves through the same lookups as on
+vanilla's items and needs no lookup file of this mod's. The gauge's title stays
+Biotech's `MechResurrectionCharges`. Should a coined noun ever replace it, it is
+shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
+(`l10n/lessons.md`), and the Russian worker reads the `plural` table and the genitive slots go through `case` lookups, so every coined noun ships a `plural.txt` line and `case.txt` rows for both numbers under `1.6/Languages/Russian/WordInfo/`. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
 ## To ground in the first pass

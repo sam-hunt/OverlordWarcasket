@@ -15,8 +15,8 @@ one); the rows inherited verbatim from the sibling Shipcracker Warcasket
 repo's `.claude/skills/translate/glossary/<Language>.md` (warcasket, the
 part nouns, the label pattern, foundry, entomb, set names, the VEF ability
 strings, the settings words Shipcracker settled), so the sets read as one
-family in-game; that language's charge-noun plural-lookup constraint, for
-when an ability adds one; the list of terms the first pass must still
+family in-game; the armor's charge noun and that language's plural-lookup
+constraint on a coined one; the list of terms the first pass must still
 ground or coin; and what is pending native review. An inherited row is
 never changed here first: reconcile it in the Shipcracker glossary, then
 mirror it here and in Toxin Warcasket. A term that has since been corrected
