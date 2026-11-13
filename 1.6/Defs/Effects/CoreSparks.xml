@@ -27,12 +27,12 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <moteDef>Mote_MechSparkSimple</moteDef>
         <burstCount>1~2</burstCount>
-        <chancePerTick>0.01</chancePerTick>
+        <chancePerTick>0.0125</chancePerTick>
         <rotation>-150~-150</rotation>
         <spawnLocType>OnTarget</spawnLocType>
         <scale>0.8~1.0</scale>
-        <positionRadiusMin>0.2</positionRadiusMin>
-        <positionRadius>0.8</positionRadius>
+        <positionRadiusMin>0.1</positionRadiusMin>
+        <positionRadius>0.7</positionRadius>
         <attachToSpawnThing>true</attachToSpawnThing>
         <rotateTowardsTargetCenter>true</rotateTowardsTargetCenter>
       </li>
