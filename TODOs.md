@@ -3,13 +3,10 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Command range limit** mod setting max. 200 throws a red dev log error:
-  "Not enough squares to get to radius 200. Max is 200"
 - **Command range** when set to "anywhere" with the mech on a second map it works, with the pilot
   in a caravan it does not (mech can't be drafted) (and should? shouldn't get the out of range message)
 - **Extraneous debug** "[Overlord Warcasket] Overlord warcasket trait disabled work types: Cooking, Construction, Growing, Mining, PlantCutting, Tailoring, Crafting."
-- **Manual ability reload** should reload only up to the slider if it's less than it,
-  maybe if it's reattempted at that point, then reload to full?
+- **Manual ability reload** should reload only up to the slider if it's less than it, maybe if it's reattempted at that point, then reload to full?
 - **Automatic ability reload** doesn't seem to work from inventory? is "pick up to inventory" PUAH only? I don't see the vanilla float menu option to pick up, so can't reach the gizmo or reload behavior that way
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
@@ -42,7 +39,7 @@
   sheet reading AimingAccuracy -15% and weapon handling -0.75; a pilot ordering a drafted mech
   across the map with no white ring, the ring at the chosen radius under the radius scope, and
   CE's 43.9 ring back for a mechanitor without the set; the settings window quoting 43.9 as the
-  normal range and as the slider's default, and the slider running out to 119; no "Reload worn
+  normal range and as the slider's default, and the slider running out to 118.9; no "Reload worn
   armor" button beside the gauge; a pilot below the handle with components in the inventory
   loading them up to the handle and dropping nothing, and fetching from the map instead with
   the automatic reload from inventory setting off; the load button after CE's own pick up

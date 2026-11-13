@@ -46,11 +46,19 @@ public enum CommandRangeAppliesTo
 // and radius back onto it; LoadDefaults reads them before the first Apply of a load, off defs
 // fresh from XML (Startup's header).
 //
-// The ring: GenDraw.DrawRadiusRing refuses, with a logged error, any radius above
-// GenRadial.MaxRadialPatternRadius, the radius of the last of its 20,000 precalculated cells,
-// 79.81 on 1.6 and 1.7 (the 20,000th cell lies at squared distance 6370). Ladder caps the
-// settings slider there, rounded down to a tenth, and the ring patch skips a radius above it
-// rather than erroring on an XML value.
+// The ring: GenDraw.DrawRadiusRing draws from GenRadial's precalculated cells and stops short of
+// the last of them. It refuses, with one logged error, a radius above
+// GenRadial.MaxRadialPatternRadius, the distance of the table's last cell, and then asks
+// GenRadial.NumCellsInRadius, which logs an error of its own on every call, so on every frame,
+// for a radius at or above it ("Not enough squares to get to radius"; both checks verified on
+// 1.7.5005 and the frozen 1.6 assembly). The widest ring that draws clean is therefore strictly
+// below the cap. The cap is read at runtime, never hard-coded, since mods rebuild the table:
+// vanilla's 20,000 cells end at 79.81 (the last lies at squared distance 6370), and Vanilla
+// Expanded Framework, which this mod always loads after, swaps in every cell out to exactly 200
+// from its Mod constructor (VEF.GenRadialPatches), so in play the cap is a whole number that no
+// ring may sit on. WidestRing is the last tenth below the cap, 79.8 for vanilla's table and
+// 199.9 for VEF's; Ladder ends the settings slider there, and the ring patch skips a radius at
+// or above the cap rather than erroring on an XML value.
 public static class CommandRange
 {
     public const string HelmetDefName = "OLWC_WarcasketHelmet_Overlord";
@@ -74,7 +82,7 @@ public static class CommandRange
     // The set's extension instance, on whichever piece Apply left it; null while vanilla stands.
     public static CommandRangeExtension Extension { get; private set; }
 
-    // The widest ring the game can draw.
+    // The distance of the last cell in the game's ring table, which a ring must stay below.
     public static float RingCap => GenRadial.MaxRadialPatternRadius;
 
     // The set's two pieces, which one carries the extension now and the extension itself; false,
@@ -187,13 +195,12 @@ public static class CommandRange
         from.DistanceToSquared(to) < radius * radius;
 
     // The settings slider's stops for a ring cap: 4.9, 9.9, ... while they fit under the cap,
-    // then the cap itself rounded down to a tenth where the last rung falls short of it, so
-    // the slider ends on the widest ring the game draws (79.8 today) rather than below it, and
-    // Combat Extended's range in its place among them, the one named range the step misses.
-    // Pure, for the tests.
+    // then the widest ring the cap allows where the last rung falls short of it, so the slider
+    // ends on the widest ring the game draws rather than below it, and Combat Extended's range
+    // in its place among them, the one named range the step misses. Pure, for the tests.
     public static float[] Ladder(float cap)
     {
-        float top = FloorToTenth(cap);
+        float top = WidestRing(cap);
         var stops = new List<float>();
         for (int k = 1; ; k++)
         {
@@ -212,7 +219,9 @@ public static class CommandRange
         return stops.ToArray();
     }
 
-    // Rounded down to a tenth, with a hair of tolerance so a value that is a tenth already is
-    // not pushed below itself by float error.
-    public static float FloorToTenth(float value) => Mathf.Floor(value * 10f + 1e-3f) / 10f;
+    // The widest radius that draws under a ring cap: the last tenth strictly below it, so a cap
+    // that is itself a tenth (VEF's 200) gives the tenth before. Counted in whole tenths, with
+    // a hair of tolerance so float error does not make a cap on a tenth read as just above it.
+    // Pure, for the tests.
+    public static float WidestRing(float cap) => (Mathf.CeilToInt(cap * 10f - 1e-3f) - 1) / 10f;
 }

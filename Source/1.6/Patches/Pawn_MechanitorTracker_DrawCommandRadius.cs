@@ -9,9 +9,10 @@ namespace OverlordWarcasket.Patches;
 // by vanilla at its constant 24.9 from Pawn.DrawAt once a frame. Where the set's range governs
 // this mechanitor (CommandRange.For), the ring would lie: under a map-wide scope it is dropped,
 // and under the Radius scope it is drawn at the extension's radius with the same vanilla call,
-// its predicate the same rule the order check applies. A radius the game cannot draw
-// (CommandRange.RingCap) draws nothing rather than the error DrawRadiusRing would log. Vanilla's
-// own method runs untouched for everyone else.
+// its predicate the same rule the order check applies. A radius the game cannot draw, one at
+// or above CommandRange.RingCap, draws nothing rather than the error the draw would log every
+// frame (CommandRange's header has the two checks). Vanilla's own method runs untouched for
+// everyone else.
 //
 // First among the prefixes: Harmony skips every later bool prefix once one returns false, and
 // another mod's ring is a prefix that always does. Combat Extended's is the known one
@@ -34,7 +35,7 @@ public static class Pawn_MechanitorTracker_DrawCommandRadius
         if (extension.scope != CommandRangeScope.Radius || !pawn.Spawned || !__instance.AnySelectedDraftedMechs)
             return false;
         float radius = extension.radius;
-        if (radius > CommandRange.RingCap)
+        if (radius >= CommandRange.RingCap)
             return false;
         IntVec3 center = pawn.Position;
         Map map = pawn.MapHeld;

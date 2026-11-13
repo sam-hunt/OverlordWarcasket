@@ -47,5 +47,9 @@ CE patches, the quickest check after a CE update or before patching a new vanill
 - **Untouched by CE**: the `ResurrectionMech` ability def and its effecters, mech weight classes
   and charge costs, mech corpses, `ComponentSpacer`, the mech gestator's and the mechanitor's
   work givers (CE adds none outside Hauling and Smithing), VEF abilities and VEF's shield bubble.
-- **CE widens `GenRadial`'s pattern to 119 cells**, which `CommandRange.RingCap` reads at
-  runtime: the settings slider runs that far under CE with no change here.
+- **CE swaps `GenRadial`'s pattern for one of 119 cells**, unconditionally and from its `Mod`
+  constructor (`Harmony_GenRadial`, CE 16.7.4), so loaded after VEF it replaces VEF's 200 and
+  `CommandRange.RingCap` reads 119 at runtime: the settings slider ends a tenth below, at 118.9,
+  with no change here. CE's prefix on `NumCellsInRadius` hard-codes the same 119, so the order
+  matters: were CE loaded before VEF, the cap would read VEF's 200 while every ring past 119
+  logged CE's error.

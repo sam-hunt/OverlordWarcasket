@@ -18,7 +18,7 @@
   CE's answer where it governs and CE's stands everywhere else. The ring is a matter of prefix
   order, handled in Source/1.6/Patches/Pawn_MechanitorTracker_DrawCommandRadius.cs. CE also
   swaps GenRadial's pattern for one reaching 119 cells, which CommandRange.RingCap reads at
-  runtime, so under CE the slider runs that far.
+  runtime, so under CE the slider ends a tenth below that, at 118.9.
 
   If CE changes its number, both values here and the constant follow it.
 -->

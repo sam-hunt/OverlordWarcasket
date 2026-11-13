@@ -8,7 +8,8 @@ using Xunit;
 namespace OverlordWarcasket.Tests;
 
 // The command range's pure rules (CommandRange): the distance comparison against vanilla's own
-// constant and the slider ladder against the ring cap; and the def wiring the settings read
+// constant and the slider ladder against the ring caps it meets, vanilla's and the whole-number
+// one Vanilla Expanded Framework leaves in play; and the def wiring the settings read
 // before any Apply, checked off the XML since the WarcasketDef type pulls in VFEP, which the
 // test output never carries: the shoulders alone carry the extension, with the scope the code
 // names and vanilla's radius as the slider's default; and Combat Extended's range, a constant
@@ -22,6 +23,9 @@ public class CommandRangeTests
 
     // The 20,000th precalculated radial cell on 1.6 and 1.7 lies at squared distance 6370.
     private const float RingCap = 79.81228f;
+
+    // The last cell of the table Vanilla Expanded Framework swaps in, the cap in play.
+    private const float FrameworkRingCap = 200f;
 
     private static readonly string RepoRoot = FindRepoRoot();
 
@@ -65,7 +69,7 @@ public class CommandRangeTests
     }
 
     [Fact]
-    public void Ladder_EndsOnTheCapRoundedDown()
+    public void Ladder_EndsOnTheLastTenthBelowTheCap()
     {
         float[] stops = CommandRange.Ladder(RingCap);
         Assert.Equal(17, stops.Length);
@@ -102,12 +106,26 @@ public class CommandRangeTests
         }
     }
 
+    // The game logs an error for a ring at the cap itself, so a rung that would sit on it is
+    // left out and the tenth before ends the ladder.
     [Fact]
-    public void Ladder_KeepsARungThatSitsOnTheCap()
+    public void Ladder_LeavesOutARungThatSitsOnTheCap()
     {
         float[] stops = CommandRange.Ladder(79.9f);
         Assert.Equal(17, stops.Length);
-        Assert.Equal(79.9f, stops[16]);
+        Assert.Equal(74.9f, stops[15]);
+        Assert.Equal(79.8f, stops[16]);
+    }
+
+    // Under the framework's table every five-cell rung to 199.9 fits and nothing reaches 200.
+    [Fact]
+    public void Ladder_StopsATenthShortOfTheFrameworksCap()
+    {
+        float[] stops = CommandRange.Ladder(FrameworkRingCap);
+        Assert.Equal(41, stops.Length);
+        Assert.Equal(194.9f, stops[39]);
+        Assert.Equal(199.9f, stops[40]);
+        Assert.All(stops, stop => Assert.True(stop < FrameworkRingCap));
     }
 
     [Fact]
@@ -120,12 +138,15 @@ public class CommandRangeTests
 
     [Theory]
     [InlineData(79.81228f, 79.8f)]
-    [InlineData(79.9f, 79.9f)]
-    [InlineData(24.9f, 24.9f)]
-    [InlineData(80f, 80f)]
-    public void FloorToTenth_RoundsDownWithoutSlippingAWholeTenth(float value, float expected)
+    [InlineData(79.9f, 79.8f)]
+    [InlineData(24.9f, 24.8f)]
+    [InlineData(80f, 79.9f)]
+    [InlineData(119f, 118.9f)]
+    [InlineData(200f, 199.9f)]
+    public void WidestRing_IsTheLastTenthStrictlyBelowTheCap(float cap, float expected)
     {
-        Assert.Equal(expected, CommandRange.FloorToTenth(value));
+        Assert.Equal(expected, CommandRange.WidestRing(cap));
+        Assert.True(CommandRange.WidestRing(cap) < cap);
     }
 
     [Fact]
