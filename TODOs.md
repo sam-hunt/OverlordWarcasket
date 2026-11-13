@@ -5,8 +5,6 @@
 - **Cerebrex node mask** pending art landing
 - **Mech resurrection control** should join the mechanitor's control group, requiring sufficient
   bandwidth as a prerequisite
-- **Resurrection effect** mech-centered wave effect on cast, and sparks on resurrection cover
-  much too wide area since warcasket version of the ability was downscaled to single target not aoe
 - **Resurrection ability can't be queued**
 - **Command range limit** mod setting max. 200 throws a red dev log error:
   "Not enough squares to get to radius 200. Max is 200"
@@ -30,7 +28,9 @@
 - **In-game look at the cerebrex node on a pilot facing north.** The node over the shell and
   under the pauldrons, with Odyssey's art and with ours; unchanged on a mechlord suit, on the
   other three facings and on an outfit stand.
-- **In-game run of the resurrect mech ability.** The core's red sparks on the pilot:
+- **In-game run of the resurrect mech ability.** The cast's effects at their single mech
+  size, on a light mech and on a centipede: the wave and the sparks on the corpse through the
+  warmup, the burst and the flash as it stands up. The core's red sparks on the pilot:
   their size and spread against the warcasket's art. A raider in the set (dev spawn) shows
   them while its core is charged. A drafted non-mechanitor pilot shows none, and does with the
   mechlink requirement off.

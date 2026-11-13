@@ -21,7 +21,7 @@ public class ResurrectMechExtension : DefModExtension
     // apocriton's.
     public List<MechChargeCosts> costs = [];
 
-    // Played on each resurrected mech, and once at the targets' centre after the cast.
+    // Played on the resurrected mech, and once where its corpse lay after the cast.
     public EffecterDef appliedEffecterDef;
     public EffecterDef centerEffecterDef;
 

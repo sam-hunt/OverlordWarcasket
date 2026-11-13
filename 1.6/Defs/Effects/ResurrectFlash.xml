@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The flash of OLWC_ResurrectResolve (Effects/ResurrectResolve.xml): Biotech's
+    ApocritonResurrectFlashGrowing (1.7.4990, Biotech Defs/Effects/Fleck_Visual.xml) with
+    growthRate 4 against 8, every other field the apocriton's. A fleck's growth is added to
+    its scale each second whatever scale it was spawned at (FleckStatic.TimeInterval, 1.7.4990
+    decompile), so the sub-effecter's scale could only shrink where the flash starts, not how
+    far it spreads, and the flash needs a def of its own. Over its 0.27 second life the
+    apocriton's grows from 2 cells across to 6.3, a burst over its 5 cell area; this one grows
+    to 4.2, fading as it goes, which stays around one mech.
+  -->
+  <FleckDef ParentName="FleckBase">
+    <defName>OLWC_ResurrectFlash</defName>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <solidTime>0.0</solidTime>
+    <fadeInTime>0.02</fadeInTime>
+    <fadeOutTime>0.25</fadeOutTime>
+    <growthRate>4</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/CircleFlash</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <color>(1, 0.7, 0.7, 0.5)</color>
+      <drawSize>2</drawSize>
+    </graphicData>
+  </FleckDef>
+</Defs>

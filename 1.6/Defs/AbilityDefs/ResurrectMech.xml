@@ -13,11 +13,13 @@
     charges for a light, medium and heavy mech and the 9.9 cell cast range, here the
     distanceToTarget the goto job
     (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is unset on purpose: the click is
-    not range-limited, the pilot walks. The warmup, cast and resolve effects are Biotech's own
-    (MechResurrect_Warmup, MechResurrect_Cast, the ApocrionAoeWarmup warmup effecter through
-    VEF's extension, MechResurrected on the mech and ApocrionAoeResolve at its corpse), and so is
-    the icon, UI/Abilities/MechResurrection; Biotech is a hard dependency, so none needs a
-    fallback.
+    not range-limited, the pilot walks. The sounds, the glow on the mech and the icon are
+    Biotech's own (MechResurrect_Warmup, MechResurrect_Cast, MechResurrected,
+    UI/Abilities/MechResurrection); Biotech is a hard dependency, so none needs a fallback. The
+    two area effects are ours, the apocriton's sized for one mech: OLWC_ResurrectWarmup on the
+    corpse through VEF's extension for the length of the warmup and OLWC_ResurrectResolve where
+    it lay as the mech stands up (Effects/ResurrectWarmup.xml and ResurrectResolve.xml have the
+    sizes).
 
     The ultraheavy entry, 8 charges, is this ability's own. The apocriton has none, and vanilla
     clears MechWeightClassDef.canResurrect on the class besides, so that a raid's apocriton
@@ -108,11 +110,11 @@
           </li>
         </costs>
         <appliedEffecterDef>MechResurrected</appliedEffecterDef>
-        <centerEffecterDef>ApocrionAoeResolve</centerEffecterDef>
+        <centerEffecterDef>OLWC_ResurrectResolve</centerEffecterDef>
         <requireMechlink>true</requireMechlink>
       </li>
       <li Class="VEF.Abilities.AbilityExtension_WarmupEffecter">
-        <effecterDef>ApocrionAoeWarmup</effecterDef>
+        <effecterDef>OLWC_ResurrectWarmup</effecterDef>
       </li>
     </modExtensions>
   </VEF.Abilities.AbilityDef>
