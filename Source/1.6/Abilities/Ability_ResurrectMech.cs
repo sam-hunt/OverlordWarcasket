@@ -21,6 +21,20 @@ namespace OverlordWarcasket;
 // paid from the core as the apocriton pays its charges; the applied effecter plays on the mech,
 // the centre effecter at its corpse, and the mech staggers for a second.
 //
+// Control: a mech's Overseer relation is removed when it dies (the relation def's removeOnDeath,
+// through Pawn_RelationsTracker.RemoveRelationsOnDeath), so one that only stood up again would
+// be the colony's but nobody's, uncontrolled and on its way to going feral. A mechanitor pilot
+// therefore takes the mech they raise, as the mech gestator's resurrect bill gives its mech to
+// the bill's mechanitor (Bill_ResurrectMech.CreateProducts): the cast adds the relation, whose
+// worker assigns the mech to the pilot's first control group
+// (PawnRelationWorker_Overseer.OnRelationCreated), and the corpse is refused beforehand unless
+// the pilot has the bandwidth for it by the gestator's own rule
+// (Pawn_MechanitorTracker.HasBandwidthToResurrect: the bandwidth in use and in gestation plus
+// the mech's cost within the total). Whose mech it was before does not matter, since the death
+// already cleared that. Neither applies to a pilot without a mechlink, who can cast only with
+// requireMechlink off and raises the mech uncontrolled, or to a mech with no CompOverseerSubject,
+// which no mechanitor can control. Verified on 1.7.5005.
+//
 // Targeting: the click is a mech corpse (targetMode Thing, corpse-only parameters), validated
 // with messages through ValidateTarget; the def sets no hasAoE, so VEF's ModifyTargets leaves
 // it the only target. The click is not
@@ -142,11 +156,21 @@ public class Ability_ResurrectMech : Ability
             reason = "OLWC_NotEnoughCharges".Translate(mech.LabelShortCap, cost, c.Charges);
             return false;
         }
+        if (TakesControlOf(mech) && !pawn.mechanitor.HasBandwidthToResurrect(corpse))
+        {
+            reason = "OLWC_NotEnoughBandwidth".Translate(pawn.LabelShortCap, mech.LabelShortCap);
+            return false;
+        }
         return true;
     }
 
+    // Whether the pilot becomes the overseer of mech when it comes back: a mechanitor raising a
+    // mech that can be overseen at all.
+    private bool TakesControlOf(Pawn mech) =>
+        MechanitorUtility.IsMechanitor(pawn) && mech.OverseerSubject != null;
+
     // base.Cast first: the cooldown, the cast sound and the extension hooks. Then the one
-    // corpse, re-checked and paid before it comes back.
+    // corpse, re-checked and paid before it comes back, and taken under the pilot's control.
     public override void Cast(params GlobalTargetInfo[] targets)
     {
         base.Cast(targets);
@@ -162,6 +186,8 @@ public class Ability_ResurrectMech : Ability
         IntVec3 cell = corpse.Position;
         Pawn mech = corpse.InnerPawn;
         ResurrectionUtility.TryResurrect(mech);
+        if (!mech.Dead && TakesControlOf(mech) && mech.GetOverseer() == null)
+            pawn.relations.AddDirectRelation(PawnRelationDefOf.Overseer, mech);
         if (extension.appliedEffecterDef != null && mech.MapHeld != null)
         {
             Effecter effecter = extension.appliedEffecterDef.SpawnAttached(mech, mech.MapHeld);

@@ -55,8 +55,10 @@
 
     Targeting: corpse-only parameters with canTargetMechs, which vanilla's corpse rule reads for
     a mechanoid corpse. The faction, the weight class, the window and the charges are decided in
-    the ability's CanResurrect, not here. requireMechlink true: the pilot must be a mechanitor;
-    a mod setting.
+    the ability's CanResurrect, not here, and so is the pilot's bandwidth: the raised mech
+    joins the pilot's control group, so the pilot must have room for it (the class header has
+    the rule and where vanilla does the same). requireMechlink true: the pilot must be a
+    mechanitor; a mod setting.
 
     showUndrafted true: a mech falls in the workshop too. autocast is pinned off in code; VEF
     never fires an apparel ability's autocast.
@@ -64,7 +66,7 @@
   <VEF.Abilities.AbilityDef>
     <defName>OLWC_ResurrectMech</defName>
     <label>resurrect mech</label>
-    <description>Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back with some but not all of its wounds healed. Each resurrection costs some of the armor's charges, and heavier mechs cost more.</description>
+    <description>Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back under the pilot's control with some but not all of its wounds healed, so the pilot needs enough bandwidth for it. Each resurrection costs some of the armor's charges, and heavier mechs cost more.</description>
     <abilityClass>OverlordWarcasket.Ability_ResurrectMech</abilityClass>
     <gizmoClass>OverlordWarcasket.Command_ResurrectMech</gizmoClass>
     <iconPath>UI/Abilities/MechResurrection</iconPath>

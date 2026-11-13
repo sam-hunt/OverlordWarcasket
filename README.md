@@ -33,7 +33,8 @@ Armor, shoulder pads and helmet, welded on at VFE Pirates' warcasket foundry and
 spacer warcaskets research together with Biotech's ultra mechtech.
 
 - **Resurrect mech**: the armor's resurrection core brings the recently killed mech you target
-  back to its feet, for charges set by its weight class as on the apocriton. The core holds ten charges, recharges
+  back to its feet and under the pilot's control, bandwidth allowing, for charges set by its
+  weight class as on the apocriton. The core holds ten charges, recharges
   on its own, can be reloaded with advanced components and shows a red gauge on the pilot
 - **A pilot who still works**: where VFE Pirates' warcaskets block all skilled and intellectual
   labor, the suit's trait keeps smithing open (mech gestation, subcore encoding and mech repair)

@@ -89,7 +89,9 @@ notes for the shim or flow edit this repo owes before continuing.
     name; `OLWC_NotMechCorpse`, `OLWC_CannotResurrectClass`,
     `OLWC_NotOurMech` and `OLWC_CorpseTooOld` (invalid targets) take `{0}`
     the dead mech's name; `OLWC_NotEnoughCharges` takes `{0}` the mech's
-    name, `{1}` the cost and `{2}` the charges held; `OLWC_ChargesLabel` (the
+    name, `{1}` the cost and `{2}` the charges held;
+    `OLWC_NotEnoughBandwidth` `{0}` the pilot's name and `{1}` the mech's
+    ("bandwidth" as Biotech renders its `Bandwidth` key); `OLWC_ChargesLabel` (the
     cursor label) takes `{0}` the charges held and `{1}` the maximum, and
     `OLWC_TargetCost` (its second line) `{0}` the mech's name and `{1}` the
     cost; the gauge's tooltip is short "label: value" lines under Biotech's

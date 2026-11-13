@@ -9,6 +9,7 @@
   <OLWC_NotOurMech>{0} is not one of your mechs.</OLWC_NotOurMech>
   <OLWC_CorpseTooOld>{0} has been dead too long.</OLWC_CorpseTooOld>
   <OLWC_NotEnoughCharges>Resurrecting {0} needs {1} charges, but only {2} are left.</OLWC_NotEnoughCharges>
+  <OLWC_NotEnoughBandwidth>{0} does not have enough bandwidth to control {1}.</OLWC_NotEnoughBandwidth>
   <OLWC_ChargesLabel>Charges: {0} / {1}</OLWC_ChargesLabel>
   <OLWC_TargetCost>{0}: {1} charges</OLWC_TargetCost>
   <OLWC_TargetTimeLeft>Can be resurrected for another {0}.</OLWC_TargetTimeLeft>
