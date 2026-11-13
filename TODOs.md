@@ -11,7 +11,6 @@
 - **Manual ability reload** should reload only up to the slider if it's less than it,
   maybe if it's reattempted at that point, then reload to full?
 - **Automatic ability reload** doesn't seem to work from inventory? is "pick up to inventory" PUAH only? I don't see the vanilla float menu option to pick up, so can't reach the gizmo or reload behavior that way
-- **Rename mech resurrection core** is there a better/more idiomatic name than "core"?
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
@@ -32,9 +31,9 @@
   no room for it (drop the helmet after the mech dies). Casts queued with shift: several
   corpses clicked in a row with the targeter staying open, raised in order with the cooldown
   waited out between them, and a corpse the queue leaves no charges for refused at the click.
-  The core's red sparks on the pilot:
+  The resurrector's red sparks on the pilot:
   their size and spread against the warcasket's art. A raider in the set (dev spawn) shows
-  them while its core is charged. A drafted non-mechanitor pilot shows none, and does with the
+  them while its resurrector is charged. A drafted non-mechanitor pilot shows none, and does with the
   mechlink requirement off.
 - **Set tuning in play.** How the helmet's -3 shooting plays with a warcasket weapon.
   Is the recharge too generous?
@@ -47,11 +46,11 @@
   armor" button beside the gauge; a pilot below the handle with components in the inventory
   loading them up to the handle and dropping nothing, and fetching from the map instead with
   the automatic reload from inventory setting off; the load button after CE's own pick up
-  order; the helmet's stat sheet listing the long range radio. Also a mech raised by the core: by the code it stands up with a freshly generated,
+  order; the helmet's stat sheet listing the long range radio. Also a mech raised by the resurrector: by the code it stands up with a freshly generated,
   loaded weapon and spare magazines, as an apocriton's does (vanilla regenerates the weapon and
   CE loads whatever that generates).
 - **In-game run with Alpha Mechs.** The scan found nothing to patch (the armor and ability def
-  headers have the findings) and nothing has been seen in game: the core raising one of its
+  headers have the findings) and nothing has been seen in game: the resurrector raising one of its
   light, medium and heavy mechs for 1, 3 and 5 charges and an ultraheavy (a siegebreaker)
   for 8; a mech turned by the Mech Master helmet's IFF
   scrambler refused as not ours once dead; an entombed pilot analyzing a tier 4 chip and using

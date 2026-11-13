@@ -25,7 +25,7 @@ public class ResurrectMechExtension : DefModExtension
     public EffecterDef appliedEffecterDef;
     public EffecterDef centerEffecterDef;
 
-    // Whether the pilot must be a mechanitor (carry a mechlink) to use the core.
+    // Whether the pilot must be a mechanitor (carry a mechlink) to use the resurrector.
     public bool requireMechlink = true;
 
     public bool TryGetCost(MechWeightClassDef weightClass, out int cost)

@@ -14,21 +14,22 @@ namespace OverlordWarcasket;
 // rationale for them, are the defs'. Nothing here is saved into a game: a save loads the same
 // with any settings, and with none.
 //
-// On the armor's CompProperties_ResurrectionCore entry, the charge capacity overrides maxCharges,
+// On the armor's CompProperties_MechResurrector entry, the charge capacity overrides maxCharges,
 // the recharge rate chargesPerDay and the reload cost ammoCountPerCharge, vanilla's reload field;
 // that row is skipped, and the field left alone, while the def does not reload by the charge
 // (another mod's patch), and so is the switch for the automatic reload taking the carried ammo
-// first, which overrides autoReloadFromInventory and closes the ability's section. On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
-// override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
-// in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
-// corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day up;
-// ticks on the def, 0 for the slider's last stop, no limit) and the mechlink
-// switch requireMechlink. On the armor's CompProperties_CoreSparks entry, the sparks switch
-// overrides onlyWhileDrafted; its row sits in the ability's section, the core being the
-// ability's. The weight class costs are def-only. A line of what the rows amount
-// to opens the section, under its header, which carries the ability's icon and tooltip, read off
-// the def at draw time: VEF resolves def.icon from iconPath in a deferred step at the end of
-// loading, and a play-data reload replaces the def and its texture together.
+// first, which overrides autoReloadFromInventory and closes the ability's section. On the
+// OLWC_ResurrectMech AbilityDef, the casting time and cooldown override castTime (in seconds, ticks
+// on the def) and cooldownTime (stored in game hours, shown in seconds, hours or days by its size;
+// ticks on the def), and on its ResurrectMechExtension the corpse window overrides
+// maxCorpseAgeTicks (stored and shown in game hours, days from one day up; ticks on the def, 0 for
+// the slider's last stop, no limit) and the mechlink switch requireMechlink. On the armor's
+// CompProperties_ResurrectorSparks entry, the sparks switch overrides onlyWhileDrafted; its row
+// sits in the ability's section, the resurrector being the ability's. The weight class costs are
+// def-only. A line of what the rows amount to opens the section, under its header, which carries
+// the ability's icon and tooltip, read off the def at draw time: VEF resolves def.icon from
+// iconPath in a deferred step at the end of loading, and a play-data reload replaces the def and
+// its texture together.
 //
 // The work section is one checkbox per work type the trait mirror leaves to the player
 // (WorkSetting over WorkProfile.Toggleable), written onto the overlord trait's disabledWorkTypes
@@ -56,8 +57,8 @@ namespace OverlordWarcasket;
 //
 // What a write leaves on live instances is caught up by them: a running cooldown on the next
 // gizmo request, keyed on Generation (Ability_ResurrectMech.ReconcileSettings); charges above a
-// lowered capacity are trimmed off the worn cores at once (TrimWornCores), and a changed rate
-// reaches a core on its next regen step, its part charge kept.
+// lowered capacity are trimmed off the worn resurrectors at once (TrimWornResurrectors), and a
+// changed rate reaches a resurrector on its next regen step, its part charge kept.
 public class OverlordWarcasketSettings : ModSettings
 {
     private const string AbilityDefName = "OLWC_ResurrectMech";
@@ -95,7 +96,7 @@ public class OverlordWarcasketSettings : ModSettings
     private const float CorpseAgeNoLimit = CorpseAgeMax + GenDate.HoursPerDay;
 
     // The capacity in charges; the recharge in charges per day, fine at the slow end around the
-    // shipped rate, coarser up to the shipped core in a day; the reload cost in items of the
+    // shipped rate, coarser up to the shipped resurrector in a day; the reload cost in items of the
     // def's ammo per charge; the casting time banded as the Medic's is.
     public readonly Tunable charges = new("Charges", 1f, 30f, 1f, Whole);
     public readonly Tunable recharge = new("ChargesPerDay", 0f, 10f, 0.25f, Decimal)
@@ -127,8 +128,8 @@ public class OverlordWarcasketSettings : ModSettings
     // The cost lines the summary quotes, read when the defaults are.
     private string costs;
 
-    // The core's reload item, while the def reloads by the charge; null hides the reload cost
-    // row and the summary's reload clause.
+    // The resurrector's reload item, while the def reloads by the charge; null hides the reload
+    // cost row and the summary's reload clause.
     private ThingDef reloadItem;
 
     // The work section's header icon, vanilla's mining work site. Its art is in the base game's
@@ -198,12 +199,12 @@ public class OverlordWarcasketSettings : ModSettings
         commandRange.LoadDefaults();
         if (!TryGetDefs(out Defs defs))
             return;
-        charges.DefaultValue = defs.core.maxCharges;
-        recharge.DefaultValue = defs.core.chargesPerDay;
-        if (defs.core.ammoDef != null && defs.core.ammoCountPerCharge > 0 && defs.core.ammoCountToRefill == 0)
+        charges.DefaultValue = defs.resurrector.maxCharges;
+        recharge.DefaultValue = defs.resurrector.chargesPerDay;
+        if (defs.resurrector.ammoDef != null && defs.resurrector.ammoCountPerCharge > 0 && defs.resurrector.ammoCountToRefill == 0)
         {
-            reloadItem = defs.core.ammoDef;
-            reloadCost.DefaultValue = defs.core.ammoCountPerCharge;
+            reloadItem = defs.resurrector.ammoDef;
+            reloadCost.DefaultValue = defs.resurrector.ammoCountPerCharge;
             reloadCost.DescArgs = [Find.ActiveLanguageWorker.Pluralize(reloadItem.label)];
         }
         else
@@ -217,7 +218,7 @@ public class OverlordWarcasketSettings : ModSettings
         cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
         requireMechlink.DefaultValue = defs.extension.requireMechlink;
         sparksOnlyDrafted.DefaultValue = defs.sparks.onlyWhileDrafted;
-        autoReloadFromInventory.DefaultValue = defs.core.autoReloadFromInventory;
+        autoReloadFromInventory.DefaultValue = defs.resurrector.autoReloadFromInventory;
         abilityTip = HeaderTip(defs.ability.LabelCap, defs.ability.description);
         abilityDef = defs.ability;
         costs = defs.extension.costs
@@ -237,12 +238,12 @@ public class OverlordWarcasketSettings : ModSettings
         commandRange.Apply();
         if (!defaultsLoaded || !TryGetDefs(out Defs defs))
             return;
-        defs.core.maxCharges = Mathf.Max(1, charges.IntValue);
-        defs.core.chargesPerDay = Mathf.Max(0f, recharge.Value);
+        defs.resurrector.maxCharges = Mathf.Max(1, charges.IntValue);
+        defs.resurrector.chargesPerDay = Mathf.Max(0f, recharge.Value);
         if (reloadItem != null)
         {
-            defs.core.ammoCountPerCharge = Mathf.Max(1, reloadCost.IntValue);
-            defs.core.autoReloadFromInventory = autoReloadFromInventory.Value;
+            defs.resurrector.ammoCountPerCharge = Mathf.Max(1, reloadCost.IntValue);
+            defs.resurrector.autoReloadFromInventory = autoReloadFromInventory.Value;
         }
         defs.extension.maxCorpseAgeTicks = NoCorpseLimit(corpseAge.Value)
             ? 0
@@ -252,12 +253,12 @@ public class OverlordWarcasketSettings : ModSettings
         defs.ability.castTime = Mathf.RoundToInt(castTime.Value * GenTicks.TicksPerRealSecond);
         defs.ability.cooldownTime = Mathf.RoundToInt(cooldown.Value * GenDate.TicksPerHour);
         Generation++;
-        TrimWornCores();
+        TrimWornResurrectors();
     }
 
-    // A lowered capacity leaves worn cores above it; every live pawn, since a caravan or
+    // A lowered capacity leaves worn resurrectors above it; every live pawn, since a caravan or
     // transporter pawn spawns with no hook of its own.
-    private static void TrimWornCores()
+    private static void TrimWornResurrectors()
     {
         if (Current.ProgramState != ProgramState.Playing)
             return;
@@ -266,7 +267,7 @@ public class OverlordWarcasketSettings : ModSettings
             if (pawn.apparel == null)
                 continue;
             foreach (Apparel apparel in pawn.apparel.WornApparel)
-                apparel.TryGetComp<CompResurrectionCore>()?.Trim();
+                apparel.TryGetComp<CompMechResurrector>()?.Trim();
         }
     }
 
@@ -346,16 +347,17 @@ public class OverlordWarcasketSettings : ModSettings
         }
     }
 
-    // What the section's rows amount to: the core's capacity and rate (a rate of 0 ends the
-    // clause on never) with what a charge reloads for, the costs, the corpse window (its own clause, or that there is none) and the cast's timings, in the formats
-    // their rows show; a cooldown of 0 ends the line on its own clause.
+    // What the section's rows amount to: the resurrector's capacity and rate (a rate of 0 ends the
+    // clause on never) with what a charge reloads for, the costs, the corpse window (its own
+    // clause, or that there is none) and the cast's timings, in the formats their rows show; a
+    // cooldown of 0 ends the line on its own clause.
     private string ResurrectSummary()
     {
         string rate = recharge.Value > 0f
             ? "OLWC_SummaryRegen".Translate(Decimal(recharge.Value)).Resolve()
             : "OLWC_SummaryNoRegen".Translate().Resolve();
         if (reloadItem != null)
-            rate = "OLWC_SummaryReload".Translate(rate, Command_LoadCore.CostLabel(reloadItem, reloadCost.IntValue)).Resolve();
+            rate = "OLWC_SummaryReload".Translate(rate, Command_LoadResurrector.CostLabel(reloadItem, reloadCost.IntValue)).Resolve();
         string window = NoCorpseLimit(corpseAge.Value)
             ? "OLWC_SummaryNoWindow".Translate().Resolve()
             : "OLWC_SummaryWindow".Translate(Period(corpseAge.Value)).Resolve();
@@ -439,8 +441,8 @@ public class OverlordWarcasketSettings : ModSettings
     {
         public AbilityDef ability;
         public ResurrectMechExtension extension;
-        public CompProperties_ResurrectionCore core;
-        public CompProperties_CoreSparks sparks;
+        public CompProperties_MechResurrector resurrector;
+        public CompProperties_ResurrectorSparks sparks;
     }
 
     // All or nothing: with any target missing (another mod patched it away) the settings leave
@@ -456,13 +458,13 @@ public class OverlordWarcasketSettings : ModSettings
         {
             ability = ability,
             extension = ability?.GetModExtension<ResurrectMechExtension>(),
-            core = armor?.GetCompProperties<CompProperties_ResurrectionCore>(),
-            sparks = armor?.GetCompProperties<CompProperties_CoreSparks>(),
+            resurrector = armor?.GetCompProperties<CompProperties_MechResurrector>(),
+            sparks = armor?.GetCompProperties<CompProperties_ResurrectorSparks>(),
         };
-        if (defs.ability != null && defs.extension != null && defs.core != null && defs.sparks != null)
+        if (defs.ability != null && defs.extension != null && defs.resurrector != null && defs.sparks != null)
             return true;
         if (!warned)
-            Log.Warning("[Overlord Warcasket] Settings could not find the resurrect mech ability, its extension, or the armor's resurrection core or core sparks; the set keeps its XML values.");
+            Log.Warning("[Overlord Warcasket] Settings could not find the resurrect mech ability, its extension, or the armor's mech resurrector or resurrector sparks; the set keeps its XML values.");
         warned = true;
         return false;
     }

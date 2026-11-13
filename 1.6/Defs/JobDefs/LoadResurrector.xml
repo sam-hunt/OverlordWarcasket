@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The carried reload: the pilot loads the armor's mech resurrector from the ammo in their own
+    inventory (OverlordWarcasket.JobDriver_LoadResurrector, ordered by the command beside the
+    resurrector's gauge). Vanilla's Reload job (Core/Defs/JobDefs/Jobs_Misc.xml) without the fetch,
+    so its fields are that job's but for allowOpportunisticPrefix: there is nothing to walk to, so
+    no haul to do on the way. Target A is the armor, as in vanilla's report string.
+  -->
+  <JobDef>
+    <defName>OLWC_LoadResurrector</defName>
+    <driverClass>OverlordWarcasket.JobDriver_LoadResurrector</driverClass>
+    <reportString>reloading TargetA.</reportString>
+    <suspendable>false</suspendable>
+  </JobDef>
+</Defs>

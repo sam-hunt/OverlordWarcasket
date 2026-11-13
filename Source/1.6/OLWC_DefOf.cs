@@ -11,9 +11,9 @@ public static class OLWC_DefOf
     // ResurrectMechExtension for the cost table and the corpse window it quotes.
     public static AbilityDef OLWC_ResurrectMech;
 
-    // The carried reload of the resurrection core (JobDefs/LoadCore.xml), ordered by
-    // Command_LoadCore.
-    public static JobDef OLWC_LoadCore;
+    // The carried reload of the mech resurrector (JobDefs/LoadResurrector.xml), ordered by
+    // Command_LoadResurrector.
+    public static JobDef OLWC_LoadResurrector;
 
     // The resurrect mech ability's cast (JobDefs/CastResurrectMech.xml), ordered by
     // Ability_ResurrectMech.

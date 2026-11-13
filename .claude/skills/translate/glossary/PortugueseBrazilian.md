@@ -35,7 +35,7 @@ carries the Siegebreaker set and the 10th-generation paragraph.
 ## Charge nouns
 
 This set has no reloadable today and so no `chargeNoun` of its own: the
-resurrection core recharges on its own and its charges are counted by Biotech's
+mech resurrector recharges on its own and its charges are counted by Biotech's
 own strings. If a reloadable piece is ever added, its noun is shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots (see the
 skill), and Portuguese runs the base `Pluralize` (lookup, else the word unchanged), so every coined noun ships a `singular;plural` line in `1.6/Languages/PortugueseBrazilian/WordInfo/plural.txt`. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
@@ -55,7 +55,7 @@ is the worked example for this language.
   heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
   label, which this ability reuses) and "Mech resurrection charges" (Biotech's
   Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- resurrection core (the armor's charge store), charge / charges (vanilla's
+- mech resurrector (the armor's charge store), charge / charges (vanilla's
   "Charges" Keyed word), the command visor and signal processors (the
   helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
 - Core work vocabulary for the settings window: crafting, smithing, the Work

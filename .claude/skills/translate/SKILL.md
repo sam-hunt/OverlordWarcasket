@@ -111,10 +111,10 @@ notes for the shim or flow edit this repo owes before continuing.
     label) takes `{0}` the reload item's plural label, as the language's own
     pluraliser gives it; `OLWC_LoadCarriedDesc` `{0}` that label and `{1}`
     the cost per charge, a count and the item's label ("1 advanced
-    component"); `OLWC_CoreFull` none; `OLWC_NotEnoughCarried` `{0}` the
+    component"); `OLWC_ResurrectorFull` none; `OLWC_NotEnoughCarried` `{0}` the
     pilot's name and `{1}` that cost.
   Name the set's things with the same renderings as the DefInjected text
-  (resurrection core, charge, mechanitor, warcasket).
+  (mech resurrector, charge, mechanitor, warcasket).
 - **Enumerate the key set from `Scripts/expected-injections.json`, never
   from a Languages folder or by scanning `1.6/Defs/`.** The sidecar is a
   dump of what the live game walks; regenerate it (game closed) with
@@ -138,7 +138,7 @@ notes for the shim or flow edit this repo owes before continuing.
     identically to `label`, as Shipcracker's languages do). The label is
     Biotech's own apocriton ability label, "resurrect mech"; render it as
     Biotech's translation does.
-  - `DefInjected/JobDef/` for `OLWC_LoadCore` and `OLWC_CastResurrectMech`:
+  - `DefInjected/JobDef/` for `OLWC_LoadResurrector` and `OLWC_CastResurrectMech`:
     `reportString`, vanilla's lowercase report with `TargetA` kept as is
     (the armor for the first, the mech corpse for the second). The second
     is never shown, the cast reports the ability's `jobReportString`, but
@@ -199,7 +199,7 @@ Terms that MUST be grounded before use:
   verbatim where the game prints them), corpse;
 - from vanilla Odyssey (ground against the Odyssey tar): vacuum;
 - this mod's own vocabulary, coined once and recorded in the glossary:
-  resurrection core (the armor's charge store), the command visor and
+  mech resurrector (the armor's charge store), the command visor and
   signal processors (the helmet's and pauldrons' lore).
 
 Grep the tars for just this handful of terms; never extract or read a

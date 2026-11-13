@@ -40,9 +40,9 @@
     and helmet (the armor's 150 / 8 to 225 / 10; the helmet's 80 / 6 to 120 / 8; shoulders 60
     to 90). Uranium and the mech boss chips are not touched, as CE leaves VFEP's uranium and
     the mechlord pair's chips.
-  The resurrection core spends charges on a corpse and touches no damage, armor or projectile
+  The mech resurrector spends charges on a corpse and touches no damage, armor or projectile
   path, so it has no stats here; its reload has a file of its own beside this one
-  (ResurrectionCore.xml), as the command range has (CommandRange.xml).
+  (MechResurrector.xml), as the command range has (CommandRange.xml).
   Patches in this root apply before the main tree's and the VGE root's; none of the three
   touch the same nodes. Tests/1.6/CompatPatchTests.cs checks every xpath here against the
   main tree.

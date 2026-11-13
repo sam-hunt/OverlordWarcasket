@@ -12,9 +12,9 @@ using CompAbilitiesApparel = VEF.Abilities.CompAbilitiesApparel;
 namespace OverlordWarcasket;
 
 // The armor's active: Biotech's resurrect mech (the apocriton's CompAbilityEffect_ResurrectMech
-// and its def, ResurrectionMech) as a VEF apparel ability drawing on the armor's resurrection
-// core (CompResurrectionCore, read off holder, which is why the two comps share the armor def).
-// The rules are the apocriton's, verified against RimWorld 1.7.4990's decompile: a corpse is
+// and its def, ResurrectionMech) as a VEF apparel ability drawing on the armor's mech
+// resurrector (CompMechResurrector, read off holder, which is why the two comps share the armor
+// def). The rules are the apocriton's, verified against RimWorld 1.7.4990's decompile: a corpse is
 // resurrectable when its pawn is a mechanoid of the pilot's own faction, not of a kind that
 // itself resurrects mechs, dead for at most the extension's maxCorpseAgeTicks (when it sets a
 // limit), and of a weight class the cost table prices within the charges held. The table alone
@@ -22,8 +22,8 @@ namespace OverlordWarcasket;
 // vanilla clears on the ultraheavy class, and this ability does not, since its table prices
 // that class (the def header has the why). Unlike
 // the apocriton's area cast, only the clicked corpse comes back (the def header has the why),
-// paid from the core as the apocriton pays its charges; the applied effecter plays on the mech,
-// the centre effecter at its corpse, and the mech staggers for a second.
+// paid from the resurrector as the apocriton pays its charges; the applied effecter plays on the
+// mech, the centre effecter at its corpse, and the mech staggers for a second.
 //
 // Control: a mech's Overseer relation is removed when it dies (the relation def's removeOnDeath,
 // through Pawn_RelationsTracker.RemoveRelationsOnDeath), so one that only stood up again would
@@ -57,12 +57,12 @@ namespace OverlordWarcasket;
 // row; it reopens on the ability without passing through DoAction, which is what resets VEF's
 // targeting index, so OrderForceTarget resets it. A corpse clicked with the queue key down is
 // checked against what the casts already ordered will take (Pending): the charges and the
-// bandwidth left after them, so the queue never holds a cast the core could not pay for. Without
-// the key the new order replaces them and they count for nothing, as at cast time.
+// bandwidth left after them, so the queue never holds a cast the resurrector could not pay for.
+// Without the key the new order replaces them and they count for nothing, as at cast time.
 //
 // Enabled only for a mechanitor while the extension's requireMechlink holds (a mod setting), and
-// only while the core holds a charge; the disabled reason names which. Autocast is pinned off:
-// VEF's only autocast consumer reads learned abilities, never an apparel comp's, so the toggle
+// only while the resurrector holds a charge; the disabled reason names which. Autocast is pinned
+// off: VEF's only autocast consumer reads learned abilities, never an apparel comp's, so the toggle
 // would show and never fire.
 //
 // Gizmo: one cached Command_ResurrectMech (VEF builds a new command, tooltip and all, on every
@@ -78,12 +78,12 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     // The apocriton's stagger on each resurrected mech.
     private const int StaggerTicks = 60;
 
-    private CompResurrectionCore core;
+    private CompMechResurrector resurrector;
     private Command_ResurrectMech gizmo;
     private int settingsGeneration = -1;
 
     // holder is the armor; it never changes for this instance.
-    public CompResurrectionCore Core => core ??= holder?.TryGetComp<CompResurrectionCore>();
+    public CompMechResurrector Resurrector => resurrector ??= holder?.TryGetComp<CompMechResurrector>();
 
     public ResurrectMechExtension Extension => def.GetModExtension<ResurrectMechExtension>();
 
@@ -96,7 +96,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     // casts with.
     public static Ability_ResurrectMech WornBy(Pawn pawn)
     {
-        List<Ability> given = CompResurrectionCore.WornBy(pawn)?.parent.GetComp<CompAbilitiesApparel>()?.GivenAbilities;
+        List<Ability> given = CompMechResurrector.WornBy(pawn)?.parent.GetComp<CompAbilitiesApparel>()?.GivenAbilities;
         if (given == null)
             return null;
         foreach (Ability ability in given)
@@ -124,7 +124,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     {
         if (!base.IsEnabledForPawn(out reason))
             return false;
-        CompResurrectionCore c = Core;
+        CompMechResurrector c = Resurrector;
         if (c == null)
             return false;
         if ((Extension?.requireMechlink ?? true) && !MechanitorUtility.IsMechanitor(pawn))
@@ -162,7 +162,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
         cost = -1;
         Pawn mech = corpse?.InnerPawn;
         ResurrectMechExtension extension = Extension;
-        CompResurrectionCore c = Core;
+        CompMechResurrector c = Resurrector;
         if (mech == null || extension == null || c == null)
             return false;
         if (!mech.RaceProps.IsMechanoid)
@@ -226,7 +226,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
         }
     }
 
-    // What the casts already ordered will take from the core and from the pilot's bandwidth,
+    // What the casts already ordered will take from the resurrector and from the pilot's bandwidth,
     // leaving out any for corpse itself, which a second click does not order twice.
     private void Pending(Corpse corpse, out int charges, out float bandwidth)
     {
@@ -306,7 +306,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     public override void Cast(params GlobalTargetInfo[] targets)
     {
         base.Cast(targets);
-        CompResurrectionCore c = Core;
+        CompMechResurrector c = Resurrector;
         ResurrectMechExtension extension = Extension;
         Map map = pawn?.Map;
         if (c == null || extension == null || map == null || targets.Length == 0)
@@ -351,7 +351,7 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     // (vanilla's "Dead for less than a day") never tells; over a refused one, why.
     public override string ExtraLabelMouseAttachment(LocalTargetInfo target)
     {
-        CompResurrectionCore c = Core;
+        CompMechResurrector c = Resurrector;
         if (c == null)
             return null;
         string first = "OLWC_ChargesLabel".Translate(c.Charges, c.MaxCharges);

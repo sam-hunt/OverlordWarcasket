@@ -4,8 +4,8 @@ using VEF.Abilities;
 
 namespace OverlordWarcasket;
 
-// A dev-mode "reset cooldown" for the VEF abilities this apparel grants, beside the core's dev
-// charge buttons (Toxin Warcasket's idiom). VEF gives its abilities no dev gizmo of their own;
+// A dev-mode "reset cooldown" for the VEF abilities this apparel grants, beside the resurrector's
+// dev charge buttons (Toxin Warcasket's idiom). VEF gives its abilities no dev gizmo of their own;
 // Ability.cooldown is the tick the cooldown ends. Declared on the def with plain CompProperties
 // and this compClass.
 public class CompDevResetCooldowns : ThingComp

@@ -23,8 +23,8 @@ CE patches, the quickest check after a CE update or before patching a new vanill
   the number is also `CommandRange.CombatExtendedRadius`, a rung the slider names in every game.
 - **The reload**: CE's prefix on `JobGiver_Reload.TryGiveJob` and its "Reload worn armor" button
   on every worn reloadable. `Source/1.6/Patches/JobGiver_Reload_TryGiveJob.cs` answers first for
-  the core and `CompResurrectionCore` drops the button; `Patches/ResurrectionCore.xml` turns the
-  automatic reload from inventory on, CE's own habit.
+  the resurrector and `CompMechResurrector` drops the button; `Patches/MechResurrector.xml` turns
+  the automatic reload from inventory on, CE's own habit.
 - **A prefix of ours on a method CE also prefixes takes `Priority.First`** (`Source/1.6/CLAUDE.md`
   has the rule): CE patches from its `Mod` constructor, ahead of ours.
 
@@ -39,7 +39,7 @@ CE patches, the quickest check after a CE update or before patching a new vanill
 - **A mech raised under CE comes back armed and loaded.** Vanilla's `ResurrectionUtility`
   regenerates a missing mech weapon through `PawnWeaponGenerator.TryGenerateWeaponFor`, which CE
   postfixes with the pawn kind's loadout (a loaded weapon and spare magazines). The apocriton's
-  raise does the same, so it is CE's behavior, not the core's.
+  raise does the same, so it is CE's behavior, not the resurrector's.
 - **CE's pick up order replaces vanilla's** (its own float menu, gated on CE bulk and weight)
   and still lands the components in `inventory.innerContainer`, where the load button reads them.
   A pilot on a non-default CE loadout sheds items the loadout does not list and CE's own pick up

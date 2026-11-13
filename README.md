@@ -22,7 +22,7 @@ industrial era into the late game. This mod adds one more set to that range: the
 10th-generation spacer-tier warcasket built for a mechanitor who leads mechs from the front line
 and brings the fallen ones back.
 
-The mod is in development: the resurrection core, the work profile and the pieces' mechanitor
+The mod is in development: the mech resurrector, the work profile and the pieces' mechanitor
 stats are in; the set's numbers have not been play-tested yet.
 
 ## Features
@@ -32,9 +32,9 @@ stats are in; the set's numbers have not been play-tested yet.
 Armor, shoulder pads and helmet, welded on at VFE Pirates' warcasket foundry and unlocked by its
 spacer warcaskets research together with Biotech's ultra mechtech.
 
-- **Resurrect mech**: the armor's resurrection core brings the recently killed mech you target
+- **Resurrect mech**: the armor's mech resurrector brings the recently killed mech you target
   back to its feet and under the pilot's control, bandwidth allowing, for charges set by its
-  weight class as on the apocriton. The core holds ten charges, recharges
+  weight class as on the apocriton. The resurrector holds ten charges, recharges
   on its own, can be reloaded with advanced components and shows a red gauge on the pilot
 - **A pilot who still works**: where VFE Pirates' warcaskets block all skilled and intellectual
   labor, the suit's trait keeps smithing open (mech gestation, subcore encoding and mech repair)
@@ -86,7 +86,7 @@ Coming with the first release.
 - **Vanilla Gravship Expanded**: follows its vacuum-resistance rules for warcaskets; there is no
   other VGE integration.
 - **Combat Extended**: built-in patch. CE armor values, bulk and carry capacity in line with VFE
-  Pirates' spacer sets and a helmet sealed against CE smoke. The resurrection core needs no CE
+  Pirates' spacer sets and a helmet sealed against CE smoke. The mech resurrector needs no CE
   patch.
 - **Warcaskets can work!, Warcaskets can haul!, Hardworking Warcaskets**: whatever they open for
   VFE Pirates' warcaskets they open for the Overlord too.

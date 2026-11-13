@@ -50,7 +50,7 @@ not reopened here.
 ## Charge nouns
 
 This set has no reloadable today and so no `chargeNoun` of its own: the
-resurrection core recharges on its own and its charges are counted by Biotech's
+mech resurrector recharges on its own and its charges are counted by Biotech's
 own strings. If a reloadable piece is ever added, its noun is shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots (see the
 skill), and `LanguageWorker_French.Pluralize` is rule-only and never reads a `WordInfo/plural.txt`, so a charge noun must be a single word. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
@@ -70,7 +70,7 @@ is the worked example for this language.
   heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
   label, which this ability reuses) and "Mech resurrection charges" (Biotech's
   Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- resurrection core (the armor's charge store), charge / charges (vanilla's
+- mech resurrector (the armor's charge store), charge / charges (vanilla's
   "Charges" Keyed word), the command visor and signal processors (the
   helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
 - Core work vocabulary for the settings window: crafting, smithing, the Work

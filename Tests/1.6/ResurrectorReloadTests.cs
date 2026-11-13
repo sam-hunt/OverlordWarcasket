@@ -6,20 +6,20 @@ using Xunit;
 
 namespace OverlordWarcasket.Tests;
 
-// The resurrection core's reload rule (CompResurrectionCore.ChargesWanted): an automatic reload
-// stops at the gauge's target and an ordered one fills the core; and the vanilla members the two
-// reload patches bind to by name, since Harmony resolves a prefix's allowForcedReload parameter
+// The mech resurrector's reload rule (CompMechResurrector.ChargesWanted): an automatic reload
+// stops at the gauge's target and an ordered one fills the resurrector; and the vanilla members the
+// two reload patches bind to by name, since Harmony resolves a prefix's allowForcedReload parameter
 // against the patched method's own and a miss fails the whole PatchAll at startup.
-public class CoreReloadTests
+public class ResurrectorReloadTests
 {
-    // The handle starts at zero: nothing is fetched unasked, however empty the core.
+    // The handle starts at zero: nothing is fetched unasked, however empty the resurrector.
     [Theory]
     [InlineData(0, 10, 0)]
     [InlineData(7, 10, 0)]
     [InlineData(10, 10, 0)]
     public void AutomaticReload_WantsNothingAtATargetOfZero(int charges, int max, int target)
     {
-        Assert.Equal(0, CompResurrectionCore.ChargesWanted(charges, max, target, ordered: false));
+        Assert.Equal(0, CompMechResurrector.ChargesWanted(charges, max, target, ordered: false));
     }
 
     // Below the target it wants the difference; at or above it, nothing. A target saved above a
@@ -32,7 +32,7 @@ public class CoreReloadTests
     [InlineData(3, 6, 10, 3)]
     public void AutomaticReload_FillsToTheTarget(int charges, int max, int target, int wanted)
     {
-        Assert.Equal(wanted, CompResurrectionCore.ChargesWanted(charges, max, target, ordered: false));
+        Assert.Equal(wanted, CompMechResurrector.ChargesWanted(charges, max, target, ordered: false));
     }
 
     // An ordered reload ignores the target; a count above the capacity (before a trim) wants
@@ -43,9 +43,9 @@ public class CoreReloadTests
     [InlineData(7, 10, 9, 3)]
     [InlineData(10, 10, 0, 0)]
     [InlineData(12, 10, 0, 0)]
-    public void OrderedReload_FillsTheCore(int charges, int max, int target, int wanted)
+    public void OrderedReload_FillsTheResurrector(int charges, int max, int target, int wanted)
     {
-        Assert.Equal(wanted, CompResurrectionCore.ChargesWanted(charges, max, target, ordered: true));
+        Assert.Equal(wanted, CompMechResurrector.ChargesWanted(charges, max, target, ordered: true));
     }
 
     // Patches/CompApparelReloadable_Reload: both queries exist, public, taking the one flag
@@ -75,14 +75,14 @@ public class CoreReloadTests
         Assert.Equal(typeof(Job), info.ReturnType);
     }
 
-    // The core is vanilla's reloadable, so the reload job, the float menu and the stat sheet
+    // The resurrector is vanilla's reloadable, so the reload job, the float menu and the stat sheet
     // pick it up; the props carry the recharge beside vanilla's reload fields.
     [Fact]
-    public void Core_IsVanillasReloadable()
+    public void Resurrector_IsVanillasReloadable()
     {
-        Assert.True(typeof(CompApparelReloadable).IsAssignableFrom(typeof(CompResurrectionCore)));
-        var props = new CompProperties_ResurrectionCore();
-        Assert.Equal(typeof(CompResurrectionCore), props.compClass);
+        Assert.True(typeof(CompApparelReloadable).IsAssignableFrom(typeof(CompMechResurrector)));
+        var props = new CompProperties_MechResurrector();
+        Assert.Equal(typeof(CompMechResurrector), props.compClass);
         Assert.Equal(1f, props.chargesPerDay);
     }
 }

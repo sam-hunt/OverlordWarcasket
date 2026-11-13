@@ -6,9 +6,9 @@
   <modVersion>0.1.0</modVersion>
   <description>Adds the Overlord, a 10th generation mechanitor warcasket for Vanilla Factions Expanded - Pirates, built at the warcasket foundry like any other set.
 
-The armor carries a resurrection core that brings your recently killed mechs back with some of their wounds healed. Heavier mechs take more charges, and the core recharges over time and can be reloaded with advanced components. The pilot can still do smithing and research, so they can gestate and repair mechs and hack.
+The armor carries a mech resurrector that brings your recently killed mechs back with some of their wounds healed. Heavier mechs take more charges, and the resurrector recharges over time and can be reloaded with advanced components. The pilot can still do smithing and research, so they can gestate and repair mechs and hack.
 
-Optionally let pilots without a mechlink use the core too, and tune its charges, recharge rate and reload cost in the mod settings. With Odyssey, a setting redraws the cerebrex node with the mod's own art.
+Optionally let pilots without a mechlink use the resurrector too, and tune its charges, recharge rate and reload cost in the mod settings. With Odyssey, a setting redraws the cerebrex node with the mod's own art.
 
 Requires Biotech. Supports CE, Vanilla Gravship Expanded, SOS2.</description>
   <supportedVersions>

@@ -22,14 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The Overlord, a spacer-tier mechanitor warcasket set for VFE Pirates
 - Resurrect mech: the armor revives one of your recently killed mechs, as the apocriton does
-- The armor's resurrection core holds ten charges, recharges on its own and can be reloaded with advanced components, with a red gauge on the pilot
-- A charged core crackles with the apocriton's red sparks
+- The armor's mech resurrector holds ten charges, recharges on its own and can be reloaded with advanced components, with a red gauge on the pilot
+- A charged resurrector crackles with the apocriton's red sparks
 - A mechanitor wearing the shoulders can order drafted mechs anywhere on the map, not just within 24.9 cells
 - The helmet and armor add mech bandwidth, and the shoulders add a control group and hacking speed
 - Mod settings choose who gets the extended command range and how far it reaches, down to a radius slider
 - The pilot can still do smithing and research, so mech gestation, mech repair and hacking stay in reach
 - More work types for the pilot can be enabled in the mod settings
-- Mod settings for the resurrection core, the ability and the pilot's work
+- Mod settings for the mech resurrector, the ability and the pilot's work
 - With Odyssey, a mod setting redraws the cerebrex node with the mod's own art
 - With Odyssey, a cerebrex node worn with a warcasket shows on its back instead of being hidden under the shell
 - Combat Extended support

@@ -11,7 +11,7 @@
     NanostructuringChip 2; UltraMechtech), which it replaces on a mechanitor's head, on the
     tier's plating and vacuum seal in place of the mechlord's recon-grade shell.
     - MechBandwidth 12, the mechlord helmet's. With the armor's 8 the set gives 20 against the
-      mechlord pair's 24, the gap being what the resurrection core costs.
+      mechlord pair's 24, the gap being what the mech resurrector costs.
     - ShootingAccuracyPawn -3 and no MeleeHitChance, vanilla's price for the bandwidth at
       three fifths of its -5 with its -0.5 left off. The offset is skill levels added before
       the stat's curve, not a percentage: the pilot shoots as if three Shooting levels lower.
@@ -55,7 +55,7 @@
     <defName>OLWC_WarcasketHelmet_Overlord</defName>
     <label>overlord warcasket helmet</label>
     <shortDescription>Specialized spacer-tech warcasket helmet with standard protection, equipped with signal enhancers that greatly increase the pilot's control bandwidth.</shortDescription>
-    <description>Specialized spacer-tech warcasket helmet with standard protection, equipped with signal enhancers that greatly increase the pilot's control bandwidth.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The core in the shell holds only a few charges and regains them slowly, so they are best saved for the mechs that matter most. When a fight cannot wait, it can be reloaded with advanced components. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <description>Specialized spacer-tech warcasket helmet with standard protection, equipped with signal enhancers that greatly increase the pilot's control bandwidth.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The resurrector in the shell holds only a few charges and regains them slowly, so they are best saved for the mechs that matter most. When a fight cannot wait, it can be reloaded with advanced components. The helmet greatly increases the pilot's bandwidth at some cost to their aim, the shoulders carry command relays that reach mechs anywhere on the map, and the arms are left free for smithing and hacking. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlordHelmet</texPath>
       <shaderType>CutoutComplex</shaderType>

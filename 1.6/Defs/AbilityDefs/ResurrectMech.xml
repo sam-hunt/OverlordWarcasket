@@ -2,7 +2,7 @@
 <Defs>
   <!--
     The Overlord armor's active, granted by the armor's CompProperties_AbilitiesApparel and fed
-    by the resurrection core beside it (ThingDefs_Misc/Warcasket_Overlord.xml). Biotech's
+    by the mech resurrector beside it (ThingDefs_Misc/Warcasket_Overlord.xml). Biotech's
     ResurrectionMech (the apocriton's; 1.7.4990, Biotech/Defs/AbilityDefs/Abilities.xml) as a
     VEF ability: the rules live in OverlordWarcasket.Ability_ResurrectMech, the tuning in the
     OverlordWarcasket.ResurrectMechExtension below, both header-documented. Design in
@@ -27,9 +27,9 @@
     never stands its war queen back up. That rule keeps a boss the player has killed dead; a
     pilot raising the colony's own ultraheavy is what the mech gestator's
     ResurrectUltraheavyMech bill already does for 150 steel. The ability therefore reads this
-    table alone and not the flag (Ability_ResurrectMech's header). 8 of the core's 10 charges
+    table alone and not the flag (Ability_ResurrectMech's header). 8 of the resurrector's 10 charges
     is one ultraheavy a fight with two charges over, where 10 would lock the cast whenever the
-    core is short of full, and eight days of recharge or eight advanced components to earn
+    resurrector is short of full, and eight days of recharge or eight advanced components to earn
     back.
 
     Alpha Mechs' mechs need no entries of their own: every one sits in the four vanilla weight
@@ -45,8 +45,8 @@
     stands among its mechs, casts by itself the moment one falls and has 30 charges to spend. A
     pilot has to notice the death, walk a warcasket to within cast range and stand through the
     warmup, often from across the map now that the helmet lets the mechs fight there. The window
-    is not what limits the ability: the core's charges are, and a longer window spends them no
-    faster. A day is the one age the player can read off a corpse, whose inspect pane says "Dead
+    is not what limits the ability: the resurrector's charges are, and a longer window spends them
+    no faster. A day is the one age the player can read off a corpse, whose inspect pane says "Dead
     for less than a day" until exactly this many ticks have passed, so a mech is resurrectable
     for as long as its corpse says so; the cursor label over a corpse gives the time it has left.
 

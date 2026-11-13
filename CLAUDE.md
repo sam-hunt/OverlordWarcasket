@@ -15,8 +15,8 @@ comes with VFEP); Odyssey and other optional content load only when present. C# 
 4.7.2), Harmony, XML defs. Def prefix `OLWC_`.
 
 **State: scaffolded, first mechanics in, not yet released.** The resurrect mech ability (Biotech's
-apocriton ability on the armor, drawing on a core that recharges by itself and reloads with
-advanced components, with a red gauge), the
+apocriton ability on the armor, drawing on a mech resurrector that recharges by itself and reloads
+with advanced components, with a red gauge), the
 overlord work trait (the pilot keeps smithing and research, so mech work and hacking) and the
 helmet's command range (a wearing mechanitor orders drafted mechs anywhere on the map, vanilla's
 24.9 cells lifted behind a settings section) are implemented; the set's plating, shield and

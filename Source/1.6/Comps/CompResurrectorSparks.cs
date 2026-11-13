@@ -6,19 +6,19 @@ using CompProperties_AbilitiesApparel = VEF.Abilities.CompProperties_AbilitiesAp
 
 namespace OverlordWarcasket;
 
-// Red sparks on the wearer while the armor's resurrection core holds a charge: the apocriton's
+// Red sparks on the wearer while the armor's mech resurrector holds a charge: the apocriton's
 // always-on crackle (its CompEffecter playing ApocrionAttached), gated on the charge. The cheapest
 // resurrection costs one charge, so "holds a charge" is "can resurrect something", and the
 // wearer must be able to act on it too: alive, not downed and awake, the states in which a pilot
 // can cast. The apocriton's own effecter checks only that it is spawned, so it crackles while
-// downed; the core is a pilot's readied tool, not a mech's hum. A dead wearer is already
+// downed; the resurrector is a pilot's readied tool, not a mech's hum. A dead wearer is already
 // unspawned (Pawn.Kill despawns the pawn before spawning its corpse, 1.7.4990 decompile), so the
 // Dead check only states the rule, and Notify_WearerDied (Apparel.Notify_PawnKilled) tears the
 // effecter down at the death itself rather than at the armor's next tick. With
 // Props.onlyWhileDrafted (a mod setting) a wearer who can be drafted must also be drafted, and
 // be able to cast: a mechanitor while the ability's requireMechlink holds (the ability's own
 // IsEnabledForPawn rule, read off the ability def this armor names, so one setting governs
-// both), since the drafted crackle is the core readied for battle. One who cannot be drafted
+// both), since the drafted crackle is the resurrector readied for battle. One who cannot be drafted
 // is exempt from both and shows the sparks on the charge alone: PawnComponentsUtility gives a
 // Pawn_DraftController only to the player's spawned humanlikes and colony mechs, so a raider or
 // any other AI pilot has a null drafter, and Pawn.Drafted would hide its sparks for good.
@@ -32,17 +32,17 @@ namespace OverlordWarcasket;
 // SprayerChance rolls its chance once per EffectTick, so the effecter must tick every tick for
 // the def's rate to hold. Like vanilla, it plays only on the map being viewed and is torn down
 // whenever it stops, so a wearer changing hands or maps starts a fresh one.
-public class CompCoreSparks : ThingComp
+public class CompResurrectorSparks : ThingComp
 {
     [Unsaved]
     private Effecter effecter;
 
     [Unsaved]
-    private CompResurrectionCore core;
+    private CompMechResurrector resurrector;
 
-    public CompProperties_CoreSparks Props => (CompProperties_CoreSparks)props;
+    public CompProperties_ResurrectorSparks Props => (CompProperties_ResurrectorSparks)props;
 
-    private CompResurrectionCore Core => core ??= parent.GetComp<CompResurrectionCore>();
+    private CompMechResurrector Resurrector => resurrector ??= parent.GetComp<CompMechResurrector>();
 
     private Pawn Wearer => (parent as Apparel)?.Wearer;
 
@@ -51,7 +51,7 @@ public class CompCoreSparks : ThingComp
         && wearer.Map == Find.CurrentMap
         && wearer.Awake()
         && (!Props.onlyWhileDrafted || wearer.drafter == null || (wearer.Drafted && CanCast(wearer)))
-        && Core is { Charges: > 0 };
+        && Resurrector is { Charges: > 0 };
 
     // The ability's mechlink rule. The extension is looked up on the live def each time, and only
     // for a drafted non-mechanitor, so neither a settings write nor a play-data reload leaves a

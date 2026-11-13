@@ -6,46 +6,46 @@ using Verse.AI;
 
 namespace OverlordWarcasket;
 
-// The armor's resurrection core: the charge store behind the resurrect mech ability
+// The armor's mech resurrector: the charge store behind the resurrect mech ability
 // (Ability_ResurrectMech), the apocriton's resurrectCharges on a piece of apparel. Vanilla's
 // CompApparelReloadable, as every gauge in the warcasket family is, with a recharge of its own on
 // top: remainingCharges is the charges held, a charge reloads from the props' ammoDef, and the
-// core also gains Props.chargesPerDay by itself. The def declares no verbs, so vanilla draws no
-// command for it; the readouts are ours.
+// resurrector also gains Props.chargesPerDay by itself. The def declares no verbs, so vanilla draws
+// no command for it; the readouts are ours.
 //
 // The recharge is the main supply and the reload the shortcut (the armor def's header has the
 // why), so the two never compete:
 // - Recharge. regenProgress is the fraction of the next charge, accrued every RegenInterval
 //   ticks and banked whole, so a lowered capacity or rate never strands a part charge: a full
-//   core holds no progress. The armor's tickerType is Normal (VFEP_WarcasketArmorBase) and worn
-//   apparel ticks through Pawn_ApparelTracker, so CompTick runs wherever the wearer is.
+//   resurrector holds no progress. The armor's tickerType is Normal (VFEP_WarcasketArmorBase) and
+//   worn apparel ticks through Pawn_ApparelTracker, so CompTick runs wherever the wearer is.
 // - Automatic reload. A colonist fetches ammo on their own (vanilla's JobGiver_Reload) only
-//   while the core sits below TargetCharges, the gauge's drag handle, which starts at zero: a
-//   pilot never spends the colony's ammo unasked. Patches/CompApparelReloadable_Reload has how
+//   while the resurrector sits below TargetCharges, the gauge's drag handle, which starts at zero:
+//   a pilot never spends the colony's ammo unasked. Patches/CompApparelReloadable_Reload has how
 //   vanilla's queries are bent to that. With Props.autoReloadFromInventory it loads the ammo
 //   the pilot carries first, up to the handle and by the carried reload's job, and fetches
 //   only for what is still missing (Patches/JobGiver_Reload_TryGiveJob).
 // - Ordered reload. Right-clicking the ammo (vanilla's float menu, drafted or not) reloads as
 //   far as the clicked stack goes, whatever the handle says.
 // - Carried reload. Vanilla's reload only looks for ammo lying on the map, so ammo in the
-//   pilot's own inventory gets a command beside the gauge (Command_LoadCore), yielded only
-//   while the pilot carries some, which orders JobDriver_LoadCore; ordered, it fills the core
-//   past the handle as the float menu's does. Combat Extended adds a reload
+//   pilot's own inventory gets a command beside the gauge (Command_LoadResurrector), yielded only
+//   while the pilot carries some, which orders JobDriver_LoadResurrector; ordered, it fills the
+//   resurrector past the handle as the float menu's does. Combat Extended adds a reload
 //   button of its own to every worn reloadable (ForeignReloadCommand), dropped here: the
 //   carried reload is ours.
 //
-// The core starts full (vanilla's PostPostMake), as the apocriton starts with its thirty. A
-// capacity lowered by the settings trims a core above it on the next tick, on equip and on load
-// (Trim), and OverlordWarcasketSettings.TrimWornCores does it at once for every worn one;
-// vanilla's reload arithmetic assumes the count never exceeds the capacity.
+// The resurrector starts full (vanilla's PostPostMake), as the apocriton starts with its thirty. A
+// capacity lowered by the settings trims a resurrector above it on the next tick, on equip and on
+// load (Trim), and OverlordWarcasketSettings.TrimWornResurrectors does it at once for every worn
+// one; vanilla's reload arithmetic assumes the count never exceeds the capacity.
 //
-// Readouts: the gauge (Gizmo_ResurrectionCore, rebuilt whenever the capacity or the settings
+// Readouts: the gauge (Gizmo_MechResurrector, rebuilt whenever the capacity or the settings
 // generation moves under it, since Gizmo_Slider builds its bar textures and reads its target
 // once), which counts the part charge the recharge has accrued (FormatProgress), and the inspect
 // line and the ability command's top-right count (Command_ResurrectMech), which count whole
 // charges, the ones a cast can spend.
 // Dev mode adds charge buttons beside the gauge: vanilla's "DEV: Reload to full" and two more.
-public class CompResurrectionCore : CompApparelReloadable
+public class CompMechResurrector : CompApparelReloadable
 {
     // Ticks between regen steps; a charge takes a day, so finer steps buy nothing.
     private const int RegenInterval = 150;
@@ -53,7 +53,7 @@ public class CompResurrectionCore : CompApparelReloadable
     // Combat Extended's "Reload worn armor" (CE 16.7.4), which its postfix on
     // CompApparelVerbOwner_Charged.CompGetWornGizmosExtra appends for every player pawn. It
     // runs CE's own automatic reload (Patches/JobGiver_Reload_TryGiveJob has what that does), so
-    // on the core it is a button that does nothing until the handle is raised and then drops
+    // on the resurrector it is a button that does nothing until the handle is raised and then drops
     // the carried ammo to reload from the floor. Matched by name: CE is not a reference.
     private const string ForeignReloadCommand = "CombatExtended.Command_ReloadArmor";
 
@@ -63,7 +63,7 @@ public class CompResurrectionCore : CompApparelReloadable
     private int targetCharges;
 
     [Unsaved]
-    private Gizmo_ResurrectionCore gauge;
+    private Gizmo_MechResurrector gauge;
 
     [Unsaved]
     private int gaugeMaxCharges = -1;
@@ -72,9 +72,9 @@ public class CompResurrectionCore : CompApparelReloadable
     private int gaugeGeneration = -1;
 
     [Unsaved]
-    private Command_LoadCore loadCommand;
+    private Command_LoadResurrector loadCommand;
 
-    public new CompProperties_ResurrectionCore Props => (CompProperties_ResurrectionCore)props;
+    public new CompProperties_MechResurrector Props => (CompProperties_MechResurrector)props;
 
     public int Charges => remainingCharges;
 
@@ -99,37 +99,37 @@ public class CompResurrectionCore : CompApparelReloadable
     public bool ReloadsPerCharge => AmmoDef != null && Props.ammoCountPerCharge > 0 && Props.ammoCountToRefill == 0;
 
     // The gauge's count: the charges held to one decimal, the part charge cut rather than
-    // rounded so the whole number never reads a charge the core does not hold yet ("3.9", never
-    // "4", at 3.96), and a whole count without the decimal ("3 / 10").
+    // rounded so the whole number never reads a charge the resurrector does not hold yet ("3.9",
+    // never "4", at 3.96), and a whole count without the decimal ("3 / 10").
     public static string FormatProgress(int charges, float progress, int maxCharges)
     {
         int tenths = charges >= maxCharges ? 0 : Mathf.Clamp(Mathf.FloorToInt(progress * 10f), 0, 9);
         return (Mathf.Min(charges, maxCharges) + tenths / 10f).ToString("0.#") + " / " + maxCharges;
     }
 
-    // The core worn by pawn, if any: the armor's.
-    public static CompResurrectionCore WornBy(Pawn pawn)
+    // The resurrector worn by pawn, if any: the armor's.
+    public static CompMechResurrector WornBy(Pawn pawn)
     {
         if (pawn?.apparel == null)
             return null;
         foreach (Apparel apparel in pawn.apparel.WornApparel)
         {
-            CompResurrectionCore core = apparel.TryGetComp<CompResurrectionCore>();
-            if (core != null)
-                return core;
+            CompMechResurrector resurrector = apparel.TryGetComp<CompMechResurrector>();
+            if (resurrector != null)
+                return resurrector;
         }
         return null;
     }
 
-    // The charges a reload may add: an ordered one fills the core, an automatic one stops at the
-    // target.
+    // The charges a reload may add: an ordered one fills the resurrector, an automatic one stops at
+    // the target.
     public static int ChargesWanted(int charges, int maxCharges, int target, bool ordered) =>
         Mathf.Max(0, (ordered ? maxCharges : Mathf.Min(target, maxCharges)) - charges);
 
     public int ChargesWanted(bool ordered) => ChargesWanted(remainingCharges, MaxCharges, targetCharges, ordered);
 
-    // The ammo of the core's kind in pawn's inventory. Indexed rather than enumerated: the gizmo
-    // pass asks every frame the wearer is selected.
+    // The ammo of the resurrector's kind in pawn's inventory. Indexed rather than enumerated: the
+    // gizmo pass asks every frame the wearer is selected.
     public int CarriedAmmo(Pawn pawn)
     {
         ThingDef ammo = AmmoDef;
@@ -163,11 +163,11 @@ public class CompResurrectionCore : CompApparelReloadable
     }
 
     // Reloads from the ammo in pawn's inventory, stack by stack, until the charges wanted are
-    // loaded (the whole core for an ordered reload, up to the target for an automatic one) or
-    // the ammo runs out. ReloadFrom loads all a stack can give the core, so a stack holding more
-    // than is wanted has that much split off first, and whatever ReloadFrom leaves of the split
-    // goes back. It splits what it loads off the stack, which takes a spent stack out of the
-    // inventory itself, hence the walk from the end.
+    // loaded (the whole resurrector for an ordered reload, up to the target for an automatic one)
+    // or the ammo runs out. ReloadFrom loads all a stack can give the resurrector, so a stack
+    // holding more than is wanted has that much split off first, and whatever ReloadFrom leaves of
+    // the split goes back. It splits what it loads off the stack, which takes a spent stack out of
+    // the inventory itself, hence the walk from the end.
     public void ReloadFromInventory(Pawn pawn, bool ordered)
     {
         ThingDef ammo = AmmoDef;
@@ -265,12 +265,12 @@ public class CompResurrectionCore : CompApparelReloadable
         }
         if (gauge == null || gaugeMaxCharges != MaxCharges || gaugeGeneration != OverlordWarcasketSettings.Generation)
         {
-            gauge = new Gizmo_ResurrectionCore(this);
+            gauge = new Gizmo_MechResurrector(this);
             gaugeMaxCharges = MaxCharges;
             gaugeGeneration = OverlordWarcasketSettings.Generation;
         }
         yield return gauge;
-        Command_LoadCore load = LoadCommand();
+        Command_LoadResurrector load = LoadCommand();
         if (load != null)
             yield return load;
         if (!DebugSettings.ShowDevGizmos)
@@ -281,7 +281,7 @@ public class CompResurrectionCore : CompApparelReloadable
 
     // The carried reload's command, for a player's pilot with ammo in the inventory and no one
     // else; one cached instance, refreshed on every request.
-    private Command_LoadCore LoadCommand()
+    private Command_LoadResurrector LoadCommand()
     {
         Pawn wearer = Wearer;
         if (!ReloadsPerCharge || wearer is not { IsColonistPlayerControlled: true })
@@ -289,14 +289,14 @@ public class CompResurrectionCore : CompApparelReloadable
         int carried = CarriedAmmo(wearer);
         if (carried <= 0)
             return null;
-        loadCommand ??= new Command_LoadCore(this);
+        loadCommand ??= new Command_LoadResurrector(this);
         loadCommand.Refresh(wearer, carried);
         return loadCommand;
     }
 
     // Orders the carried reload; a drafted pilot takes it as any ordered job.
     public void OrderReloadFromInventory(Pawn pawn) =>
-        pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(OLWC_DefOf.OLWC_LoadCore, parent), JobTag.Misc);
+        pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(OLWC_DefOf.OLWC_LoadResurrector, parent), JobTag.Misc);
 
     public override string CompInspectStringExtra() =>
         "MechResurrectionCharges".Translate() + ": " + LabelRemaining;

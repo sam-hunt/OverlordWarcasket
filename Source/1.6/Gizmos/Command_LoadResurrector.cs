@@ -4,14 +4,14 @@ using Verse;
 
 namespace OverlordWarcasket;
 
-// The carried reload's command: loads the resurrection core from the ammo in the pilot's own
+// The carried reload's command: loads the mech resurrector from the ammo in the pilot's own
 // inventory, which vanilla's reload never looks in (ReloadableUtility.FindEnoughAmmo searches
-// the map). CompResurrectionCore yields it only while the pilot carries some, so it appears with
+// the map). CompMechResurrector yields it only while the pilot carries some, so it appears with
 // the ammo and goes with it.
 //
 // The icon is the ammo's own, set as Designator_Build sets a buildable's (uiIcon with its angle,
-// offset and colour), over a background in the core gauge's red rather than vanilla's grey, so
-// the button reads as the gauge's. The count in the corner is the ammo carried.
+// offset and colour), over a background in the resurrector gauge's red rather than vanilla's grey,
+// so the button reads as the gauge's. The count in the corner is the ammo carried.
 //
 // The comp keeps one instance and refreshes it on every gizmo request, each frame the pilot is
 // selected, so Refresh compares before it builds: the icon and the texts are rebuilt only when
@@ -22,12 +22,12 @@ namespace OverlordWarcasket;
 // The background is a solid colour made once, as Gizmo_Slider makes its bar textures; it belongs
 // to no mod content, so a play-data reload leaves it alone.
 [StaticConstructorOnStartup]
-public class Command_LoadCore : Command_Action
+public class Command_LoadResurrector : Command_Action
 {
     private static readonly Texture2D Background =
-        SolidColorMaterials.NewSolidColorTexture(Gizmo_ResurrectionCore.CoreShade);
+        SolidColorMaterials.NewSolidColorTexture(Gizmo_MechResurrector.ResurrectorShade);
 
-    private readonly CompResurrectionCore core;
+    private readonly CompMechResurrector resurrector;
 
     private Pawn pilot;
     private ThingDef ammo;
@@ -44,10 +44,10 @@ public class Command_LoadCore : Command_Action
         Short,
     }
 
-    public Command_LoadCore(CompResurrectionCore core)
+    public Command_LoadResurrector(CompMechResurrector resurrector)
     {
-        this.core = core;
-        action = () => this.core.OrderReloadFromInventory(pilot);
+        this.resurrector = resurrector;
+        action = () => this.resurrector.OrderReloadFromInventory(pilot);
     }
 
     public override Texture2D BGTexture => Background;
@@ -60,10 +60,10 @@ public class Command_LoadCore : Command_Action
     {
         bool restate = wearer != pilot;
         pilot = wearer;
-        if (core.AmmoDef != ammo || core.Props.ammoCountPerCharge != perCharge)
+        if (resurrector.AmmoDef != ammo || resurrector.Props.ammoCountPerCharge != perCharge)
         {
-            ammo = core.AmmoDef;
-            perCharge = core.Props.ammoCountPerCharge;
+            ammo = resurrector.AmmoDef;
+            perCharge = resurrector.Props.ammoCountPerCharge;
             string plural = Find.ActiveLanguageWorker.Pluralize(ammo.label);
             icon = ammo.uiIcon;
             iconAngle = ammo.uiIconAngle;
@@ -78,14 +78,14 @@ public class Command_LoadCore : Command_Action
             carried = carriedAmmo;
             carriedLabel = carriedAmmo.ToString();
         }
-        State now = core.Full ? State.Full : carriedAmmo < perCharge ? State.Short : State.Ready;
+        State now = resurrector.Full ? State.Full : carriedAmmo < perCharge ? State.Short : State.Ready;
         if (now == state && !restate)
             return;
         state = now;
         Disabled = now != State.Ready;
         disabledReason = now switch
         {
-            State.Full => "OLWC_CoreFull".Translate(),
+            State.Full => "OLWC_ResurrectorFull".Translate(),
             State.Short => "OLWC_NotEnoughCarried".Translate(wearer.LabelShortCap, CostLabel(ammo, perCharge)),
             _ => null,
         };

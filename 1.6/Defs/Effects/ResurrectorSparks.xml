@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <!--
-    The resurrection core's idle crackle: the red sparks of Biotech's ApocrionAttached (sic,
+    The mech resurrector's idle crackle: the red sparks of Biotech's ApocrionAttached (sic,
     Biotech Defs/Effects/Effecter_Misc.xml), the apocriton's always-on CompEffecter, without
     its second child, the Mote_ApocritonPulse psychic wave, which is the apocriton's hatred
-    aura and no part of a resurrection core. Played on the armor's wearer by
-    OverlordWarcasket.CompCoreSparks (Source/1.6/Comps/), which gates it on the core holding a
-    charge and the wearer being able to cast; its header has the conditions and the tick path.
+    aura and no part of a mech resurrector. Played on the armor's wearer by
+    OverlordWarcasket.CompResurrectorSparks (Source/1.6/Comps/), which gates it on the resurrector
+    holding a charge and the wearer being able to cast; its header has the conditions and the tick
+    path.
 
     The spark child is the apocriton's with four fields changed. Biotech draws the apocriton
     at drawSize 2 and a humanlike body at 1.5, so the spark scale 1.0~1.2 becomes 0.8~1.0.
@@ -18,10 +19,10 @@
     the plating. positionRadiusMin 0.2 keeps them off the wearer's centre, where a spark is
     lost against the chest plate. chancePerTick 0.01 at a burst of 1~2 is a burst every 100
     ticks on average at random gaps, two thirds of the apocriton's 0.015: a pilot's readied
-    core crackles less than a mech built around one.
+    resurrector crackles less than a mech built around one.
   -->
   <EffecterDef>
-    <defName>OLWC_CoreSparks</defName>
+    <defName>OLWC_ResurrectorSparks</defName>
     <children>
       <li>
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
