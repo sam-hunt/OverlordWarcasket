@@ -208,8 +208,7 @@ public static class WorkProfile
             work => OpenableDefault(work.defName),
             vfep.disabledWorkTags,
             vfepTypes);
-        WorkTags tags = profile.Tags;
-        ours.disabledWorkTags = tags;
+        ours.disabledWorkTags = profile.Tags;
         baseTypes = profile.BaseTypes;
         toggleable = profile.Toggleable;
         openByDefault = profile.OpenByDefault;
@@ -231,8 +230,6 @@ public static class WorkProfile
             CopyPublicFields(vfepExtension, ourExtension, null);
         else
             Log.Warning($"[Overlord Warcasket] {VfepTraitName} or {OverlordTraitName} has no VEF TraitExtension; the overlord trait keeps its XML extension.");
-
-        Log.Message($"[Overlord Warcasket] Overlord warcasket trait mirrored from {VfepTraitName}: disabled work tags {tags}; {Describe(toggleable)} open to settings, {Describe(openByDefault)} open by default.");
     }
 
     // Writes the profile the settings choose, open deciding each toggleable work type, and
@@ -265,9 +262,6 @@ public static class WorkProfile
         }
         overlord.disabledWorkTypes = types;
     }
-
-    private static string Describe(IEnumerable<WorkTypeDef> works) =>
-        works.Any() ? works.Select(work => work.defName).ToCommaList() : "none";
 
     // Copies every public instance field of T from source onto target by reflection, so a field
     // T gains in a later game or VEF version is carried without a code change. Enumerated on T,
