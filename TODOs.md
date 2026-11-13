@@ -3,8 +3,6 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Mech resurrection charges gauge** Review tooltip text for unnatural newlines and readability.
-  Should show decimal charges rather than integer plus "The next charge will be ready in X hours"
 - **Mech resurrection control** should join the mechanitor's control group, requiring sufficient
   bandwidth as a prerequisite
 - **Resurrection effect** mech-centered wave effect on cast, and sparks on resurrection cover

@@ -92,17 +92,19 @@ notes for the shim or flow edit this repo owes before continuing.
     name, `{1}` the cost and `{2}` the charges held; `OLWC_ChargesLabel` (the
     cursor label) takes `{0}` the charges held and `{1}` the maximum, and
     `OLWC_TargetCost` (its second line) `{0}` the mech's name and `{1}` the
-    cost; the gauge's tooltip is label lines under Biotech's own
-    `MechResurrectionCharges` header (never re-rendered here):
-    `OLWC_GaugeRegen` takes `{0}` the charges per day, a plain number, and
-    `{1}` the wait for the next charge, already a period; `OLWC_GaugeFull`
-    `{0}` the charges per day; `OLWC_GaugeNoRegen` none; the reload cost
-    line between them and the next is Core's own
-    `Stat_Thing_ReloadPerCharge_Name` (never re-rendered here);
+    cost; the gauge's tooltip is short "label: value" lines under Biotech's
+    own `MechResurrectionCharges` header (never re-rendered here), each kept
+    under about forty characters with its value filled in, since a tooltip
+    is that wide and a wrapped stat line reads as two:
+    `OLWC_GaugeRegen` takes `{0}` the charges per day, a plain number;
+    `OLWC_GaugeNoRegen` none; `OLWC_GaugeReload` `{0}` the reload cost of a
+    charge, a count and the item's label ("1 advanced component");
     `OLWC_GaugeAutoReload` `{0}` the charges the drag handle is set to and
-    `OLWC_GaugeNoAutoReload` none; `OLWC_GaugeCosts` none, then one
-    `OLWC_GaugeCost` per weight class with `{0}` its capitalised label and
-    `{1}` the charges; `OLWC_GaugeCorpseAge` `{0}` the window as a period.
+    `OLWC_GaugeNoAutoReload` none; `OLWC_GaugeCorpseAge` `{0}` the window as
+    a period and `OLWC_GaugeNoCorpseAge` none; `OLWC_GaugeCosts` none, then
+    one `OLWC_GaugeCost` per weight class with `{0}` its capitalised label
+    and `{1}` the charges, which the code bullets; `OLWC_GaugeDragHint`
+    (the closing paragraph, free to wrap) none.
   - the carried reload's command beside the gauge: `OLWC_LoadCarried` (its
     label) takes `{0}` the reload item's plural label, as the language's own
     pluraliser gives it; `OLWC_LoadCarriedDesc` `{0}` that label and `{1}`

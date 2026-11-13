@@ -12,15 +12,16 @@
   <OLWC_ChargesLabel>Charges: {0} / {1}</OLWC_ChargesLabel>
   <OLWC_TargetCost>{0}: {1} charges</OLWC_TargetCost>
   <OLWC_TargetTimeLeft>Can be resurrected for another {0}.</OLWC_TargetTimeLeft>
-  <OLWC_GaugeRegen>The core recharges at a rate of {0} per day. The next charge will be ready in {1}.</OLWC_GaugeRegen>
-  <OLWC_GaugeFull>The core is fully charged. It recharges at a rate of {0} per day.</OLWC_GaugeFull>
-  <OLWC_GaugeNoRegen>The core does not recharge on its own.</OLWC_GaugeNoRegen>
+  <OLWC_GaugeRegen>Recharge rate: {0} per day</OLWC_GaugeRegen>
+  <OLWC_GaugeNoRegen>Recharge rate: none</OLWC_GaugeNoRegen>
+  <OLWC_GaugeReload>Reload cost: {0}</OLWC_GaugeReload>
   <OLWC_GaugeAutoReload>Automatic reload level: {0}</OLWC_GaugeAutoReload>
-  <OLWC_GaugeNoAutoReload>Automatic reload is off. Drag the bar to set a level.</OLWC_GaugeNoAutoReload>
+  <OLWC_GaugeNoAutoReload>Automatic reload: off</OLWC_GaugeNoAutoReload>
+  <OLWC_GaugeCorpseAge>Maximum corpse age: {0}</OLWC_GaugeCorpseAge>
+  <OLWC_GaugeNoCorpseAge>Maximum corpse age: unlimited</OLWC_GaugeNoCorpseAge>
   <OLWC_GaugeCosts>Charges per mech:</OLWC_GaugeCosts>
   <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
-  <OLWC_GaugeCorpseAge>Mechs dead for up to {0} can be resurrected.</OLWC_GaugeCorpseAge>
-  <OLWC_GaugeNoCorpseAge>Mechs can be resurrected no matter how long they have been dead.</OLWC_GaugeNoCorpseAge>
+  <OLWC_GaugeDragHint>Drag the bar to set a level. The pilot will reload the core whenever it falls below that level.</OLWC_GaugeDragHint>
 
   <!-- The carried reload's command (Source/1.6/Gizmos/Command_LoadCore.cs) -->
   <OLWC_LoadCarried>Load carried {0}</OLWC_LoadCarried>

@@ -41,7 +41,9 @@ namespace OverlordWarcasket;
 //
 // Readouts: the gauge (Gizmo_ResurrectionCore, rebuilt whenever the capacity or the settings
 // generation moves under it, since Gizmo_Slider builds its bar textures and reads its target
-// once), the inspect line and the ability command's top-right count (Command_ResurrectMech).
+// once), which counts the part charge the recharge has accrued (FormatProgress), and the inspect
+// line and the ability command's top-right count (Command_ResurrectMech), which count whole
+// charges, the ones a cast can spend.
 // Dev mode adds charge buttons beside the gauge: vanilla's "DEV: Reload to full" and two more.
 public class CompResurrectionCore : CompApparelReloadable
 {
@@ -81,6 +83,11 @@ public class CompResurrectionCore : CompApparelReloadable
     // The fraction of the next charge accrued, 0 while full.
     public float RegenProgress => regenProgress;
 
+    // The charges held with the part charge the recharge has accrued: what the gauge shows.
+    public float ChargesWithProgress => Mathf.Min(remainingCharges + regenProgress, MaxCharges);
+
+    public string ProgressLabel => FormatProgress(remainingCharges, regenProgress, MaxCharges);
+
     public int TargetCharges
     {
         get => Mathf.Clamp(targetCharges, 0, MaxCharges);
@@ -91,16 +98,13 @@ public class CompResurrectionCore : CompApparelReloadable
     // to ammoCountToRefill, or took its ammo away, gets vanilla's rules untouched.
     public bool ReloadsPerCharge => AmmoDef != null && Props.ammoCountPerCharge > 0 && Props.ammoCountToRefill == 0;
 
-    // Ticks until the next charge at the current rate, or -1 while full or at a rate of zero.
-    public int TicksToNextCharge
+    // The gauge's count: the charges held to one decimal, the part charge cut rather than
+    // rounded so the whole number never reads a charge the core does not hold yet ("3.9", never
+    // "4", at 3.96), and a whole count without the decimal ("3 / 10").
+    public static string FormatProgress(int charges, float progress, int maxCharges)
     {
-        get
-        {
-            float perDay = Props.chargesPerDay;
-            if (Full || perDay <= 0f)
-                return -1;
-            return Mathf.CeilToInt((1f - regenProgress) / perDay * GenDate.TicksPerDay);
-        }
+        int tenths = charges >= maxCharges ? 0 : Mathf.Clamp(Mathf.FloorToInt(progress * 10f), 0, 9);
+        return (Mathf.Min(charges, maxCharges) + tenths / 10f).ToString("0.#") + " / " + maxCharges;
     }
 
     // The core worn by pawn, if any: the armor's.

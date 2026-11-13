@@ -8,7 +8,9 @@ namespace OverlordWarcasket;
 
 // The resurrection core's gauge, Toxin's Gizmo_ToxTank pattern over CompResurrectionCore: the bar
 // is the charges held, ticked at each charge, under Biotech's own "Mech resurrection charges"
-// title (a Keyed string of the hard dependency, so every language has it). For the player's
+// title (a Keyed string of the hard dependency, so every language has it). The fill and the
+// count include the part charge the recharge has accrued ("3.4 / 10"), so the bar creeps toward
+// the next tick and the count says how far off the next charge is. For the player's
 // wearers the drag handle sets TargetCharges, the level the pilot keeps the core at by fetching
 // ammo unasked (Patches/CompApparelReloadable_Reload); it starts at zero, the recharge being the
 // core's main supply, and an ordered reload ignores it. The colours are red, the core's warning
@@ -37,13 +39,13 @@ public class Gizmo_ResurrectionCore : Gizmo_Slider
         set => core.TargetCharges = Mathf.RoundToInt(value * core.MaxCharges);
     }
 
-    protected override float ValuePercent => Mathf.Clamp01((float)core.Charges / core.MaxCharges);
+    protected override float ValuePercent => Mathf.Clamp01(core.ChargesWithProgress / core.MaxCharges);
 
     protected override string Title => "MechResurrectionCharges".Translate();
 
     protected override bool IsDraggable => core.ReloadsPerCharge && core.Wearer?.Faction == Faction.OfPlayer;
 
-    protected override string BarLabel => core.LabelRemaining;
+    protected override string BarLabel => core.ProgressLabel;
 
     protected override int Increments => core.MaxCharges;
 
@@ -66,47 +68,49 @@ public class Gizmo_ResurrectionCore : Gizmo_Slider
             yield return (float)i / max;
     }
 
-    // Laid out as vanilla's hemogen gauge: the count under a tinted header, the recharge line
-    // (the rate in charges per day and the wait for the next charge, or that the core is full,
-    // or that it never recharges), the reload line (vanilla's own stat label over what a charge
-    // costs, as the armor's stat sheet words it) and, where the bar drags, the level the handle
-    // sets, then what each weight class costs and how fresh a corpse must be, read off the
-    // ability def's extension.
+    // Laid out as vanilla's hemogen gauge (GeneGizmo_ResourceHemogen.GetTooltip): short "label:
+    // value" lines in blocks, a blank line between blocks, sentences last. A tooltip is 260
+    // pixels wide, about forty characters of the small font, and a stat line that wraps reads
+    // as two lines, so every line here stays short of that and only the closing hint, a
+    // paragraph of its own, is left to wrap.
+    // - The core: the count under a tinted header, the recharge rate (or that there is none),
+    //   what a charge costs to reload and, where the bar drags, the level the handle sets.
+    // - The ability, read off its def's extension: how fresh a corpse must be, then what each
+    //   weight class costs as a list, bulleted in code as vanilla's tooltip lists are.
+    // - Where the bar drags, what dragging it does.
     protected override string GetTooltip()
     {
         var tip = new StringBuilder();
         tip.Append("MechResurrectionCharges".Translate().Resolve().Colorize(ColoredText.TipSectionTitleColor));
-        tip.Append(": ").Append(core.LabelRemaining);
+        tip.Append(": ").Append(core.ProgressLabel);
         float rate = core.Props.chargesPerDay;
-        if (rate <= 0f)
-            tip.Append('\n').Append("OLWC_GaugeNoRegen".Translate().Resolve());
-        else if (core.Full)
-            tip.Append('\n').Append("OLWC_GaugeFull".Translate(rate.ToString("0.##")).Resolve());
-        else
-            tip.Append('\n').Append("OLWC_GaugeRegen".Translate(rate.ToString("0.##"), core.TicksToNextCharge.ToStringTicksToPeriod()).Resolve());
+        tip.Append('\n').Append(rate > 0f
+            ? "OLWC_GaugeRegen".Translate(rate.ToString("0.##")).Resolve()
+            : "OLWC_GaugeNoRegen".Translate().Resolve());
         if (core.ReloadsPerCharge)
-        {
-            tip.Append('\n').Append("Stat_Thing_ReloadPerCharge_Name".Translate(core.Props.ChargeNounArgument).Resolve().CapitalizeFirst());
-            tip.Append(": ").Append(Command_LoadCore.CostLabel(core.AmmoDef, core.Props.ammoCountPerCharge));
-        }
-        if (IsDraggable)
+            tip.Append('\n').Append("OLWC_GaugeReload".Translate(Command_LoadCore.CostLabel(core.AmmoDef, core.Props.ammoCountPerCharge)).Resolve());
+        bool draggable = IsDraggable;
+        if (draggable)
         {
             tip.Append('\n').Append(core.TargetCharges > 0
                 ? "OLWC_GaugeAutoReload".Translate(core.TargetCharges).Resolve()
                 : "OLWC_GaugeNoAutoReload".Translate().Resolve());
         }
         ResurrectMechExtension extension = OLWC_DefOf.OLWC_ResurrectMech.GetModExtension<ResurrectMechExtension>();
-        if (extension == null)
-            return tip.ToString();
-        tip.Append("\n\n").Append("OLWC_GaugeCosts".Translate().Resolve());
-        foreach (MechChargeCosts cost in extension.costs)
+        if (extension != null)
         {
-            if (cost.weightClass != null)
-                tip.Append('\n').Append("OLWC_GaugeCost".Translate(cost.weightClass.LabelCap, cost.cost).Resolve());
+            tip.Append("\n\n").Append(extension.LimitsCorpseAge
+                ? "OLWC_GaugeCorpseAge".Translate(Ability_ResurrectMech.PeriodText(extension.maxCorpseAgeTicks)).Resolve()
+                : "OLWC_GaugeNoCorpseAge".Translate().Resolve());
+            tip.Append('\n').Append("OLWC_GaugeCosts".Translate().Resolve());
+            foreach (MechChargeCosts cost in extension.costs)
+            {
+                if (cost.weightClass != null)
+                    tip.Append("\n  - ").Append("OLWC_GaugeCost".Translate(cost.weightClass.LabelCap, cost.cost).Resolve());
+            }
         }
-        tip.Append('\n').Append(extension.LimitsCorpseAge
-            ? "OLWC_GaugeCorpseAge".Translate(Ability_ResurrectMech.PeriodText(extension.maxCorpseAgeTicks)).Resolve()
-            : "OLWC_GaugeNoCorpseAge".Translate().Resolve());
+        if (draggable)
+            tip.Append("\n\n").Append("OLWC_GaugeDragHint".Translate().Resolve());
         return tip.ToString();
     }
 }
