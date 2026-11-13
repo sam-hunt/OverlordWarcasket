@@ -7,13 +7,25 @@
     it, and apparel/wornGraphicPath, the pack on the wearer's back (renderUtilityAsPack, so the
     worn path takes the facing suffixes and no body type one). Both take the one path of ours,
     which Mods/Odyssey/Textures carries as the item (no suffix) and the three worn facings, never
-    at Odyssey's path, where it would replace the art for everyone. PatchOperationSetting reads
-    the switch while the patches apply, so a change waits for a restart and the def then builds
-    its graphic, icon and atlas entry from our path exactly as it would from Odyssey's; off, the
-    patch touches nothing and Odyssey's XML stands. The root is gated on Odyssey's package id
-    (LoadFolders.xml), so the xpaths never miss. The path here must match CerebrexNode.TexPath
-    (Source/1.6/Settings/CerebrexNode.cs), which the settings window reads off the def to show
-    which art is live; Tests/1.6/CerebrexNodeArtTests.cs holds the two together.
+    at Odyssey's path, where it would replace the art for everyone.
+
+    Our art ships masks where Odyssey's has none (_m for the item, _northm/_eastm/_southm for
+    the worn pack, as the helmet's are named), so the patch also turns the two mask switches on:
+    graphicData/shaderType CutoutComplex for the item and apparel/useWornGraphicMask for the
+    pack (ApparelGraphicRecordGetter picks the worn shader from that flag, never from
+    graphicData). The node is colorable (ApparelNoQualityBase's CompColorable), and without a
+    mask a dye tints the whole piece: the masks paint the frame red and leave the core black, so
+    a dyed node takes the color on its frame and keeps the red of its lens. An undyed node draws
+    white through the mask and looks as it does without one. Odyssey's def sets neither field,
+    so both are added.
+
+    PatchOperationSetting reads the switch while the patches apply, so a change waits for a
+    restart and the def then builds its graphic, icon and atlas entry from our path exactly as
+    it would from Odyssey's; off, the patch touches nothing and Odyssey's XML stands. The root
+    is gated on Odyssey's package id (LoadFolders.xml), so the xpaths never miss. The path here
+    must match CerebrexNode.TexPath (Source/1.6/Settings/CerebrexNode.cs), which the settings
+    window reads off the def to show which art is live; Tests/1.6/CerebrexNodeArtTests.cs holds
+    the patch, that constant and the shipped textures together.
   -->
   <Operation Class="OverlordWarcasket.PatchOperationSetting">
     <setting>cerebrexArt</setting>
@@ -29,6 +41,18 @@
           <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/apparel/wornGraphicPath</xpath>
           <value>
             <wornGraphicPath>Things/Pawn/Humanlike/Apparel/CerebrexNodeOverlord/CerebrexNodePack</wornGraphicPath>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/graphicData</xpath>
+          <value>
+            <shaderType>CutoutComplex</shaderType>
+          </value>
+        </li>
+        <li Class="PatchOperationAdd">
+          <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/apparel</xpath>
+          <value>
+            <useWornGraphicMask>true</useWornGraphicMask>
           </value>
         </li>
       </operations>

@@ -12,9 +12,11 @@ namespace OverlordWarcasket.Tests;
 // player who opted in: the switch it names must be a public BoolSetting field of the settings,
 // as PatchOperationSetting looks it up (read off the settings' source, since the type itself
 // pulls in VEF, which the test output never carries); every path it writes must be
-// CerebrexNode.TexPath, which the settings window reads off the def; and that path must have its
+// CerebrexNode.TexPath, which the settings window reads off the def; that path must have its
 // four textures in the Odyssey art root, the item and the worn pack's three facings (the game
-// flips east for west).
+// flips east for west); and each of the four must have its mask beside it, which the patch must
+// switch on for the item and for the pack, since a mask the def never asks for is never read and
+// a mask shader with no mask file paints nothing.
 public class CerebrexNodeArtTests
 {
     private const string PatchPath = "1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml";
@@ -57,9 +59,26 @@ public class CerebrexNodeArtTests
     [Fact]
     public void EveryPathWrittenIsCerebrexNodeTexPath()
     {
-        var values = Patch().Descendants("value").Elements().Select(e => e.Value).ToList();
+        var values = Patch().Descendants("value").Elements()
+            .Where(e => e.Name.LocalName is "texPath" or "wornGraphicPath")
+            .Select(e => e.Value)
+            .ToList();
         Assert.Equal(2, values.Count);
         Assert.All(values, value => Assert.Equal(CerebrexNode.TexPath, value));
+    }
+
+    // The item's graphic reads its mask under a mask shader (graphicData/shaderType) and the worn
+    // pack's under the apparel's own flag; each is written once, under the parent that owns it.
+    [Theory]
+    [InlineData("graphicData", "shaderType", "CutoutComplex")]
+    [InlineData("apparel", "useWornGraphicMask", "true")]
+    public void MaskSwitchIsWrittenOnce(string parent, string field, string expected)
+    {
+        var written = Patch().Descendants("value").Elements(field).ToList();
+        Assert.Single(written);
+        Assert.Equal(expected, written[0].Value);
+        var xpath = written[0].Parent!.Parent!.Element("xpath")?.Value ?? "";
+        Assert.EndsWith("/" + parent, xpath);
     }
 
     [Theory]
@@ -67,6 +86,10 @@ public class CerebrexNodeArtTests
     [InlineData("_north")]
     [InlineData("_east")]
     [InlineData("_south")]
+    [InlineData("_m")]
+    [InlineData("_northm")]
+    [InlineData("_eastm")]
+    [InlineData("_southm")]
     public void TextureShipsAtTheWrittenPath(string suffix)
     {
         var file = Path.Combine(RepoRoot, ArtRoot, CerebrexNode.TexPath + suffix + ".png");
