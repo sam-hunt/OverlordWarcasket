@@ -31,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - More work types for the pilot can be enabled in the mod settings
 - Mod settings for the resurrection core, the ability and the pilot's work
 - With Odyssey, a mod setting redraws the cerebrex node with the mod's own art
+- With Odyssey, a cerebrex node worn with a warcasket shows on its back instead of being hidden under the shell
 - Combat Extended support
 - Vanilla Gravship Expanded and Save Our Ship 2 support

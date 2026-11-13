@@ -56,7 +56,10 @@
       30, 0.011) and firefoam (40, 0.015). Hair and beard (about 0.022) can draw over them on a
       bare head, as hair does over shoulders anyway.
     North, east and west inherit the base's 0.2, 0.02 and 0.02: XmlInheritance merges
-    same-named elements recursively, so only the changed facing is listed.
+    same-named elements recursively, so only the changed facing is listed. The north 0.2 and
+    the armor's 0.1 are what Odyssey's cerebrex node is slotted between
+    (1.6/Mods/Odyssey/Patches/CerebrexNodeDrawOrder.xml), so a north offset on either piece
+    moves against that patch's 0.134.
   -->
   <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketShoulderPadBase">
     <defName>OLWC_WarcasketShoulders_Overlord</defName>

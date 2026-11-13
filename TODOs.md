@@ -2,9 +2,6 @@
 
 ## Features
 
-- **Warcasket/Cerebrex node layering** Looks good on a normal mechlord set, but hidden behind the
-  warcasket torso and shoulders when worn with our set (North view only). fix the render ordering
-  to be above torso, then make a judgement call on whether to render over/under shoulders too.
 - **Cerebrex node mask** pending art landing
 - **Mech resurrection charges gauge** Review tooltip text for unnatural newlines and readability.
   Should show decimal charges rather than integer plus "The next charge will be ready in X hours"
@@ -32,6 +29,9 @@
 
 ## Testing
 
+- **In-game look at the cerebrex node on a pilot facing north.** The node over the shell and
+  under the pauldrons, with Odyssey's art and with ours; unchanged on a mechlord suit, on the
+  other three facings and on an outfit stand.
 - **In-game run of the resurrect mech ability.** The core's red sparks on the pilot:
   their size and spread against the warcasket's art. A raider in the set (dev spawn) shows
   them while its core is charged. A drafted non-mechanitor pilot shows none, and does with the

@@ -65,8 +65,10 @@ install, or the frozen copy at `~/.local/share/RimWorld-1.6/Managed`); without t
 stays green but every test touching game types fails. `CompatPatchTests` resolves every xpath in
 `1.6/Mods/*/Patches/` and the SOS2 patch against the main-tree defs (the Odyssey root's against
 the DLC's defs in the local install), the only check a gated root gets short of a boot with that
-mod active; `CerebrexNodeArtTests` ties that root's patch to its switch, the path constant and
-the shipped textures; the other two files cover the settings slider arithmetic and the trait
+mod active; `CerebrexNodeArtTests` ties that root's art patch to its switch, the path constant
+and the shipped textures, and `CerebrexNodeDrawOrderTests` holds its draw order patch between
+the north offsets of VFEP's armor and shoulder bases, read from the VFEP folder (`VFEP_PATH` or
+the sibling checkout); the other two files cover the settings slider arithmetic and the trait
 mirror's tag and work type rules.
 
 ## Layout

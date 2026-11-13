@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Patch>
+  <!--
+    Draws Odyssey's cerebrex node (Apparel_CerebrexNode) over a warcasket's shell on a pilot seen
+    from behind, where the shell would otherwise cover it whole. Always on, whichever art the
+    cerebrex art setting picks, and for every VFEP warcasket, ours or not.
+
+    The node is a utility pack with no drawData of its own, so vanilla hands it one
+    (DynamicPawnRenderNodeSetup_Apparel.ProcessApparel): layer 93 facing north, over a
+    shell's 88, and -3 facing south, behind the body. A node's altitude is that layer times
+    0.000366 (PawnRenderUtility.AltitudeForLayer, clamped to layer 100, so 0.0366 at most) plus
+    its drawData offset y; "Draw order" in WarcasketShoulders_Overlord.xml's header has the
+    arithmetic. VFEP's bases order the warcasket pieces by that offset, far past anything a layer
+    can reach: facing north the armor sits at 0.1 (0.107 to 0.109 with its layer) and the
+    shoulders at 0.2 (0.207 to 0.209), both over the pack's 0.034.
+
+    A def's drawData replaces vanilla's default whole, so this one restates the two layers and
+    adds the north offset. East and west stay unlisted, as in vanilla's: the pack keeps its place
+    among the body apparel there, hanging out behind the back from under the shell.
+    - North y 0.1, the armor base's own lift, which lands the pack at 0.134: 0.025 over any
+      armor and 0.073 under any shoulders. Under the shoulders by choice. The node sits in the
+      hollow of the Overlord's back between the pauldrons, whose inner edges cross its frame;
+      drawn over them, the frame cuts across their outlines and the node reads as stuck on
+      rather than seated.
+    Without a warcasket nothing changes: on that facing the pack already drew over every graphic
+    of the pawn, no vanilla or DLC node taking a north layer over its 93 (the status overlay's
+    100 positions its own draws and ignores the node's altitude). Odyssey's outfit stand
+    (Building_OutfitStand.RecacheGraphics) reads only the layer, then sets a pack's to the same
+    93 and -3 itself.
+
+    The root is gated on Odyssey's package id (LoadFolders.xml), so the xpath never misses;
+    Tests/1.6/CerebrexNodeDrawOrderTests.cs holds the layers to vanilla's and the offset between
+    VFEP's two.
+  -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>/Defs/ThingDef[defName = "Apparel_CerebrexNode"]/apparel</xpath>
+    <value>
+      <drawData>
+        <dataNorth>
+          <layer>93</layer>
+          <offset>(0, 0.1, 0)</offset>
+        </dataNorth>
+        <dataSouth>
+          <layer>-3</layer>
+        </dataSouth>
+      </drawData>
+    </value>
+  </Operation>
+</Patch>

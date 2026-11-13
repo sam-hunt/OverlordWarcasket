@@ -4,8 +4,9 @@
     <li>/</li>
     <li>1.6</li>
     <!-- Odyssey: this mod's art for the cerebrex node at its own texture path (art only, so no
-         version root) and the patch that writes that path onto Odyssey's def behind the cerebrex
-         art setting (1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). -->
+         version root), the patch that writes that path onto Odyssey's def behind the cerebrex
+         art setting (1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) and the one that draws the
+         node over a warcasket's shell from behind (CerebrexNodeDrawOrder.xml). -->
     <li IfModActive="ludeon.rimworld.odyssey">Mods/Odyssey</li>
     <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
     <li IfModActive="vanillaexpanded.gravship">1.6/Mods/VanillaGravshipExpanded</li>
