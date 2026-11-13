@@ -3,8 +3,6 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Command range** when set to "anywhere" with the mech on a second map it works, with the pilot
-  in a caravan it does not (mech can't be drafted) (and should? shouldn't get the out of range message)
 - **Extraneous debug** "[Overlord Warcasket] Overlord warcasket trait disabled work types: Cooking, Construction, Growing, Mining, PlantCutting, Tailoring, Crafting."
 - **Manual ability reload** should reload only up to the slider if it's less than it, maybe if it's reattempted at that point, then reload to full?
 - **Automatic ability reload** doesn't seem to work from inventory? is "pick up to inventory" PUAH only? I don't see the vanilla float menu option to pick up, so can't reach the gizmo or reload behavior that way
@@ -32,6 +30,11 @@
   their size and spread against the warcasket's art. A raider in the set (dev spawn) shows
   them while its resurrector is charged. A drafted non-mechanitor pilot shows none, and does with the
   mechlink requirement off.
+- **In-game run of the Anywhere command range from a caravan.** A pilot who left in a caravan
+  drafting a mech at home, ordering it to move and attack with no out of range refusal, and
+  changing its group's work mode; the draft button greyed again under the other two scopes,
+  with the helmet off, and for a pilot in a transport pod in flight. Mechs drafted as the pilot
+  walks off the map undraft, as vanilla has it, and draft again once the caravan has formed.
 - **Set tuning in play.** How the helmet's -3 shooting plays with a warcasket weapon.
   Is the recharge too generous?
 - **In-game run with Combat Extended.** The CE root is checked statically and the three C#

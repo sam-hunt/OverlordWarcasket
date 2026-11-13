@@ -39,8 +39,9 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   so vanilla, VEF and our code read the setting through the def. Live state a write leaves behind
   (a running cooldown, charges above a lowered capacity) is reconciled by the instance on its next
   use, keyed on `OverlordWarcasketSettings.Generation`, or by the write itself.
-- **The command range is one postfix and one prefix** (`Patches/MechanitorUtility_InMechanitorCommandRange`,
-  `Patches/Pawn_MechanitorTracker_DrawCommandRadius`) over the rules in `CommandRange/`, which
+- **The command range is two postfixes and one prefix** (`Patches/MechanitorUtility_InMechanitorCommandRange`,
+  `Patches/Pawn_MechanitorTracker_CanControlMechs`, `Patches/Pawn_MechanitorTracker_DrawCommandRadius`)
+  over the rules in `CommandRange/`, which
   reads the `CommandRangeExtension` off the def: the settings move that extension between the
   helmet and the shoulders and write its scope and radius (`CommandRange.Apply`), so the def
   rule above holds; the two choices no def can express, every mechanitor and off, are the one

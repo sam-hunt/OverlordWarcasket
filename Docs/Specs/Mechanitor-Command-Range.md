@@ -79,9 +79,10 @@ rule, `Allows`:
 - CurrentMap: allowed. Radius: `Within`, the squared distance strictly below the radius squared,
   vanilla's own comparison, so a .9 radius excludes the next whole distance.
 
-Caveat for Anywhere: vanilla still refuses all mech control while the mechanitor is not spawned
-on some map (a caravan, a transport pod in flight, a casket). Anywhere means any map while the
-mechanitor stands on one.
+Anywhere also covers a mechanitor traveling in a player caravan: a postfix on
+`Pawn_MechanitorTracker.CanControlMechs` lifts vanilla's refusal of an unspawned mechanitor for
+that case alone (the patch's header has the readers it opens). A transport pod in flight and a
+casket keep vanilla's refusal.
 
 ### 3.4 The ring
 

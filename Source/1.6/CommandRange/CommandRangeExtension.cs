@@ -13,8 +13,9 @@ namespace OverlordWarcasket;
 public class CommandRangeExtension : DefModExtension
 {
     // Where orders may go: anywhere on the mech's map while the overseer is on it (CurrentMap),
-    // anywhere on any map while the overseer stands on some map (Anywhere), or within radius
-    // cells of the overseer on the same map (Radius), vanilla's own rule at 24.9.
+    // anywhere on any map while the overseer stands on some map or travels in a caravan
+    // (Anywhere), or within radius cells of the overseer on the same map (Radius), vanilla's own
+    // rule at 24.9.
     public CommandRangeScope scope = CommandRangeScope.CurrentMap;
 
     // The Radius scope's reach in cells, compared as vanilla compares its own: the squared

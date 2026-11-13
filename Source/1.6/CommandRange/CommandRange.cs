@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using RimWorld;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -27,14 +28,16 @@ public enum CommandRangeAppliesTo
 // square of 24.9, a private constant with no stat or def behind it. The white ring shown while a
 // drafted mech is selected is Pawn_MechanitorTracker.DrawCommandRadius with the same literal.
 // Nothing else is range-gated: drafting (CanDraftMech) asks only that the overseer be spawned,
-// not downed, imprisoned or in a mental state, work-mode mechs ignore range, and an accepted
-// order is never recalled when the overseer walks away. Nothing in VFEP or VEF touches any of
-// this.
+// not downed, imprisoned or in a mental state (Pawn_MechanitorTracker.CanControlMechs),
+// work-mode mechs ignore range, and an accepted order is never recalled when the overseer walks
+// away. Nothing in VFEP or VEF touches any of this.
 //
 // The patches: Patches/MechanitorUtility_InMechanitorCommandRange replaces vanilla's answer
-// with Allows whenever TryEvaluate finds a governing extension, and
+// with Allows whenever TryEvaluate finds a governing extension,
 // Patches/Pawn_MechanitorTracker_DrawCommandRadius draws the ring at the extension's radius,
-// or not at all for the map-wide scopes. The extension that governs an order is For: the set's
+// or not at all for the map-wide scopes, and Patches/Pawn_MechanitorTracker_CanControlMechs
+// lifts the spawned requirement for a mechanitor ControlsFromCaravan admits, since under
+// Anywhere a pilot on the road is no further from their mechs than one on another map. The extension that governs an order is For: the set's
 // own instance for every mechanitor under AllMechanitors, else the one on a worn piece, so a
 // patch mod that puts a CommandRangeExtension on its own apparel grants the range too, at its
 // own scope.
@@ -175,9 +178,15 @@ public static class CommandRange
         return true;
     }
 
+    // Whether a mechanitor off every map still controls their mechs: under the Anywhere scope,
+    // as a member of a caravan the player controls. A pilot in a casket, carried, or in a
+    // transport pod or a shuttle in flight is left to vanilla's refusal.
+    public static bool ControlsFromCaravan(Pawn mechanitor) =>
+        For(mechanitor)?.scope == CommandRangeScope.Anywhere && mechanitor.IsPlayerControlledCaravanMember();
+
     // The scope's rule. The bounds check is against the mech's map, not the overseer's as
-    // vanilla's is, since under Anywhere the two differ; a mech held off any map is refused as
-    // vanilla refuses it.
+    // vanilla's is, since under Anywhere the two differ and a caravanning overseer has none; a
+    // mech held off any map is refused as vanilla refuses it.
     public static bool Allows(Pawn overseer, Map mechMap, LocalTargetInfo target, CommandRangeExtension extension)
     {
         if (mechMap == null || !target.Cell.InBounds(mechMap))
