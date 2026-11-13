@@ -11,9 +11,10 @@
     The apocriton's numbers, kept where they still mean the same: a 4 second warmup (castTime
     240), a 2 second cooldown (cooldownTime 120; a mod setting), the costs of 1 / 3 / 5
     charges for a light, medium and heavy mech and the 9.9 cell cast range, here the
-    distanceToTarget the goto job
-    (VFEA_GotoTargetAndUseAbility) walks the pilot to. range is unset on purpose: the click is
-    not range-limited, the pilot walks. The sounds, the glow on the mech and the icon are
+    distanceToTarget the cast job walks the pilot to (OLWC_CastResurrectMech,
+    JobDefs/CastResurrectMech.xml: ours rather than VEF's VFEA_GotoTargetAndUseAbility so that
+    casts can queue). range is unset on purpose: the click is not range-limited, the pilot
+    walks. The sounds, the glow on the mech and the icon are
     Biotech's own (MechResurrect_Warmup, MechResurrect_Cast, MechResurrected,
     UI/Abilities/MechResurrection); Biotech is a hard dependency, so none needs a fallback. The
     two area effects are ours, the apocriton's sized for one mech: OLWC_ResurrectWarmup on the
@@ -70,7 +71,7 @@
     <abilityClass>OverlordWarcasket.Ability_ResurrectMech</abilityClass>
     <gizmoClass>OverlordWarcasket.Command_ResurrectMech</gizmoClass>
     <iconPath>UI/Abilities/MechResurrection</iconPath>
-    <jobDef>VFEA_GotoTargetAndUseAbility</jobDef>
+    <jobDef>OLWC_CastResurrectMech</jobDef>
     <jobReportString>Resurrecting mechs.</jobReportString>
     <targetMode>Thing</targetMode>
     <targetingParametersList>

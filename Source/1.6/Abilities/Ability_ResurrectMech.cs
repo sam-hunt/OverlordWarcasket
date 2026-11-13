@@ -1,9 +1,13 @@
 using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
+using UnityEngine;
 using Verse;
+using Verse.AI;
 using Ability = VEF.Abilities.Ability;
+using AbilityExtension_AbilityMod = VEF.Abilities.AbilityExtension_AbilityMod;
 using Command_Ability = VEF.Abilities.Command_Ability;
+using CompAbilitiesApparel = VEF.Abilities.CompAbilitiesApparel;
 
 namespace OverlordWarcasket;
 
@@ -30,19 +34,31 @@ namespace OverlordWarcasket;
 // (PawnRelationWorker_Overseer.OnRelationCreated), and the corpse is refused beforehand unless
 // the pilot has the bandwidth for it by the gestator's own rule
 // (Pawn_MechanitorTracker.HasBandwidthToResurrect: the bandwidth in use and in gestation plus
-// the mech's cost within the total). Whose mech it was before does not matter, since the death
-// already cleared that. Neither applies to a pilot without a mechlink, who can cast only with
-// requireMechlink off and raises the mech uncontrolled, or to a mech with no CompOverseerSubject,
-// which no mechanitor can control. Verified on 1.7.5005.
+// the mech's cost within the total; HasBandwidthFor is that rule). Whose mech it was before
+// does not matter, since the death already cleared that. Neither applies to a pilot without a
+// mechlink, who can cast only with requireMechlink off and raises the mech uncontrolled, or to
+// a mech with no CompOverseerSubject, which no mechanitor can control. Verified on 1.7.5005.
 //
 // Targeting: the click is a mech corpse (targetMode Thing, corpse-only parameters), validated
 // with messages through ValidateTarget; the def sets no hasAoE, so VEF's ModifyTargets leaves
 // it the only target. The click is not
-// range-limited (GetRangeForPawn returns a number VEF treats as unlimited) because the goto job
-// (VFEA_GotoTargetAndUseAbility) walks the pilot to within the def's distanceToTarget, the
-// apocriton's cast range, before the warmup; requireLineOfSight is off, as on the apocriton,
-// and the walk enforces sight itself. The corpse is re-checked at cast time, since the walk
-// may outlast the corpse window or the charges may have changed meanwhile.
+// range-limited (GetRangeForPawn returns a number VEF treats as unlimited) because the cast job
+// (OLWC_CastResurrectMech, JobDriver_CastResurrectMech) walks the pilot to within the def's
+// distanceToTarget, the apocriton's cast range, before the warmup; requireLineOfSight is off, as
+// on the apocriton, and the walk enforces sight itself. The corpse is re-checked at cast time,
+// since the walk may outlast the corpse window or the charges may have changed meanwhile.
+//
+// Orders and queueing: the cast is an ordered job of ours rather than VEF's started one (the
+// driver's header has why VEF's cannot queue). CreateCastJob, VEF's hook between the click and
+// the job, runs VEF's own steps and then orders the job through TryTakeOrderedJob, so the queue
+// key queues it behind what the pilot is doing, as for any order. MultiSelect, which VEF leaves
+// false and non-virtual, is answered true through the interface, so the targeter stays open
+// while shift is held (Targeter.ProcessInputEvents) and several corpses can be clicked in a
+// row; it reopens on the ability without passing through DoAction, which is what resets VEF's
+// targeting index, so OrderForceTarget resets it. A corpse clicked with the queue key down is
+// checked against what the casts already ordered will take (Pending): the charges and the
+// bandwidth left after them, so the queue never holds a cast the core could not pay for. Without
+// the key the new order replaces them and they count for nothing, as at cast time.
 //
 // Enabled only for a mechanitor while the extension's requireMechlink holds (a mod setting), and
 // only while the core holds a charge; the disabled reason names which. Autocast is pinned off:
@@ -54,7 +70,7 @@ namespace OverlordWarcasket;
 // stored as an end tick is capped to the new length on the next gizmo request after a settings
 // write (ReconcileSettings, keyed on the settings generation), since VEF's cooldown overlay
 // would otherwise overflow the button.
-public class Ability_ResurrectMech : Ability
+public class Ability_ResurrectMech : Ability, ITargetingSource
 {
     // "Unlimited" as a finite number so VEF's range arithmetic and ring drawing stay sane.
     private const float UnlimitedRange = 10000f;
@@ -70,6 +86,26 @@ public class Ability_ResurrectMech : Ability
     public CompResurrectionCore Core => core ??= holder?.TryGetComp<CompResurrectionCore>();
 
     public ResurrectMechExtension Extension => def.GetModExtension<ResurrectMechExtension>();
+
+    bool ITargetingSource.MultiSelect => true;
+
+    // The queue key as TryTakeOrderedJob reads it: down means the next order queues.
+    private static bool Queueing => KeyBindingDefOf.QueueOrder.IsDownEvent;
+
+    // The ability pawn's armor grants, if any: what a cast job, which names only its corpse,
+    // casts with.
+    public static Ability_ResurrectMech WornBy(Pawn pawn)
+    {
+        List<Ability> given = CompResurrectionCore.WornBy(pawn)?.parent.GetComp<CompAbilitiesApparel>()?.GivenAbilities;
+        if (given == null)
+            return null;
+        foreach (Ability ability in given)
+        {
+            if (ability is Ability_ResurrectMech resurrect)
+                return resurrect;
+        }
+        return null;
+    }
 
     public override float GetRangeForPawn() => UnlimitedRange;
 
@@ -110,7 +146,7 @@ public class Ability_ResurrectMech : Ability
             return false;
         if (target.Thing is not Corpse corpse)
             return false;
-        if (CanResurrect(corpse, out string reason, out _))
+        if (CanResurrect(corpse, out string reason, out _, Queueing))
             return true;
         if (showMessages && reason != null)
             Messages.Message(reason, corpse, MessageTypeDefOf.RejectInput, historical: false);
@@ -118,8 +154,9 @@ public class Ability_ResurrectMech : Ability
     }
 
     // The apocriton's CanResurrect less its canResurrect check, with the reason each refusal
-    // shows; cost is the charges the corpse's weight class takes when it passes.
-    public bool CanResurrect(Corpse corpse, out string reason, out int cost)
+    // shows; cost is the charges the corpse's weight class takes when it passes. afterPending
+    // counts the charges and the bandwidth as the casts already ordered will leave them.
+    public bool CanResurrect(Corpse corpse, out string reason, out int cost, bool afterPending = false)
     {
         reason = null;
         cost = -1;
@@ -151,17 +188,112 @@ public class Ability_ResurrectMech : Ability
             reason = "OLWC_CorpseTooOld".Translate(mech.LabelShortCap);
             return false;
         }
-        if (cost > c.Charges)
+        int pendingCharges = 0;
+        float pendingBandwidth = 0f;
+        if (afterPending)
+            Pending(corpse, out pendingCharges, out pendingBandwidth);
+        int charges = Mathf.Max(0, c.Charges - pendingCharges);
+        if (cost > charges)
         {
-            reason = "OLWC_NotEnoughCharges".Translate(mech.LabelShortCap, cost, c.Charges);
+            reason = "OLWC_NotEnoughCharges".Translate(mech.LabelShortCap, cost, charges);
             return false;
         }
-        if (TakesControlOf(mech) && !pawn.mechanitor.HasBandwidthToResurrect(corpse))
+        if (TakesControlOf(mech) && !HasBandwidthFor(mech, pendingBandwidth))
         {
             reason = "OLWC_NotEnoughBandwidth".Translate(pawn.LabelShortCap, mech.LabelShortCap);
             return false;
         }
         return true;
+    }
+
+    // The gestator's rule (Pawn_MechanitorTracker.HasBandwidthToResurrect), with the bandwidth
+    // the casts already ordered will take counted as in use.
+    private bool HasBandwidthFor(Pawn mech, float pending)
+    {
+        Pawn_MechanitorTracker tracker = pawn.mechanitor;
+        return tracker.UsedBandwidth + pending + mech.GetStatValue(StatDefOf.BandwidthCost) <= tracker.TotalBandwidth;
+    }
+
+    // The corpses the pilot's current and queued cast jobs name.
+    private IEnumerable<Corpse> OrderedCorpses()
+    {
+        if (pawn?.jobs == null)
+            yield break;
+        foreach (Job job in pawn.jobs.AllJobs())
+        {
+            if (job.def == OLWC_DefOf.OLWC_CastResurrectMech && job.targetA.Thing is Corpse corpse)
+                yield return corpse;
+        }
+    }
+
+    // What the casts already ordered will take from the core and from the pilot's bandwidth,
+    // leaving out any for corpse itself, which a second click does not order twice.
+    private void Pending(Corpse corpse, out int charges, out float bandwidth)
+    {
+        charges = 0;
+        bandwidth = 0f;
+        ResurrectMechExtension extension = Extension;
+        foreach (Corpse ordered in OrderedCorpses())
+        {
+            Pawn mech = ordered.InnerPawn;
+            if (ordered == corpse || mech == null)
+                continue;
+            if (extension.TryGetCost(mech.RaceProps.mechWeightClass, out int cost))
+                charges += cost;
+            if (TakesControlOf(mech))
+                bandwidth += mech.GetStatValue(StatDefOf.BandwidthCost);
+        }
+    }
+
+    // The targeter reopened on a shift-click (see the header) still holds the index
+    // CreateCastJob left at -1.
+    public override void OrderForceTarget(LocalTargetInfo target)
+    {
+        if (currentTargetingIndex < 0)
+        {
+            currentTargetingIndex = 0;
+            currentTargets = new GlobalTargetInfo[def.targetCount];
+        }
+        base.OrderForceTarget(target);
+    }
+
+    // VEF's CreateCastJob (verified on VEF's source at 58c884b9) with the job ordered instead of
+    // started: the extensions' Valid and PreCast hooks, which may put the start off and call back
+    // for it, then the order.
+    public override void CreateCastJob(params GlobalTargetInfo[] targets)
+    {
+        foreach (AbilityExtension_AbilityMod extension in AbilityModExtensions)
+        {
+            if (!extension.Valid(targets, this, true))
+            {
+                currentTargetingIndex--;
+                return;
+            }
+        }
+        currentTargetingIndex = -1;
+        currentTargets = new GlobalTargetInfo[def.targetCount];
+        Corpse corpse = targets.Length > 0 ? targets[0].Thing as Corpse : null;
+        bool orderNow = true;
+        PreCast(targets, ref orderNow, () => Order(corpse));
+        if (orderNow)
+            Order(corpse);
+    }
+
+    // Orders the cast on corpse; with the queue key down it queues, unless the pilot already has
+    // that corpse ordered.
+    private void Order(Corpse corpse)
+    {
+        if (corpse == null || pawn?.jobs == null)
+            return;
+        if (Queueing)
+        {
+            foreach (Corpse ordered in OrderedCorpses())
+            {
+                if (ordered == corpse)
+                    return;
+            }
+        }
+        pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(OLWC_DefOf.OLWC_CastResurrectMech, corpse), JobTag.Misc);
     }
 
     // Whether the pilot becomes the overseer of mech when it comes back: a mechanitor raising a
@@ -225,7 +357,7 @@ public class Ability_ResurrectMech : Ability
         string first = "OLWC_ChargesLabel".Translate(c.Charges, c.MaxCharges);
         if (target.Thing is not Corpse corpse)
             return first;
-        if (CanResurrect(corpse, out string reason, out int cost))
+        if (CanResurrect(corpse, out string reason, out int cost, Queueing))
         {
             ResurrectMechExtension extension = Extension;
             string label = first + "\n" + "OLWC_TargetCost".Translate(corpse.InnerPawn.LabelShortCap, cost);

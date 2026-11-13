@@ -15,5 +15,9 @@ public static class OLWC_DefOf
     // Command_LoadCore.
     public static JobDef OLWC_LoadCore;
 
+    // The resurrect mech ability's cast (JobDefs/CastResurrectMech.xml), ordered by
+    // Ability_ResurrectMech.
+    public static JobDef OLWC_CastResurrectMech;
+
     static OLWC_DefOf() => DefOfHelper.EnsureInitializedInCtor(typeof(OLWC_DefOf));
 }

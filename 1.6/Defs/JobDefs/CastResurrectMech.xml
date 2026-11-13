@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The resurrect mech ability's cast job (OverlordWarcasket.JobDriver_CastResurrectMech, whose
+    header has why the ability cannot use VEF's own VFEA_GotoTargetAndUseAbility): the pilot
+    walks to within cast range of the mech corpse, target A, stands through the warmup and
+    casts. Named as the ability def's jobDef (AbilityDefs/ResurrectMech.xml) and ordered by the
+    ability itself, as any ordered job, so holding the queue key queues it. The fields are
+    VEF's job's (VEF 1.6 Defs/Abilities/GeneralAbilityDefs.xml). reportString is never shown,
+    the driver reports the ability's jobReportString, as VEF's does, but it is a translatable
+    field the game's walker lists, so it carries vanilla's shape of the same report.
+  -->
+  <JobDef>
+    <defName>OLWC_CastResurrectMech</defName>
+    <driverClass>OverlordWarcasket.JobDriver_CastResurrectMech</driverClass>
+    <reportString>resurrecting TargetA.</reportString>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+    <carryThingAfterJob>true</carryThingAfterJob>
+  </JobDef>
+</Defs>

@@ -3,7 +3,6 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Resurrection ability can't be queued**
 - **Command range limit** mod setting max. 200 throws a red dev log error:
   "Not enough squares to get to radius 200. Max is 200"
 - **Command range** when set to "anywhere" with the mech on a second map it works, with the pilot
@@ -30,7 +29,10 @@
   size, on a light mech and on a centipede: the wave and the sparks on the corpse through the
   warmup, the burst and the flash as it stands up. A raised mech in the pilot's first control group
   and working at once, and a corpse refused with the bandwidth message when the pilot has
-  no room for it (drop the helmet after the mech dies). The core's red sparks on the pilot:
+  no room for it (drop the helmet after the mech dies). Casts queued with shift: several
+  corpses clicked in a row with the targeter staying open, raised in order with the cooldown
+  waited out between them, and a corpse the queue leaves no charges for refused at the click.
+  The core's red sparks on the pilot:
   their size and spread against the warcasket's art. A raider in the set (dev spawn) shows
   them while its core is charged. A drafted non-mechanitor pilot shows none, and does with the
   mechlink requirement off.

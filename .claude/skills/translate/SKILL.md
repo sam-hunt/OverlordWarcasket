@@ -138,6 +138,11 @@ notes for the shim or flow edit this repo owes before continuing.
     identically to `label`, as Shipcracker's languages do). The label is
     Biotech's own apocriton ability label, "resurrect mech"; render it as
     Biotech's translation does.
+  - `DefInjected/JobDef/` for `OLWC_LoadCore` and `OLWC_CastResurrectMech`:
+    `reportString`, vanilla's lowercase report with `TargetA` kept as is
+    (the armor for the first, the mech corpse for the second). The second
+    is never shown, the cast reports the ability's `jobReportString`, but
+    the game lists it, so it is rendered all the same.
   - `DefInjected/TraitDef/` for `OLWC_WarcasketTrait_Overlord`:
     `degreeDatas.0.label` and `degreeDatas.0.description`. The label is
     VFEP's own trait label, `warcasket`, shown in the Bio tab's traits

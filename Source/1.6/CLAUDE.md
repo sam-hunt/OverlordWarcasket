@@ -55,7 +55,11 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target, and with the extension's cost table alone deciding which weight classes come
-  back: every rule lives in `CanResurrect`, which the cast re-runs on the corpse.
+  back: every rule lives in `CanResurrect`, which the cast re-runs on the corpse. Its cast is
+  an ordered job of ours (`OLWC_CastResurrectMech`, `Jobs/JobDriver_CastResurrectMech`), never
+  VEF's started one, so that casts queue: VEF keeps the cast in one slot per pawn, which the
+  driver fills only as its job starts. Medic Warcasket's `JobDriver_MedicCast` is the precedent;
+  the driver's header has the order-time trap.
 - **The overlord trait is mirrored from VFEP's at startup** by `WorkProfile.Mirror`, first in
   `Startup.Run`, so editing or patching its work tags, work types, degree effects or VEF
   extension on our def does not stick, and VFEP's 1.6/1.7 differences need no version check.
