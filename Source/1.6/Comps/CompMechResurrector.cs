@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace OverlordWarcasket;
 
@@ -22,17 +21,15 @@ namespace OverlordWarcasket;
 // - Automatic reload. A colonist fetches ammo on their own (vanilla's JobGiver_Reload) only
 //   while the resurrector sits below TargetCharges, the gauge's drag handle, which starts at zero:
 //   a pilot never spends the colony's ammo unasked. Patches/CompApparelReloadable_Reload has how
-//   vanilla's queries are bent to that. With Props.autoReloadFromInventory it loads the ammo
-//   the pilot carries first, up to the handle and by the carried reload's job, and fetches
-//   only for what is still missing (Patches/JobGiver_Reload_TryGiveJob).
-// - Ordered reload. Right-clicking the ammo (vanilla's float menu, drafted or not) reloads as
-//   far as the clicked stack goes, whatever the handle says.
-// - Carried reload. Vanilla's reload only looks for ammo lying on the map, so ammo in the
-//   pilot's own inventory gets a command beside the gauge (Command_LoadResurrector), yielded only
-//   while the pilot carries some, which orders JobDriver_LoadResurrector; ordered, it fills the
-//   resurrector past the handle as the float menu's does. Combat Extended adds a reload
-//   button of its own to every worn reloadable (ForeignReloadCommand), dropped here: the
-//   carried reload is ours.
+//   vanilla's queries are bent to that, and Patches/JobGiver_Reload_TryGiveJob holds the job's
+//   count to the handle.
+// - Ordered reload. Right-clicking the ammo (vanilla's float menu, drafted or not) fills the
+//   resurrector, whatever the handle says: vanilla gathers stacks outward from the clicked one
+//   until the whole need is met.
+// Both are vanilla's own reload and take ammo lying on the map (ReloadableUtility.FindEnoughAmmo);
+// nothing here reads the pilot's inventory. Combat Extended's "Reload worn armor" button, which
+// it adds to every worn reloadable, is yielded as it comes: the reload from the inventory is
+// CE's to give (Patches/JobGiver_Reload_TryGiveJob has what it does on the resurrector).
 //
 // The resurrector starts full (vanilla's PostPostMake), as the apocriton starts with its thirty. A
 // capacity lowered by the settings trims a resurrector above it on the next tick, on equip and on
@@ -50,13 +47,6 @@ public class CompMechResurrector : CompApparelReloadable
     // Ticks between regen steps; a charge takes a day, so finer steps buy nothing.
     private const int RegenInterval = 150;
 
-    // Combat Extended's "Reload worn armor" (CE 16.7.4), which its postfix on
-    // CompApparelVerbOwner_Charged.CompGetWornGizmosExtra appends for every player pawn. It
-    // runs CE's own automatic reload (Patches/JobGiver_Reload_TryGiveJob has what that does), so
-    // on the resurrector it is a button that does nothing until the handle is raised and then drops
-    // the carried ammo to reload from the floor. Matched by name: CE is not a reference.
-    private const string ForeignReloadCommand = "CombatExtended.Command_ReloadArmor";
-
     private float regenProgress;
 
     // The level an automatic reload fills to; zero never fetches ammo.
@@ -70,9 +60,6 @@ public class CompMechResurrector : CompApparelReloadable
 
     [Unsaved]
     private int gaugeGeneration = -1;
-
-    [Unsaved]
-    private Command_LoadResurrector loadCommand;
 
     public new CompProperties_MechResurrector Props => (CompProperties_MechResurrector)props;
 
@@ -127,68 +114,6 @@ public class CompMechResurrector : CompApparelReloadable
         Mathf.Max(0, (ordered ? maxCharges : Mathf.Min(target, maxCharges)) - charges);
 
     public int ChargesWanted(bool ordered) => ChargesWanted(remainingCharges, MaxCharges, targetCharges, ordered);
-
-    // The ammo of the resurrector's kind in pawn's inventory. Indexed rather than enumerated: the
-    // gizmo pass asks every frame the wearer is selected.
-    public int CarriedAmmo(Pawn pawn)
-    {
-        ThingDef ammo = AmmoDef;
-        ThingOwner<Thing> carried = pawn?.inventory?.innerContainer;
-        if (ammo == null || carried == null)
-            return 0;
-        int count = 0;
-        for (int i = 0; i < carried.Count; i++)
-        {
-            if (carried[i].def == ammo)
-                count += carried[i].stackCount;
-        }
-        return count;
-    }
-
-    // Whether pawn carries a stack that holds a charge's worth: what a carried reload can load,
-    // since ReloadFrom takes one stack at a time. The automatic reload asks before it gives the
-    // job, so a job that could load nothing is never given over and over.
-    public bool CarriesACharge(Pawn pawn)
-    {
-        ThingDef ammo = AmmoDef;
-        ThingOwner<Thing> carried = pawn?.inventory?.innerContainer;
-        if (ammo == null || carried == null)
-            return false;
-        for (int i = 0; i < carried.Count; i++)
-        {
-            if (carried[i].def == ammo && carried[i].stackCount >= Props.ammoCountPerCharge)
-                return true;
-        }
-        return false;
-    }
-
-    // Reloads from the ammo in pawn's inventory, stack by stack, until the charges wanted are
-    // loaded (the whole resurrector for an ordered reload, up to the target for an automatic one)
-    // or the ammo runs out. ReloadFrom loads all a stack can give the resurrector, so a stack
-    // holding more than is wanted has that much split off first, and whatever ReloadFrom leaves of
-    // the split goes back. It splits what it loads off the stack, which takes a spent stack out of
-    // the inventory itself, hence the walk from the end.
-    public void ReloadFromInventory(Pawn pawn, bool ordered)
-    {
-        ThingDef ammo = AmmoDef;
-        ThingOwner<Thing> carried = pawn?.inventory?.innerContainer;
-        if (ammo == null || carried == null)
-            return;
-        for (int i = carried.Count - 1; i >= 0; i--)
-        {
-            int wanted = ChargesWanted(ordered);
-            if (wanted <= 0)
-                return;
-            Thing stack = carried[i];
-            if (stack.def != ammo)
-                continue;
-            int most = wanted * Props.ammoCountPerCharge;
-            Thing part = stack.stackCount > most ? stack.SplitOff(most) : stack;
-            ReloadFrom(part);
-            if (part != stack && !part.Destroyed)
-                carried.TryAdd(part);
-        }
-    }
 
     public bool TryConsume(int cost)
     {
@@ -259,10 +184,7 @@ public class CompMechResurrector : CompApparelReloadable
     public override IEnumerable<Gizmo> CompGetWornGizmosExtra()
     {
         foreach (Gizmo gizmo in base.CompGetWornGizmosExtra())
-        {
-            if (gizmo.GetType().FullName != ForeignReloadCommand)
-                yield return gizmo;
-        }
+            yield return gizmo;
         if (gauge == null || gaugeMaxCharges != MaxCharges || gaugeGeneration != OverlordWarcasketSettings.Generation)
         {
             gauge = new Gizmo_MechResurrector(this);
@@ -270,33 +192,11 @@ public class CompMechResurrector : CompApparelReloadable
             gaugeGeneration = OverlordWarcasketSettings.Generation;
         }
         yield return gauge;
-        Command_LoadResurrector load = LoadCommand();
-        if (load != null)
-            yield return load;
         if (!DebugSettings.ShowDevGizmos)
             yield break;
         yield return new Command_Action { defaultLabel = "DEV: Add charge", action = () => Add(1) };
         yield return new Command_Action { defaultLabel = "DEV: Empty charges", action = () => Add(-MaxCharges) };
     }
-
-    // The carried reload's command, for a player's pilot with ammo in the inventory and no one
-    // else; one cached instance, refreshed on every request.
-    private Command_LoadResurrector LoadCommand()
-    {
-        Pawn wearer = Wearer;
-        if (!ReloadsPerCharge || wearer is not { IsColonistPlayerControlled: true })
-            return null;
-        int carried = CarriedAmmo(wearer);
-        if (carried <= 0)
-            return null;
-        loadCommand ??= new Command_LoadResurrector(this);
-        loadCommand.Refresh(wearer, carried);
-        return loadCommand;
-    }
-
-    // Orders the carried reload; a drafted pilot takes it as any ordered job.
-    public void OrderReloadFromInventory(Pawn pawn) =>
-        pawn.jobs.TryTakeOrderedJob(JobMaker.MakeJob(OLWC_DefOf.OLWC_LoadResurrector, parent), JobTag.Misc);
 
     public override string CompInspectStringExtra() =>
         "MechResurrectionCharges".Translate() + ": " + LabelRemaining;

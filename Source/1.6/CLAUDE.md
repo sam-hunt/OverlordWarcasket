@@ -52,7 +52,7 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   comp only: `CompApparelReloadable_Reload` and `JobGiver_Reload_TryGiveJob` (their headers have
   the call paths). The ability reads the resurrector off `holder` and `CompResurrectorSparks` off
   its own parent, so all three comps share the armor def. `CompMechResurrector`'s header has the
-  arithmetic, the three reloads and the trim rules.
+  arithmetic, the two reloads and the trim rules.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target, and with the extension's cost table alone deciding which weight classes come

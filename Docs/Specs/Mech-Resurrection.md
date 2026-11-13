@@ -60,16 +60,19 @@ never competes with the reload:
 - Reload: `ammoCountPerCharge` advanced components (`ComponentSpacer`) per charge, the costly
   shortcut (VFE Pirates' Controller warcasket reloads its drones with one advanced component).
 
-A reload happens three ways. Automatic: the pilot fetches components on their own (vanilla's
-`JobGiver_Reload`) only while the resurrector is below the gauge's drag handle, which starts at
-zero, so a pilot never spends the colony's components unasked. Ordered: right-clicking components
-(vanilla's float menu, drafted too) reloads as far as the clicked stack goes, ignoring the
-handle. Carried: a command beside the gauge loads the resurrector from the pilot's inventory (job
-`OLWC_LoadResurrector`), since vanilla's reload never looks there. Two Harmony patches bend
-vanilla's queries for this comp only: `CompApparelReloadable_Reload` (`NeedsReload` and
-`MaxAmmoNeeded`, branching on `allowForcedReload`: false answers for the handle's target, true for
-the whole resurrector) and `JobGiver_Reload_TryGiveJob` (caps the automatic job's count at the
-target). The capacity, the recharge and the reload cost are mod settings.
+A reload happens two ways, both vanilla's and both from the map only; nothing of ours looks in
+the pilot's inventory. Automatic: an undrafted colonist pilot fetches components on their own
+(vanilla's `JobGiver_Reload`) only while the resurrector is below the gauge's drag handle, which
+starts at zero, so a pilot never spends the colony's components unasked, and loads up to the
+handle and no further. Ordered: right-clicking components (vanilla's float menu, drafted too)
+fills the resurrector, ignoring the handle; vanilla's finder gathers stacks outward from the
+clicked one until the whole need is met, so it is not limited to the clicked stack. Two Harmony
+patches bend vanilla's queries for this comp only: `CompApparelReloadable_Reload` (`NeedsReload`
+and `MaxAmmoNeeded`, branching on `allowForcedReload`: false answers for the handle's target, true
+for the whole resurrector) and `JobGiver_Reload_TryGiveJob` (a `Priority.First` prefix that, when
+the reloadable vanilla would serve is the resurrector, repeats vanilla's own steps and caps the
+automatic job's count at the target). The capacity, the recharge and the reload cost are mod
+settings.
 
 ### 3.3 The gauge
 
@@ -79,9 +82,7 @@ the player's pilots to set the automatic reload level, which starts at zero.
 Red: fill (0.62, 0.12, 0.12), hover (0.85, 0.30, 0.30), handle (0.40, 0.07, 0.07). The
 tooltip: the count, the recharge line (rate and wait, or full, or never), vanilla's reload per
 charge line, the automatic reload level line (or that it is off), the cost per weight class and
-the corpse window. Beside the gauge, `Command_LoadResurrector` shows only while the pilot carries
-the components: the component's icon on a red background with the count carried, disabled with a
-reason when the resurrector is full or too few are carried.
+the corpse window.
 
 ### 3.4 The cast
 
@@ -126,9 +127,7 @@ mechlink reason. Lower the capacity in settings to 5 and expect the gauge trimme
 
 Reload: with the handle at zero and the resurrector below full, expect no pilot to fetch components;
 raise the handle and expect an undrafted pilot to fetch advanced components up to that level and
-no further. Right-click components drafted and undrafted and expect a reload past the handle.
-Pick components up with vanilla's pick up order and expect the load button, with the component's
-icon on a red background and the count; expect it gone with none carried, disabled when the
-resurrector is full and when too few are carried, and the load to take the components out of the
-inventory. Expect the charge-per-day and reload cost sliders to reach a worn resurrector, the
-tooltip to show the wait for the next charge, and the armor's stat sheet to show the reload cost.
+no further. Right-click components drafted and undrafted and expect a reload past the handle,
+taking stacks beyond the clicked one when it falls short. Expect the charge-per-day and reload
+cost sliders to reach a worn resurrector, the tooltip to show the wait for the next charge, and
+the armor's stat sheet to show the reload cost.

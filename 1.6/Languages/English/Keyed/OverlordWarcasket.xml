@@ -24,12 +24,6 @@
   <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
   <OLWC_GaugeDragHint>Drag the bar to set a level. The pilot will reload the resurrector whenever it falls below that level.</OLWC_GaugeDragHint>
 
-  <!-- The carried reload's command (Source/1.6/Gizmos/Command_LoadResurrector.cs) -->
-  <OLWC_LoadCarried>Load carried {0}</OLWC_LoadCarried>
-  <OLWC_LoadCarriedDesc>Reload the mech resurrector with the {0} the pilot is carrying. Each charge takes {1}.</OLWC_LoadCarriedDesc>
-  <OLWC_ResurrectorFull>The mech resurrector is full.</OLWC_ResurrectorFull>
-  <OLWC_NotEnoughCarried>{0} is carrying less than the {1} a charge takes.</OLWC_NotEnoughCarried>
-
   <!-- Mod settings (Source/1.6/Settings/) -->
   <OLWC_SettingsCategory>Overlord Warcasket</OLWC_SettingsCategory>
   <OLWC_SettingsUnavailable>These settings are unavailable. Another mod has changed the overlord warcasket's definitions, so the set keeps its built-in values.</OLWC_SettingsUnavailable>
@@ -60,9 +54,6 @@
 
   <OLWC_SparksOnlyDrafted>Sparks only while drafted</OLWC_SparksOnlyDrafted>
   <OLWC_SparksOnlyDraftedDesc>When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the sparks will play whenever the armor holds a charge, as on an apocriton.</OLWC_SparksOnlyDraftedDesc>
-
-  <OLWC_AutoReloadFromInventory>Automatic reload from inventory</OLWC_AutoReloadFromInventory>
-  <OLWC_AutoReloadFromInventoryDesc>When enabled, an automatic reload will use what the pilot is carrying before fetching more. When disabled, it will only fetch from elsewhere, and what the pilot is carrying will be loaded when you order it.</OLWC_AutoReloadFromInventoryDesc>
 
   <OLWC_SummaryCost>{1} for {0_indefinite} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>

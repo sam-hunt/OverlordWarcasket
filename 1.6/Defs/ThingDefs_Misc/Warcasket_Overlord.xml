@@ -97,13 +97,8 @@
       values (the Medic's suite); chargeNoun is vanilla's default, spelled out because the
       stat sheet and the gauge's tooltip print it.
     A pilot never fetches components unasked: the gauge's drag handle sets the level an
-    automatic reload fills to and starts at zero (CompMechResurrector's header has the three
+    automatic reload fills to and starts at zero (CompMechResurrector's header has the two
     ways a reload happens).
-    - autoReloadFromInventory false: an automatic reload fetches from the map and leaves the
-      components the pilot carries to the load button, as vanilla's reload never looks in an
-      inventory and a carried stock reads as the player's reserve. A mod setting defaulting to
-      this value. The Combat Extended root turns it on, CE's players carrying their reload
-      ammo to have it used (1.6/Mods/CombatExtended/Patches/MechResurrector.xml).
 
     Resurrector sparks: OverlordWarcasket.CompProperties_ResurrectorSparks plays
     OLWC_ResurrectorSparks (Effects/ResurrectorSparks.xml), the apocriton's idle red crackle, on
@@ -203,7 +198,6 @@
         <chargesPerDay>1</chargesPerDay>
         <ammoDef>ComponentSpacer</ammoDef>
         <ammoCountPerCharge>1</ammoCountPerCharge>
-        <autoReloadFromInventory>false</autoReloadFromInventory>
         <baseReloadTicks>60</baseReloadTicks>
         <soundReload>Standard_Reload</soundReload>
         <chargeNoun>charge</chargeNoun>

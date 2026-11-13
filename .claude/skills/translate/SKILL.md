@@ -107,12 +107,6 @@ notes for the shim or flow edit this repo owes before continuing.
     one `OLWC_GaugeCost` per weight class with `{0}` its capitalised label
     and `{1}` the charges, which the code bullets; `OLWC_GaugeDragHint`
     (the closing paragraph, free to wrap) none.
-  - the carried reload's command beside the gauge: `OLWC_LoadCarried` (its
-    label) takes `{0}` the reload item's plural label, as the language's own
-    pluraliser gives it; `OLWC_LoadCarriedDesc` `{0}` that label and `{1}`
-    the cost per charge, a count and the item's label ("1 advanced
-    component"); `OLWC_ResurrectorFull` none; `OLWC_NotEnoughCarried` `{0}` the
-    pilot's name and `{1}` that cost.
   Name the set's things with the same renderings as the DefInjected text
   (mech resurrector, charge, mechanitor, warcasket).
 - **Enumerate the key set from `Scripts/expected-injections.json`, never
@@ -138,11 +132,10 @@ notes for the shim or flow edit this repo owes before continuing.
     identically to `label`, as Shipcracker's languages do). The label is
     Biotech's own apocriton ability label, "resurrect mech"; render it as
     Biotech's translation does.
-  - `DefInjected/JobDef/` for `OLWC_LoadResurrector` and `OLWC_CastResurrectMech`:
-    `reportString`, vanilla's lowercase report with `TargetA` kept as is
-    (the armor for the first, the mech corpse for the second). The second
-    is never shown, the cast reports the ability's `jobReportString`, but
-    the game lists it, so it is rendered all the same.
+  - `DefInjected/JobDef/` for `OLWC_CastResurrectMech`: `reportString`,
+    vanilla's lowercase report with `TargetA` kept as is (the mech corpse).
+    It is never shown, the cast reports the ability's `jobReportString`,
+    but the game lists it, so it is rendered all the same.
   - `DefInjected/TraitDef/` for `OLWC_WarcasketTrait_Overlord`:
     `degreeDatas.0.label` and `degreeDatas.0.description`. The label is
     VFEP's own trait label, `warcasket`, shown in the Bio tab's traits

@@ -15,15 +15,14 @@ namespace OverlordWarcasket;
 // fetching ammo unasked (Patches/CompApparelReloadable_Reload); it starts at zero, the recharge
 // being the resurrector's main supply, and an ordered reload ignores it. The colours are red, the
 // resurrector's warning light, against the family's canister green (Toxin) and medical blue
-// (Medic): the fill, a lighter red on hover and a darker red for the handle, which
-// Command_LoadResurrector takes for its background. Gizmo_Slider builds its bar textures and reads
-// its target on first draw, so the comp keeps one instance and rebuilds it when the capacity or the
-// settings generation changes.
+// (Medic): the fill, a lighter red on hover and a darker red for the handle. Gizmo_Slider builds
+// its bar textures and reads its target on first draw, so the comp keeps one instance and rebuilds
+// it when the capacity or the settings generation changes.
 public class Gizmo_MechResurrector : Gizmo_Slider
 {
     private static readonly Color ResurrectorFill = new(0.62f, 0.12f, 0.12f);
     private static readonly Color ResurrectorHighlight = new(0.85f, 0.30f, 0.30f);
-    internal static readonly Color ResurrectorShade = new(0.40f, 0.07f, 0.07f);
+    private static readonly Color ResurrectorShade = new(0.40f, 0.07f, 0.07f);
 
     private static bool draggingBar;
 
@@ -89,7 +88,7 @@ public class Gizmo_MechResurrector : Gizmo_Slider
             ? "OLWC_GaugeRegen".Translate(rate.ToString("0.##")).Resolve()
             : "OLWC_GaugeNoRegen".Translate().Resolve());
         if (resurrector.ReloadsPerCharge)
-            tip.Append('\n').Append("OLWC_GaugeReload".Translate(Command_LoadResurrector.CostLabel(resurrector.AmmoDef, resurrector.Props.ammoCountPerCharge)).Resolve());
+            tip.Append('\n').Append("OLWC_GaugeReload".Translate(CostLabel(resurrector.AmmoDef, resurrector.Props.ammoCountPerCharge)).Resolve());
         bool draggable = IsDraggable;
         if (draggable)
         {
@@ -114,4 +113,8 @@ public class Gizmo_MechResurrector : Gizmo_Slider
             tip.Append("\n\n").Append("OLWC_GaugeDragHint".Translate().Resolve());
         return tip.ToString();
     }
+
+    // "1 advanced component", "2 advanced components": what a charge costs to reload.
+    internal static string CostLabel(ThingDef ammo, int count) =>
+        count + " " + Find.ActiveLanguageWorker.Pluralize(ammo.label, count);
 }

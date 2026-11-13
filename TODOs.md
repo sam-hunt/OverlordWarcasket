@@ -3,8 +3,6 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Manual ability reload** should reload only up to the slider if it's less than it, maybe if it's reattempted at that point, then reload to full?
-- **Automatic ability reload** doesn't seem to work from inventory? is "pick up to inventory" PUAH only? I don't see the vanilla float menu option to pick up, so can't reach the gizmo or reload behavior that way
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
@@ -36,16 +34,16 @@
   walks off the map undraft, as vanilla has it, and draft again once the caravan has formed.
 - **Set tuning in play.** How the helmet's -3 shooting plays with a warcasket weapon.
   Is the recharge too generous?
-- **In-game run with Combat Extended.** The CE root is checked statically and the three C#
+- **In-game run with Combat Extended.** The CE root is checked statically and the two C#
   answers to CE's patches build clean, but nothing has been seen in game: the helmet's stat
   sheet reading AimingAccuracy -15% and weapon handling -0.75; a pilot ordering a drafted mech
   across the map with no white ring, the ring at the chosen radius under the radius scope, and
   CE's 43.9 ring back for a mechanitor without the set; the settings window quoting 43.9 as the
-  normal range and as the slider's default, and the slider running out to 118.9; no "Reload worn
-  armor" button beside the gauge; a pilot below the handle with components in the inventory
-  loading them up to the handle and dropping nothing, and fetching from the map instead with
-  the automatic reload from inventory setting off; the load button after CE's own pick up
-  order; the helmet's stat sheet listing the long range radio. Also a mech raised by the resurrector: by the code it stands up with a freshly generated,
+  normal range and as the slider's default, and the slider running out to 118.9; CE's "Reload
+  worn armor" button beside the gauge, doing nothing at or above the handle, and below it with
+  components carried dropping what the resurrector lacks and loading it; an undrafted pilot below
+  the handle fetching components from the map up to the handle while carrying some, and dropping
+  none; the helmet's stat sheet listing the long range radio. Also a mech raised by the resurrector: by the code it stands up with a freshly generated,
   loaded weapon and spare magazines, as an apocriton's does (vanilla regenerates the weapon and
   CE loads whatever that generates).
 - **In-game run with Alpha Mechs.** The scan found nothing to patch (the armor and ability def

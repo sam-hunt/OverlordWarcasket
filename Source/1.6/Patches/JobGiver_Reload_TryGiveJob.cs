@@ -20,19 +20,21 @@ namespace OverlordWarcasket.Patches;
 // through here, so an ordered reload keeps the whole resurrector's count. Every other reloadable
 // falls through to vanilla.
 //
-// Where the resurrector's autoReloadFromInventory is on, the ammo the pilot carries comes first:
-// while a carried stack holds a charge's worth the job given is the carried reload's
-// (OLWC_LoadResurrector), which loads up to the target and no further, and the fetch above serves
-// only what is still missing once no carried stack does.
-//
 // A prefix, and first among them, rather than a postfix on the count: another mod's prefix can
 // answer before vanilla does, and Harmony skips every later bool prefix once one returns false.
 // Combat Extended's is the known one (Harmony_JobGiver_Reload_TryGiveJob, CE 16.7.4, applied
 // from the Mod constructor and so ahead of ours at equal priority): for any worn reloadable
 // whose ammo the pawn carries it drops MaxAmmoNeeded(true) of it, a whole resurrector's worth, at
 // the pawn's feet and reloads from that, which a capped count would leave lying where the pilot
-// stood. Answering first keeps the automatic reload the same with CE as without, the carried
-// ammo spent or left as the resurrector's own switch says, and never dropped.
+// stood. Answering first keeps the automatic reload the same with CE as without: fetched from
+// the map up to the target, the carried ammo neither spent nor dropped.
+//
+// CE's "Reload worn armor" button (Command_ReloadArmor, on every worn reloadable of a player's
+// colonist) calls that prefix of CE's as a plain method, outside Harmony's chain, so it is not
+// answered here. It asks FindSomeReloadableComponent with allowForcedReload false, as the
+// automatic reload does, so on a resurrector at or above the target it does nothing; below it
+// the carried stack is dropped for what the resurrector lacks and loaded whole, an order's
+// reload from the inventory.
 [HarmonyPatch(typeof(JobGiver_Reload), "TryGiveJob")]
 public static class JobGiver_Reload_TryGiveJob
 {
@@ -49,8 +51,6 @@ public static class JobGiver_Reload_TryGiveJob
     {
         if (!pawn.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
             return null;
-        if (resurrector.Props.autoReloadFromInventory && resurrector.CarriesACharge(pawn))
-            return JobMaker.MakeJob(OLWC_DefOf.OLWC_LoadResurrector, resurrector.parent);
         if (pawn.carryTracker.AvailableStackSpace(resurrector.AmmoDef) < resurrector.MinAmmoNeeded(allowForcedReload: true))
             return null;
         List<Thing> ammo = ReloadableUtility.FindEnoughAmmo(pawn, pawn.Position, resurrector, forceReload: false);

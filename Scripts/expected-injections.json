@@ -24,10 +24,6 @@
       "OLWC_CastResurrectMech.reportString": {
         "english": "resurrecting TargetA.",
         "required": true
-      },
-      "OLWC_LoadResurrector.reportString": {
-        "english": "reloading TargetA.",
-        "required": true
       }
     },
     "ThingDef": {

@@ -23,27 +23,23 @@ CE patches, the quickest check after a CE update or before patching a new vanill
   the number is also `CommandRange.CombatExtendedRadius`, a rung the slider names in every game.
 - **The reload**: CE's prefix on `JobGiver_Reload.TryGiveJob` and its "Reload worn armor" button
   on every worn reloadable. `Source/1.6/Patches/JobGiver_Reload_TryGiveJob.cs` answers first for
-  the resurrector and `CompMechResurrector` drops the button; `Patches/MechResurrector.xml` turns
-  the automatic reload from inventory on, CE's own habit.
+  the resurrector, so the automatic reload fetches from the map up to the handle with CE as
+  without it, the carried components neither spent nor dropped. The button is CE's and stays
+  beside the gauge, the one reload from the inventory (that file's header has what it does on the
+  resurrector). Nothing in `Patches/` concerns the reload.
 - **A prefix of ours on a method CE also prefixes takes `Priority.First`** (`Source/1.6/CLAUDE.md`
   has the rule): CE patches from its `Mod` constructor, ahead of ours.
 
 ## Looked at and left alone
 
-- **CE's inventory weight goes stale after a carried reload that takes part of a stack.** CE
-  caches a pawn's carried weight and bulk (`CompInventory`) and refreshes on `ThingOwner` adds,
-  removals and takes; a partial `Thing.SplitOff`, which `ReloadFromInventory` and vanilla's
-  `ReloadFrom` both do, only lowers a stack's count and notifies no one. The pilot reads a few
-  components heavy until their inventory next changes. Not worth a patch or a CE reference;
-  do not "fix" it by reflecting into `CompInventory`.
 - **A mech raised under CE comes back armed and loaded.** Vanilla's `ResurrectionUtility`
   regenerates a missing mech weapon through `PawnWeaponGenerator.TryGenerateWeaponFor`, which CE
   postfixes with the pawn kind's loadout (a loaded weapon and spare magazines). The apocriton's
   raise does the same, so it is CE's behavior, not the resurrector's.
-- **CE's pick up order replaces vanilla's** (its own float menu, gated on CE bulk and weight)
-  and still lands the components in `inventory.innerContainer`, where the load button reads them.
-  A pilot on a non-default CE loadout sheds items the loadout does not list and CE's own pick up
-  did not record; that is the player's loadout to set.
+- **CE's pick up order replaces vanilla's** (its own float menu, gated on CE bulk and weight).
+  Components a CE player picks up or keeps in a loadout are what CE's "Reload worn armor" button
+  reads. A pilot on a non-default CE loadout sheds items the loadout does not list and CE's own
+  pick up did not record; that is the player's loadout to set.
 - **Untouched by CE**: the `ResurrectionMech` ability def and its effecters, mech weight classes
   and charge costs, mech corpses, `ComponentSpacer`, the mech gestator's and the mechanitor's
   work givers (CE adds none outside Hauling and Smithing), VEF abilities and VEF's shield bubble.
