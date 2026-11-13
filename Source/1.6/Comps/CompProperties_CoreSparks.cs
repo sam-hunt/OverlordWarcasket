@@ -9,8 +9,8 @@ public class CompProperties_CoreSparks : CompProperties
 {
     public EffecterDef effecterDef;
 
-    // Plays only while the wearer is drafted, for wearers who can be (see CompCoreSparks). A mod
-    // setting defaulting to the XML, written back here.
+    // Plays only while the wearer is drafted and able to cast, for wearers who can be drafted
+    // (see CompCoreSparks). A mod setting defaulting to the XML, written back here.
     public bool onlyWhileDrafted = true;
 
     public CompProperties_CoreSparks()
