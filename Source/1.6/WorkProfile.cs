@@ -246,7 +246,6 @@ public static class WorkProfile
         if (overlord == null)
             return;
         Write(open);
-        Log.Message($"[Overlord Warcasket] Overlord warcasket trait disabled work types: {Describe(overlord.disabledWorkTypes)}.");
         if (Current.ProgramState != ProgramState.Playing)
             return;
         foreach (Pawn pawn in PawnsFinder.AllMapsWorldAndTemporary_Alive)

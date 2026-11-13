@@ -3,7 +3,6 @@
 ## Features
 
 - **Cerebrex node mask** pending art landing
-- **Extraneous debug** "[Overlord Warcasket] Overlord warcasket trait disabled work types: Cooking, Construction, Growing, Mining, PlantCutting, Tailoring, Crafting."
 - **Manual ability reload** should reload only up to the slider if it's less than it, maybe if it's reattempted at that point, then reload to full?
 - **Automatic ability reload** doesn't seem to work from inventory? is "pick up to inventory" PUAH only? I don't see the vanilla float menu option to pick up, so can't reach the gizmo or reload behavior that way
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
