@@ -39,7 +39,7 @@ public class CompatPatchTests
     // without one the root's files fail here and say so.
     private static readonly (string root, string dlc)[] DlcRoots = [("1.6/Mods/Odyssey/", "Odyssey")];
 
-    private static string? RimWorldPath()
+    internal static string? RimWorldPath()
     {
         string home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
         string?[] candidates =

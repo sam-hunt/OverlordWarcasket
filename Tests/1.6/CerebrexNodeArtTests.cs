@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,22 +9,31 @@ using Xunit;
 namespace OverlordWarcasket.Tests;
 
 // The cerebrex art patch (1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) only runs with Odyssey
-// active and the setting on, so a drift between its loose ends would surface in game only for a
-// player who opted in: the switch it names must be a public BoolSetting field of the settings,
-// as PatchOperationSetting looks it up (read off the settings' source, since the type itself
-// pulls in VEF, which the test output never carries); every path it writes must be
-// CerebrexNode.TexPath, which the settings window reads off the def; that path must have its
-// four textures in the Odyssey art root, the item and the worn pack's three facings (the game
-// flips east for west); and each of the four must have its mask beside it, which the patch must
-// switch on for the item and for the pack, since a mask the def never asks for is never read and
-// a mask shader with no mask file paints nothing.
+// active and a choice other than the default, so a drift between its loose ends would surface in
+// game only for a player who opted in. Each branch names a setting and a choice: the setting
+// must be a public field of the settings that a patch can read, as PatchOperationSetting looks
+// it up (read off the settings' source, since the type itself pulls in VEF, which the test
+// output never carries), and the choice one of CerebrexArt's names; every choice but Odyssey's
+// own art, which is the patch not running, must have exactly one branch. A branch must write
+// its choice's path, CerebrexNode.TexPath or RingTexPath, which the settings window reads off
+// the def, onto the item and the worn pack alike, and turn the two mask switches on exactly when
+// the choice is a masked one, since a mask the def never asks for is never read and a mask
+// shader with no mask file paints nothing. Each path must have its four textures in the Odyssey
+// art root, the item and the worn pack's three facings (the game flips east for west), and each
+// of the four its mask beside it. The two folders must carry the same art and different masks,
+// the ring folder being a copy made only because the worn pack finds its masks by name. And the
+// path the picker draws Odyssey's own art from must be the one Odyssey's def ships with.
 public class CerebrexNodeArtTests
 {
     private const string PatchPath = "1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml";
     private const string ArtRoot = "Mods/Odyssey/Textures";
     private const string SettingOperation = "OverlordWarcasket.PatchOperationSetting";
     private const string SettingsSource = "Source/1.6/Settings/OverlordWarcasketSettings.cs";
-    private static readonly Regex SwitchField = new(@"public\s+readonly\s+BoolSetting\s+(\w+)\s*=", RegexOptions.Compiled);
+    private const string ArtSetting = "CerebrexArtSetting";
+    private static readonly Regex SettingField = new(@"public\s+readonly\s+(BoolSetting|CerebrexArtSetting)\s+(\w+)\s*=", RegexOptions.Compiled);
+
+    private static readonly string[] ArtSuffixes = ["", "_north", "_east", "_south"];
+    private static readonly string[] MaskSuffixes = ["_m", "_northm", "_eastm", "_southm"];
 
     private static readonly string RepoRoot = FindRepoRoot();
 
@@ -37,62 +47,116 @@ public class CerebrexNodeArtTests
         throw new InvalidOperationException("OverlordWarcasket.sln not found above the test output folder");
     }
 
-    private static XDocument Patch() => XDocument.Load(Path.Combine(RepoRoot, PatchPath));
+    private static List<XElement> Branches() => XDocument.Load(Path.Combine(RepoRoot, PatchPath)).Descendants()
+        .Where(e => (string)e.Attribute("Class") == SettingOperation)
+        .ToList();
+
+    private static XElement Branch(string choice) => Assert.Single(Branches(), b => b.Element("choice")?.Value == choice);
+
+    private static string TextureFile(string texPath, string suffix) => Path.Combine(RepoRoot, ArtRoot, texPath + suffix + ".png");
 
     [Fact]
-    public void SwitchIsAPublicBoolSettingOfTheSettings()
+    public void EveryBranchNamesAPatchableSettingAndOneOfItsChoices()
     {
-        var names = Patch().Descendants()
-            .Where(e => (string)e.Attribute("Class") == SettingOperation)
-            .Select(e => e.Element("setting")?.Value)
-            .ToList();
-        Assert.NotEmpty(names);
-        var switches = SwitchField.Matches(File.ReadAllText(Path.Combine(RepoRoot, SettingsSource)))
+        var fields = SettingField.Matches(File.ReadAllText(Path.Combine(RepoRoot, SettingsSource)))
             .Cast<Match>()
-            .Select(m => m.Groups[1].Value)
-            .ToList();
-        Assert.NotEmpty(switches);
-        foreach (var name in names)
-            Assert.True(switches.Contains(name ?? ""), $"{PatchPath}: '{name}' is not a public BoolSetting field in {SettingsSource}");
+            .ToDictionary(m => m.Groups[2].Value, m => m.Groups[1].Value);
+        Assert.NotEmpty(fields);
+        var branches = Branches();
+        Assert.NotEmpty(branches);
+        foreach (var branch in branches)
+        {
+            string name = branch.Element("setting")?.Value ?? "";
+            string choice = branch.Element("choice")?.Value;
+            Assert.True(fields.TryGetValue(name, out var type), $"{PatchPath}: '{name}' is not a public setting field a patch can read in {SettingsSource}");
+            string[] choices = type == ArtSetting ? Enum.GetNames(typeof(CerebrexArt)) : ["true", "false"];
+            Assert.True(choice == null ? type != ArtSetting : choices.Contains(choice), $"{PatchPath}: '{name}' has no choice '{choice}'");
+        }
     }
 
     [Fact]
-    public void EveryPathWrittenIsCerebrexNodeTexPath()
+    public void EveryChoiceButOdysseysHasOneBranch()
     {
-        var values = Patch().Descendants("value").Elements()
+        var expected = Enum.GetNames(typeof(CerebrexArt)).Where(n => n != nameof(CerebrexArt.Odyssey)).OrderBy(n => n);
+        var written = Branches().Select(b => b.Element("choice")?.Value).OrderBy(n => n);
+        Assert.Equal(expected, written);
+    }
+
+    [Theory]
+    [InlineData(nameof(CerebrexArt.DyeAll), CerebrexNode.TexPath)]
+    [InlineData(nameof(CerebrexArt.DyeFrame), CerebrexNode.TexPath)]
+    [InlineData(nameof(CerebrexArt.DyeFrameAndRing), CerebrexNode.RingTexPath)]
+    public void BranchWritesItsPathOnTheItemAndThePack(string choice, string texPath)
+    {
+        var values = Branch(choice).Descendants("value").Elements()
             .Where(e => e.Name.LocalName is "texPath" or "wornGraphicPath")
-            .Select(e => e.Value)
             .ToList();
-        Assert.Equal(2, values.Count);
-        Assert.All(values, value => Assert.Equal(CerebrexNode.TexPath, value));
+        Assert.Equal(["texPath", "wornGraphicPath"], values.Select(e => e.Name.LocalName).OrderBy(n => n));
+        Assert.All(values, value => Assert.Equal(texPath, value.Value));
     }
 
     // The item's graphic reads its mask under a mask shader (graphicData/shaderType) and the worn
-    // pack's under the apparel's own flag; each is written once, under the parent that owns it.
+    // pack's under the apparel's own flag; a masked branch writes each once, under the parent
+    // that owns it, and the unmasked one neither.
     [Theory]
-    [InlineData("graphicData", "shaderType", "CutoutComplex")]
-    [InlineData("apparel", "useWornGraphicMask", "true")]
-    public void MaskSwitchIsWrittenOnce(string parent, string field, string expected)
+    [InlineData(nameof(CerebrexArt.DyeAll), false)]
+    [InlineData(nameof(CerebrexArt.DyeFrame), true)]
+    [InlineData(nameof(CerebrexArt.DyeFrameAndRing), true)]
+    public void BranchSwitchesTheMasksOnOnlyWhenMasked(string choice, bool masked)
     {
-        var written = Patch().Descendants("value").Elements(field).ToList();
-        Assert.Single(written);
-        Assert.Equal(expected, written[0].Value);
-        var xpath = written[0].Parent!.Parent!.Element("xpath")?.Value ?? "";
-        Assert.EndsWith("/" + parent, xpath);
+        foreach (var (parent, field, expected) in new[] { ("graphicData", "shaderType", "CutoutComplex"), ("apparel", "useWornGraphicMask", "true") })
+        {
+            var written = Branch(choice).Descendants("value").Elements(field).ToList();
+            if (!masked)
+            {
+                Assert.Empty(written);
+                continue;
+            }
+            Assert.Single(written);
+            Assert.Equal(expected, written[0].Value);
+            var xpath = written[0].Parent!.Parent!.Element("xpath")?.Value ?? "";
+            Assert.EndsWith("/" + parent, xpath);
+        }
     }
 
     [Theory]
-    [InlineData("")]
-    [InlineData("_north")]
-    [InlineData("_east")]
-    [InlineData("_south")]
-    [InlineData("_m")]
-    [InlineData("_northm")]
-    [InlineData("_eastm")]
-    [InlineData("_southm")]
-    public void TextureShipsAtTheWrittenPath(string suffix)
+    [InlineData(CerebrexNode.TexPath)]
+    [InlineData(CerebrexNode.RingTexPath)]
+    public void ArtAndMasksShipAtTheWrittenPath(string texPath)
     {
-        var file = Path.Combine(RepoRoot, ArtRoot, CerebrexNode.TexPath + suffix + ".png");
-        Assert.True(File.Exists(file), $"missing {file.Substring(RepoRoot.Length + 1)}");
+        foreach (var suffix in ArtSuffixes.Concat(MaskSuffixes))
+        {
+            var file = TextureFile(texPath, suffix);
+            Assert.True(File.Exists(file), $"missing {file.Substring(RepoRoot.Length + 1)}");
+        }
+    }
+
+    [Fact]
+    public void RingFolderCarriesTheSameArtAndItsOwnMasks()
+    {
+        foreach (var suffix in ArtSuffixes)
+        {
+            Assert.True(File.ReadAllBytes(TextureFile(CerebrexNode.TexPath, suffix)).SequenceEqual(File.ReadAllBytes(TextureFile(CerebrexNode.RingTexPath, suffix))),
+                $"CerebrexNodePack{suffix}.png differs between the two art folders: the ring folder's is a copy");
+        }
+        foreach (var suffix in MaskSuffixes)
+        {
+            Assert.False(File.ReadAllBytes(TextureFile(CerebrexNode.TexPath, suffix)).SequenceEqual(File.ReadAllBytes(TextureFile(CerebrexNode.RingTexPath, suffix))),
+                $"CerebrexNodePack{suffix}.png is the same mask in both art folders");
+        }
+    }
+
+    // Odyssey's def from the local install, as CompatPatchTests reads it; without an install the
+    // test fails and says so.
+    [Fact]
+    public void OdysseyTexPathIsTheOneOdysseysDefShipsWith()
+    {
+        var install = CompatPatchTests.RimWorldPath();
+        Assert.True(install != null, "no RimWorld install was found to read Odyssey's cerebrex node from: set RIMWORLD_PATH");
+        var def = Directory.EnumerateFiles(Path.Combine(install!, "Data", "Odyssey", "Defs"), "*.xml", SearchOption.AllDirectories)
+            .SelectMany(file => XDocument.Load(file).Root!.Elements("ThingDef"))
+            .Single(e => e.Element("defName")?.Value == CerebrexNode.DefName);
+        Assert.Equal(CerebrexNode.OdysseyTexPath, def.Element("graphicData")?.Element("texPath")?.Value);
+        Assert.Equal(CerebrexNode.OdysseyTexPath, def.Element("apparel")?.Element("wornGraphicPath")?.Value);
     }
 }

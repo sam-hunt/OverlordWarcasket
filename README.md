@@ -44,7 +44,8 @@ spacer warcaskets research together with Biotech's ultra mechtech.
   must be, the casting time, the cooldown, whether a mechlink is required and which work the
   pilot may take on
 - **A new look for the cerebrex node** (Odyssey): a setting redraws Odyssey's mechanitor utility
-  pack with the mod's own art, on the ground and on the wearer's back; off by default
+  pack with the mod's own art, on the ground and on the wearer's back, with a choice of how
+  much of it a dye colors; off by default
 - **Mechanitor gear on a warcasket**: the helmet adds 12 bandwidth at some cost to the pilot's
   aim, the armor 8 more, and the shoulders a control group, faster hacking and the reach to
   order drafted mechs anywhere on the map

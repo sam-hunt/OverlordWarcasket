@@ -6,12 +6,13 @@ namespace OverlordWarcasket;
 // One player-tunable switch, what a Tunable is for a number: until the player flips it, it is
 // DefaultValue, read from the def field it overrides when defs load (the settings'
 // LoadDefaultsFromDefs), so the def and its header stay the record and another mod's XML patch
-// moves the default too; a switch an XML patch reads instead (PatchOperationSetting) keeps the
-// default off, the XML's own state, and says a change takes a restart (RequiresRestart). Only an
-// override is saved, under the key; flipping the box back to its default clears it. The row's
-// label and tooltip are "OLWC_" + key and that with "Desc", as a Tunable's are, the tooltip
-// taking the default's word in the box's colour.
-public sealed class BoolSetting
+// moves the default too; a switch an XML patch reads instead (PatchOperationSetting, which
+// takes it with no choice named, or with true or false) keeps the default off, the XML's own
+// state, and says a change takes a restart (RequiresRestart). Only an override is saved, under
+// the key; flipping the box back to its default clears it. The row's label and tooltip are
+// "OLWC_" + key and that with "Desc", as a Tunable's are, the tooltip taking the default's word
+// in the box's colour.
+public sealed class BoolSetting : IPatchSetting
 {
     // The default's word in the tooltip, in the colours of the box's states: pure green for the
     // tick, vanilla's readable red for the cross.
@@ -34,6 +35,17 @@ public sealed class BoolSetting
     public bool Value => value ?? DefaultValue;
 
     public void Reset() => value = null;
+
+    public bool TryMatch(string choice, out bool matches)
+    {
+        matches = Value;
+        if (choice.NullOrEmpty())
+            return true;
+        if (!bool.TryParse(choice, out bool named))
+            return false;
+        matches = named == Value;
+        return true;
+    }
 
     public void ExposeData()
     {

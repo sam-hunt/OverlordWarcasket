@@ -54,12 +54,12 @@ manifest globs, so new files and subfolders need no build change.
   table); keep every xpath to one node per `defName` it names, or zero for a
   `PatchOperationConditional` probe.
 - **A patch that branches on a mod setting** wraps its operations in
-  `OverlordWarcasket.PatchOperationSetting` naming the switch (`Source/1.6/CLAUDE.md`); a change
-  then takes a restart. The smoke test boots on default settings, so its `match` branch never
-  runs there: the static xpath test is its coverage, enough for a cosmetic gate like the
-  cerebrex art; a gate that changes stats or composes with another patch (Toxin Warcasket's
-  spacer tier is the model) needs a boot with the setting forced on, as that repo's
-  `Scripts/spacer_tier_boot.py` does.
+  `OverlordWarcasket.PatchOperationSetting` naming the setting and, for a setting of several
+  choices, the choice (`Source/1.6/CLAUDE.md`); a change then takes a restart. The smoke test
+  boots on default settings, so its `match` branch never runs there: the static xpath test is
+  its coverage, enough for a cosmetic gate like the cerebrex art; a gate that changes stats or
+  composes with another patch (Toxin Warcasket's spacer tier is the model) needs a boot with the
+  setting forced on, as that repo's `Scripts/spacer_tier_boot.py` does.
 - **Compat roots sit beside the well-known folders, never inside them.** Anything under
   `1.6/Defs/**` or `1.6/Languages/**` loads unconditionally at any depth.
 - **An injection is gated by the root that contains it, never by the def it targets.** A main-tree
@@ -73,5 +73,7 @@ manifest globs, so new files and subfolders need no build change.
   mod's art (`Mods/Odyssey/Textures`, the cerebrex node): at the original's path it would replace
   that art for everyone, so it sits at its own path and a setting-gated patch in the matching
   version root (`1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml`) writes that path onto the def.
+  Worn apparel finds its masks by name beside its art, so a second mask set for the same art is
+  a second folder with the art copied in (`CerebrexNodeOverlordRing`), never a suffix.
 - **Gate on the package id** (`ludeon.rimworld.odyssey`), never `PatchOperationFindMod` (display
   names), unless the patch mirrors an upstream patch and copies its gate so both fire together.

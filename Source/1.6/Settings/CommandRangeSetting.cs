@@ -193,8 +193,9 @@ public sealed class CommandRangeSetting
             TooltipHandler.TipRegion(rect, "OLWC_CommandRangeSliderSelects".Translate());
     }
 
-    // A group's label row, indented as a Tunable row is, grey while its group is inert.
-    private static void GroupLabel(Listing_Standard listing, string label, string tooltip, bool enabled)
+    // A group's label row, indented as a Tunable row is, grey while its group is inert. The
+    // cerebrex art picker heads its two groups with it too.
+    internal static void GroupLabel(Listing_Standard listing, string label, string tooltip, bool enabled)
     {
         Rect rect = listing.GetRect(Text.LineHeight);
         rect.xMin += Tunable.RowIndent;

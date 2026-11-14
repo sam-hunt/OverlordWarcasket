@@ -53,13 +53,14 @@ namespace OverlordWarcasket;
 // survives a play-data reload as a plain static. The section is skipped while the mirror found
 // nothing to toggle (a broken install).
 //
-// The cerebrex node section is one switch that writes no def: the XML patch
+// The cerebrex node section is one choice of four that writes no def (CerebrexArtSetting, a
+// row of preview tiles over the dye swatches that tint them): the XML patch
 // 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml reads it by name while the patches apply
-// (PatchOperationSetting), so its row says a change takes a restart and the summary reads which
-// art is live off the def (CerebrexNode.UsesOurArt) rather than off the box. Its header carries
-// the node's own label and description and our art as its icon, a mod-shipped texture that
-// CerebrexNode.Icon re-resolves after a reload. The section needs none of the set's defs and is
-// skipped without Odyssey.
+// (PatchOperationSetting), so its label says a change takes a restart and the summary reads
+// which art is live off the def (CerebrexNode.Live) rather than off the picker. Its header
+// carries the node's own label and description and our art as its icon, a mod-shipped texture
+// that CerebrexNode.Icon re-resolves after a reload. The section needs none of the set's defs
+// and is skipped without Odyssey.
 //
 // What a write leaves on live instances is caught up by them: a running cooldown on the next
 // gizmo request, keyed on Generation (Ability_ResurrectMech.ReconcileSettings); charges above a
@@ -78,7 +79,7 @@ public class OverlordWarcasketSettings : ModSettings
 
     public readonly BoolSetting requireMechlink = new("RequireMechlink");
     public readonly BoolSetting sparksOnlyDrafted = new("SparksOnlyDrafted");
-    public readonly BoolSetting cerebrexArt = new("CerebrexArt") { RequiresRestart = true };
+    public readonly CerebrexArtSetting cerebrexArt = new();
     public readonly WorkSetting work = new();
     public readonly CommandRangeSetting commandRange = new();
 
@@ -149,10 +150,10 @@ public class OverlordWarcasketSettings : ModSettings
     // Resources, not Ideology's, so it loads whatever DLCs are active and survives a reload.
     private Texture2D workIcon;
 
-    // Odyssey's cerebrex node, whether it carries our art this session and its header tooltip;
-    // null without Odyssey, when the section is skipped.
+    // Odyssey's cerebrex node, the art it carries this session and its header tooltip; null
+    // without Odyssey, when the section is skipped.
     private ThingDef cerebrexNode;
-    private bool cerebrexLive;
+    private CerebrexArt cerebrexLive;
     private string cerebrexTip;
 
     private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown, sparkFrequency];
@@ -212,8 +213,9 @@ public class OverlordWarcasketSettings : ModSettings
         cerebrexNode = CerebrexNode.Def;
         if (cerebrexNode != null)
         {
-            cerebrexLive = CerebrexNode.UsesOurArt(cerebrexNode);
+            cerebrexLive = CerebrexNode.Live(cerebrexNode);
             cerebrexTip = HeaderTip(cerebrexNode.LabelCap, cerebrexNode.description);
+            cerebrexArt.LoadDefaults();
         }
         commandRange.LoadDefaults();
         if (!TryGetDefs(out Defs defs))
@@ -255,7 +257,7 @@ public class OverlordWarcasketSettings : ModSettings
 
     // The work profile and the command range go first: they need none of the ability's defs, so
     // a saved choice still holds while they are missing, though the page is unavailable to
-    // change it. The cerebrex art switch writes nothing here; its patch read it at startup.
+    // change it. The cerebrex art choice writes nothing here; its patch read it at startup.
     public void ApplyToDefs()
     {
         WorkProfile.Apply(work.IsOpen);
@@ -349,7 +351,7 @@ public class OverlordWarcasketSettings : ModSettings
         {
             SectionHeader(listing, "OLWC_SectionCerebrex", CerebrexNode.Icon, cerebrexTip);
             SummaryRow(listing, CerebrexSummary);
-            cerebrexArt.DoRow(listing);
+            cerebrexArt.DoRows(listing, cerebrexLive);
         }
         listing.Gap(SectionGap);
         contentHeight = listing.CurHeight;
@@ -399,11 +401,11 @@ public class OverlordWarcasketSettings : ModSettings
         return "OLWC_WorkSummary".Translate(open.ToCommaList(useAnd: true));
     }
 
-    // Whose art the node wears this session, off the def, then that the box's choice waits for a
-    // restart while it differs.
+    // The art the node wears this session, off the def, then that the picker's choice waits for
+    // a restart while it differs.
     private string CerebrexSummary()
     {
-        string live = cerebrexLive ? "OLWC_CerebrexSummaryOurs".Translate() : "OLWC_CerebrexSummaryVanilla".Translate();
+        string live = ("OLWC_CerebrexSummary_" + cerebrexLive).Translate();
         if (cerebrexArt.Value == cerebrexLive)
             return live;
         return live + " " + "OLWC_CerebrexSummaryRestart".Translate();

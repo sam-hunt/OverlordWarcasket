@@ -111,12 +111,26 @@
   <OLWC_CommandRangeReachAnywhere>anywhere, even on another map</OLWC_CommandRangeReachAnywhere>
   <OLWC_CommandRangeReachRadius>to within {0} cells</OLWC_CommandRangeReachRadius>
 
-  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexNode.cs; the switch gates 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) -->
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexArtSetting.cs, CerebrexNode.cs; the choice picks a branch of 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). The _<choice> keys end in a CerebrexArt name. -->
   <OLWC_SectionCerebrex>Cerebrex node</OLWC_SectionCerebrex>
-  <OLWC_CerebrexArt>Replace the cerebrex node's art</OLWC_CerebrexArt>
-  <OLWC_CerebrexArtDesc>When enabled, Odyssey's cerebrex node will use new higher resolution art. When disabled, it will keep Odyssey's art.</OLWC_CerebrexArtDesc>
-  <OLWC_CerebrexSummaryOurs>The cerebrex node uses the higher resolution art.</OLWC_CerebrexSummaryOurs>
-  <OLWC_CerebrexSummaryVanilla>The cerebrex node uses Odyssey's own art.</OLWC_CerebrexSummaryVanilla>
+  <OLWC_CerebrexArt>Cerebrex node art</OLWC_CerebrexArt>
+  <OLWC_CerebrexArtDesc>The art used for Odyssey's cerebrex node. The new art is higher resolution, and you can choose how much of it a dye will color. Default: {0}.</OLWC_CerebrexArtDesc>
+  <OLWC_CerebrexArt_Odyssey>Odyssey's art</OLWC_CerebrexArt_Odyssey>
+  <OLWC_CerebrexArt_OdysseyDesc>The cerebrex node will keep Odyssey's own art.</OLWC_CerebrexArt_OdysseyDesc>
+  <OLWC_CerebrexArt_DyeAll>New art, fully dyed</OLWC_CerebrexArt_DyeAll>
+  <OLWC_CerebrexArt_DyeAllDesc>Dye will color the whole node, as it does with Odyssey's art.</OLWC_CerebrexArt_DyeAllDesc>
+  <OLWC_CerebrexArt_DyeFrame>New art, dyed frame</OLWC_CerebrexArt_DyeFrame>
+  <OLWC_CerebrexArt_DyeFrameDesc>Dye will only color the frame. The ring and the core will keep their own colors.</OLWC_CerebrexArt_DyeFrameDesc>
+  <OLWC_CerebrexArt_DyeFrameAndRing>New art, dyed frame and ring</OLWC_CerebrexArt_DyeFrameAndRing>
+  <OLWC_CerebrexArt_DyeFrameAndRingDesc>Dye will color the frame and the ring. Only the red core will keep its color.</OLWC_CerebrexArt_DyeFrameAndRingDesc>
+  <OLWC_CerebrexInUse>In use</OLWC_CerebrexInUse>
+  <OLWC_CerebrexDye>Preview dye</OLWC_CerebrexDye>
+  <OLWC_CerebrexDyeDesc>The dye color shown on the previews above. It will not dye any cerebrex node.</OLWC_CerebrexDyeDesc>
+  <OLWC_CerebrexDyeNone>Undyed</OLWC_CerebrexDyeNone>
+  <OLWC_CerebrexSummary_Odyssey>The cerebrex node uses Odyssey's own art.</OLWC_CerebrexSummary_Odyssey>
+  <OLWC_CerebrexSummary_DyeAll>The cerebrex node uses the new art, and dye colors the whole node.</OLWC_CerebrexSummary_DyeAll>
+  <OLWC_CerebrexSummary_DyeFrame>The cerebrex node uses the new art, and dye only colors its frame.</OLWC_CerebrexSummary_DyeFrame>
+  <OLWC_CerebrexSummary_DyeFrameAndRing>The cerebrex node uses the new art, and dye colors its frame and ring.</OLWC_CerebrexSummary_DyeFrameAndRing>
   <OLWC_CerebrexSummaryRestart>The change will take effect after a restart.</OLWC_CerebrexSummaryRestart>
 
   <OLWC_SwitchDefault>Default: {0}.</OLWC_SwitchDefault>

@@ -2,8 +2,8 @@
 
 ## Features
 
-- **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
+- **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
   booted with the full compat list, and a boot on 1.6.
 - **Full review of player-facing copy**, the descriptions' lore paragraphs in particular.
@@ -12,11 +12,13 @@
 
 ## Testing
 
-- **In-game look at the cerebrex node on a pilot facing north.** The node over the shell and
-  under the pauldrons, with Odyssey's art and with ours; unchanged on a mechlord suit, on the
-  other three facings and on an outfit stand. With ours, a node dyed at a styling station: the
-  frame in the dye and the lens still red, worn on every facing, on the ground and as an icon;
-  an undyed one as before.
+- **In-game look at the cerebrex art picker.** Nothing of it has been seen in game. In the mod
+  settings with Odyssey: four tiles of the pack from behind, the picked one outlined and the
+  live one tagged "In use"; the slate swatch picked on opening; each swatch dyeing the first two
+  tiles whole, the third on its frame alone and the fourth on its frame and ring, the core red
+  in both, and the undyed swatch leaving all four as drawn; the tiles clipped cleanly when
+  scrolled half out of view; the same on 1.6. Then each choice after a restart, with a node dyed
+  at a styling station: worn on every facing, on the ground and as an icon, matching its tile.
 - **In-game run of the resurrect mech ability.** The cast's effects at their single mech
   size, on a light mech and on a centipede: the wave and the sparks on the corpse through the
   warmup, the burst and the flash as it stands up. A raised mech in the pilot's first control group
