@@ -23,8 +23,15 @@ namespace OverlordWarcasket;
 // corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day
 // up; ticks on the def, 0 for the slider's last stop, no limit) and the mechlink switch
 // requireMechlink. On the armor's
-// CompProperties_ResurrectorSparks entry, the sparks switch overrides onlyWhileDrafted; its row
-// sits in the ability's section, the resurrector being the ability's. The weight class costs are
+// CompProperties_ResurrectorSparks entry, the sparks switch overrides onlyWhileDrafted, and the
+// spark frequency overrides chancePerTick on its effecter's chance sprayer, stored as a percent
+// of the same child's chance on Biotech's ApocrionAttached, the apocriton's crackle the sparks
+// are cut from (same bursts, same mote), so 100% reads as "as often as an apocriton" and 0% is
+// none; SubEffecter_SprayerChance reads the def's chance every tick (EffectiveChancePerTick,
+// 1.7.4990 decompile), so a write reaches running effecters at once. That row is skipped, and
+// the field left alone, while either def lacks a chance sprayer (another mod's patch). Both
+// rows sit in the ability's section, the resurrector being the ability's, the slider after the
+// other sliders and the switch after the other switch. The weight class costs are
 // def-only. A line of what the rows amount to opens the section, under its header, which carries
 // the ability's icon and tooltip, read off the def at draw time: VEF resolves def.icon from
 // iconPath in a deferred step at the end of loading, and a play-data reload replaces the def and
@@ -112,6 +119,9 @@ public class OverlordWarcasketSettings : ModSettings
     };
     public readonly Tunable cooldown = new("Cooldown", 0f, CooldownMax, 0.25f, Period) { StepBands = CooldownBands };
 
+    // The spark frequency in percent of the apocriton's rate, up to twice it; see the header.
+    public readonly Tunable sparkFrequency = new("SparkFrequency", 0f, 200f, 5f, Percent);
+
     private bool defaultsLoaded;
     private Vector2 scrollPosition;
     private float contentHeight;
@@ -130,6 +140,11 @@ public class OverlordWarcasketSettings : ModSettings
     // cost row and the summary's reload clause.
     private ThingDef reloadItem;
 
+    // The sparks effecter's chance sprayer, which the frequency writes, and the apocriton's
+    // chance per tick it is a percent of; a null sprayer hides the frequency row.
+    private SubEffecterDef sparkSprayer;
+    private float apocritonSparkChance;
+
     // The work section's header icon, vanilla's mining work site. Its art is in the base game's
     // Resources, not Ideology's, so it loads whatever DLCs are active and survives a reload.
     private Texture2D workIcon;
@@ -140,9 +155,16 @@ public class OverlordWarcasketSettings : ModSettings
     private bool cerebrexLive;
     private string cerebrexTip;
 
-    private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown];
+    private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown, sparkFrequency];
 
     private static string Whole(float v) => Mathf.RoundToInt(v).ToString();
+
+    private static string Percent(float v) => (v / 100f).ToStringPercent();
+
+    // An effecter's first chance sprayer child, the one ApocrionAttached and OLWC_ResurrectorSparks
+    // both open on.
+    private static SubEffecterDef ChanceSprayer(EffecterDef effecter) =>
+        effecter?.children?.FirstOrDefault(child => child.subEffecterClass == typeof(SubEffecter_SprayerChance));
 
     private static string Decimal(float v) => v.ToString("0.##");
 
@@ -215,6 +237,12 @@ public class OverlordWarcasketSettings : ModSettings
         cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
         requireMechlink.DefaultValue = defs.extension.requireMechlink;
         sparksOnlyDrafted.DefaultValue = defs.sparks.onlyWhileDrafted;
+        sparkSprayer = ChanceSprayer(defs.sparks.effecterDef);
+        apocritonSparkChance = ChanceSprayer(DefDatabase<EffecterDef>.GetNamedSilentFail("ApocrionAttached"))?.chancePerTick ?? 0f;
+        if (apocritonSparkChance > 0f && sparkSprayer != null)
+            sparkFrequency.DefaultValue = sparkSprayer.chancePerTick / apocritonSparkChance * 100f;
+        else
+            sparkSprayer = null;
         abilityTip = HeaderTip(defs.ability.LabelCap, defs.ability.description);
         abilityDef = defs.ability;
         costs = defs.extension.costs
@@ -243,6 +271,8 @@ public class OverlordWarcasketSettings : ModSettings
             : Mathf.Max(1, Mathf.RoundToInt(corpseAge.Value * GenDate.TicksPerHour));
         defs.extension.requireMechlink = requireMechlink.Value;
         defs.sparks.onlyWhileDrafted = sparksOnlyDrafted.Value;
+        if (sparkSprayer != null)
+            sparkSprayer.chancePerTick = Mathf.Max(0f, sparkFrequency.Value) / 100f * apocritonSparkChance;
         defs.ability.castTime = Mathf.RoundToInt(castTime.Value * GenTicks.TicksPerRealSecond);
         defs.ability.cooldownTime = Mathf.RoundToInt(cooldown.Value * GenDate.TicksPerHour);
         Generation++;
@@ -298,6 +328,8 @@ public class OverlordWarcasketSettings : ModSettings
         corpseAge.DoRow(listing);
         castTime.DoRow(listing);
         cooldown.DoRow(listing);
+        if (sparkSprayer != null)
+            sparkFrequency.DoRow(listing);
         requireMechlink.DoRow(listing);
         sparksOnlyDrafted.DoRow(listing);
         if (WorkProfile.Toggleable.Count > 0)

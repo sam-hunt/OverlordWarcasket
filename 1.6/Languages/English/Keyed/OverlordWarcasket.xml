@@ -49,6 +49,9 @@
   <OLWC_Cooldown>Cooldown</OLWC_Cooldown>
   <OLWC_CooldownDesc>The time the pilot must wait after a resurrection before starting another. Default: {0}.</OLWC_CooldownDesc>
 
+  <OLWC_SparkFrequency>Spark frequency</OLWC_SparkFrequency>
+  <OLWC_SparkFrequencyDesc>How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}.</OLWC_SparkFrequencyDesc>
+
   <OLWC_RequireMechlink>Require a mechlink</OLWC_RequireMechlink>
   <OLWC_RequireMechlinkDesc>When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs.</OLWC_RequireMechlinkDesc>
 
