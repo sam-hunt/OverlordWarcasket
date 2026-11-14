@@ -114,8 +114,8 @@
   <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexNode.cs; the switch gates 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml) -->
   <OLWC_SectionCerebrex>Cerebrex node</OLWC_SectionCerebrex>
   <OLWC_CerebrexArt>Replace the cerebrex node's art</OLWC_CerebrexArt>
-  <OLWC_CerebrexArtDesc>When enabled, Odyssey's cerebrex node will be drawn with Overlord Warcasket's own art, on the ground and on the wearer's back. When disabled, it will keep Odyssey's art.</OLWC_CerebrexArtDesc>
-  <OLWC_CerebrexSummaryOurs>The cerebrex node uses Overlord Warcasket's art.</OLWC_CerebrexSummaryOurs>
+  <OLWC_CerebrexArtDesc>When enabled, Odyssey's cerebrex node will use new higher resolution art. When disabled, it will keep Odyssey's art.</OLWC_CerebrexArtDesc>
+  <OLWC_CerebrexSummaryOurs>The cerebrex node uses the higher resolution art.</OLWC_CerebrexSummaryOurs>
   <OLWC_CerebrexSummaryVanilla>The cerebrex node uses Odyssey's own art.</OLWC_CerebrexSummaryVanilla>
   <OLWC_CerebrexSummaryRestart>The change will take effect after a restart.</OLWC_CerebrexSummaryRestart>
 
