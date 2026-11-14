@@ -37,13 +37,6 @@ namespace OverlordWarcasket;
 // iconPath in a deferred step at the end of loading, and a play-data reload replaces the def and
 // its texture together.
 //
-// The work section is one checkbox per work type the trait mirror leaves to the player
-// (WorkSetting over WorkProfile.Toggleable), written onto the overlord trait's disabledWorkTypes
-// through WorkProfile.Apply, which also refreshes every entombed pilot; the mirror's own rule is
-// each box's default. Its header's icon is vanilla's mining work site, a Core texture, so it
-// survives a play-data reload as a plain static. The section is skipped while the mirror found
-// nothing to toggle (a broken install).
-//
 // The command range section is two radio groups and a slider (CommandRangeSetting), who the
 // set's extended mechanitor command range applies to and how far it reaches, written through
 // CommandRange.Apply onto the set's CommandRangeExtension (its scope and radius), onto the piece
@@ -52,6 +45,13 @@ namespace OverlordWarcasket;
 // header carries that piece's icon, read off the def at draw time, and the section's own text.
 // It needs only the two pieces, so it is skipped when either is missing or neither carries the
 // extension, and shown without the ability's defs.
+//
+// The work section is one checkbox per work type the trait mirror leaves to the player
+// (WorkSetting over WorkProfile.Toggleable), written onto the overlord trait's disabledWorkTypes
+// through WorkProfile.Apply, which also refreshes every entombed pilot; the mirror's own rule is
+// each box's default. Its header's icon is vanilla's mining work site, a Core texture, so it
+// survives a play-data reload as a plain static. The section is skipped while the mirror found
+// nothing to toggle (a broken install).
 //
 // The cerebrex node section is one switch that writes no def: the XML patch
 // 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml reads it by name while the patches apply
@@ -332,18 +332,18 @@ public class OverlordWarcasketSettings : ModSettings
             sparkFrequency.DoRow(listing);
         requireMechlink.DoRow(listing);
         sparksOnlyDrafted.DoRow(listing);
-        if (WorkProfile.Toggleable.Count > 0)
-        {
-            SectionHeader(listing, "OLWC_SectionWork", workIcon, HeaderTip("OLWC_SectionWork".Translate(), "OLWC_SectionWorkDesc".Translate()));
-            SummaryRow(listing, WorkSummary);
-            work.DoRows(listing);
-        }
         if (commandRange.Available)
         {
             SectionHeader(listing, "OLWC_SectionCommandRange", commandRange.Icon,
                 HeaderTip("OLWC_SectionCommandRange".Translate(), "OLWC_SectionCommandRangeDesc".Translate(commandRange.NormalRadius.ToString("0.#"))));
             SummaryRow(listing, commandRange.Summary);
             commandRange.DoRows(listing);
+        }
+        if (WorkProfile.Toggleable.Count > 0)
+        {
+            SectionHeader(listing, "OLWC_SectionWork", workIcon, HeaderTip("OLWC_SectionWork".Translate(), "OLWC_SectionWorkDesc".Translate()));
+            SummaryRow(listing, WorkSummary);
+            work.DoRows(listing);
         }
         if (cerebrexNode != null)
         {
