@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back under the pilot's control with some but not all of its wounds healed, so the pilot needs enough bandwidth for it. Each resurrection costs some of the armor's charges, and heavier mechs cost more. -->
+  <OLWC_ResurrectMech.description>최근에 파괴된 메카노이드의 자체 수리 기능을 외부에서 자극해 소생합니다. 소생한 메카노이드는 손상이 일부만 복구된 상태로 조종사의 제어를 받으므로, 조종사에게 이를 감당할 대역폭이 있어야 합니다. 소생할 때마다 갑옷의 충전이 소모되며, 체급이 높은 메카노이드일수록 더 많이 소모됩니다.</OLWC_ResurrectMech.description>
+  <!-- EN: Resurrecting mechs. -->
+  <OLWC_ResurrectMech.jobReportString>메카노이드 소생 중</OLWC_ResurrectMech.jobReportString>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.label>메카노이드 소생</OLWC_ResurrectMech.label>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.verbProperties.label>메카노이드 소생</OLWC_ResurrectMech.verbProperties.label>
+
+</LanguageData>

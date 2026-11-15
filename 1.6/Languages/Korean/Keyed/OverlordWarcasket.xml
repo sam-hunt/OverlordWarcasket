@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Resurrect mech (Source/1.6/Abilities/Ability_ResurrectMech.cs, Source/1.6/Comps/, Source/1.6/Gizmos/) -->
+  <!-- EN: No resurrection charges left. -->
+  <OLWC_NoCharges>남은 소생 충전이 없습니다.</OLWC_NoCharges>
+  <!-- EN: {0} needs a mechlink to command the mech resurrector. -->
+  <OLWC_NotMechanitor>{0}에게는 메카노이드 소생기를 다룰 메크링크가 없습니다.</OLWC_NotMechanitor>
+  <!-- EN: {0} is not a mechanoid. -->
+  <OLWC_NotMechCorpse>{0}(은)는 메카노이드가 아닙니다.</OLWC_NotMechCorpse>
+  <!-- EN: {0} cannot be resurrected. -->
+  <OLWC_CannotResurrectClass>{0}(은)는 소생시킬 수 없습니다.</OLWC_CannotResurrectClass>
+  <!-- EN: {0} is not one of your mechs. -->
+  <OLWC_NotOurMech>{0}(은)는 내 메카노이드가 아닙니다.</OLWC_NotOurMech>
+  <!-- EN: {0} has been dead too long. -->
+  <OLWC_CorpseTooOld>{0}(은)는 파괴된 지 너무 오래되었습니다.</OLWC_CorpseTooOld>
+  <!-- EN: Not enough charges to resurrect {0}. -->
+  <OLWC_NotEnoughCharges>{0}(을)를 소생시킬 충전이 부족합니다.</OLWC_NotEnoughCharges>
+  <!-- EN: {0} does not have enough bandwidth to control {1}. -->
+  <OLWC_NotEnoughBandwidth>{0}에게는 {1}(을)를 제어할 대역폭이 부족합니다.</OLWC_NotEnoughBandwidth>
+  <!-- EN: Charges: {0} / {1} -->
+  <OLWC_ChargesLabel>충전: {0} / {1}</OLWC_ChargesLabel>
+  <!-- EN: Cost to resurrect {0}: {1} -->
+  <OLWC_TargetCost>{0} 소생 비용: {1}</OLWC_TargetCost>
+  <!-- EN: Can be resurrected for another {0}. -->
+  <OLWC_TargetTimeLeft>앞으로 {0} 동안 소생시킬 수 있습니다.</OLWC_TargetTimeLeft>
+  <!-- EN: Recharge rate: {0} per day -->
+  <OLWC_GaugeRegen>재충전 속도: 하루 {0}회분</OLWC_GaugeRegen>
+  <!-- EN: Recharge rate: none -->
+  <OLWC_GaugeNoRegen>재충전 속도: 없음</OLWC_GaugeNoRegen>
+  <!-- EN: Reload cost: {0} -->
+  <OLWC_GaugeReload>재장전 비용: {0}</OLWC_GaugeReload>
+  <!-- EN: Automatic reload level: {0} -->
+  <OLWC_GaugeAutoReload>자동 재장전 기준: {0}</OLWC_GaugeAutoReload>
+  <!-- EN: Automatic reload: off -->
+  <OLWC_GaugeNoAutoReload>자동 재장전: 꺼짐</OLWC_GaugeNoAutoReload>
+  <!-- EN: Maximum corpse age: {0} -->
+  <OLWC_GaugeCorpseAge>시체 최대 경과 시간: {0}</OLWC_GaugeCorpseAge>
+  <!-- EN: Maximum corpse age: unlimited -->
+  <OLWC_GaugeNoCorpseAge>시체 최대 경과 시간: 제한 없음</OLWC_GaugeNoCorpseAge>
+  <!-- EN: Charges per mech: -->
+  <OLWC_GaugeCosts>메카노이드별 필요 충전:</OLWC_GaugeCosts>
+  <!-- EN: {0}: {1} -->
+  <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
+  <!-- EN: Drag the bar to set a level. The pilot will reload the resurrector whenever it falls below that level. -->
+  <OLWC_GaugeDragHint>막대를 끌어 기준을 정하세요. 충전이 그 아래로 떨어지면 조종사가 소생기를 재장전합니다.</OLWC_GaugeDragHint>
+
+  <!-- Mod settings (Source/1.6/Settings/) -->
+  <!-- EN: Overlord Warcasket -->
+  <OLWC_SettingsCategory>대군주 워캐스킷</OLWC_SettingsCategory>
+  <!-- EN: These settings are unavailable. Another mod has changed the overlord warcasket, so the set will keep its built-in values. -->
+  <OLWC_SettingsUnavailable>이 설정은 사용할 수 없습니다. 다른 모드가 대군주 워캐스킷을 변경해서 세트가 내장된 값을 사용합니다.</OLWC_SettingsUnavailable>
+
+  <!-- EN: Resurrect mech -->
+  <OLWC_SectionResurrect>메카노이드 소생</OLWC_SectionResurrect>
+
+  <!-- EN: Charge capacity -->
+  <OLWC_Charges>충전 용량</OLWC_Charges>
+  <!-- EN: The number of resurrection charges the armor holds when full. Default: {0}. -->
+  <OLWC_ChargesDesc>갑옷을 가득 채웠을 때 들어가는 소생 충전의 수입니다. 기본값: {0}.</OLWC_ChargesDesc>
+
+  <!-- EN: Charges recharged per day -->
+  <OLWC_ChargesPerDay>하루 재충전량</OLWC_ChargesPerDay>
+  <!-- EN: The number of charges the armor recharges on its own each day. At 0, it will only gain charges by reloading. Default: {0}. -->
+  <OLWC_ChargesPerDayDesc>갑옷에 하루마다 저절로 다시 채워지는 충전 수입니다. 0으로 설정하면 재장전으로만 충전을 얻습니다. 기본값: {0}.</OLWC_ChargesPerDayDesc>
+
+  <!-- EN: Reload cost per charge -->
+  <OLWC_ReloadCost>충전당 재장전 비용</OLWC_ReloadCost>
+  <!-- EN: The number of {1} it takes to reload one charge. Default: {0}. -->
+  <OLWC_ReloadCostDesc>충전 하나를 재장전하는 데 필요한 {1} 개수입니다. 기본값: {0}.</OLWC_ReloadCostDesc>
+
+  <!-- EN: Maximum corpse age -->
+  <OLWC_CorpseAge>시체 최대 경과 시간</OLWC_CorpseAge>
+  <!-- EN: How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}. -->
+  <OLWC_CorpseAgeDesc>메카노이드가 파괴된 뒤에도 소생시킬 수 있는 게임 내 시간입니다. 최댓값으로 설정하면 제한이 없습니다. 기본값: {0}.</OLWC_CorpseAgeDesc>
+  <!-- EN: Unlimited -->
+  <OLWC_Unlimited>제한 없음</OLWC_Unlimited>
+
+  <!-- EN: Casting time -->
+  <OLWC_CastTime>시전 시간</OLWC_CastTime>
+  <!-- EN: How long the pilot takes to start a resurrection. Default: {0}. -->
+  <OLWC_CastTimeDesc>조종사가 소생을 시작하기까지 걸리는 시간입니다. 기본값: {0}.</OLWC_CastTimeDesc>
+
+  <!-- EN: Cooldown -->
+  <OLWC_Cooldown>재사용 대기</OLWC_Cooldown>
+  <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
+  <OLWC_CooldownDesc>조종사가 소생시킨 뒤 다시 소생을 시작하기까지 기다려야 하는 시간입니다. 기본값: {0}.</OLWC_CooldownDesc>
+
+  <!-- EN: Spark frequency -->
+  <OLWC_SparkFrequency>불꽃 빈도</OLWC_SparkFrequency>
+  <!-- EN: How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}. -->
+  <OLWC_SparkFrequencyDesc>조종사의 갑옷에서 붉은 불꽃이 튀는 빈도입니다. 100%는 아포크리톤과 같은 빈도이며, 0%로 설정하면 불꽃이 전혀 튀지 않습니다. 기본값: {0}.</OLWC_SparkFrequencyDesc>
+
+  <!-- EN: Require a mechlink -->
+  <OLWC_RequireMechlink>메크링크 필요</OLWC_RequireMechlink>
+  <!-- EN: When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs. -->
+  <OLWC_RequireMechlinkDesc>켜면 메카나이터 조종사만 메카노이드 소생을 쓸 수 있습니다. 끄면 어떤 조종사든 내 메카노이드를 소생시킬 수 있습니다.</OLWC_RequireMechlinkDesc>
+
+  <!-- EN: Sparks only while drafted -->
+  <OLWC_SparksOnlyDrafted>소집 중에만 불꽃</OLWC_SparksOnlyDrafted>
+  <!-- EN: When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the armor will spark whenever it holds a charge, as an apocriton does. -->
+  <OLWC_SparksOnlyDraftedDesc>켜면 조종사가 소집되어 메카노이드를 소생시킬 수 있을 때만 갑옷에서 붉은 불꽃이 튑니다. 끄면 아포크리톤처럼 충전이 남아 있는 동안 늘 불꽃이 튑니다.</OLWC_SparksOnlyDraftedDesc>
+
+  <!-- EN: {1} for {0_indefinite} mech -->
+  <OLWC_SummaryCost>{0_indefinite} {1}</OLWC_SummaryCost>
+  <!-- EN: recharges {0} of them each day -->
+  <OLWC_SummaryRegen>매일 {0}회분씩 저절로 다시 채워집니다</OLWC_SummaryRegen>
+  <!-- EN: never recharges -->
+  <OLWC_SummaryNoRegen>저절로 다시 채워지지는 않습니다</OLWC_SummaryNoRegen>
+  <!-- EN: {0}, and each one can be reloaded with {1} -->
+  <OLWC_SummaryReload>{0}. 충전 하나당 재장전 비용은 {1}입니다</OLWC_SummaryReload>
+  <!-- EN: as long as it died within the last {0} -->
+  <OLWC_SummaryWindow>파괴된 지 {0} 이내라면</OLWC_SummaryWindow>
+  <!-- EN: no matter how long ago it died -->
+  <OLWC_SummaryNoWindow>파괴된 지 얼마나 지났든</OLWC_SummaryNoWindow>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}. -->
+  <OLWC_ResurrectSummary>갑옷에는 충전이 최대 {0}회분 들어가며, {1}. 메카노이드 소생에 드는 충전은 체급별로 {2}이며, {3} 소생시킬 수 있습니다. 소생을 시전하는 데 {4} 걸리며, 재사용 대기 시간은 {5}입니다.</OLWC_ResurrectSummary>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
+  <OLWC_ResurrectSummaryNoCooldown>갑옷에는 충전이 최대 {0}회분 들어가며, {1}. 메카노이드 소생에 드는 충전은 체급별로 {2}이며, {3} 소생시킬 수 있습니다. 소생을 시전하는 데 {4} 걸리며, 다음 소생은 바로 시작할 수 있습니다.</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- EN: Enabled work types -->
+  <OLWC_SectionWork>활성화된 작업 유형</OLWC_SectionWork>
+  <!-- EN: The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too. -->
+  <OLWC_SectionWorkDesc>대군주 조종사가 할 수 있는 작업입니다. 그 밖의 작업은 모두 VFE Pirates의 워캐스킷 규칙을 따르므로, 다른 모드가 이 규칙을 바꾸면 대군주 조종사에게도 똑같이 적용됩니다.</OLWC_SectionWorkDesc>
+  <!-- EN: When enabled, overlord pilots can do this work, though you will need to assign it in the work tab. When disabled, they cannot. -->
+  <OLWC_WorkDesc>켜면 대군주 조종사가 이 작업을 할 수 있지만, 작업 탭에서 따로 할당해야 합니다. 끄면 할 수 없습니다.</OLWC_WorkDesc>
+  <!-- EN: Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either. -->
+  <OLWC_WorkNote_Research>해킹은 연구 작업입니다. 메카나이터가 기계공학 연구를 해금하는 칩을 분석할 때도 같은 기술이 필요하므로, 연구를 할 수 없는 조종사는 둘 다 할 수 없습니다.</OLWC_WorkNote_Research>
+  <!-- EN: Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work. -->
+  <OLWC_WorkNote_Smithing>메카노이드 배양, 서브코어 부호화, 메카노이드 수리, 기계 작업대에서 하는 메카노이드 분쇄는 모두 제작 작업입니다.</OLWC_WorkNote_Smithing>
+  <!-- EN: Default: {0}. -->
+  <OLWC_WorkDefault>기본값: {0}.</OLWC_WorkDefault>
+  <!-- EN: enabled -->
+  <OLWC_WorkOpen>켜짐</OLWC_WorkOpen>
+  <!-- EN: disabled -->
+  <OLWC_WorkBlocked>꺼짐</OLWC_WorkBlocked>
+  <!-- EN: The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummary>조종사는 {0} 작업을 맡을 수 있습니다. 그 밖의 작업은 모두 VFE Pirates의 워캐스킷 규칙을 따릅니다.</OLWC_WorkSummary>
+  <!-- EN: The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummaryNone>조종사는 이 작업을 하나도 맡을 수 없습니다. 그 밖의 작업은 모두 VFE Pirates의 워캐스킷 규칙을 따릅니다.</OLWC_WorkSummaryNone>
+
+  <!-- Mechanitor command range (Source/1.6/CommandRange/, Source/1.6/Settings/CommandRangeSetting.cs) -->
+  <!-- EN: Mechanitor command range -->
+  <OLWC_SectionCommandRange>메카나이터 명령 범위</OLWC_SectionCommandRange>
+  <!-- EN: Normally, a mechanitor's drafted mechs can only be ordered to within {0} cells of the mechanitor. These settings let mechanitors command their mechs from further away. -->
+  <OLWC_SectionCommandRangeDesc>보통 메카나이터는 소집한 메카노이드에게 자기 주변 {0}칸 이내에서만 명령할 수 있습니다. 이 설정을 바꾸면 더 먼 곳에서도 메카노이드를 지휘할 수 있습니다.</OLWC_SectionCommandRangeDesc>
+
+  <!-- EN: Applies to -->
+  <OLWC_CommandRangeAppliesTo>적용 대상</OLWC_CommandRangeAppliesTo>
+  <!-- EN: Which mechanitors get the extended command range. -->
+  <OLWC_CommandRangeAppliesToDesc>확장된 명령 범위를 받을 메카나이터입니다.</OLWC_CommandRangeAppliesToDesc>
+  <!-- EN: Mechanitors wearing the {0} -->
+  <OLWC_CommandRangeWearing>{0}(을)를 착용한 메카나이터</OLWC_CommandRangeWearing>
+  <!-- EN: Only mechanitors wearing the {0} will get the extended command range. Everyone else will keep the normal range. -->
+  <OLWC_CommandRangeWearingDesc>{0}(을)를 착용한 메카나이터만 확장된 명령 범위를 받습니다. 다른 메카나이터는 보통 범위를 유지합니다.</OLWC_CommandRangeWearingDesc>
+  <!-- EN: All mechanitors -->
+  <OLWC_CommandRangeAllMechanitors>모든 메카나이터</OLWC_CommandRangeAllMechanitors>
+  <!-- EN: Every mechanitor will get the extended command range, whatever they are wearing. -->
+  <OLWC_CommandRangeAllMechanitorsDesc>무엇을 입고 있든 모든 메카나이터가 확장된 명령 범위를 받습니다.</OLWC_CommandRangeAllMechanitorsDesc>
+  <!-- EN: No one -->
+  <OLWC_CommandRangeNone>없음</OLWC_CommandRangeNone>
+  <!-- EN: Mechanitors will keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeNoneDesc>메카나이터는 보통 명령 범위인 {0}칸을 유지합니다.</OLWC_CommandRangeNoneDesc>
+
+  <!-- EN: Command range -->
+  <OLWC_CommandRangeScope>명령 범위</OLWC_CommandRangeScope>
+  <!-- EN: How far from their mechanitor drafted mechs can be ordered to move or attack. -->
+  <OLWC_CommandRangeScopeDesc>메카나이터가 소집한 메카노이드에게 이동이나 공격을 명령할 수 있는 거리입니다.</OLWC_CommandRangeScopeDesc>
+  <!-- EN: Anywhere on the same map -->
+  <OLWC_CommandRangeCurrentMap>같은 지도 어디든</OLWC_CommandRangeCurrentMap>
+  <!-- EN: Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map. -->
+  <OLWC_CommandRangeCurrentMapDesc>메카나이터가 같은 지도에 있으면 소집한 메카노이드에게 지도 어디로든 명령할 수 있습니다.</OLWC_CommandRangeCurrentMapDesc>
+  <!-- EN: Anywhere -->
+  <OLWC_CommandRangeAnywhere>어디든</OLWC_CommandRangeAnywhere>
+  <!-- EN: Mechs can be drafted and ordered anywhere, even if their mechanitor is on another map or traveling in a caravan. -->
+  <OLWC_CommandRangeAnywhereDesc>메카나이터가 다른 지도에 있거나 상단으로 이동 중이어도 메카노이드를 소집하고 어디로든 명령할 수 있습니다.</OLWC_CommandRangeAnywhereDesc>
+  <!-- EN: Within {0} cells{1} -->
+  <OLWC_CommandRangeRadius>{0}칸 이내{1}</OLWC_CommandRangeRadius>
+  <!-- EN: Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells. -->
+  <OLWC_CommandRangeRadiusDesc>메카나이터 주변 이 거리 안에서 소집한 메카노이드에게 명령할 수 있습니다. 보통 범위는 {0}칸입니다. 기본값: {1}칸.</OLWC_CommandRangeRadiusDesc>
+  <!-- EN:  (vanilla) -->
+  <OLWC_CommandRangeVanillaSuffix> (바닐라)</OLWC_CommandRangeVanillaSuffix>
+  <!-- EN:  (Combat Extended) -->
+  <OLWC_CommandRangeCombatExtendedSuffix> (Combat Extended)</OLWC_CommandRangeCombatExtendedSuffix>
+  <!-- EN: Moving the slider will select this range. -->
+  <OLWC_CommandRangeSliderSelects>슬라이더를 움직이면 이 범위가 선택됩니다.</OLWC_CommandRangeSliderSelects>
+  <!-- EN: This has no effect while the extended command range applies to no one. -->
+  <OLWC_CommandRangeInert>확장된 명령 범위를 받는 메카나이터가 없으면 아무 효과가 없습니다.</OLWC_CommandRangeInert>
+
+  <!-- EN: Mechanitors keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeSummaryNone>메카나이터는 보통 명령 범위인 {0}칸을 유지합니다.</OLWC_CommandRangeSummaryNone>
+  <!-- EN: Mechanitors wearing the {0} can order their drafted mechs {1}. -->
+  <OLWC_CommandRangeSummaryWearing>{0}(을)를 착용한 메카나이터는 소집한 메카노이드에게 {1} 명령할 수 있습니다.</OLWC_CommandRangeSummaryWearing>
+  <!-- EN: Every mechanitor can order their drafted mechs {0}. -->
+  <OLWC_CommandRangeSummaryAll>모든 메카나이터는 소집한 메카노이드에게 {0} 명령할 수 있습니다.</OLWC_CommandRangeSummaryAll>
+  <!-- EN: anywhere on the same map -->
+  <OLWC_CommandRangeReachMap>같은 지도 어디로든</OLWC_CommandRangeReachMap>
+  <!-- EN: anywhere, even on another map -->
+  <OLWC_CommandRangeReachAnywhere>다른 지도에서도 어디로든</OLWC_CommandRangeReachAnywhere>
+  <!-- EN: to within {0} cells -->
+  <OLWC_CommandRangeReachRadius>{0}칸 이내로</OLWC_CommandRangeReachRadius>
+
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexArtSetting.cs, CerebrexNode.cs; the choice picks a branch of 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). The _<choice> keys end in a CerebrexArt name. -->
+  <!-- EN: Cerebrex node -->
+  <OLWC_SectionCerebrex>세레브렉스 노드</OLWC_SectionCerebrex>
+  <!-- EN: Cerebrex node art -->
+  <OLWC_CerebrexArt>세레브렉스 노드 외형</OLWC_CerebrexArt>
+  <!-- EN: The art used for Odyssey's cerebrex node. The new art is higher resolution, and you can choose how much of it a dye will color. Default: {0}. -->
+  <OLWC_CerebrexArtDesc>오디세이의 세레브렉스 노드에 쓰는 외형입니다. 새 외형은 해상도가 더 높고, 염료로 칠할 범위를 고를 수 있습니다. 기본값: {0}.</OLWC_CerebrexArtDesc>
+  <!-- EN: Odyssey's art -->
+  <OLWC_CerebrexArt_Odyssey>오디세이 외형</OLWC_CerebrexArt_Odyssey>
+  <!-- EN: The cerebrex node will keep Odyssey's own art. -->
+  <OLWC_CerebrexArt_OdysseyDesc>세레브렉스 노드가 오디세이의 원래 외형을 유지합니다.</OLWC_CerebrexArt_OdysseyDesc>
+  <!-- EN: New art, fully dyed -->
+  <OLWC_CerebrexArt_DyeAll>새 외형, 전체 염색</OLWC_CerebrexArt_DyeAll>
+  <!-- EN: Dye will color the whole node, as it does with Odyssey's art. -->
+  <OLWC_CerebrexArt_DyeAllDesc>오디세이 외형처럼 염료가 노드 전체를 칠합니다.</OLWC_CerebrexArt_DyeAllDesc>
+  <!-- EN: New art, dyed frame -->
+  <OLWC_CerebrexArt_DyeFrame>새 외형, 프레임 염색</OLWC_CerebrexArt_DyeFrame>
+  <!-- EN: Dye will only color the frame. The ring and the core will keep their own colors. -->
+  <OLWC_CerebrexArt_DyeFrameDesc>염료가 프레임만 칠합니다. 고리와 코어는 원래 색을 유지합니다.</OLWC_CerebrexArt_DyeFrameDesc>
+  <!-- EN: New art, dyed frame and ring -->
+  <OLWC_CerebrexArt_DyeFrameAndRing>새 외형, 프레임과 고리 염색</OLWC_CerebrexArt_DyeFrameAndRing>
+  <!-- EN: Dye will color the frame and the ring. Only the red core will keep its color. -->
+  <OLWC_CerebrexArt_DyeFrameAndRingDesc>염료가 프레임과 고리를 칠합니다. 붉은 코어만 원래 색을 유지합니다.</OLWC_CerebrexArt_DyeFrameAndRingDesc>
+  <!-- EN: In use -->
+  <OLWC_CerebrexInUse>사용 중</OLWC_CerebrexInUse>
+  <!-- EN: Preview dye -->
+  <OLWC_CerebrexDye>미리보기 염료</OLWC_CerebrexDye>
+  <!-- EN: The dye color shown on the previews above. It will not dye any cerebrex node. -->
+  <OLWC_CerebrexDyeDesc>위 미리보기에 보이는 염료 색입니다. 실제 세레브렉스 노드를 염색하지는 않습니다.</OLWC_CerebrexDyeDesc>
+  <!-- EN: Undyed -->
+  <OLWC_CerebrexDyeNone>염색 안 됨</OLWC_CerebrexDyeNone>
+  <!-- EN: The cerebrex node uses Odyssey's own art. -->
+  <OLWC_CerebrexSummary_Odyssey>세레브렉스 노드가 오디세이의 원래 외형을 사용합니다.</OLWC_CerebrexSummary_Odyssey>
+  <!-- EN: The cerebrex node uses the new art, and dye colors the whole node. -->
+  <OLWC_CerebrexSummary_DyeAll>세레브렉스 노드가 새 외형을 사용하며, 염료가 노드 전체를 칠합니다.</OLWC_CerebrexSummary_DyeAll>
+  <!-- EN: The cerebrex node uses the new art, and dye only colors its frame. -->
+  <OLWC_CerebrexSummary_DyeFrame>세레브렉스 노드가 새 외형을 사용하며, 염료가 프레임만 칠합니다.</OLWC_CerebrexSummary_DyeFrame>
+  <!-- EN: The cerebrex node uses the new art, and dye colors its frame and ring. -->
+  <OLWC_CerebrexSummary_DyeFrameAndRing>세레브렉스 노드가 새 외형을 사용하며, 염료가 프레임과 고리를 칠합니다.</OLWC_CerebrexSummary_DyeFrameAndRing>
+  <!-- EN: The change will take effect after a restart. -->
+  <OLWC_CerebrexSummaryRestart>변경 사항은 재시작한 뒤 적용됩니다.</OLWC_CerebrexSummaryRestart>
+
+  <!-- EN: Default: {0}. -->
+  <OLWC_SwitchDefault>기본값: {0}.</OLWC_SwitchDefault>
+  <!-- EN: on -->
+  <OLWC_SwitchOn>켜짐</OLWC_SwitchOn>
+  <!-- EN: off -->
+  <OLWC_SwitchOff>꺼짐</OLWC_SwitchOff>
+
+  <!-- EN:  (default) -->
+  <OLWC_DefaultSuffix> (기본값)</OLWC_DefaultSuffix>
+  <!-- EN:  (requires restart) -->
+  <OLWC_RequiresRestartSuffix> (재시작 필요)</OLWC_RequiresRestartSuffix>
+
+</LanguageData>

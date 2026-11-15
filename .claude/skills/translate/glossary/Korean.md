@@ -1,7 +1,8 @@
 # Korean glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); first machine-assisted pass 2026-11-16, pending
+native review. Only
 mod-specific coinages and grounding decisions; family-wide mechanics, josa
 markers and style live in `l10n/languages/Korean.md`.
 
@@ -51,29 +52,44 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and Korean falls to the base `Pluralize` (lookup, else unchanged), so one noun serves every slot and no lookup file is needed. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Korean | Grounding or reason |
+|---|---|---|
+| overlord (set name) | 대군주 (`대군주 워캐스킷`, `... 어깨`, `... 헬멧`) | Coined, bare prefix like 의무병 / 독소. Not 기계군주: Biotech spends it on `Apparel_MechlordSuit` (기계군주 갑옷). |
+| Workshop title / `OLWC_SettingsCategory` | 대군주 워캐스킷 | The armor label. |
+| pilot | 조종사 | Inherited row. |
+| mechanitor | 메카나이터 | Biotech `Mechanitor.label`, ConceptDef `Mechanitors`. |
+| mechlink | 메크링크 | Biotech `Mechlink.label`. |
+| mech / mechanoid | 메카노이드 (both) | Biotech uses 메카노이드 for both; `MechBandwidth` = 메카노이드 대역폭. |
+| bandwidth | 대역폭 | Biotech Keyed `Bandwidth`. |
+| light / medium / heavy (weight class) | 소형 / 중형 / 대형; "weight class" 체급 | Core `MechWeightClassDef`, Biotech Keyed `MechWeightClass`. |
+| resurrect mech (ability) | 메카노이드 소생 | Biotech `ResurrectionMech.label`, verbatim. |
+| mech resurrector / resurrector | 메카노이드 소생기 / 소생기 | Coined from the ability label. |
+| charge (chargeNoun, "Charges") | 충전 (amounts: `{0}회분`) | Core `PsychicShockLance` chargeNoun, Keyed `Charges`. |
+| command relays | 명령 중계기 | Coined; Odyssey 궤도 중계기 uses 중계기. |
+| signal enhancers | 신호 증폭기 | Coined after Biotech ConceptDef `Mechanitors` (대역 신호 증폭기). |
+| command range | 명령 범위 | Biotech Keyed `OutOfCommandRange` (명령 범위 벗어남). |
+| drafted | 소집한 / 소집 중 | Core Keyed `CommandDraftLabel` = 소집. |
+| cells | `{0}칸` | Core Keyed `ConfirmSettleNearFactionBase`. |
+| map | 지도 | Core Keyed (다른 지도). |
+| control group | 제어 집단 | Biotech Keyed `ControlGroup`. |
+| hacking | 해킹 | Core Keyed `Hack`, StatDef `HackingSpeed`. |
+| research / smithing / crafting / tailoring / construction (work) | 연구 / 제작 / 가공 / 재봉 / 건설 | Core `WorkTypeDef.labelShort`. |
+| skilled / intellectual labor | 숙련노동 / 지적노동 | Core Keyed `WorkTagManualSkilled`, `WorkTagIntellectual`. |
+| mech gestation / subcore encoding / mech repair / shredding mechanoids | 메카노이드 배양 / 서브코어 부호화 / 메카노이드 수리 / 메카노이드 분쇄 | Biotech Keyed `InitMechGestationCycle`, `SubcoreEncoder` (서브코어 부호기), `AlertMechNeedsRepair`; Core `SmashCorpseMechanoid.jobString`. |
+| machining table | 기계 작업대 | Core `TableMachining.label`. |
+| mechtech research / ultra mechtech | 기계공학 연구 / 최첨단 기계공학 | Biotech `ResearchProjectDef` labels. |
+| corpse age | 시체 최대 경과 시간 | Coined; mechs "dead" are 파괴된 (Biotech ability text). |
+| cerebrex node / core / dye | 세레브렉스 노드 / 코어 / 염료 | Odyssey `Apparel_CerebrexNode`, `CerebrexCore`; Core `Dye.label`. |
+| art (cerebrex node art) / frame / ring | 외형 / 프레임 / 고리 | Coined. |
+| (vanilla) suffix | ` (바닐라)` | Coined, common Korean modding usage. |
+| Biotech / Odyssey (DLC) | 바이오테크 / 오디세이 | Toxin Workshop; ExpansionDef. |
+| comma-and list | `A, B 그리고 C` | Core Keyed `AndLower`; the cost and work summaries are built so that joiner reads. |
 
 ## Pending native review
 
-Nothing inherited is open for the VFEP rows (they are RMK's). Add this mod's
-own coinages here as the pass makes them.
+Nothing inherited is open for the VFEP rows (they are RMK's). This mod's
+coinages: 대군주 (set name), 메카노이드 소생기, 명령 중계기, 신호 증폭기,
+시체 최대 경과 시간, 외형 / 고리 (cerebrex art), ` (바닐라)`, and the
+summary fragment `{0_indefinite} {1}` read as `체급별로 소형 1, ...`.
