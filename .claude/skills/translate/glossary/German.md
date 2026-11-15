@@ -1,7 +1,8 @@
 # German glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); the first machine-assisted pass ran 2026-11-16,
+no native review yet. Only
 mod-specific coinages and grounding decisions; family-wide mechanics and
 style live in `l10n/languages/German.md`.
 
@@ -52,32 +53,42 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and the German worker delegates to the English one (lookup, else `+s`) and Core's German `plural.txt` is thin, so any coined noun ships its own `singular;plural` line in `1.6/Languages/German/WordInfo/plural.txt`. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded or coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | German | Grounding or reason |
+|---|---|---|
+| overlord (set name) | Gebieter (m.); labels Gebieter-Kriegssarg, Gebieter-Kriegssarg-Schulterpanzer, Gebieter-Kriegssarg-Helm | **Coined.** Translated like the sibling set names (Sanitäter, Schiffsknacker, Kontrolleur). Rejected: Oberherr (archaic), Overlord (the family translates set names; Biotech's Mechlord keeps its loan but is not a set name). |
+| Workshop title / `OLWC_SettingsCategory` | Gebieter-Kriegssarg | Glossary title row; equals the armor label. |
+| pilot | Pilot | Inherited family row. |
+| mechanitor | Mechanitor, pl. Mechanitoren | Biotech `PawnKindDef Mechanitor`, `ConceptDef Mechanitors`. |
+| mechlink | Mechlink | Biotech `Mechlink.label`. |
+| mech / mechanoid | Mech, pl. Mechs / Mechanoid, pl. Mechanoiden | Biotech prose (`Apparel_ArmorHelmetMechCommander.description`, ability label). |
+| bandwidth | Bandbreite (Mech-Bandbreite as the stat) | Biotech Keyed `Bandwidth`, `MechBandwidth.label`. |
+| weight class / light, medium, heavy, ultraheavy | Gewichtsklasse / leicht, mittel, schwer, ultraschwer | Core `MechWeightClassDef`, Biotech Keyed `MechWeightClass`. In `OLWC_SummaryCost` the `{0_indefinite}` ("ein leicht") is rewritten by a `{replace:}` to "einen leichten / mittelschweren / schweren / ultraschweren", after Core `PsychicDrone`'s `{replace: {0_plural}; ...}`; mittelschwer per Biotech `LargeMechGestator.description`. |
+| resurrect mech (ability) | Mechanoiden erwecken | Biotech `ResurrectionMech.label`, verbatim. resurrect / resurrection = erwecken / Erweckung. |
+| mech resurrector | Mech-Erwecker | **Coined** after Biotech's Mech-Gestator and its "erwecken". |
+| charge | Ladung, pl. Ladungen | Core `Apparel_PsychicShockLance` chargeNoun, Keyed `Charges`. |
+| command relays | Befehlsrelais | **Coined**: Biotech Keyed `OutOfCommandRange` (Befehlsreichweite) plus Odyssey's Relais. |
+| signal enhancers | Signalverstärker | Biotech `Apparel_ArmorHelmetMechCommander.description`. |
+| command range | Befehlsreichweite | Biotech Keyed `OutOfCommandRange`. |
+| drafted | im Kampfmodus | Core Keyed `IsNotDrafted`, Biotech `DraftMech.label`. |
+| control group | Kontrollgruppe | Biotech Keyed `ControlGroup`. |
+| hacking / hack | Hacken / hacken | Core Keyed `IncapableOfHacking`, `Hack.reportString`. |
+| work names | Forschen, Schmieden, Handwerk, Schneidern, Bauen (verbs forschen, schmieden) | Core `WorkTypeDef` labelShort and verb. |
+| aim | Fernkampfgenauigkeit | Core `ShootingAccuracyPawn.label`. |
+| advanced component | Hightech-Bauteil | Core `ComponentSpacer.label`. |
+| machining table / shred mechanoids | Werkbank / tote Mechanoiden zerlegen | Core `TableMachining.label` and its description. |
+| corpse | Leiche | Core `Corpses.label`. |
+| apocriton | Apokrit | Biotech `Mech_Apocriton.label`. |
+| cerebrex node / dye | Cerebrex-Knoten / Farbstoff | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label`. |
+| art (texture option) | Grafik | Family Workshop "Grafik von"; **coined** for the settings. |
+| vanilla (range suffix) | Vanilla | Loan as German players use it. |
 
 ## Pending native review
 
 Inherited from the Shipcracker glossary, still open there: Kriegssarg for
 "warcasket" (rejected: Kriegssarkophag, Kriegskapsel, Panzersarg, Kampfsarg,
 Kriegsrüstung, the English loan), Kriegssarg-Gießerei, einsargen,
-Schulterpanzer, the set names and 'Raumfahrt-Kriegssärge'. Add this mod's own
-coinages here as the pass makes them.
+Schulterpanzer, the set names and 'Raumfahrt-Kriegssärge'. This mod's own:
+Gebieter (set name), Mech-Erwecker, Befehlsrelais, Grafik (art option),
+and the `{replace:}` rewrite in `OLWC_SummaryCost`, unverified in game.

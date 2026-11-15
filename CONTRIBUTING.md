@@ -23,7 +23,7 @@ review lands.
 | Simplified Chinese   | Machine-assisted | -         |
 | Russian              | Machine-assisted | -         |
 | Korean               | Machine-assisted | -         |
-| German               | Planned          | -         |
+| German               | Machine-assisted | -         |
 | Spanish              | Planned          | -         |
 | French               | Planned          | -         |
 | Brazilian Portuguese | Planned          | -         |

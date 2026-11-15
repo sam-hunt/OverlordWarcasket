@@ -1,0 +1,49 @@
+Gebieter-Kriegssarg
+
+Ein neuer Kriegssarg der Techstufe Raumfahrt für [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url].
+
+[h1]Überblick[/h1]
+
+Der Gebieter ist ein Kriegssarg der 10. Generation für Mechanitoren. Mit ihm führt sein Pilot die Mechs von vorderster Front aus und holt gefallene zurück.
+
+[hr][/hr]
+[h2]Das Set[/h2]
+Rüstung, Schulterpanzer und Helm entstehen in der Kriegssarg-Gießerei. Die Teile lassen sich nach Belieben mit den Sets aus VFE Pirates (oder Alpha Mechs!) kombinieren.
+[list]
+[*][b]Torso:[/b] Bringt die Fähigkeit 'Mechanoiden erwecken' und zusätzliche Bandbreite mit, und der Pilot kann weiterhin schmieden, forschen und hacken.
+[*][b]Schulterpanzer:[/b] Befehlsrelais, über die der Pilot seinen Mechs im Kampfmodus überall auf der Karte Befehle erteilen kann, dazu eine weitere Kontrollgruppe und schnelleres Hacken.
+[*][b]Helm:[/b] Signalverstärker für noch mehr Bandbreite, auf Kosten der Fernkampfgenauigkeit des Piloten.
+[/list]
+
+[h2]Mechanoiden erwecken[/h2]
+Die Rüstung trägt einen Mech-Erwecker. Wähle einen deiner gefallenen Mechs als Ziel, und der Pilot überlädt dessen Selbstreparatur und stellt ihn wieder auf die Beine. Schwerere Mechs kosten mehr Ladungen. Der Mech-Erwecker lädt sich mit der Zeit wieder auf und lässt sich im Notfall mit Hightech-Bauteilen nachladen.
+
+[h2]Aktivierte Arbeitstypen[/h2]
+Die Kriegssärge aus VFE Pirates sperren alle anspruchsvollen und geistigen Arbeiten. Der Pilot des Gebieters kann weiterhin schmieden, etwa an Mech-Gestatoren und Subkern-Kodierern oder bei Mech-Reparaturen, und forschen, denn das braucht er zum Hacken. Beides lässt sich in den Mod-Einstellungen anpassen.
+
+[hr][/hr]
+[h1]Mod-Kompatibilität[/h1]
+[list]
+[*]Kann gefahrlos zu bestehenden Spielständen hinzugefügt werden.
+[*]Kann nicht gefahrlos entfernt werden, solange jemand in das Set eingeschweißt ist.
+[*]Odyssey: Eine optionale Mod-Einstellung gibt dem Cerebrex-Knoten eine neue Grafik und bietet Färbemasken für seinen Kern.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: erforderlich.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: Eingebauter Patch. Rüstungswerte, Bulk und Bulk-Kapazität liegen auf dem Niveau der Raumfahrt-Sets aus VFE Pirates.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: Es gelten dessen Vakuumregeln für Kriegssärge.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] und [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: kompatibel.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: EVA-tauglich nach denselben Regeln wie die Sets aus VFE Pirates.
+[/list]
+
+[hr][/hr]
+[h1]FAQ[/h1]
+
+[b]F: Wie bekomme ich es?[/b]
+A: Erforsche die Projekte 'Raumfahrt-Kriegssärge' und 'Mechtech-Ultrastufe' und baue das Set dann wie jedes andere in der Kriegssarg-Gießerei. Jedes Teil kostet Chips von den Mech-Bossen aus Biotech.
+
+[b]F: Muss der Pilot ein Mechanitor sein?[/b]
+A: Standardmäßig ja. Über eine Mod-Einstellung kann aber jeder Pilot den Mech-Erwecker nutzen.
+
+[hr][/hr]
+[h1]Links[/h1]
+Quellcode, manuelle Downloads und Fehler-Tracker: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+Grafik von [url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]
