@@ -28,7 +28,7 @@ review lands.
 | French               | Machine-assisted | -         |
 | Brazilian Portuguese | Machine-assisted | -         |
 | Japanese             | Machine-assisted | -         |
-| Traditional Chinese  | Planned          | -         |
+| Traditional Chinese  | Machine-assisted | -         |
 
 Statuses: **Source** (the authoritative English strings), **Machine-assisted**
 (generated with terminology grounded against the official RimWorld

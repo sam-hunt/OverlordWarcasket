@@ -1,7 +1,7 @@
 # Traditional Chinese glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there, no
-native review yet); no translation pass has run here yet. Mod-specific terms
+native review yet); first machine-assisted pass 2026-11-16, no native review. Mod-specific terms
 and grounding decisions only; family-wide mechanics, punctuation rules and
 the zh-Hant/zh-Hans inversion table live in `l10n/languages/ChineseTraditional.md`.
 
@@ -51,30 +51,37 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and Chinese falls to the base `Pluralize` (lookup, else unchanged), so one noun serves every slot and no lookup file is needed. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded or coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Traditional Chinese | Grounding / notes |
+|---|---|---|
+| overlord (set name) | 霸主型 | Coined, same `<set>型` shape as 醫療型 / 毒素型; avoids Biotech's 御機王 (mechlord suit). Labels 霸主型戰棺裝甲 / 護肩 / 頭盔. |
+| Workshop title / `OLWC_SettingsCategory` | 霸主型戰棺 | Title row pattern. |
+| pilot | 駕駛員 | Family row (language file). |
+| mechanitor | 御機使 | Biotech `Mechanitors.label`, `PawnKindDef Mechanitor`. |
+| mechlink | 機絆 | Biotech `Mechlink.label`. |
+| mech / mechanoid | 機械族 (prose); 機械- in compound labels | Biotech prose throughout; 機械培養艙, 機械操控組. |
+| bandwidth / mech bandwidth | 頻寬 / 機械族頻寬 | Biotech Keyed `Bandwidth`, StatDef `MechBandwidth`. |
+| light / medium / heavy | 輕量級 / 中量級 / 重量級 | `MechWeightClassDef` labels. |
+| resurrect mech (ability) | 復活機械族 | Biotech `ResurrectionMech.label`; description opens on its official text. |
+| mech resurrector | 機械復活器 | Coined, compound-label 機械- prefix. |
+| charge / charges | 充能, counted 次 (`{0}次充能`) | Core `chargeNoun`, Keyed `Charges`. No WordInfo needed. |
+| command relays | 指令中繼器 | Coined; 中繼 per Odyssey 中繼站. |
+| signal enhancers | 訊號增強器 | Biotech `Apparel_ArmorHelmetMechCommander.description`. |
+| command range | 指揮範圍 | Coined; cells 格 per Core `{0}格`. |
+| control group | 操控組 | Biotech Keyed `ControlGroup`. |
+| hacking | 破解 | Core `Hack` WorkGiver / JobDef, StatDef 破解速度. |
+| research / smithing work | 研究 / 鍛造; Work-tab short labels 研究員 / 鍛造師 | Core `WorkTypeDef`. `OLWC_WorkSummary` uses 擔任{0} for the agent-noun labelShort list. |
+| mech gestation / subcore encoding / mech repair / shredding mechanoids | 培養機械族 / 次核心編碼 / 修理機械族 / 拆解機械族 | Biotech `MechlinkImplant`, `SubcoreEncodingSpeed`, Core `Smithing.description`, `ButcherCorpseMechanoid`. |
+| drafted | 受徵召 | Core Keyed. |
+| cerebrex node / dye | 超智腦節點 / 染料 | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label`. |
+| art (settings) | 美術 | Family Workshop line 美術由…繪製. |
+| (vanilla) suffix | (原版) | Coined, ASCII parens set solid like (預設). |
+| mech bosses / chips | 超級機械族 / 晶片 | Biotech `Mechanitors.helpText`, `Bossgroup` letters. |
+| apocriton | 阿布機頓 | Biotech `Mech_Apocriton.label`. |
 
 ## Pending native review
 
 Every "derived" term above: converted from the zh-Hans pack and
 character-checked against the zh-Hant tars, but the actual Traditional pack
-could not be compared. Add this mod's own coinages here as the pass makes them.
+could not be compared. This mod's coinages: 霸主型, 機械復活器, 指令中繼器, 指揮範圍, (原版), 美術 for the cerebrex art, and the summary fragments' 次 counter on 充能.

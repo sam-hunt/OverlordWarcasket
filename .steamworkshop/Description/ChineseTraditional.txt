@@ -1,0 +1,49 @@
+霸主型戰棺
+
+為[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]新增一套太空級的戰棺。
+
+[h1]關於[/h1]
+
+霸主型是第十代的御機使戰棺，讓駕駛員能在前線帶領機械族，並讓倒下的機械族重新站起來。
+
+[hr][/hr]
+[h2]套裝[/h2]
+裝甲主體、護肩與頭盔皆在戰棺鑄造廠組裝。各部件也能和VFE Pirates(或Alpha Mechs！)原有的套裝自由混搭。
+[list]
+[*][b]裝甲主體：[/b]提供「復活機械族」能力並增加頻寬，駕駛員仍可從事鍛造、研究和破解
+[*][b]護肩：[/b]指令中繼器讓駕駛員能在地圖上任何地方指揮受徵召的機械族，另外增加一個操控組，並加快破解速度
+[*][b]頭盔：[/b]訊號增強器可進一步增加頻寬，但會稍微降低駕駛員的射擊準度
+[/list]
+
+[h2]復活機械族[/h2]
+裝甲內裝有機械復活器。選定一具倒下的機械族，駕駛員就會讓它的自我修復過程超載，使它重新站起來。越重的機械族消耗的充能越多。復活器會隨時間自行充能，緊急時也能用高級零件裝填。
+
+[h2]已啟用的工作類型[/h2]
+VFE Pirates的戰棺會封鎖所有技術性和智力勞動。霸主型的駕駛員仍可從事鍛造和研究，前者用於培養機械族、次核心編碼和修理機械族，後者則是破解所需的工作。這些都可以在模組設定中調整。
+
+[hr][/hr]
+[h1]模組相容性[/h1]
+[list]
+[*]可安全加入現有的存檔。
+[*]有殖民者封在這套戰棺內時，請勿移除本模組。
+[*]「漫遊」：可在模組設定中選擇為超智腦節點換上新美術，並為其核心提供遮罩。
+[*]必須安裝[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]：內建補丁，護甲數值、穿著體積與體積攜帶能力比照VFE Pirates的太空級戰棺。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]：遵循其戰棺的真空抵抗力規則。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url]、[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url]與[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]：相容。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]：與VFE Pirates原有的套裝採用相同規則，具備EVA能力。
+[/list]
+
+[hr][/hr]
+[h1]常見問題[/h1]
+
+[b]問：要怎麼取得？[/b]
+答：完成「太空戰棺」和「超高機械科技」研究後，和其他套裝一樣到戰棺鑄造廠組裝即可。每個部件都需要「生機」超級機械族掉落的晶片。
+
+[b]問：駕駛員一定要是御機使嗎？[/b]
+答：預設是的。不過模組設定可以讓任何駕駛員使用復活器。
+
+[hr][/hr]
+[h1]連結[/h1]
+原始碼、手動下載與問題回報：[url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+美術由[url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]繪製

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: {PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do research, smithing and hacking. -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>{PAWN_nameDef}被封在戰棺內。再劇烈的疼痛也影響不了{PAWN_objective}，{PAWN_pronoun}永遠不會陷入劇痛休克，也不會因疼痛而失去意識。由於裝甲十分笨重，使用時又極為耗能，{PAWN_nameDef}無法從事大多數工作，但仍可從事研究、鍛造和破解工作。</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>
+  <!-- EN: warcasket -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>戰棺</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>
+
+</LanguageData>
