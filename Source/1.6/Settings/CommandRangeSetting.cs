@@ -69,11 +69,6 @@ public sealed class CommandRangeSetting
 
     public float Radius => radius < 0f ? DefaultRadius : radius;
 
-    // The section header's icon: the piece the range rides on, the helmet for the piece-free
-    // choices, read off the def at draw time so a play-data reload's fresh texture is the one
-    // drawn.
-    public Texture2D Icon => (AppliesTo == CommandRangeAppliesTo.Shoulders ? shoulders : helmet)?.uiIcon;
-
     public void Reset()
     {
         appliesToName = null;

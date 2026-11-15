@@ -42,9 +42,11 @@ namespace OverlordWarcasket;
 // CommandRange.Apply onto the set's CommandRangeExtension (its scope and radius), onto the piece
 // that carries it (moved between the helmet and the shoulders) and into the state the two
 // patches read; the defaults are the extension's as the XML places it, on the shoulders. Its
-// header carries that piece's icon, read off the def at draw time, and the section's own text.
-// It needs only the two pieces, so it is skipped when either is missing or neither carries the
-// extension, and shown without the ability's defs.
+// header carries the section's own text and vanilla's draft gizmo icon (TexCommand.Draft, what
+// Pawn_DraftController.GetGizmos draws, 1.6 and 1.7.5005 decompiles), the order the range
+// governs, a Core texture that survives a play-data reload as a plain static. It needs only the
+// two pieces, so it is skipped when either is missing or neither carries the extension, and
+// shown without the ability's defs.
 //
 // The work section is one checkbox per work type the trait mirror leaves to the player
 // (WorkSetting over WorkProfile.Toggleable), written onto the overlord trait's disabledWorkTypes
@@ -336,7 +338,7 @@ public class OverlordWarcasketSettings : ModSettings
         sparksOnlyDrafted.DoRow(listing);
         if (commandRange.Available)
         {
-            SectionHeader(listing, "OLWC_SectionCommandRange", commandRange.Icon,
+            SectionHeader(listing, "OLWC_SectionCommandRange", TexCommand.Draft,
                 HeaderTip("OLWC_SectionCommandRange".Translate(), "OLWC_SectionCommandRangeDesc".Translate(commandRange.NormalRadius.ToString("0.#"))));
             SummaryRow(listing, commandRange.Summary);
             commandRange.DoRows(listing);
@@ -429,10 +431,12 @@ public class OverlordWarcasketSettings : ModSettings
     // The header's text in the medium font after its icon, a square as tall as the header; a
     // header whose texture is missing starts its text at the left edge rather than after an
     // empty slot. The tooltip covers the icon and the text only, not the empty width after them.
+    // The height is the icon's: the icons are full-bleed art, which a square much under 48px
+    // blurs past recognition.
     private static void SectionHeader(Listing_Standard listing, string key, Texture2D icon, string tooltip, bool first = false)
     {
         const float headerGap = 4f;
-        const float headerHeight = 32f;
+        const float headerHeight = 48f;
         const float iconPad = 8f;
         if (!first)
             listing.Gap(SectionGap);
