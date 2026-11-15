@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back under the pilot's control with some but not all of its wounds healed, so the pilot needs enough bandwidth for it. Each resurrection costs some of the armor's charges, and heavier mechs cost more. -->
+  <OLWC_ResurrectMech.description>自己修復プロセスを外部から供給することにより,最近破壊されたメカノイドを復活させます.損傷が完治するわけではなく,一部修復状態で再起動します.復活したメカはパイロットの制御下に入るため,パイロットにはそのメカを制御できるだけの帯域幅が必要です.復活のたびにアーマーのチャージを消費し,重いメカほど多くのチャージを使います.</OLWC_ResurrectMech.description>
+  <!-- EN: Resurrecting mechs. -->
+  <OLWC_ResurrectMech.jobReportString>メカを復活中</OLWC_ResurrectMech.jobReportString>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.label>リザレクトメカ</OLWC_ResurrectMech.label>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.verbProperties.label>リザレクトメカ</OLWC_ResurrectMech.verbProperties.label>
+
+</LanguageData>

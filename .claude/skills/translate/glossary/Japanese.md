@@ -1,7 +1,8 @@
 # Japanese glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); first machine-assisted pass ran 2026-11-16, no
+native review yet. Only
 mod-specific coinages and grounding decisions; family-wide mechanics and
 style (ASCII `,` `.`, no LanguageWorker, polite register in descriptions,
 「」 vs ASCII quotes per slot) live in `l10n/languages/Japanese.md`.
@@ -56,27 +57,38 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and Japanese falls to the base `Pluralize` (lookup, else unchanged), so one noun serves every slot and no lookup file is needed. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded and coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Japanese | Grounding or reason |
+|---|---|---|
+| overlord (set name) | オーバーロード | Katakana per the family set-name habit. |
+| Workshop title / `OLWC_SettingsCategory` | オーバーロード・ウォーキャスケット | Equals the armor label. |
+| labels | オーバーロード・ウォーキャスケット / 〜ヘルメット / 〜ショルダーアーマー | Inherited label pattern. |
+| pilot | パイロット | Inherited row. |
+| mechanitor / mechlink | メカニター / メカリンク | Biotech `Mechanitors.label`, `Mechlink.label`. |
+| mech / mechanoid | メカ / メカノイド | Biotech throughout (`CommandSelectAllMechs`). |
+| bandwidth / mech bandwidth | 帯域幅 / メカ帯域幅 | Biotech Keyed `Bandwidth`, StatDef `MechBandwidth`. |
+| weight classes (light / medium / heavy) | 軽 / 中 / 重 | Core `MechWeightClassDef`; framed as `{0}量級` (軽量級, 中量級, 重量級, 超重量級). `_indefinite` is a no-op with no worker. |
+| resurrect mech | リザレクトメカ | Biotech `ResurrectionMech.label`, verbatim; description opens with its two official sentences. |
+| Resurrecting mechs. / resurrecting TargetA | メカを復活中 / TargetAを復活させている | Biotech `ResurrectXMech.jobString`; `RepairMech.reportString` shape. |
+| mech resurrector | メカ復活装置 | Coined from Biotech's 復活 (`ResurrectLightMech`). |
+| charge | チャージ | Core `Charges`, `Apparel_PsychicShockLance` chargeNoun. Recharge = 再チャージ / 回復. |
+| reload | 充填 | Main language file row. |
+| corpse (mech) | 死骸 | Core `SmashCorpseMechanoid.description`. |
+| command relays | コマンドリレー | Coined; コマンド from Biotech `OutOfCommandRange`, リレー from Odyssey `OrbitalRelay`. |
+| signal enhancers | 信号増幅器 | Biotech `Apparel_ArmorHelmetMechCommander.description`. |
+| command range | コマンド範囲 | Biotech Keyed `OutOfCommandRange` (コマンド範囲外). |
+| control group | メカ制御グループ | Biotech StatDef `MechControlGroups` (the stat the shoulders raise). |
+| drafted | 徴兵中 | Core Keyed `MechNameDisplayMode_WhileDrafted`. |
+| hacking | ハッキング | Core WorkGiverDef `Hack.label`. |
+| research / smithing / crafting / tailoring / construction | 研究 / 鍛冶 / 工芸 / 裁縫 / 建築 | Core `WorkTypeDef.labelShort`. |
+| mech gestation / subcore encoding / mech repair / shred at machining table | メカの培養 / サブコアのエンコード / メカの修理 / 精密工作機械でのメカノイドの寸断 | Biotech `MechGestator`, `SubcoreEncoder`, `RepairMech`; Core `ButcherCorpseMechanoid`, `TableMachining`. |
+| ultra mechtech (research) | 「機械技術 超高度」 | Biotech `UltraMechtech.label`. |
+| mech bosses | ボス級メカノイド | Coined, Workshop FAQ only. |
+| cerebrex node / dye | セレブレックスノード / 染料 | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label`. |
+| art (cerebrex setting) | 外観 | Coined; avoids modder words. |
+| (vanilla) suffix | ` (バニラ)` | Coined; community usage. |
+| Enabled work types (Workshop h2) | 有効な作業 | Pre-filled sibling `MDWC_SectionWork`. |
 
 ## Pending native review
 
@@ -85,3 +97,8 @@ length, ウォーキャスケット鋳造台 (foundry) and 封入 (entomb), both
 If the community VFEP translation surfaces, align these and the set names to
 it in the Shipcracker glossary first. Add this mod's own coinages here as the
 pass makes them.
+
+This pass's own coinages, pending native review: オーバーロード (set
+name), メカ復活装置, コマンドリレー, the `{0}量級` frame for weight classes,
+ボス級メカノイド, 外観 for the cerebrex art, ` (バニラ)`, and the
+10th-generation paragraph's Overlord wording (鹵獲した宙賊の装備は政府のパワーアーマーを核に作り直され).

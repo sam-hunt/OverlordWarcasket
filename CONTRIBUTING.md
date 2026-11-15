@@ -27,7 +27,7 @@ review lands.
 | Spanish              | Machine-assisted | -         |
 | French               | Machine-assisted | -         |
 | Brazilian Portuguese | Machine-assisted | -         |
-| Japanese             | Planned          | -         |
+| Japanese             | Machine-assisted | -         |
 | Traditional Chinese  | Planned          | -         |
 
 Statuses: **Source** (the authoritative English strings), **Machine-assisted**

@@ -1,0 +1,49 @@
+オーバーロード・ウォーキャスケット
+
+[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]に,宇宙世紀の新型ウォーキャスケットを追加します.
+
+[h1]概要[/h1]
+
+オーバーロードは第10世代のメカニター用ウォーキャスケットです.最前線でメカを率い,倒れたメカを復活させるために作られています.
+
+[hr][/hr]
+[h2]セット構成[/h2]
+胴体,ショルダーアーマー,ヘルメットの3部位からなり,ウォーキャスケット鋳造台で溶接できます.VFE Pirates本体(またはAlpha Mechs!)のセットとも自由に組み合わせられます.
+[list]
+[*][b]胴体:[/b] リザレクトメカを使えるようになり,帯域幅が増えます.パイロットは鍛冶,研究,ハッキングも続けられます.
+[*][b]ショルダーアーマー:[/b] コマンドリレーにより,マップ上のどこにいる徴兵中のメカにも命令できます.メカ制御グループが1つ増え,ハッキングも速くなります.
+[*][b]ヘルメット:[/b] 信号増幅器で帯域幅がさらに増えますが,パイロットの射撃の精度は少し落ちます.
+[/list]
+
+[h2]リザレクトメカ[/h2]
+アーマーにはメカ復活装置が搭載されています.コロニーの倒れたメカを指定すると,パイロットがメカの自己修復プロセスを強化して再び立ち上がらせます.重いメカほど多くのチャージを消費します.メカ復活装置は時間とともに再チャージされ,いざというときは先進コンポーネントで充填することもできます.
+
+[h2]有効な作業[/h2]
+VFE Piratesのウォーキャスケットでは,技能を要する作業や知的作業がすべて行えなくなります.オーバーロードのパイロットは鍛冶と研究を続けられます.鍛冶はメカの培養,サブコアのエンコード,メカの修理に,研究はハッキングに必要です.これらはMod 設定で調整できます.
+
+[hr][/hr]
+[h1]互換性[/h1]
+[list]
+[*]既存のセーブデータに追加しても安全です.
+[*]ポーンがセットに溶接されている間は,MODを削除しないでください.
+[*]Odyssey: Mod 設定で有効にすると,セレブレックスノードの外観が新しくなり,染料で染まる範囲も選べます.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: 必須です.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: パッチを内蔵しており,アーマー値,かさ,積載量が他の宇宙世紀のウォーキャスケットと同水準に調整されます.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: ウォーキャスケット向けの真空耐性のルールに従います.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url],[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url],[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: 対応しています.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: VFE Pirates本体のセットと同じ条件でEVA対応になります.
+[/list]
+
+[hr][/hr]
+[h1]よくある質問[/h1]
+
+[b]Q: どうやって入手しますか?[/b]
+A: 研究「宇宙世紀のウォーキャスケット」と「機械技術 超高度」を完了したら,ほかのセットと同じくウォーキャスケット鋳造台で溶接します.各部位の素材には,Biotechのボス級メカノイドが落とすチップが必要です.
+
+[b]Q: パイロットはメカニターでなければいけませんか?[/b]
+A: デフォルトではそうです.ただし,Mod 設定でどのパイロットでもメカ復活装置を使えるようにできます.
+
+[hr][/hr]
+[h1]リンク[/h1]
+ソースコード,手動ダウンロード,不具合報告: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+アートは [url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url] 氏による

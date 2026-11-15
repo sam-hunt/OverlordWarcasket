@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: {PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do research, smithing and hacking. -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>{PAWN_nameDef}はウォーキャスケットに封入されています.どんな痛みも{PAWN_objective}苦しめることはなく,{PAWN_pronoun}が痛みでショック状態になったり意識を失ったりすることもありません.アーマーはかさばり,動かすのにも多くのエネルギーを要するため,{PAWN_nameDef}はほとんどの作業ができません.ただし,研究,鍛冶,ハッキングは行えます.</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>
+  <!-- EN: warcasket -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>ウォーキャスケット</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>
+
+</LanguageData>
