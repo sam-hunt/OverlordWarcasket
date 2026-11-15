@@ -93,18 +93,18 @@ public class WorkProfileResolveTests
     public void ReblocksByNameWhatTheFreedTagsCovered()
     {
         WorkProfile.Resolved<string> profile = Resolve(Vfep);
-        Assert.Equal(["Cooking", "Construction", "Growing", "Mining", "PlantCutting"], profile.BaseTypes);
+        Assert.Equal(["Cooking", "Growing", "Mining", "PlantCutting"], profile.BaseTypes);
         Assert.Equal(["Smithing", "Research"], profile.OpenByDefault.OrderBy(name => name == "Research"));
     }
 
     // The settings' rows: those open by default first, each group in the Openable table's
-    // order, not the work tab's, which has Tailoring ahead of Crafting.
+    // order, not the work tab's, which has Construction first and Tailoring ahead of Crafting.
     [Fact]
     public void OrdersTheToggleablesByTheTable()
     {
-        Assert.Equal(["Smithing", "Research", "Crafting", "Tailoring", "DarkStudy"], Resolve(Vfep).Toggleable);
+        Assert.Equal(["Smithing", "Research", "Crafting", "Tailoring", "DarkStudy", "Construction"], Resolve(Vfep).Toggleable);
         Assert.Equal(
-            ["Smithing", "Research", "Tailoring", "Crafting", "DarkStudy"],
+            ["Smithing", "Research", "Tailoring", "Construction", "Crafting", "DarkStudy"],
             Resolve(Vfep & ~WorkTags.ManualSkilled, null, "Crafting").Toggleable);
     }
 
@@ -128,6 +128,7 @@ public class WorkProfileResolveTests
         Assert.Empty(profile.BaseTypes);
         Assert.Contains("Crafting", profile.OpenByDefault);
         Assert.Contains("Tailoring", profile.OpenByDefault);
+        Assert.Contains("Construction", profile.OpenByDefault);
         Assert.DoesNotContain("DarkStudy", profile.OpenByDefault);
         Assert.Contains("Cooking", OpenByDefault(profile));
     }
@@ -145,13 +146,14 @@ public class WorkProfileResolveTests
     }
 
     [Fact]
-    public void OnlyTheFiveWorkTypesAreOpenable()
+    public void OnlyTheSixWorkTypesAreOpenable()
     {
         Assert.True(WorkProfile.OpenableDefault("Research"));
         Assert.True(WorkProfile.OpenableDefault("Smithing"));
         Assert.False(WorkProfile.OpenableDefault("Crafting"));
         Assert.False(WorkProfile.OpenableDefault("Tailoring"));
         Assert.False(WorkProfile.OpenableDefault("DarkStudy"));
+        Assert.False(WorkProfile.OpenableDefault("Construction"));
         Assert.Null(WorkProfile.OpenableDefault("Cooking"));
     }
 }

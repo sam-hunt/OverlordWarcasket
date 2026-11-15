@@ -25,8 +25,8 @@ carries Intellectual, which also covers Anomaly's DarkStudy (the installed Core 
 types, read from `Data/*/Defs/WorkTypeDefs`; no DLC adds another), so the mirror generalises:
 
 - `WorkProfile.Openable` names the openable work types by defName with the fixed rule's
-  default: Research and Smithing open, Crafting, Tailoring and DarkStudy blocked (DarkStudy
-  skipped silently without Anomaly).
+  default: Research and Smithing open, Crafting, Tailoring, DarkStudy and Construction blocked
+  (DarkStudy skipped silently without Anomaly).
 - `ResolveTags` (pure, tested) keeps the Medic's ManualDumb-to-Cleaning swap and removes every
   tag an openable work type carries that VFEP blocks (ManualSkilled and Intellectual).
 - Every work type the removed tags covered that is not openable is re-blocked by name in

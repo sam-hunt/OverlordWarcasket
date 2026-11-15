@@ -9,13 +9,12 @@ namespace OverlordWarcasket;
 // The pilot's work: one checkbox per work type the trait mirror leaves to the player
 // (WorkProfile.Toggleable, the openable work types), what a Tunable is for a number. Until the
 // player flips one it is WorkProfile.OpenByDefault, the fixed rule the mirror applies on its
-// own (Research and Smithing open, Crafting, Tailoring and Dark study blocked, each open
-// regardless once VFEP opens it),
-// read live so the default follows whatever the loaded mods make of VFEP's trait. Only an
-// override is saved, by the work type's defName, so it outlives the def instances a play-data
-// reload replaces and a work type whose DLC or mod is off keeps its override for when it is
-// back; flipping a box back to its default clears it. Written onto the trait by the settings'
-// ApplyToDefs through WorkProfile.Apply.
+// own (Smithing and Research open, Crafting, Tailoring, Dark study and Construction blocked,
+// each open regardless once VFEP opens it), read live so the default follows whatever the
+// loaded mods make of VFEP's trait. Only an override is saved, by the work type's defName, so
+// it outlives the def instances a play-data reload replaces and a work type whose DLC or mod
+// is off keeps its override for when it is back; flipping a box back to its default clears it.
+// Written onto the trait by the settings' ApplyToDefs through WorkProfile.Apply.
 public sealed class WorkSetting
 {
     private const string Key = "Work";

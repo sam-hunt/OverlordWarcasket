@@ -12,9 +12,10 @@ public class WorkProfileTagsTests
         | WorkTags.Artistic | WorkTags.Caring | WorkTags.Intellectual;
 
     // Smithing, Crafting and Tailoring carry Crafting, ManualSkilled, Commoner and AllWork;
-    // Research and DarkStudy carry Intellectual, Commoner and AllWork.
-    private const WorkTags Openable = WorkTags.Crafting | WorkTags.ManualSkilled | WorkTags.Intellectual
-        | WorkTags.Commoner | WorkTags.AllWork;
+    // Construction carries Constructing, ManualSkilled, Commoner and AllWork; Research and
+    // DarkStudy carry Intellectual, Commoner and AllWork.
+    private const WorkTags Openable = WorkTags.Crafting | WorkTags.Constructing | WorkTags.ManualSkilled
+        | WorkTags.Intellectual | WorkTags.Commoner | WorkTags.AllWork;
 
     [Fact]
     public void SwapsManualDumbForCleaning()

@@ -26,8 +26,10 @@ namespace OverlordWarcasket;
 // disabled, which a totally disabled Intellectual skill does; verified on 1.7); Smithing open,
 // as Biotech files mech gestation, subcore encoding and the mechanitor-only mech repair there
 // and Core the machining table, where mechanoids are shredded (the Crafting spot's smash recipe
-// is Crafting work); Crafting, Tailoring and Anomaly's DarkStudy blocked until the player opens
-// them, the last skipped silently without Anomaly. The table's order is the order of the
+// is Crafting work); Crafting, Tailoring, Anomaly's DarkStudy and Construction blocked until
+// the player opens them, DarkStudy skipped silently without Anomaly. Construction is the one
+// work type of Core and the DLCs the Construction skill is relevant to (read on 1.7), so the
+// skill is totally disabled until it is opened. The table's order is the order of the
 // settings' rows. Resolve, pure and tested, sorts the loaded game's work types into the trait's
 // tags, the types blocked by name whatever the settings say and the toggleables, with what the
 // rule makes of each (OpenByDefault: its own default, or open whenever VFEP's trait blocks
@@ -41,8 +43,8 @@ namespace OverlordWarcasket;
 // Tailoring blocked, disable the Crafting skill the mech work's speed stats need.
 //
 // Opening a work type that VFEP blocks by tag means dropping that tag (ManualSkilled, for
-// Smithing, Crafting and Tailoring; Intellectual, for Research and DarkStudy) and re-blocking by
-// name every other work type the tag covered (Cooking, Construction, Growing, Mining,
+// Smithing, Crafting, Tailoring and Construction; Intellectual, for Research and DarkStudy) and
+// re-blocking by name every other work type the tag covered (Cooking, Growing, Mining,
 // PlantCutting, and any modded one), since a trait's disabledWorkTypes can only add. Hacking
 // cannot be had without Research: with Research and DarkStudy blocked by name the Intellectual
 // skill is totally disabled (SkillDef.IsDisabled: every work type it is relevant to is blocked),
@@ -67,6 +69,7 @@ public static class WorkProfile
         ("Crafting", false),
         ("Tailoring", false),
         ("DarkStudy", false),
+        ("Construction", false),
     ];
 
     // The degree's text stays ours, and so do its identity (degree: the armor grants degree 0 and
