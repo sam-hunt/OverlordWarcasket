@@ -2,7 +2,6 @@
 
 ## Features
 
-- **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be booted with the full compat list, and a boot on 1.6.
 - **Workshop images.** add gameplay images of the resurrection and the settings etc
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **First Workshop publish.** Commit `About/PublishedFileId.txt`, add the Workshop link and the Steam badges to the README, paste the description.
