@@ -8,11 +8,11 @@ The Overlord is a 10th-generation mechanitor warcasket, built to lead mechs from
 
 [hr][/hr]
 [h2]The Set[/h2]
-Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by Spacer Warcaskets and Ultra Mechtech research. Each piece costs chips from Biotech's mech bosses. Mix and match the pieces with VFE Pirates' own sets as you please.
+Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by Spacer Warcaskets and Ultra Mechtech research. Each piece costs chips from Biotech's mech bosses. Mix and match the pieces with VFE Pirates' (or Alpha Mechs!) own sets as you please.
 [list]
-[*][b]Armor:[/b] Grants resurrect mech, adds 8 bandwidth, and leaves the pilot able to smith, research and hack
+[*][b]Armor:[/b] Grants resurrect mech, adds bandwidth, and leaves the pilot able to smith, research and hack
 [*][b]Shoulders:[/b] Command relays that let the pilot order drafted mechs anywhere on the map, with one more control group and faster hacking
-[*][b]Helmet:[/b] Signal enhancers that add 12 bandwidth, at some cost to the pilot's aim
+[*][b]Helmet:[/b] Signal enhancers that add more bandwidth, at some cost to the pilot's aim
 [/list]
 
 [h2]Resurrect mech[/h2]
@@ -31,10 +31,10 @@ The charge capacity, the recharge rate, the reload cost, how fresh a mech must b
 [*]Biotech: required.
 [*]Odyssey: optional. A mod setting redraws the cerebrex node with Overlord Warcasket's own art.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: required.
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: EVA rated under the same rules as VFE Pirates' own sets.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: built-in patch, with armor, bulk and carry capacity in line with VFE Pirates' spacer sets.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: follows its vacuum-resistance rules for warcaskets.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: Yes.
-[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: built-in patch, with armor, bulk and carry capacity in line with VFE Pirates' spacer sets.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: EVA rated under the same rules as VFE Pirates' own sets.
 [/list]
 
 [hr][/hr]
