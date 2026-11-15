@@ -34,5 +34,5 @@ are on the smoke list); the engines live in the `l10n/` submodule. Nothing here 
   the guide for the next commission: what the delivery looks like, the cost model and the
   pitfalls (a snapshot of the family primary in `../`).
 - **Translation passes are deferred until shortly before release**, one language at a time on
-  explicit request, through the `/translate` skill, once the English text is final. No language
-  exists yet; the public roster is in `CONTRIBUTING.md`.
+  explicit request, through the `/translate` skill, once the English text is final. The nine
+  roster languages are machine-assisted first passes; the public roster is in `CONTRIBUTING.md`.

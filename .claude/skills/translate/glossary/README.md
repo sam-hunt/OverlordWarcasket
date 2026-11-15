@@ -8,16 +8,16 @@ names and "warcasket foundry" are rendered, and which community VFEP
 translation, if any, they were grounded against), the overlord set's own
 coined terms, and anything pending native review.
 
-Every roster language has a seeded file, written before any translation
-pass ran and before this set's own text was final. Each carries, in this
+Every roster language has a file, seeded before the first translation
+pass and filled in by it. Each carries, in this
 order: the community VFEP source it is grounded against (or the absence of
 one); the rows inherited verbatim from the sibling Shipcracker Warcasket
 repo's `.claude/skills/translate/glossary/<Language>.md` (warcasket, the
 part nouns, the label pattern, foundry, entomb, set names, the VEF ability
 strings, the settings words Shipcracker settled), so the sets read as one
 family in-game; the armor's charge noun and that language's plural-lookup
-constraint on a coined one; the list of terms the first pass must still
-ground or coin; and what is pending native review. An inherited row is
+constraint on a coined one; the table of what the first pass grounded or
+coined for this set; and what is pending native review. An inherited row is
 never changed here first: reconcile it in the Shipcracker glossary, then
 mirror it here and in Toxin Warcasket. A term that has since been corrected
 by a native reviewer in the sibling repo is the one to carry.

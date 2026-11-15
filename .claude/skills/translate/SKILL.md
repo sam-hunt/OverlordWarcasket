@@ -29,9 +29,9 @@ and only these** (progressive disclosure; if `l10n/` is empty, run
   seeded: its inherited rows are the sibling Shipcracker Warcasket repo's
   VFEP warcasket vocabulary (warcasket, parts, foundry, entomb, set names,
   the VEF ability strings), copied verbatim through the Medic Warcasket
-  repo's seed so the sets read as one family in-game, and its closing list
-  names the terms the first pass must still ground or coin. The pass fills
-  that list in and never reopens an inherited row (a change there is made
+  repo's seed so the sets read as one family in-game, and its second table
+  holds what the first pass grounded or coined for this set. A pass adds to
+  that table and never reopens an inherited row (a change there is made
   in the Shipcracker glossary first, then mirrored here and in the Toxin
   and Medic repos).
 - `l10n/lessons.md`, cross-language lessons; read when generating a new
@@ -83,7 +83,35 @@ notes for the shim or flow edit this repo owes before continuing.
     and `{1}` the charges, joined with Core's comma-and list), `{3}` the
     corpse window, `{4}` the casting time and `{5}` the cooldown, each
     already carrying its unit letter; `OLWC_ResurrectSummaryNoCooldown`
-    takes `{0}` to `{4}` only. `OLWC_DefaultSuffix` keeps its leading space.
+    takes `{0}` to `{4}` only. `{3}` is the window clause, `OLWC_SummaryWindow`
+    with `{0}` the corpse window or `OLWC_SummaryNoWindow`. `OLWC_SummaryCost`
+    must keep `{0_indefinite}` (the checker compares it literally); the weight
+    class label arrives uninflected, so a language that declines adjectives
+    builds the fragment to need no agreement or rewrites it with `{replace:}`,
+    as German does. The suffix keys (`OLWC_DefaultSuffix`,
+    `OLWC_RequiresRestartSuffix`, `OLWC_CommandRangeVanillaSuffix`,
+    `OLWC_CommandRangeCombatExtendedSuffix`) keep their leading space where
+    the language writes one.
+  - the other settings sections. The spark rows follow the same label and
+    `...Desc` shape. Work: `OLWC_WorkDefault` takes `{0}`, the
+    `OLWC_WorkOpen` / `OLWC_WorkBlocked` word; `OLWC_WorkSummary` takes `{0}`,
+    a comma-and list of the Work tab's short labels (`WorkTypeDef`
+    `labelShort`) in the game's translation, uninflected, which are agent
+    nouns in some languages (French, Traditional Chinese) and verbs or
+    gerunds in others. Command range: `OLWC_SectionCommandRangeDesc` `{0}`
+    vanilla's range in cells; `OLWC_CommandRangeWearing`, its `...Desc` and
+    `OLWC_CommandRangeSummaryWearing` `{0}` the helmet's or the shoulders'
+    label as the DefInjected file writes it, uninflected;
+    `OLWC_CommandRangeSummaryWearing` `{1}` and `OLWC_CommandRangeSummaryAll`
+    `{0}` one of the lowercase reach fragments (`OLWC_CommandRangeReachMap`,
+    `...ReachAnywhere`, `...ReachRadius` with `{0}` cells);
+    `OLWC_CommandRangeRadius` `{0}` cells and `{1}` empty or one of the two
+    range suffixes; `OLWC_CommandRangeRadiusDesc` `{0}` the normal range and
+    `{1}` the default; `OLWC_CommandRangeNoneDesc` and
+    `OLWC_CommandRangeSummaryNone` `{0}` cells. Cerebrex node art (shown with
+    Odyssey only): `OLWC_CerebrexArtDesc` `{0}` the default choice's label,
+    one of the `OLWC_CerebrexArt_*` labels; the node and dye are named as
+    Odyssey's `Apparel_CerebrexNode` and Core's `Dye` are.
   - the resurrect mech's runtime strings. `OLWC_NoCharges` (the disabled
     reason, no placeholder); `OLWC_NotMechanitor` takes `{0}` the pilot's
     name; `OLWC_NotMechCorpse`, `OLWC_CannotResurrectClass`,
