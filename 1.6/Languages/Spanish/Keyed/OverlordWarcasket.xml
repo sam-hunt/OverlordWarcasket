@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Resurrect mech (Source/1.6/Abilities/Ability_ResurrectMech.cs, Source/1.6/Comps/, Source/1.6/Gizmos/) -->
+  <!-- EN: No resurrection charges left. -->
+  <OLWC_NoCharges>No quedan cargas de resurrección.</OLWC_NoCharges>
+  <!-- EN: {0} needs a mechlink to command the mech resurrector. -->
+  <OLWC_NotMechanitor>{0} necesita un mecaenlace para manejar el resucitador de mecas.</OLWC_NotMechanitor>
+  <!-- EN: {0} is not a mechanoid. -->
+  <OLWC_NotMechCorpse>{0} no es un mecanoide.</OLWC_NotMechCorpse>
+  <!-- EN: {0} cannot be resurrected. -->
+  <OLWC_CannotResurrectClass>{0} no se puede resucitar.</OLWC_CannotResurrectClass>
+  <!-- EN: {0} is not one of your mechs. -->
+  <OLWC_NotOurMech>{0} no es uno de tus mecas.</OLWC_NotOurMech>
+  <!-- EN: {0} has been dead too long. -->
+  <OLWC_CorpseTooOld>Ha pasado demasiado tiempo desde la muerte de {0}.</OLWC_CorpseTooOld>
+  <!-- EN: Not enough charges to resurrect {0}. -->
+  <OLWC_NotEnoughCharges>No hay suficientes cargas para resucitar a {0}.</OLWC_NotEnoughCharges>
+  <!-- EN: {0} does not have enough bandwidth to control {1}. -->
+  <OLWC_NotEnoughBandwidth>{0} no tiene suficiente ancho de banda para controlar a {1}.</OLWC_NotEnoughBandwidth>
+  <!-- EN: Charges: {0} / {1} -->
+  <OLWC_ChargesLabel>Cargas: {0} / {1}</OLWC_ChargesLabel>
+  <!-- EN: Cost to resurrect {0}: {1} -->
+  <OLWC_TargetCost>Coste para resucitar a {0}: {1}</OLWC_TargetCost>
+  <!-- EN: Can be resurrected for another {0}. -->
+  <OLWC_TargetTimeLeft>Se puede resucitar durante {0} más.</OLWC_TargetTimeLeft>
+  <!-- EN: Recharge rate: {0} per day -->
+  <OLWC_GaugeRegen>Recuperación: {0} al día</OLWC_GaugeRegen>
+  <!-- EN: Recharge rate: none -->
+  <OLWC_GaugeNoRegen>Recuperación: ninguna</OLWC_GaugeNoRegen>
+  <!-- EN: Reload cost: {0} -->
+  <OLWC_GaugeReload>Coste de recarga: {0}</OLWC_GaugeReload>
+  <!-- EN: Automatic reload level: {0} -->
+  <OLWC_GaugeAutoReload>Nivel de recarga automática: {0}</OLWC_GaugeAutoReload>
+  <!-- EN: Automatic reload: off -->
+  <OLWC_GaugeNoAutoReload>Recarga automática: desactivada</OLWC_GaugeNoAutoReload>
+  <!-- EN: Maximum corpse age: {0} -->
+  <OLWC_GaugeCorpseAge>Plazo tras la muerte: {0}</OLWC_GaugeCorpseAge>
+  <!-- EN: Maximum corpse age: unlimited -->
+  <OLWC_GaugeNoCorpseAge>Plazo tras la muerte: ilimitado</OLWC_GaugeNoCorpseAge>
+  <!-- EN: Charges per mech: -->
+  <OLWC_GaugeCosts>Cargas por meca:</OLWC_GaugeCosts>
+  <!-- EN: {0}: {1} -->
+  <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
+  <!-- EN: Drag the bar to set a level. The pilot will reload the resurrector whenever it falls below that level. -->
+  <OLWC_GaugeDragHint>Arrastra la barra para fijar un nivel. El piloto recargará el resucitador cada vez que baje de ese nivel.</OLWC_GaugeDragHint>
+
+  <!-- Mod settings (Source/1.6/Settings/) -->
+  <!-- EN: Overlord Warcasket -->
+  <OLWC_SettingsCategory>Ataúd de guerra soberano</OLWC_SettingsCategory>
+  <!-- EN: These settings are unavailable. Another mod has changed the overlord warcasket, so the set will keep its built-in values. -->
+  <OLWC_SettingsUnavailable>Estos ajustes no están disponibles. Otro mod ha modificado el ataúd de guerra soberano, así que el conjunto mantendrá sus valores originales.</OLWC_SettingsUnavailable>
+
+  <!-- EN: Resurrect mech -->
+  <OLWC_SectionResurrect>Resucitar meca</OLWC_SectionResurrect>
+
+  <!-- EN: Charge capacity -->
+  <OLWC_Charges>Capacidad de cargas</OLWC_Charges>
+  <!-- EN: The number of resurrection charges the armor holds when full. Default: {0}. -->
+  <OLWC_ChargesDesc>Número de cargas de resurrección que almacena la armadura cuando está llena. Por defecto: {0}.</OLWC_ChargesDesc>
+
+  <!-- EN: Charges recharged per day -->
+  <OLWC_ChargesPerDay>Cargas recuperadas al día</OLWC_ChargesPerDay>
+  <!-- EN: The number of charges the armor recharges on its own each day. At 0, it will only gain charges by reloading. Default: {0}. -->
+  <OLWC_ChargesPerDayDesc>Número de cargas que la armadura recupera por sí sola cada día. Con 0, solo obtendrá cargas al recargarla. Por defecto: {0}.</OLWC_ChargesPerDayDesc>
+
+  <!-- EN: Reload cost per charge -->
+  <OLWC_ReloadCost>Coste de recarga por carga</OLWC_ReloadCost>
+  <!-- EN: The number of {1} it takes to reload one charge. Default: {0}. -->
+  <OLWC_ReloadCostDesc>Cantidad de {1} que cuesta recargar una carga. Por defecto: {0}.</OLWC_ReloadCostDesc>
+
+  <!-- EN: Maximum corpse age -->
+  <OLWC_CorpseAge>Plazo máximo tras la muerte</OLWC_CorpseAge>
+  <!-- EN: How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}. -->
+  <OLWC_CorpseAgeDesc>Cuánto tiempo de juego tras su muerte se puede seguir resucitando a un meca. Con el valor máximo, no habrá límite. Por defecto: {0}.</OLWC_CorpseAgeDesc>
+  <!-- EN: Unlimited -->
+  <OLWC_Unlimited>Ilimitado</OLWC_Unlimited>
+
+  <!-- EN: Casting time -->
+  <OLWC_CastTime>Tiempo de lanzamiento</OLWC_CastTime>
+  <!-- EN: How long the pilot takes to start a resurrection. Default: {0}. -->
+  <OLWC_CastTimeDesc>Tiempo que tarda el piloto en iniciar una resurrección. Por defecto: {0}.</OLWC_CastTimeDesc>
+
+  <!-- EN: Cooldown -->
+  <OLWC_Cooldown>Enfriamiento</OLWC_Cooldown>
+  <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
+  <OLWC_CooldownDesc>Tiempo que el piloto debe esperar tras una resurrección para empezar otra. Por defecto: {0}.</OLWC_CooldownDesc>
+
+  <!-- EN: Spark frequency -->
+  <OLWC_SparkFrequency>Frecuencia de chispas</OLWC_SparkFrequency>
+  <!-- EN: How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}. -->
+  <OLWC_SparkFrequencyDesc>Frecuencia con la que la armadura de tus pilotos suelta chispas rojas. Un 100% equivale a la de un apocritón y un 0% las elimina por completo. Por defecto: {0}.</OLWC_SparkFrequencyDesc>
+
+  <!-- EN: Require a mechlink -->
+  <OLWC_RequireMechlink>Requerir un mecaenlace</OLWC_RequireMechlink>
+  <!-- EN: When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs. -->
+  <OLWC_RequireMechlinkDesc>Si está activado, solo un piloto mecanitor podrá usar "resucitar meca". Si está desactivado, cualquier piloto podrá resucitar tus mecas.</OLWC_RequireMechlinkDesc>
+
+  <!-- EN: Sparks only while drafted -->
+  <OLWC_SparksOnlyDrafted>Chispas solo al estar reclutado</OLWC_SparksOnlyDrafted>
+  <!-- EN: When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the armor will spark whenever it holds a charge, as an apocriton does. -->
+  <OLWC_SparksOnlyDraftedDesc>Si está activado, la armadura de tus pilotos solo soltará chispas rojas mientras estén reclutados y puedan resucitar mecas. Si está desactivado, soltará chispas siempre que le quede alguna carga, como un apocritón.</OLWC_SparksOnlyDraftedDesc>
+
+  <!-- EN: {1} for {0_indefinite} mech -->
+  <OLWC_SummaryCost>{1} por {0_indefinite}</OLWC_SummaryCost>
+  <!-- EN: recharges {0} of them each day -->
+  <OLWC_SummaryRegen>recupera {0} de ellas al día</OLWC_SummaryRegen>
+  <!-- EN: never recharges -->
+  <OLWC_SummaryNoRegen>no las recupera por sí sola</OLWC_SummaryNoRegen>
+  <!-- EN: {0}, and each one can be reloaded with {1} -->
+  <OLWC_SummaryReload>{0}, y cada una se puede recargar con {1}</OLWC_SummaryReload>
+  <!-- EN: as long as it died within the last {0} -->
+  <OLWC_SummaryWindow>siempre que haya muerto hace menos de {0}</OLWC_SummaryWindow>
+  <!-- EN: no matter how long ago it died -->
+  <OLWC_SummaryNoWindow>sin importar cuánto tiempo lleve muerto</OLWC_SummaryNoWindow>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}. -->
+  <OLWC_ResurrectSummary>La armadura almacena hasta {0} cargas y {1}. Resucitar un meca cuesta {2}, {3}. La resurrección tarda {4} en lanzarse y el enfriamiento posterior es de {5}.</OLWC_ResurrectSummary>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
+  <OLWC_ResurrectSummaryNoCooldown>La armadura almacena hasta {0} cargas y {1}. Resucitar un meca cuesta {2}, {3}. La resurrección tarda {4} en lanzarse y la siguiente puede empezar de inmediato.</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- EN: Enabled work types -->
+  <OLWC_SectionWork>Tipos de trabajo activados</OLWC_SectionWork>
+  <!-- EN: The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too. -->
+  <OLWC_SectionWorkDesc>Trabajos que puede hacer un piloto soberano. Los demás trabajos se rigen por las reglas de los ataúdes de guerra de VFE Pirates, así que los mods que cambien esas reglas también las cambiarán para el Soberano.</OLWC_SectionWorkDesc>
+  <!-- EN: When enabled, overlord pilots can do this work, though you will need to assign it in the work tab. When disabled, they cannot. -->
+  <OLWC_WorkDesc>Si está activado, los pilotos soberanos podrán hacer este trabajo, aunque tendrás que asignarlo en la pestaña "Trabajo". Si está desactivado, no podrán hacerlo.</OLWC_WorkDesc>
+  <!-- EN: Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either. -->
+  <OLWC_WorkNote_Research>El hackeo es un trabajo de investigación, y un mecanitor necesita la misma habilidad para estudiar los chips que desbloquean la investigación mecatrónica. Un piloto que no pueda investigar no podrá hacer ninguna de las dos cosas.</OLWC_WorkNote_Research>
+  <!-- EN: Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work. -->
+  <OLWC_WorkNote_Smithing>Gestar mecas, codificar subnúcleos, reparar mecas y desarmar mecanoides en una mesa de maquinado son trabajos de forja.</OLWC_WorkNote_Smithing>
+  <!-- EN: Default: {0}. -->
+  <OLWC_WorkDefault>Por defecto: {0}.</OLWC_WorkDefault>
+  <!-- EN: enabled -->
+  <OLWC_WorkOpen>activado</OLWC_WorkOpen>
+  <!-- EN: disabled -->
+  <OLWC_WorkBlocked>desactivado</OLWC_WorkBlocked>
+  <!-- EN: The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummary>El piloto puede hacer trabajos de {0}. Los demás trabajos se rigen por las reglas de los ataúdes de guerra de VFE Pirates.</OLWC_WorkSummary>
+  <!-- EN: The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummaryNone>El piloto no hace ninguno de estos trabajos. Los demás trabajos se rigen por las reglas de los ataúdes de guerra de VFE Pirates.</OLWC_WorkSummaryNone>
+
+  <!-- Mechanitor command range (Source/1.6/CommandRange/, Source/1.6/Settings/CommandRangeSetting.cs) -->
+  <!-- EN: Mechanitor command range -->
+  <OLWC_SectionCommandRange>Alcance de comando del mecanitor</OLWC_SectionCommandRange>
+  <!-- EN: Normally, a mechanitor's drafted mechs can only be ordered to within {0} cells of the mechanitor. These settings let mechanitors command their mechs from further away. -->
+  <OLWC_SectionCommandRangeDesc>Normalmente, solo se pueden dar órdenes a los mecas reclutados dentro de un radio de {0} casillas alrededor de su mecanitor. Estos ajustes permiten a los mecanitores dirigir sus mecas desde más lejos.</OLWC_SectionCommandRangeDesc>
+
+  <!-- EN: Applies to -->
+  <OLWC_CommandRangeAppliesTo>Se aplica a</OLWC_CommandRangeAppliesTo>
+  <!-- EN: Which mechanitors get the extended command range. -->
+  <OLWC_CommandRangeAppliesToDesc>Qué mecanitores obtienen el alcance de comando ampliado.</OLWC_CommandRangeAppliesToDesc>
+  <!-- EN: Mechanitors wearing the {0} -->
+  <OLWC_CommandRangeWearing>Mecanitores que lleven {0}</OLWC_CommandRangeWearing>
+  <!-- EN: Only mechanitors wearing the {0} will get the extended command range. Everyone else will keep the normal range. -->
+  <OLWC_CommandRangeWearingDesc>Solo los mecanitores que lleven {0} obtendrán el alcance de comando ampliado. Los demás conservarán el alcance normal.</OLWC_CommandRangeWearingDesc>
+  <!-- EN: All mechanitors -->
+  <OLWC_CommandRangeAllMechanitors>Todos los mecanitores</OLWC_CommandRangeAllMechanitors>
+  <!-- EN: Every mechanitor will get the extended command range, whatever they are wearing. -->
+  <OLWC_CommandRangeAllMechanitorsDesc>Todos los mecanitores obtendrán el alcance de comando ampliado, lleven lo que lleven.</OLWC_CommandRangeAllMechanitorsDesc>
+  <!-- EN: No one -->
+  <OLWC_CommandRangeNone>Nadie</OLWC_CommandRangeNone>
+  <!-- EN: Mechanitors will keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeNoneDesc>Los mecanitores conservarán el alcance de comando normal de {0} casillas.</OLWC_CommandRangeNoneDesc>
+
+  <!-- EN: Command range -->
+  <OLWC_CommandRangeScope>Alcance de comando</OLWC_CommandRangeScope>
+  <!-- EN: How far from their mechanitor drafted mechs can be ordered to move or attack. -->
+  <OLWC_CommandRangeScopeDesc>A qué distancia de su mecanitor se puede ordenar a los mecas reclutados que se muevan o ataquen.</OLWC_CommandRangeScopeDesc>
+  <!-- EN: Anywhere on the same map -->
+  <OLWC_CommandRangeCurrentMap>En cualquier lugar del mismo mapa</OLWC_CommandRangeCurrentMap>
+  <!-- EN: Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map. -->
+  <OLWC_CommandRangeCurrentMapDesc>Se pueden dar órdenes a los mecas reclutados en cualquier lugar de su mapa, siempre que su mecanitor esté en ese mismo mapa.</OLWC_CommandRangeCurrentMapDesc>
+  <!-- EN: Anywhere -->
+  <OLWC_CommandRangeAnywhere>En cualquier lugar</OLWC_CommandRangeAnywhere>
+  <!-- EN: Mechs can be drafted and ordered anywhere, even if their mechanitor is on another map or traveling in a caravan. -->
+  <OLWC_CommandRangeAnywhereDesc>Se puede reclutar a los mecas y darles órdenes en cualquier lugar, aunque su mecanitor esté en otro mapa o viaje en una caravana.</OLWC_CommandRangeAnywhereDesc>
+  <!-- EN: Within {0} cells{1} -->
+  <OLWC_CommandRangeRadius>Hasta {0} casillas{1}</OLWC_CommandRangeRadius>
+  <!-- EN: Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells. -->
+  <OLWC_CommandRangeRadiusDesc>Distancia máxima entre los mecas reclutados y su mecanitor a la que se les pueden dar órdenes. El alcance normal es de {0} casillas. Por defecto: {1} casillas.</OLWC_CommandRangeRadiusDesc>
+  <!-- EN:  (vanilla) -->
+  <OLWC_CommandRangeVanillaSuffix> (juego base)</OLWC_CommandRangeVanillaSuffix>
+  <!-- EN:  (Combat Extended) -->
+  <OLWC_CommandRangeCombatExtendedSuffix> (Combat Extended)</OLWC_CommandRangeCombatExtendedSuffix>
+  <!-- EN: Moving the slider will select this range. -->
+  <OLWC_CommandRangeSliderSelects>Al mover el control deslizante se seleccionará este alcance.</OLWC_CommandRangeSliderSelects>
+  <!-- EN: This has no effect while the extended command range applies to no one. -->
+  <OLWC_CommandRangeInert>No tiene efecto mientras el alcance de comando ampliado no se aplique a nadie.</OLWC_CommandRangeInert>
+
+  <!-- EN: Mechanitors keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeSummaryNone>Los mecanitores conservan el alcance de comando normal de {0} casillas.</OLWC_CommandRangeSummaryNone>
+  <!-- EN: Mechanitors wearing the {0} can order their drafted mechs {1}. -->
+  <OLWC_CommandRangeSummaryWearing>Los mecanitores que llevan {0} pueden dar órdenes a sus mecas reclutados {1}.</OLWC_CommandRangeSummaryWearing>
+  <!-- EN: Every mechanitor can order their drafted mechs {0}. -->
+  <OLWC_CommandRangeSummaryAll>Todos los mecanitores pueden dar órdenes a sus mecas reclutados {0}.</OLWC_CommandRangeSummaryAll>
+  <!-- EN: anywhere on the same map -->
+  <OLWC_CommandRangeReachMap>en cualquier lugar del mismo mapa</OLWC_CommandRangeReachMap>
+  <!-- EN: anywhere, even on another map -->
+  <OLWC_CommandRangeReachAnywhere>en cualquier lugar, incluso en otro mapa</OLWC_CommandRangeReachAnywhere>
+  <!-- EN: to within {0} cells -->
+  <OLWC_CommandRangeReachRadius>a un máximo de {0} casillas</OLWC_CommandRangeReachRadius>
+
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexArtSetting.cs, CerebrexNode.cs; the choice picks a branch of 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). The _<choice> keys end in a CerebrexArt name. -->
+  <!-- EN: Cerebrex node -->
+  <OLWC_SectionCerebrex>Nodo Cerébrex</OLWC_SectionCerebrex>
+  <!-- EN: Cerebrex node art -->
+  <OLWC_CerebrexArt>Gráficos del nodo Cerébrex</OLWC_CerebrexArt>
+  <!-- EN: The art used for Odyssey's cerebrex node. The new art is higher resolution, and you can choose how much of it a dye will color. Default: {0}. -->
+  <OLWC_CerebrexArtDesc>Los gráficos que usa el nodo Cerébrex de Odyssey. Los nuevos tienen más resolución y te dejan elegir qué parte colorea el tinte. Por defecto: {0}.</OLWC_CerebrexArtDesc>
+  <!-- EN: Odyssey's art -->
+  <OLWC_CerebrexArt_Odyssey>Gráficos de Odyssey</OLWC_CerebrexArt_Odyssey>
+  <!-- EN: The cerebrex node will keep Odyssey's own art. -->
+  <OLWC_CerebrexArt_OdysseyDesc>El nodo Cerébrex conservará los gráficos propios de Odyssey.</OLWC_CerebrexArt_OdysseyDesc>
+  <!-- EN: New art, fully dyed -->
+  <OLWC_CerebrexArt_DyeAll>Gráficos nuevos, teñido completo</OLWC_CerebrexArt_DyeAll>
+  <!-- EN: Dye will color the whole node, as it does with Odyssey's art. -->
+  <OLWC_CerebrexArt_DyeAllDesc>El tinte coloreará todo el nodo, igual que con los gráficos de Odyssey.</OLWC_CerebrexArt_DyeAllDesc>
+  <!-- EN: New art, dyed frame -->
+  <OLWC_CerebrexArt_DyeFrame>Gráficos nuevos, marco teñido</OLWC_CerebrexArt_DyeFrame>
+  <!-- EN: Dye will only color the frame. The ring and the core will keep their own colors. -->
+  <OLWC_CerebrexArt_DyeFrameDesc>El tinte solo coloreará el marco. El anillo y el núcleo conservarán sus propios colores.</OLWC_CerebrexArt_DyeFrameDesc>
+  <!-- EN: New art, dyed frame and ring -->
+  <OLWC_CerebrexArt_DyeFrameAndRing>Gráficos nuevos, marco y anillo teñidos</OLWC_CerebrexArt_DyeFrameAndRing>
+  <!-- EN: Dye will color the frame and the ring. Only the red core will keep its color. -->
+  <OLWC_CerebrexArt_DyeFrameAndRingDesc>El tinte coloreará el marco y el anillo. Solo el núcleo rojo conservará su color.</OLWC_CerebrexArt_DyeFrameAndRingDesc>
+  <!-- EN: In use -->
+  <OLWC_CerebrexInUse>En uso</OLWC_CerebrexInUse>
+  <!-- EN: Preview dye -->
+  <OLWC_CerebrexDye>Tinte de muestra</OLWC_CerebrexDye>
+  <!-- EN: The dye color shown on the previews above. It will not dye any cerebrex node. -->
+  <OLWC_CerebrexDyeDesc>El color de tinte que se muestra en las vistas previas de arriba. No tiñe ningún nodo Cerébrex.</OLWC_CerebrexDyeDesc>
+  <!-- EN: Undyed -->
+  <OLWC_CerebrexDyeNone>Sin teñir</OLWC_CerebrexDyeNone>
+  <!-- EN: The cerebrex node uses Odyssey's own art. -->
+  <OLWC_CerebrexSummary_Odyssey>El nodo Cerébrex usa los gráficos propios de Odyssey.</OLWC_CerebrexSummary_Odyssey>
+  <!-- EN: The cerebrex node uses the new art, and dye colors the whole node. -->
+  <OLWC_CerebrexSummary_DyeAll>El nodo Cerébrex usa los gráficos nuevos y el tinte colorea todo el nodo.</OLWC_CerebrexSummary_DyeAll>
+  <!-- EN: The cerebrex node uses the new art, and dye only colors its frame. -->
+  <OLWC_CerebrexSummary_DyeFrame>El nodo Cerébrex usa los gráficos nuevos y el tinte solo colorea su marco.</OLWC_CerebrexSummary_DyeFrame>
+  <!-- EN: The cerebrex node uses the new art, and dye colors its frame and ring. -->
+  <OLWC_CerebrexSummary_DyeFrameAndRing>El nodo Cerébrex usa los gráficos nuevos y el tinte colorea su marco y su anillo.</OLWC_CerebrexSummary_DyeFrameAndRing>
+  <!-- EN: The change will take effect after a restart. -->
+  <OLWC_CerebrexSummaryRestart>El cambio se aplicará tras reiniciar.</OLWC_CerebrexSummaryRestart>
+
+  <!-- EN: Default: {0}. -->
+  <OLWC_SwitchDefault>Por defecto: {0}.</OLWC_SwitchDefault>
+  <!-- EN: on -->
+  <OLWC_SwitchOn>activado</OLWC_SwitchOn>
+  <!-- EN: off -->
+  <OLWC_SwitchOff>desactivado</OLWC_SwitchOff>
+
+  <!-- EN:  (default) -->
+  <OLWC_DefaultSuffix> (por defecto)</OLWC_DefaultSuffix>
+  <!-- EN:  (requires restart) -->
+  <OLWC_RequiresRestartSuffix> (requiere reinicio)</OLWC_RequiresRestartSuffix>
+
+</LanguageData>

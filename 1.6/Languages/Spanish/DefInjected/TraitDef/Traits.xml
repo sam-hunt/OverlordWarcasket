@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: {PAWN_nameDef} is entombed in a warcasket. No amount of pain will have an effect on {PAWN_objective}, and {PAWN_pronoun} can never go into a pain shock or drop unconscious due to pain. Because of how bulky the armor is and how much energy it takes to use it, {PAWN_nameDef} is not capable of most work, but can still do research, smithing and hacking. -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>{PAWN_nameDef} está sepultad{PAWN_gender ? o : a} en un ataúd de guerra. Ningún dolor {PAWN_objective} afecta, y {PAWN_pronoun} nunca entrará en shock ni quedará inconsciente por su causa. Como la armadura es tan voluminosa y consume tanta energía, {PAWN_nameDef} no puede realizar la mayoría de los trabajos, pero sí puede investigar, forjar y hackear.</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.description>
+  <!-- EN: warcasket -->
+  <OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>ataúd de guerra</OLWC_WarcasketTrait_Overlord.degreeDatas.warcasket.label>
+
+</LanguageData>

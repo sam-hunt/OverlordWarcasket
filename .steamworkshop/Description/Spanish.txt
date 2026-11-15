@@ -1,0 +1,49 @@
+Ataúd de guerra soberano
+
+Un nuevo ataúd de guerra de la era espacial para [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url].
+
+[h1]Acerca de[/h1]
+
+El Soberano es un ataúd de guerra de 10.ª generación para mecanitores, pensado para dirigir a los mecas desde primera línea y devolver a la vida a los caídos.
+
+[hr][/hr]
+[h2]El conjunto[/h2]
+Consta de torso, hombreras y casco, que se montan en la forja de ataúd de guerra. Combina las piezas con las series de VFE Pirates (¡o de Alpha Mechs!) como quieras.
+[list]
+[*][b]Torso:[/b] incluye la habilidad resucitar meca, añade ancho de banda y permite al piloto forjar, investigar y hackear.
+[*][b]Hombreras:[/b] llevan repetidores de comando que permiten al piloto dar órdenes a los mecas reclutados en cualquier lugar del mapa. Además, dan un grupo de control más y aceleran el hackeo.
+[*][b]Casco:[/b] lleva potenciadores de señal que añaden más ancho de banda, a costa de algo de puntería.
+[/list]
+
+[h2]Resucitar meca[/h2]
+La armadura lleva un resucitador de mecas. Apunta a uno de tus mecas caídos y el piloto sobrealimentará su autorreparación para ponerlo de nuevo en pie. Los mecas más pesados cuestan más cargas. El resucitador recupera cargas con el tiempo y, en un apuro, se puede recargar con componentes avanzados.
+
+[h2]Tipos de trabajo activados[/h2]
+Los ataúdes de guerra de VFE Pirates bloquean todo trabajo especializado e intelectual. El piloto del Soberano conserva la forja, con la que gesta y repara mecas y codifica subnúcleos. También conserva la investigación, necesaria para hackear. Puedes cambiarlo en las opciones del mod.
+
+[hr][/hr]
+[h1]Compatibilidad con mods[/h1]
+[list]
+[*]Se puede añadir sin riesgo a partidas existentes.
+[*]No es seguro quitarlo mientras haya alguien sepultado en el conjunto.
+[*]Odyssey: una opción del mod, desactivada por defecto, cambia los gráficos del nodo Cerébrex y ofrece máscaras para su núcleo.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: obligatorio.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: parche integrado, con valores de armadura, volumen equipado y capacidades de masa y de volumen a la par de las series de la era espacial de VFE Pirates.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: sigue sus reglas de vacío para ataúdes de guerra.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] y [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: compatibles.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: apto para EVA con las mismas reglas que las series propias de VFE Pirates.
+[/list]
+
+[hr][/hr]
+[h1]Preguntas frecuentes[/h1]
+
+[b]P: ¿Cómo lo consigo?[/b]
+R: Investiga los proyectos "ataúdes de guerra de la era espacial" y "tecnología meca ultra", y móntalo en la forja de ataúd de guerra como cualquier otro conjunto. Cada pieza cuesta chips de los jefes mecanoides de Biotech.
+
+[b]P: ¿El piloto tiene que ser mecanitor?[/b]
+R: Por defecto, sí, pero una opción del mod permite que cualquier piloto use el resucitador.
+
+[hr][/hr]
+[h1]Enlaces[/h1]
+Código fuente, descargas manuales y seguimiento de incidencias: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+Arte de [url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]
