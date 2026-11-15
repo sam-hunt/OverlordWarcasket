@@ -66,8 +66,8 @@
       <li>Growing</li>
       <li>Mining</li>
       <li>PlantCutting</li>
-      <li>Tailoring</li>
       <li>Crafting</li>
+      <li>Tailoring</li>
       <li MayRequire="Ludeon.RimWorld.Anomaly">DarkStudy</li>
     </disabledWorkTypes>
     <degreeDatas>

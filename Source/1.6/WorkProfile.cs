@@ -27,13 +27,13 @@ namespace OverlordWarcasket;
 // as Biotech files mech gestation, subcore encoding and the mechanitor-only mech repair there
 // and Core the machining table, where mechanoids are shredded (the Crafting spot's smash recipe
 // is Crafting work); Crafting, Tailoring and Anomaly's DarkStudy blocked until the player opens
-// them, the last skipped silently without Anomaly. Resolve, pure and tested, sorts the loaded
-// game's work types into the trait's tags, the types blocked by name whatever the settings say
-// and the toggleables, with what the rule makes of each (OpenByDefault: its own default, or
-// open whenever VFEP's trait blocks neither its tags nor the type itself). Mirror writes that
-// default profile and Apply the profile the settings choose, on every ApplyToDefs. A pawn
-// caches its disabled work types, so Apply refreshes every live pawn carrying the trait; at
-// startup there is none.
+// them, the last skipped silently without Anomaly. The table's order is the order of the
+// settings' rows. Resolve, pure and tested, sorts the loaded game's work types into the trait's
+// tags, the types blocked by name whatever the settings say and the toggleables, with what the
+// rule makes of each (OpenByDefault: its own default, or open whenever VFEP's trait blocks
+// neither its tags nor the type itself). Mirror writes that default profile and Apply the
+// profile the settings choose, on every ApplyToDefs. A pawn caches its disabled work types, so
+// Apply refreshes every live pawn carrying the trait; at startup there is none.
 //
 // No tag an openable work type carries may stay on the trait: a trait blocks a work type on any
 // shared tag (Trait.AllowsWorkType), and Smithing carries the Crafting tag as well as
@@ -62,8 +62,8 @@ public static class WorkProfile
 
     private static readonly (string defName, bool openByDefault)[] Openable =
     [
-        ("Research", true),
         ("Smithing", true),
+        ("Research", true),
         ("Crafting", false),
         ("Tailoring", false),
         ("DarkStudy", false),
@@ -91,7 +91,7 @@ public static class WorkProfile
     private static HashSet<WorkTypeDef> openByDefault = [];
 
     // The openable work types the loaded game has, those open by default first and each group
-    // in the work tab's order: what the settings may open or block, row by row.
+    // in Openable's order: what the settings may open or block, row by row.
     public static IReadOnlyList<WorkTypeDef> Toggleable => toggleable;
 
     // The fixed rule for a toggleable work type: its own default from Openable, or open when
@@ -140,6 +140,14 @@ public static class WorkProfile
         return null;
     }
 
+    // An openable work type's place in Openable, which orders the settings' rows; past the end
+    // for every other.
+    public static int OpenableRow(string defName)
+    {
+        int row = Array.FindIndex(Openable, openable => openable.defName == defName);
+        return row < 0 ? Openable.Length : row;
+    }
+
     // What Resolve makes of a game's work types: the trait's tags, the work types blocked by
     // name whatever the settings say, and the toggleables with those the fixed rule opens.
     public sealed class Resolved<T>
@@ -154,12 +162,13 @@ public static class WorkProfile
     // ResolveTags with every openable work type's tags as the ones to free; every work type the
     // freed tags covered that is not openable, and every one VFEP lists by name, into the base;
     // each openable one into the toggleables, open by default when its own default says so or
-    // VFEP blocks neither its tags nor the type, and those open by default first. Pure and
-    // generic over the work type, for the tests.
+    // VFEP blocks neither its tags nor the type, and those open by default first, each group
+    // by rowOf. Pure and generic over the work type, for the tests.
     public static Resolved<T> Resolve<T>(
         IReadOnlyList<T> workTypes,
         Func<T, WorkTags> tagsOf,
         Func<T, bool?> openableDefault,
+        Func<T, int> rowOf,
         WorkTags vfepTags,
         ICollection<T> vfepTypes)
     {
@@ -186,7 +195,10 @@ public static class WorkProfile
                 profile.BaseTypes.Add(work);
             }
         }
-        profile.Toggleable = profile.Toggleable.OrderBy(work => !profile.OpenByDefault.Contains(work)).ToList();
+        profile.Toggleable = profile.Toggleable
+            .OrderBy(work => !profile.OpenByDefault.Contains(work))
+            .ThenBy(rowOf)
+            .ToList();
         return profile;
     }
 
@@ -206,6 +218,7 @@ public static class WorkProfile
             WorkTypeDefsUtility.WorkTypeDefsInPriorityOrder.ToList(),
             work => work.workTags,
             work => OpenableDefault(work.defName),
+            work => OpenableRow(work.defName),
             vfep.disabledWorkTags,
             vfepTypes);
         ours.disabledWorkTags = profile.Tags;

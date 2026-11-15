@@ -51,7 +51,7 @@ public class WorkProfileResolveTests
         params string[] vfepTypes)
     {
         Dictionary<string, WorkTags> tags = (workTypes ?? Vanilla).ToDictionary(work => work.name, work => work.tags);
-        return WorkProfile.Resolve(tags.Keys.ToList(), name => tags[name], WorkProfile.OpenableDefault, vfepTags, vfepTypes);
+        return WorkProfile.Resolve(tags.Keys.ToList(), name => tags[name], WorkProfile.OpenableDefault, WorkProfile.OpenableRow, vfepTags, vfepTypes);
     }
 
     // The work types a pilot can be assigned under the default profile: every one the trait's
@@ -94,8 +94,18 @@ public class WorkProfileResolveTests
     {
         WorkProfile.Resolved<string> profile = Resolve(Vfep);
         Assert.Equal(["Cooking", "Construction", "Growing", "Mining", "PlantCutting"], profile.BaseTypes);
-        Assert.Equal(["Smithing", "Research", "Tailoring", "Crafting", "DarkStudy"], profile.Toggleable);
         Assert.Equal(["Smithing", "Research"], profile.OpenByDefault.OrderBy(name => name == "Research"));
+    }
+
+    // The settings' rows: those open by default first, each group in the Openable table's
+    // order, not the work tab's, which has Tailoring ahead of Crafting.
+    [Fact]
+    public void OrdersTheToggleablesByTheTable()
+    {
+        Assert.Equal(["Smithing", "Research", "Crafting", "Tailoring", "DarkStudy"], Resolve(Vfep).Toggleable);
+        Assert.Equal(
+            ["Smithing", "Research", "Tailoring", "Crafting", "DarkStudy"],
+            Resolve(Vfep & ~WorkTags.ManualSkilled, null, "Crafting").Toggleable);
     }
 
     // A modded skilled work type is no business of the suit's and stays blocked.
