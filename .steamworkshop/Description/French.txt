@@ -1,0 +1,49 @@
+Warcasket suzerain
+
+Un nouveau warcasket de niveau spatial pour [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url].
+
+[h1]À propos[/h1]
+
+Le Suzerain est un warcasket de méchanitor de 10e génération, conçu pour mener les mécanoïdes depuis la ligne de front et ramener à la vie ceux qui tombent.
+
+[hr][/hr]
+[h2]L'ensemble[/h2]
+Torse, épaulières et casque, soudés à la fonderie de warcaskets. Combinez librement ses pièces avec celles des ensembles de VFE Pirates (ou d'Alpha Mechs !).
+[list]
+[*][b]Torse :[/b] donne la capacité « ressusciter mécanoïde », ajoute de la bande passante, et le pilote peut toujours forger, faire de la recherche et pirater
+[*][b]Épaulières :[/b] relais de commande qui permettent au pilote de donner des ordres aux mécanoïdes mobilisés n'importe où sur la carte, avec un groupe de contrôle supplémentaire et un piratage plus rapide
+[*][b]Casque :[/b] amplificateurs de signal qui ajoutent encore de la bande passante, au prix d'une précision de tir réduite
+[/list]
+
+[h2]Ressusciter mécanoïde[/h2]
+L'armure est équipée d'un résurrecteur de mécanoïdes. Ciblez l'un de vos mécanoïdes tombés, et le pilote suralimentera son auto-réparation pour le remettre sur pied. Les mécanoïdes plus lourds coûtent plus de charges. Le résurrecteur regagne ses charges avec le temps et peut, en cas de besoin, être rechargé avec des composants avancés.
+
+[h2]Tâches activées[/h2]
+Les warcaskets de VFE Pirates interdisent tout travail qualifié ou intellectuel. Le pilote du Suzerain conserve le forgeage, pour la gestation, l'encodage de sous-noyaux et la réparation des mécanoïdes, ainsi que la recherche, dont dépend le piratage. Ces réglages sont modifiables dans les paramètres du mod.
+
+[hr][/hr]
+[h1]Compatibilité des mods[/h1]
+[list]
+[*]Peut être ajouté sans risque à une partie en cours.
+[*]Ne peut pas être retiré sans risque tant qu'un colon est soudé dans l'ensemble.
+[*]Odyssey : une option du mod, à activer soi-même, change la texture du nœud cérébrex et propose des masques pour son noyau.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url] : requis.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url] : patch intégré, avec des valeurs d'armure, de masse et de capacité de transport au niveau des ensembles spatiaux de VFE Pirates.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url] : suit ses règles de résistance au vide pour les warcaskets.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] et [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url] : compatibles.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url] : apte aux sorties extravéhiculaires, selon les mêmes règles que les ensembles de VFE Pirates.
+[/list]
+
+[hr][/hr]
+[h1]FAQ[/h1]
+
+[b]Q : Comment l'obtenir ?[/b]
+R : Recherchez « spacer warcaskets » (warcaskets spatiaux) et « mechtech de pointe », puis soudez l'ensemble sur un colon à la fonderie de warcaskets, comme n'importe quel autre. Chaque pièce coûte des puces récupérées sur les boss mécanoïdes de Biotech.
+
+[b]Q : Le pilote doit-il être un méchanitor ?[/b]
+R : Par défaut, oui. Une option du mod permet toutefois à n'importe quel pilote d'utiliser le résurrecteur.
+
+[hr][/hr]
+[h1]Liens[/h1]
+Code source, téléchargements manuels et suivi des problèmes : [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+Illustrations par [url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]

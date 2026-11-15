@@ -25,7 +25,7 @@ review lands.
 | Korean               | Machine-assisted | -         |
 | German               | Machine-assisted | -         |
 | Spanish              | Machine-assisted | -         |
-| French               | Planned          | -         |
+| French               | Machine-assisted | -         |
 | Brazilian Portuguese | Planned          | -         |
 | Japanese             | Planned          | -         |
 | Traditional Chinese  | Planned          | -         |

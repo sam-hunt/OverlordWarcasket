@@ -1,7 +1,7 @@
 # French glossary, Overlord Warcasket
 
-Seeded from the Shipcracker Warcasket glossary; no translation pass has run
-here yet. Only mod-specific coinages and grounding decisions; family-wide
+Seeded from the Shipcracker Warcasket glossary; first machine-assisted pass
+2026-11-16, no native review yet. Only mod-specific coinages and grounding decisions; family-wide
 mechanics and style (the elision worker, where `PostProcessed` runs, register
 tells) live in `l10n/languages/French.md`. Folder `French`, grounded against
 the Core, Royalty and Biotech `French (Français).tar`s.
@@ -61,30 +61,44 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and `LanguageWorker_French.Pluralize` is rule-only and never reads a `WordInfo/plural.txt`, so a charge noun must be a single word. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded or coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | French | Grounding |
+|---|---|---|
+| overlord (set name) | suzerain; labels `warcasket suzerain` / `épaulières de warcasket suzerain` / `casque de warcasket suzerain`; prose `le Suzerain`, `la série Suzerain` | **Coined**, the plain French for overlord, translated like the siblings' `médecin`, `toxine`, `brise-coque` (Biotech keeps `mechlord` English, a different word). |
+| Workshop title / `OLWC_SettingsCategory` | Warcasket suzerain | Sibling pattern `Warcasket médecin`. |
+| pilot | pilote | Inherited family row. |
+| mechanitor | méchanitor | Biotech `PawnKindDef Mechanitor.label`, `ConceptDef Mechanitors`. |
+| mechlink | mécalien | Biotech `Mechlink.label`. |
+| mech / mechanoid | mécanoïde everywhere (Biotech also says `mech`; one word kept for consistency) | Biotech `ResurrectionMech`, `RepairMech` WorkGiver. |
+| bandwidth | bande passante | Biotech `MechBandwidth.label` (Keyed gizmo `Bande conso` not used in prose). |
+| weight classes | léger / moyen / lourd / ultra-lourd, used as nouns after `{0_indefinite}` (`1 pour un léger`) | Core `MechWeightClassDef`; all masculine, so `un` is always right. |
+| resurrect mech | ressusciter mécanoïde (label, verb label, section header) | Biotech `ResurrectionMech.label` verbatim. |
+| mech resurrector | résurrecteur de mécanoïdes, short `résurrecteur` | **Coined.** |
+| charge (chargeNoun) | charge | Core `Apparel_PsychicShockLance` chargeNoun. |
+| command relays | relais de commande | **Coined** on Odyssey `relais orbital` and Biotech `portée de commande`. |
+| signal enhancers | amplificateurs de signal | Biotech `Apparel_ArmorHelmetMechCommander.description`, `BandNode.description`. |
+| command range | portée de commande | Biotech Keyed `OutOfCommandRange`. |
+| drafted | mobilisé | Core Keyed `IsNotDrafted`. |
+| control group | groupe de contrôle | Biotech Keyed `ControlGroup`. |
+| hacking | piratage | Core `HackingSpeed.label`, `Hack.reportString`. |
+| work names (trait text / summary) | recherche, forgeage, piratage / labelShort chercheur, forgeron, artisan, couturier, constructeur | Core `WorkTypeDef` gerundLabel / labelShort. |
+| mech gestation / subcore encoding / mech repair / shredding | gestation des mécanoïdes / encodage de sous-noyaux / réparation des mécanoïdes / déchiquetage à l'établi d'assemblage | Biotech `SubcoreEncoder`, `RepairMech`; Core `ButcherCorpseMechanoid`, `TableMachining`; gestation coined. |
+| advanced component | composant avancé | Core `ComponentSpacer.label`. |
+| apocriton | apocrite | Biotech `Mech_Apocriton.label`. |
+| aim | précision de tir | Core `ShootingAccuracyPawn.label`. |
+| ultra mechtech | « mechtech de pointe » | Biotech `UltraMechtech.label`, a clickable project in guillemets. |
+| cerebrex node / dye (noun, verb) | nœud cérébrex / colorant, teindre | Odyssey `Apparel_CerebrexNode.label`; Core `Dye.label`, `Dye.description`. |
+| art (cerebrex setting) | apparence | **Coined**, `Nouvelle apparence, cadre teint`. |
+| mech bosses | boss mécanoïdes | **Coined**; no vanilla French rendering found. |
+| helmet/shoulders label in a `{0}` slot | `portant "{0}"` | ASCII-quoted cited label, so neither article nor agreement depends on casque (m.) vs épaulières (f. pl.). |
+| (vanilla) suffix | (jeu de base) | **Coined.** |
 
 ## Pending native review
 
 Still open from the Shipcracker review, inherited as-is: `fonderie de
-warcaskets`, `épaulières`, and the set-name capitalization pattern. Add this
-mod's own coinages here as the pass makes them.
+warcaskets`, `épaulières`, and the set-name capitalization pattern. This
+mod's coinages: `suzerain`, `résurrecteur de mécanoïdes`, `relais de
+commande`, `apparence` (cerebrex art), `boss mécanoïdes`, `(jeu de base)`,
+`gestation des mécanoïdes`, and the elliptical `{1} pour un léger` summary
+fragment.
