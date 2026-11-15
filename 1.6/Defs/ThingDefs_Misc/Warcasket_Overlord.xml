@@ -56,10 +56,12 @@
     any VFEP sets do: this armor and helmet under its shoulders read MechBandwidth 44 with the
     resurrector kept.
 
-    apparel tags: WarcasketVeteran (VFEP's 10th-gen tag) puts the set on the veteran raid
-    pawnkinds of both VFEP factions and Odyssey's VFEP_Salvager_Warcasket; WarcasketAll is
-    VFEP_General. Threat and flavor only: AI pawns never cast apparel abilities, so a raider
-    in the set is a Controller with the baseline shield and no drones.
+    No apparel tags, so no pawnkind's gear roll picks the set (PawnApparelGenerator matches
+    a kind's apparelTags against them): a generated pilot has no mechlink and no mechs for
+    the set to serve, and the psychic sensitivity it leaves its pilot makes that pawn an
+    easy capture where the tier's other sets deafen theirs. VFEP's slot fill reads no tags;
+    Source/1.6/Patches/PawnGenerator_GeneratePawn_Patch_Postfix.cs keeps the set out of it.
+    Save Our Ship 2's EVA tag (1.6/Patches/SOS2Patch.xml) is then the only one a part has.
 
     Resurrect mech: VEF CompAbilitiesApparel grants OLWC_ResurrectMech (AbilityDefs/
     ResurrectMech.xml), fed by the mech resurrector beside it. The ability reads the resurrector off
@@ -187,10 +189,6 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
-      <tags>
-        <li>WarcasketVeteran</li>
-        <li>WarcasketAll</li>
-      </tags>
     </apparel>
     <comps>
       <li Class="OverlordWarcasket.CompProperties_MechResurrector">

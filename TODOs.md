@@ -65,6 +65,7 @@
   fitting change, if play shows the set crowding its tier 4 gear, is the shoulders' command
   relays taking a hyper-linkage chip, its beamcasting tier, in place of one SignalChip.
 - **Sometimes spawn vanilla pod/crash mechanitors in the warcasket?**
+- **Overlord raids.** The set is kept off every generated pawn (the armor def's header has why). A dedicated raid would need its pilot to arrive with a mechlink and mechs under control, to cast the resurrect, and to be no easier a capture than any other warcasket pilot.
 - **Raider overlords.** The set is on the raid tables as a Controller with the baseline shield;
   AI pawns never cast apparel abilities. Toxin's raider auto-vent is the family precedent for
   giving raiders an ability, so a raider mechanitor resurrecting its escort is possible later.

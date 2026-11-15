@@ -23,6 +23,10 @@ manifest globs, so new files and subfolders need no build change.
 - **Worn graphics go through the pawn render tree** (`apparel.renderNodeProperties`), never draw
   hooks. The Shipcracker repo's thruster glow is the precedent, including the zoomed-out pawn
   cache and draw-order traps; read its CLAUDE.md bullet before adding one here.
+- **The parts declare no `apparel/tags`**, which keeps them out of every pawnkind's gear roll;
+  VFEP's slot fill, which reads no tags, is answered in
+  `Source/1.6/Patches/PawnGenerator_GeneratePawn_Patch_Postfix.cs`. The armor def's header has
+  why; a patch that adds a tag (Save Our Ship 2's `EVA`) adds the node with it.
 - **Tunables are def fields** the mod settings write at startup (`Source/1.6/CLAUDE.md`); the XML
   value is the default and the header stays the record.
 - **The shoulders' `CommandRangeExtension` is the only entry that moves between defs**: the

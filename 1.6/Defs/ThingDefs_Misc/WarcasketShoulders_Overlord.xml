@@ -110,10 +110,6 @@
         <li>Middle</li>
         <li>Shell</li>
       </layers>
-      <tags>
-        <li>WarcasketVeteran</li>
-        <li>WarcasketAll</li>
-      </tags>
     </apparel>
     <modExtensions>
       <li Class="VEF.Apparels.ApparelExtension">

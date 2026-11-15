@@ -96,10 +96,6 @@
       <layers>
         <li>Overhead</li>
       </layers>
-      <tags>
-        <li>WarcasketVeteran</li>
-        <li>WarcasketAll</li>
-      </tags>
     </apparel>
     <modExtensions>
       <li Class="VEF.Apparels.ApparelExtension">

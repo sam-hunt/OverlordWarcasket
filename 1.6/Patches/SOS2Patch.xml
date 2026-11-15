@@ -3,7 +3,9 @@
   <!--
     Save Our Ship 2 / Universum parity. VFEP's own SOS2Patch.xml gives its warcasket armor and
     helmets the EVA apparel tag and a flat Insulation_Cold 100, matching by defName, so it never
-    reaches ours; this applies the same two operations to the Overlord armor and helmet.
+    reaches ours; this applies the same two operations to the Overlord armor and helmet. Our
+    parts declare no apparel tags (the armor def's header has why), so the first adds the tags
+    node itself, EVA its only entry, where VFEP's adds to a list.
     Shoulder pads are left alone, as in VFEP. These two are all that needs mirroring: SOS2's own
     VFEP patch (its Patches/patch_mod.xml) puts its CompEVA, DecompressionResistance 0.75 / 0.25
     and the helmet's HypoxiaResistance 1 on VFEP's abstract armor and helmet bases, which our defs
@@ -25,9 +27,11 @@
     <match Class="PatchOperationSequence">
       <operations>
         <li Class="PatchOperationAdd">
-          <xpath>/Defs/VFEPirates.WarcasketDef[defName = "OLWC_Warcasket_Overlord" or defName = "OLWC_WarcasketHelmet_Overlord"]/apparel/tags</xpath>
+          <xpath>/Defs/VFEPirates.WarcasketDef[defName = "OLWC_Warcasket_Overlord" or defName = "OLWC_WarcasketHelmet_Overlord"]/apparel</xpath>
           <value>
-            <li>EVA</li>
+            <tags>
+              <li>EVA</li>
+            </tags>
           </value>
         </li>
         <li Class="PatchOperationReplace">
