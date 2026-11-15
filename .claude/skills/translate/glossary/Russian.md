@@ -1,7 +1,8 @@
 # Russian glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); the first machine-assisted pass ran 2026-11-16,
+no native review yet. Only
 mod-specific coinages and grounding decisions; family-wide mechanics and
 style live in `l10n/languages/Russian.md`.
 
@@ -47,29 +48,39 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and the Russian worker reads the `plural` table and the genitive slots go through `case` lookups, so every coined noun ships a `plural.txt` line and `case.txt` rows for both numbers under `1.6/Languages/Russian/WordInfo/`. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded and coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Russian | Grounding or reason |
+|---|---|---|
+| overlord (set name) | командирская (`командирская броня мертвеца`, `наплечники командирской брони`, `шлем командирской брони`; prose `Командирская серия`) | Coined adjective on the pack's set pattern; Biotech's own `мехлорд` / `мехкомандир` are item names, so not reused |
+| Workshop title / `OLWC_SettingsCategory` | Командирская броня мертвеца | Title row above |
+| pilot | пилот | Family VFEP row |
+| mechanitor | механитор | Biotech `Mechanitor.label` |
+| mechlink | мехлинк | Biotech `Mechlink.label` |
+| mech / mechanoid | механоид (both) | Biotech uses `механоид` throughout (`ResurrectionMech.description`) |
+| bandwidth | пропускная способность | Biotech Keyed `Bandwidth`, `MechBandwidth.label` |
+| light / medium / heavy | лёгкий / средний / тяжёлый, quoted as `класса «{0_indefinite}»` | Core `MechWeightClassDef` labels; the fragment needs no agreement |
+| resurrect mech (ability) | воскрешение механоида | Biotech `ResurrectionMech.label`, verbatim; description opens with its description |
+| mech resurrector | воскреситель механоидов (m.) | Coined |
+| charge | заряд | Core `Apparel_PsychicShockLance` `chargeNoun`; in Core `WordInfo`, no file here |
+| command relays | командные ретрансляторы | Coined on Odyssey `орбитальный ретранслятор` |
+| signal enhancers | усилители сигнала | Coined (Odyssey `глушитель сигналов`, Biotech `сигнальный чип`) |
+| command range | радиус управления | Coined; cells are `{0} кл`, after Core `MoveSpeed.formatString` `{0} кл/с`, so no numeral agreement and no numCase on a decimal range |
+| drafted (mechs) | в режиме призыва | Core `IsNotDrafted`, Biotech `DraftMech.label` |
+| control group | группа механоидов | Biotech `MechControlGroups.label` |
+| hacking | взлом / взламывать | Core `HackingSpeed.label`, `Hack.reportString` |
+| research / smithing (work) | исследовать, учёный / ковать, кузнец | Core `WorkTypeDef` `verb` and `labelShort` |
+| mech gestation / subcore encoding / mech repair / shredding at a machining table | выращивание механоидов / создание субъядер / починка механоидов / переработка механоидов на верстаке | Biotech `GestatingMech`, `SubcoreEncodingSpeed`, `RepairMech`; Core `ButcherCorpseMechanoid`, `TableMachining` |
+| advanced components | продвинутые компоненты | Core `ComponentSpacer.label` |
+| ultra mechtech | «Ультратехнологии механоидов» | Biotech `UltraMechtech.label` |
+| cerebrex node / dye | узел церебрекса / краситель | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label` |
+| (vanilla) suffix | (обычный) | Coined; matches `обычный радиус` in the same section |
+| reportString / jobReportString | воскрешает TargetA / воскрешает механоидов | Core reportString form, Core `Resurrect.reportString` verb |
 
 ## Pending native review
 
 Nothing inherited is open for the VFEP rows (they are the community pack's).
-Add this mod's own coinages here as the pass makes them.
+This pass's coinages: `командирская` (set name), `воскреситель механоидов`,
+`командные ретрансляторы`, `усилители сигнала`, `радиус управления` with
+`кл`, ` (обычный)`, and the 10th-generation lore paragraph wording
+(`трофейные пиратские каркасы`).

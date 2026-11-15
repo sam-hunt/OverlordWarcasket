@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Resurrect mech (Source/1.6/Abilities/Ability_ResurrectMech.cs, Source/1.6/Comps/, Source/1.6/Gizmos/) -->
+  <!-- EN: No resurrection charges left. -->
+  <OLWC_NoCharges>Не осталось зарядов воскрешения.</OLWC_NoCharges>
+  <!-- EN: {0} needs a mechlink to command the mech resurrector. -->
+  <OLWC_NotMechanitor>{0} не может управлять воскресителем механоидов без мехлинка.</OLWC_NotMechanitor>
+  <!-- EN: {0} is not a mechanoid. -->
+  <OLWC_NotMechCorpse>{0} не является механоидом.</OLWC_NotMechCorpse>
+  <!-- EN: {0} cannot be resurrected. -->
+  <OLWC_CannotResurrectClass>Невозможно воскресить: {0}.</OLWC_CannotResurrectClass>
+  <!-- EN: {0} is not one of your mechs. -->
+  <OLWC_NotOurMech>{0} не входит в число ваших механоидов.</OLWC_NotOurMech>
+  <!-- EN: {0} has been dead too long. -->
+  <OLWC_CorpseTooOld>{0}: с момента гибели прошло слишком много времени.</OLWC_CorpseTooOld>
+  <!-- EN: Not enough charges to resurrect {0}. -->
+  <OLWC_NotEnoughCharges>Недостаточно зарядов для воскрешения: {0}.</OLWC_NotEnoughCharges>
+  <!-- EN: {0} does not have enough bandwidth to control {1}. -->
+  <OLWC_NotEnoughBandwidth>{0} не может управлять механоидом {1}: не хватает пропускной способности.</OLWC_NotEnoughBandwidth>
+  <!-- EN: Charges: {0} / {1} -->
+  <OLWC_ChargesLabel>Заряды: {0} / {1}</OLWC_ChargesLabel>
+  <!-- EN: Cost to resurrect {0}: {1} -->
+  <OLWC_TargetCost>{0}, зарядов на воскрешение: {1}</OLWC_TargetCost>
+  <!-- EN: Can be resurrected for another {0}. -->
+  <OLWC_TargetTimeLeft>Осталось времени на воскрешение: {0}.</OLWC_TargetTimeLeft>
+  <!-- EN: Recharge rate: {0} per day -->
+  <OLWC_GaugeRegen>Восстановление: {0} в день</OLWC_GaugeRegen>
+  <!-- EN: Recharge rate: none -->
+  <OLWC_GaugeNoRegen>Восстановление: нет</OLWC_GaugeNoRegen>
+  <!-- EN: Reload cost: {0} -->
+  <OLWC_GaugeReload>Перезарядка: {0}</OLWC_GaugeReload>
+  <!-- EN: Automatic reload level: {0} -->
+  <OLWC_GaugeAutoReload>Автоперезарядка до: {0}</OLWC_GaugeAutoReload>
+  <!-- EN: Automatic reload: off -->
+  <OLWC_GaugeNoAutoReload>Автоперезарядка: выкл</OLWC_GaugeNoAutoReload>
+  <!-- EN: Maximum corpse age: {0} -->
+  <OLWC_GaugeCorpseAge>Максимальный возраст трупа: {0}</OLWC_GaugeCorpseAge>
+  <!-- EN: Maximum corpse age: unlimited -->
+  <OLWC_GaugeNoCorpseAge>Максимальный возраст трупа: не ограничен</OLWC_GaugeNoCorpseAge>
+  <!-- EN: Charges per mech: -->
+  <OLWC_GaugeCosts>Зарядов на механоида:</OLWC_GaugeCosts>
+  <!-- EN: {0}: {1} -->
+  <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
+  <!-- EN: Drag the bar to set a level. The pilot will reload the resurrector whenever it falls below that level. -->
+  <OLWC_GaugeDragHint>Потяните шкалу, чтобы задать уровень. Когда заряды опустятся ниже него, пилот перезарядит воскреситель.</OLWC_GaugeDragHint>
+
+  <!-- Mod settings (Source/1.6/Settings/) -->
+  <!-- EN: Overlord Warcasket -->
+  <OLWC_SettingsCategory>Командирская броня мертвеца</OLWC_SettingsCategory>
+  <!-- EN: These settings are unavailable. Another mod has changed the overlord warcasket, so the set will keep its built-in values. -->
+  <OLWC_SettingsUnavailable>Эти настройки недоступны. Другой мод изменил командирскую броню мертвеца, поэтому у комплекта останутся исходные значения.</OLWC_SettingsUnavailable>
+
+  <!-- EN: Resurrect mech -->
+  <OLWC_SectionResurrect>Воскрешение механоида</OLWC_SectionResurrect>
+
+  <!-- EN: Charge capacity -->
+  <OLWC_Charges>Запас зарядов</OLWC_Charges>
+  <!-- EN: The number of resurrection charges the armor holds when full. Default: {0}. -->
+  <OLWC_ChargesDesc>Сколько зарядов воскрешения вмещает полностью заряженная броня. По умолчанию: {0}.</OLWC_ChargesDesc>
+
+  <!-- EN: Charges recharged per day -->
+  <OLWC_ChargesPerDay>Восстановление зарядов в день</OLWC_ChargesPerDay>
+  <!-- EN: The number of charges the armor recharges on its own each day. At 0, it will only gain charges by reloading. Default: {0}. -->
+  <OLWC_ChargesPerDayDesc>Сколько зарядов броня восстанавливает сама за день. При значении 0 новые заряды можно будет получить только перезарядкой. По умолчанию: {0}.</OLWC_ChargesPerDayDesc>
+
+  <!-- EN: Reload cost per charge -->
+  <OLWC_ReloadCost>Цена перезарядки одного заряда</OLWC_ReloadCost>
+  <!-- EN: The number of {1} it takes to reload one charge. Default: {0}. -->
+  <OLWC_ReloadCostDesc>Сколько предметов уходит на перезарядку одного заряда. Для неё используется: {1}. По умолчанию: {0}.</OLWC_ReloadCostDesc>
+
+  <!-- EN: Maximum corpse age -->
+  <OLWC_CorpseAge>Максимальный возраст трупа</OLWC_CorpseAge>
+  <!-- EN: How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}. -->
+  <OLWC_CorpseAgeDesc>Сколько игрового времени после гибели механоида его ещё можно воскресить. На максимальном значении ограничения не будет. По умолчанию: {0}.</OLWC_CorpseAgeDesc>
+  <!-- EN: Unlimited -->
+  <OLWC_Unlimited>Не ограничен</OLWC_Unlimited>
+
+  <!-- EN: Casting time -->
+  <OLWC_CastTime>Время для подготовки</OLWC_CastTime>
+  <!-- EN: How long the pilot takes to start a resurrection. Default: {0}. -->
+  <OLWC_CastTimeDesc>Сколько времени пилот готовится к воскрешению. По умолчанию: {0}.</OLWC_CastTimeDesc>
+
+  <!-- EN: Cooldown -->
+  <OLWC_Cooldown>Перезарядка</OLWC_Cooldown>
+  <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
+  <OLWC_CooldownDesc>Пауза после воскрешения, прежде чем пилот сможет начать следующее. По умолчанию: {0}.</OLWC_CooldownDesc>
+
+  <!-- EN: Spark frequency -->
+  <OLWC_SparkFrequency>Частота искр</OLWC_SparkFrequency>
+  <!-- EN: How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}. -->
+  <OLWC_SparkFrequencyDesc>Как часто на броне ваших пилотов вспыхивают красные искры. При 100% они появляются так же часто, как у апокритона, а при 0% искр не будет совсем. По умолчанию: {0}.</OLWC_SparkFrequencyDesc>
+
+  <!-- EN: Require a mechlink -->
+  <OLWC_RequireMechlink>Требовать мехлинк</OLWC_RequireMechlink>
+  <!-- EN: When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs. -->
+  <OLWC_RequireMechlinkDesc>Если включено, воскрешать механоидов сможет только пилот-механитор. Если отключено, ваших механоидов сможет воскрешать любой пилот.</OLWC_RequireMechlinkDesc>
+
+  <!-- EN: Sparks only while drafted -->
+  <OLWC_SparksOnlyDrafted>Искры только в режиме призыва</OLWC_SparksOnlyDrafted>
+  <!-- EN: When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the armor will spark whenever it holds a charge, as an apocriton does. -->
+  <OLWC_SparksOnlyDraftedDesc>Если включено, броня ваших пилотов будет искрить только в режиме призыва, когда пилот может воскрешать механоидов. Если отключено, броня будет искрить всегда, пока в ней есть хоть один заряд, как у апокритона.</OLWC_SparksOnlyDraftedDesc>
+
+  <!-- EN: {1} for {0_indefinite} mech -->
+  <OLWC_SummaryCost>{1} для класса «{0_indefinite}»</OLWC_SummaryCost>
+  <!-- EN: recharges {0} of them each day -->
+  <OLWC_SummaryRegen>восстанавливает их по {0} в день</OLWC_SummaryRegen>
+  <!-- EN: never recharges -->
+  <OLWC_SummaryNoRegen>сама их не восстанавливает</OLWC_SummaryNoRegen>
+  <!-- EN: {0}, and each one can be reloaded with {1} -->
+  <OLWC_SummaryReload>{0}, а каждый заряд можно восполнить за {1}</OLWC_SummaryReload>
+  <!-- EN: as long as it died within the last {0} -->
+  <OLWC_SummaryWindow>если механоид погиб не раньше чем {0} назад</OLWC_SummaryWindow>
+  <!-- EN: no matter how long ago it died -->
+  <OLWC_SummaryNoWindow>как бы давно механоид ни погиб</OLWC_SummaryNoWindow>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}. -->
+  <OLWC_ResurrectSummary>Броня вмещает до {0_numCase ? заряда : зарядов : зарядов} и {1}. Воскрешение механоида требует зарядов: {2}, {3}. Подготовка к воскрешению занимает {4}, а пауза после него длится {5}.</OLWC_ResurrectSummary>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
+  <OLWC_ResurrectSummaryNoCooldown>Броня вмещает до {0_numCase ? заряда : зарядов : зарядов} и {1}. Воскрешение механоида требует зарядов: {2}, {3}. Подготовка к воскрешению занимает {4}, а следующее можно начать сразу.</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- EN: Enabled work types -->
+  <OLWC_SectionWork>Разрешённые работы</OLWC_SectionWork>
+  <!-- EN: The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too. -->
+  <OLWC_SectionWorkDesc>Работы, которые может выполнять пилот командирской брони. Остальные работы подчиняются правилам брони мертвеца из VFE Pirates, так что моды, меняющие эти правила, изменят их и для командирской брони.</OLWC_SectionWorkDesc>
+  <!-- EN: When enabled, overlord pilots can do this work, though you will need to assign it in the work tab. When disabled, they cannot. -->
+  <OLWC_WorkDesc>Если включено, пилоты командирской брони смогут выполнять эту работу, но назначить её нужно будет во вкладке «Работа». Если отключено, не смогут.</OLWC_WorkDesc>
+  <!-- EN: Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either. -->
+  <OLWC_WorkNote_Research>Взлом относится к работе учёного, и тот же навык нужен механитору, чтобы изучать чипы, открывающие исследования технологий механоидов. Пилот, которому недоступны исследования, не сможет делать ни того, ни другого.</OLWC_WorkNote_Research>
+  <!-- EN: Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work. -->
+  <OLWC_WorkNote_Smithing>Выращивание и починка механоидов, создание субъядер и переработка механоидов на верстаке относятся к работе кузнеца.</OLWC_WorkNote_Smithing>
+  <!-- EN: Default: {0}. -->
+  <OLWC_WorkDefault>По умолчанию: {0}.</OLWC_WorkDefault>
+  <!-- EN: enabled -->
+  <OLWC_WorkOpen>включено</OLWC_WorkOpen>
+  <!-- EN: disabled -->
+  <OLWC_WorkBlocked>выключено</OLWC_WorkBlocked>
+  <!-- EN: The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummary>Пилоту доступны работы: {0}. Остальные работы подчиняются правилам брони мертвеца из VFE Pirates.</OLWC_WorkSummary>
+  <!-- EN: The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummaryNone>Пилот не выполняет ни одной из этих работ. Остальные работы подчиняются правилам брони мертвеца из VFE Pirates.</OLWC_WorkSummaryNone>
+
+  <!-- Mechanitor command range (Source/1.6/CommandRange/, Source/1.6/Settings/CommandRangeSetting.cs) -->
+  <!-- EN: Mechanitor command range -->
+  <OLWC_SectionCommandRange>Радиус управления механитора</OLWC_SectionCommandRange>
+  <!-- EN: Normally, a mechanitor's drafted mechs can only be ordered to within {0} cells of the mechanitor. These settings let mechanitors command their mechs from further away. -->
+  <OLWC_SectionCommandRangeDesc>Обычно механитор может отдавать приказы своим механоидам в режиме призыва только в радиусе {0} кл от себя. С этими настройками механиторы смогут управлять механоидами издалека.</OLWC_SectionCommandRangeDesc>
+
+  <!-- EN: Applies to -->
+  <OLWC_CommandRangeAppliesTo>Кому доступно</OLWC_CommandRangeAppliesTo>
+  <!-- EN: Which mechanitors get the extended command range. -->
+  <OLWC_CommandRangeAppliesToDesc>Какие механиторы получат расширенный радиус управления.</OLWC_CommandRangeAppliesToDesc>
+  <!-- EN: Mechanitors wearing the {0} -->
+  <OLWC_CommandRangeWearing>Механиторы, носящие {0}</OLWC_CommandRangeWearing>
+  <!-- EN: Only mechanitors wearing the {0} will get the extended command range. Everyone else will keep the normal range. -->
+  <OLWC_CommandRangeWearingDesc>Расширенный радиус управления получат только механиторы, носящие {0}. У остальных останется обычный радиус.</OLWC_CommandRangeWearingDesc>
+  <!-- EN: All mechanitors -->
+  <OLWC_CommandRangeAllMechanitors>Все механиторы</OLWC_CommandRangeAllMechanitors>
+  <!-- EN: Every mechanitor will get the extended command range, whatever they are wearing. -->
+  <OLWC_CommandRangeAllMechanitorsDesc>Расширенный радиус управления получат все механиторы, что бы они ни носили.</OLWC_CommandRangeAllMechanitorsDesc>
+  <!-- EN: No one -->
+  <OLWC_CommandRangeNone>Никто</OLWC_CommandRangeNone>
+  <!-- EN: Mechanitors will keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeNoneDesc>Механиторы сохранят обычный радиус управления: {0} кл.</OLWC_CommandRangeNoneDesc>
+
+  <!-- EN: Command range -->
+  <OLWC_CommandRangeScope>Радиус управления</OLWC_CommandRangeScope>
+  <!-- EN: How far from their mechanitor drafted mechs can be ordered to move or attack. -->
+  <OLWC_CommandRangeScopeDesc>На каком расстоянии от механитора его механоиды в режиме призыва могут получать приказы двигаться или атаковать.</OLWC_CommandRangeScopeDesc>
+  <!-- EN: Anywhere on the same map -->
+  <OLWC_CommandRangeCurrentMap>В любой точке той же карты</OLWC_CommandRangeCurrentMap>
+  <!-- EN: Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map. -->
+  <OLWC_CommandRangeCurrentMapDesc>Механоидам в режиме призыва можно будет отдавать приказы в любой точке карты, если механитор на той же карте.</OLWC_CommandRangeCurrentMapDesc>
+  <!-- EN: Anywhere -->
+  <OLWC_CommandRangeAnywhere>Где угодно</OLWC_CommandRangeAnywhere>
+  <!-- EN: Mechs can be drafted and ordered anywhere, even if their mechanitor is on another map or traveling in a caravan. -->
+  <OLWC_CommandRangeAnywhereDesc>Механоидов можно будет призывать и отдавать им приказы где угодно, даже если механитор находится на другой карте или путешествует с караваном.</OLWC_CommandRangeAnywhereDesc>
+  <!-- EN: Within {0} cells{1} -->
+  <OLWC_CommandRangeRadius>В радиусе {0} кл{1}</OLWC_CommandRangeRadius>
+  <!-- EN: Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells. -->
+  <OLWC_CommandRangeRadiusDesc>Механоидам в режиме призыва можно будет отдавать приказы в этом радиусе от механитора. Обычный радиус: {0} кл. По умолчанию: {1} кл.</OLWC_CommandRangeRadiusDesc>
+  <!-- EN:  (vanilla) -->
+  <OLWC_CommandRangeVanillaSuffix> (обычный)</OLWC_CommandRangeVanillaSuffix>
+  <!-- EN:  (Combat Extended) -->
+  <OLWC_CommandRangeCombatExtendedSuffix> (Combat Extended)</OLWC_CommandRangeCombatExtendedSuffix>
+  <!-- EN: Moving the slider will select this range. -->
+  <OLWC_CommandRangeSliderSelects>Если сдвинуть ползунок, будет выбран этот радиус.</OLWC_CommandRangeSliderSelects>
+  <!-- EN: This has no effect while the extended command range applies to no one. -->
+  <OLWC_CommandRangeInert>Пока расширенный радиус управления никому не доступен, эта настройка ни на что не влияет.</OLWC_CommandRangeInert>
+
+  <!-- EN: Mechanitors keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeSummaryNone>Механиторы сохраняют обычный радиус управления: {0} кл.</OLWC_CommandRangeSummaryNone>
+  <!-- EN: Mechanitors wearing the {0} can order their drafted mechs {1}. -->
+  <OLWC_CommandRangeSummaryWearing>Механиторы, носящие {0}, могут отдавать приказы своим механоидам в режиме призыва {1}.</OLWC_CommandRangeSummaryWearing>
+  <!-- EN: Every mechanitor can order their drafted mechs {0}. -->
+  <OLWC_CommandRangeSummaryAll>Любой механитор может отдавать приказы своим механоидам в режиме призыва {0}.</OLWC_CommandRangeSummaryAll>
+  <!-- EN: anywhere on the same map -->
+  <OLWC_CommandRangeReachMap>в любой точке той же карты</OLWC_CommandRangeReachMap>
+  <!-- EN: anywhere, even on another map -->
+  <OLWC_CommandRangeReachAnywhere>где угодно, даже на другой карте</OLWC_CommandRangeReachAnywhere>
+  <!-- EN: to within {0} cells -->
+  <OLWC_CommandRangeReachRadius>в радиусе {0} кл</OLWC_CommandRangeReachRadius>
+
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexArtSetting.cs, CerebrexNode.cs; the choice picks a branch of 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). The _<choice> keys end in a CerebrexArt name. -->
+  <!-- EN: Cerebrex node -->
+  <OLWC_SectionCerebrex>Узел церебрекса</OLWC_SectionCerebrex>
+  <!-- EN: Cerebrex node art -->
+  <OLWC_CerebrexArt>Графика узла церебрекса</OLWC_CerebrexArt>
+  <!-- EN: The art used for Odyssey's cerebrex node. The new art is higher resolution, and you can choose how much of it a dye will color. Default: {0}. -->
+  <OLWC_CerebrexArtDesc>Какую графику использовать для узла церебрекса из Odyssey. Новая графика более детальная, и можно выбрать, какую её часть окрасит краситель. По умолчанию: {0}.</OLWC_CerebrexArtDesc>
+  <!-- EN: Odyssey's art -->
+  <OLWC_CerebrexArt_Odyssey>Графика Odyssey</OLWC_CerebrexArt_Odyssey>
+  <!-- EN: The cerebrex node will keep Odyssey's own art. -->
+  <OLWC_CerebrexArt_OdysseyDesc>Узел церебрекса сохранит родную графику Odyssey.</OLWC_CerebrexArt_OdysseyDesc>
+  <!-- EN: New art, fully dyed -->
+  <OLWC_CerebrexArt_DyeAll>Новая графика, полная окраска</OLWC_CerebrexArt_DyeAll>
+  <!-- EN: Dye will color the whole node, as it does with Odyssey's art. -->
+  <OLWC_CerebrexArt_DyeAllDesc>Краситель окрасит весь узел, как и с графикой Odyssey.</OLWC_CerebrexArt_DyeAllDesc>
+  <!-- EN: New art, dyed frame -->
+  <OLWC_CerebrexArt_DyeFrame>Новая графика, окрашена рамка</OLWC_CerebrexArt_DyeFrame>
+  <!-- EN: Dye will only color the frame. The ring and the core will keep their own colors. -->
+  <OLWC_CerebrexArt_DyeFrameDesc>Краситель окрасит только рамку. Кольцо и ядро сохранят свои цвета.</OLWC_CerebrexArt_DyeFrameDesc>
+  <!-- EN: New art, dyed frame and ring -->
+  <OLWC_CerebrexArt_DyeFrameAndRing>Новая графика, окрашены рамка и кольцо</OLWC_CerebrexArt_DyeFrameAndRing>
+  <!-- EN: Dye will color the frame and the ring. Only the red core will keep its color. -->
+  <OLWC_CerebrexArt_DyeFrameAndRingDesc>Краситель окрасит рамку и кольцо. Свой цвет сохранит только красное ядро.</OLWC_CerebrexArt_DyeFrameAndRingDesc>
+  <!-- EN: In use -->
+  <OLWC_CerebrexInUse>Используется</OLWC_CerebrexInUse>
+  <!-- EN: Preview dye -->
+  <OLWC_CerebrexDye>Краситель для превью</OLWC_CerebrexDye>
+  <!-- EN: The dye color shown on the previews above. It will not dye any cerebrex node. -->
+  <OLWC_CerebrexDyeDesc>Цвет красителя на превью выше. Сами узлы церебрекса он не окрашивает.</OLWC_CerebrexDyeDesc>
+  <!-- EN: Undyed -->
+  <OLWC_CerebrexDyeNone>Без окраски</OLWC_CerebrexDyeNone>
+  <!-- EN: The cerebrex node uses Odyssey's own art. -->
+  <OLWC_CerebrexSummary_Odyssey>Узел церебрекса использует родную графику Odyssey.</OLWC_CerebrexSummary_Odyssey>
+  <!-- EN: The cerebrex node uses the new art, and dye colors the whole node. -->
+  <OLWC_CerebrexSummary_DyeAll>Узел церебрекса использует новую графику, и краситель окрашивает весь узел.</OLWC_CerebrexSummary_DyeAll>
+  <!-- EN: The cerebrex node uses the new art, and dye only colors its frame. -->
+  <OLWC_CerebrexSummary_DyeFrame>Узел церебрекса использует новую графику, и краситель окрашивает только его рамку.</OLWC_CerebrexSummary_DyeFrame>
+  <!-- EN: The cerebrex node uses the new art, and dye colors its frame and ring. -->
+  <OLWC_CerebrexSummary_DyeFrameAndRing>Узел церебрекса использует новую графику, и краситель окрашивает его рамку и кольцо.</OLWC_CerebrexSummary_DyeFrameAndRing>
+  <!-- EN: The change will take effect after a restart. -->
+  <OLWC_CerebrexSummaryRestart>Изменение вступит в силу после перезапуска.</OLWC_CerebrexSummaryRestart>
+
+  <!-- EN: Default: {0}. -->
+  <OLWC_SwitchDefault>По умолчанию: {0}.</OLWC_SwitchDefault>
+  <!-- EN: on -->
+  <OLWC_SwitchOn>включено</OLWC_SwitchOn>
+  <!-- EN: off -->
+  <OLWC_SwitchOff>выключено</OLWC_SwitchOff>
+
+  <!-- EN:  (default) -->
+  <OLWC_DefaultSuffix> (по умолчанию)</OLWC_DefaultSuffix>
+  <!-- EN:  (requires restart) -->
+  <OLWC_RequiresRestartSuffix> (требуется перезапуск)</OLWC_RequiresRestartSuffix>
+
+</LanguageData>
