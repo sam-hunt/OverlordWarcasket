@@ -19,15 +19,14 @@ Armor, shoulder pads and helmet, welded at the warcasket foundry. Mix and match 
 The armor carries a mech resurrector. Point it at one of your fallen mechs and the pilot will supercharge its self-repair and bring it back to its feet. Heavier mechs cost more charges. The resurrector recharges over time and can be reloaded with advanced components in a pinch.
 
 [h2]Enabled work types[/h2]
-VFE Pirates' warcaskets block all skilled and intellectual labor. The Overlord's pilot keeps smithing, for mech gestation, subcore encoding and mech repair, and research, which hacking needs. Crafting, tailoring and dark study can be enabled in the mod settings.
+VFE Pirates' warcaskets block all skilled and intellectual labor. The Overlord's pilot keeps smithing, for mech gestation, subcore encoding and mech repair, and research, which hacking needs. These can be tweaked in the mod settings.
 
 [hr][/hr]
 [h1]Mod Compatibility[/h1]
 [list]
 [*]Safe to add to existing saves.
 [*]Not safe to remove while a pawn is welded into the set.
-[*]Biotech: required.
-[*]Odyssey: optional. A mod setting redraws the cerebrex node with Overlord Warcasket's own art.
+[*]Odyssey: An opt-in mod setting retextures the cerebrex node and offers masks for its core.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: required.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: built-in patch, with armor, bulk and carry capacity in line with VFE Pirates' spacer sets.
 [*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: follows its vacuum-resistance rules for warcaskets.
