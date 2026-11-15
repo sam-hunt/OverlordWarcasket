@@ -4,11 +4,11 @@ A new spacer-tier warcasket for [url=https://steamcommunity.com/sharedfiles/file
 
 [h1]About[/h1]
 
-The Overlord is a 10th-generation mechanitor warcasket, built to lead mechs from the frontline and bring fallen ones back.
+The Overlord is a 10th-generation mechanitor warcasket, built to lead mechs from the front line and bring fallen ones back.
 
 [hr][/hr]
 [h2]The Set[/h2]
-Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by Spacer Warcaskets and Ultra Mechtech research. Each piece costs chips from Biotech's mech bosses. Mix and match the pieces with VFE Pirates' (or Alpha Mechs!) own sets as you please.
+Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by spacer warcaskets and ultra mechtech research. Each piece costs chips from Biotech's mech bosses. Mix and match the pieces with VFE Pirates' (or Alpha Mechs!) own sets as you please.
 [list]
 [*][b]Armor:[/b] Grants resurrect mech, adds bandwidth, and leaves the pilot able to smith, research and hack
 [*][b]Shoulders:[/b] Command relays that let the pilot order drafted mechs anywhere on the map, with one more control group and faster hacking
@@ -16,12 +16,12 @@ Armor, shoulder pads and helmet, welded at the warcasket foundry and unlocked by
 [/list]
 
 [h2]Resurrect mech[/h2]
-The armor carries a mech resurrector. Point it at one of your fallen mechs and the pilot supercharges its self-repair, bringing it back to its feet for a number of charges set by its weight class. The resurrector recharges over time and can be reloaded with advanced components, and its red gauge on the pilot shows what is left. A mechlink is required, unless you turn that off.
+The armor carries a mech resurrector. Point it at one of your fallen mechs and the pilot will supercharge its self-repair and bring it back to its feet. Heavier mechs cost more charges. The resurrector recharges over time and can be reloaded with advanced components in a pinch, and its red gauge on the pilot shows what is left. A mechlink is required, unless you turn that off.
 
-[h2]A pilot who still works[/h2]
-VFE Pirates' warcaskets block all skilled and intellectual labor. The Overlord's pilot keeps smithing, for mech gestation, subcore encoding and mech repair, and research, which hacking needs. Crafting, tailoring and dark study can be enabled in the mod settings. Everything else follows VFE Pirates' warcasket rules and the mods that change them.
+[h2]Enabled work types[/h2]
+VFE Pirates' warcaskets block all skilled and intellectual labor. The Overlord's pilot keeps smithing, for mech gestation, subcore encoding and mech repair, and research, which hacking needs. Crafting, tailoring and dark study can be enabled in the mod settings. Everything else follows VFE Pirates' warcasket rules, including any changes other mods make to them.
 
-The charge capacity, the recharge rate, the reload cost, how fresh a mech must be, the casting time, the cooldown, the mechlink requirement and which work the pilot may do can be changed in the mod settings.
+Also includes an opt-in retexture patch that makes Odyssey's Cerebrex Node apparel fit a bit nicer together.
 
 [hr][/hr]
 [h1]Mod Compatibility[/h1]
@@ -44,7 +44,7 @@ The charge capacity, the recharge rate, the reload cost, how fresh a mech must b
 A: Research spacer warcaskets and ultra mechtech, then weld it on at the warcasket foundry like any other set.
 
 [b]Q: Does the pilot need to be a mechanitor?[/b]
-A: By default, yes: the resurrector answers to a mechlink. A mod setting lets any pilot use it.
+A: By default, yes. A mod setting lets any pilot use the resurrector though.
 
 [hr][/hr]
 [h1]Links[/h1]

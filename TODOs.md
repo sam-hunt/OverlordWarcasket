@@ -6,7 +6,6 @@
 - **Optimize images** Run the `../MOD_DOWNLOAD_SIZE_TRIM.md` pass before the first release.
 - **Smoke test on both branches** (`Scripts/integration-smoke-test.py`) once the game can be
   booted with the full compat list, and a boot on 1.6.
-- **Full review of player-facing copy**, the descriptions' lore paragraphs in particular.
 - **First Workshop publish.** Commit `About/PublishedFileId.txt`, add the Workshop link and the
   Steam badges to the README, paste the description.
 

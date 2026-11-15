@@ -8,10 +8,10 @@
   <OLWC_CannotResurrectClass>{0} cannot be resurrected.</OLWC_CannotResurrectClass>
   <OLWC_NotOurMech>{0} is not one of your mechs.</OLWC_NotOurMech>
   <OLWC_CorpseTooOld>{0} has been dead too long.</OLWC_CorpseTooOld>
-  <OLWC_NotEnoughCharges>Resurrecting {0} needs {1} charges, but only {2} are left.</OLWC_NotEnoughCharges>
+  <OLWC_NotEnoughCharges>Not enough charges to resurrect {0}.</OLWC_NotEnoughCharges>
   <OLWC_NotEnoughBandwidth>{0} does not have enough bandwidth to control {1}.</OLWC_NotEnoughBandwidth>
   <OLWC_ChargesLabel>Charges: {0} / {1}</OLWC_ChargesLabel>
-  <OLWC_TargetCost>{0}: {1} charges</OLWC_TargetCost>
+  <OLWC_TargetCost>Cost to resurrect {0}: {1}</OLWC_TargetCost>
   <OLWC_TargetTimeLeft>Can be resurrected for another {0}.</OLWC_TargetTimeLeft>
   <OLWC_GaugeRegen>Recharge rate: {0} per day</OLWC_GaugeRegen>
   <OLWC_GaugeNoRegen>Recharge rate: none</OLWC_GaugeNoRegen>
@@ -26,7 +26,7 @@
 
   <!-- Mod settings (Source/1.6/Settings/) -->
   <OLWC_SettingsCategory>Overlord Warcasket</OLWC_SettingsCategory>
-  <OLWC_SettingsUnavailable>These settings are unavailable. Another mod has changed the overlord warcasket's definitions, so the set keeps its built-in values.</OLWC_SettingsUnavailable>
+  <OLWC_SettingsUnavailable>These settings are unavailable. Another mod has changed the overlord warcasket, so the set will keep its built-in values.</OLWC_SettingsUnavailable>
 
   <OLWC_SectionResurrect>Resurrect mech</OLWC_SectionResurrect>
 
@@ -56,7 +56,7 @@
   <OLWC_RequireMechlinkDesc>When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs.</OLWC_RequireMechlinkDesc>
 
   <OLWC_SparksOnlyDrafted>Sparks only while drafted</OLWC_SparksOnlyDrafted>
-  <OLWC_SparksOnlyDraftedDesc>When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the sparks will play whenever the armor holds a charge, as on an apocriton.</OLWC_SparksOnlyDraftedDesc>
+  <OLWC_SparksOnlyDraftedDesc>When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the armor will spark whenever it holds a charge, as an apocriton does.</OLWC_SparksOnlyDraftedDesc>
 
   <OLWC_SummaryCost>{1} for {0_indefinite} mech</OLWC_SummaryCost>
   <OLWC_SummaryRegen>recharges {0} of them each day</OLWC_SummaryRegen>
@@ -69,7 +69,7 @@
 
   <OLWC_SectionWork>Enabled work types</OLWC_SectionWork>
   <OLWC_SectionWorkDesc>The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too.</OLWC_SectionWorkDesc>
-  <OLWC_WorkDesc>When enabled, overlord pilots can do this work, though you will need to assign it in the Work tab. When disabled, they cannot.</OLWC_WorkDesc>
+  <OLWC_WorkDesc>When enabled, overlord pilots can do this work, though you will need to assign it in the work tab. When disabled, they cannot.</OLWC_WorkDesc>
   <OLWC_WorkNote_Research>Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either.</OLWC_WorkNote_Research>
   <OLWC_WorkNote_Smithing>Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work.</OLWC_WorkNote_Smithing>
   <OLWC_WorkDefault>Default: {0}.</OLWC_WorkDefault>
@@ -96,7 +96,7 @@
   <OLWC_CommandRangeCurrentMap>Anywhere on the same map</OLWC_CommandRangeCurrentMap>
   <OLWC_CommandRangeCurrentMapDesc>Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map.</OLWC_CommandRangeCurrentMapDesc>
   <OLWC_CommandRangeAnywhere>Anywhere</OLWC_CommandRangeAnywhere>
-  <OLWC_CommandRangeAnywhereDesc>Mechs can be drafted and ordered anywhere, even on a map their mechanitor is not on or while their mechanitor is traveling in a caravan.</OLWC_CommandRangeAnywhereDesc>
+  <OLWC_CommandRangeAnywhereDesc>Mechs can be drafted and ordered anywhere, even if their mechanitor is on another map or traveling in a caravan.</OLWC_CommandRangeAnywhereDesc>
   <OLWC_CommandRangeRadius>Within {0} cells{1}</OLWC_CommandRangeRadius>
   <OLWC_CommandRangeRadiusDesc>Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells.</OLWC_CommandRangeRadiusDesc>
   <OLWC_CommandRangeVanillaSuffix> (vanilla)</OLWC_CommandRangeVanillaSuffix>
