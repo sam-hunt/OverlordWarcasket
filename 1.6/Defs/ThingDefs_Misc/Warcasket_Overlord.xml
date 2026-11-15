@@ -1,144 +1,102 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <!--
-    Templated from VFEP's VFEP_Warcasket_Controller (VFEP v4.03,
-    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml), the tier's computing-heavy set; fields not
-    discussed here are the Controller's. Docs/Research/VFEP_WARCASKET_STATS.md tabulates the
-    sets it sits beside.
+    Templated from VFEP_Warcasket_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml); a field not discussed here is the
+    Controller's. Docs/Research/VFEP_WARCASKET_STATS.md tabulates the tier.
 
-    Tuning. The set is designed against vanilla: VFEP's 10th-generation chassis (Siegebreaker,
-    Guardian, Controller, Sarcophagus, Brute are the reference numbers) carrying what Biotech's
-    top mechanitor gear carries, the mechlord helmet and suit (MechBandwidth 12 each,
-    ShootingAccuracyPawn -5 and MeleeHitChance -0.5 each; the suit Plasteel 120,
-    ComponentSpacer 8, NanostructuringChip 2, PowerfocusChip 1; both UltraMechtech), whose
-    slots the helmet and this shell take. The resurrection is at or past the top of what
-    vanilla and VFEP offer, so the set is gated and priced as vanilla's top tier is:
-    - researchPrerequisites VFEP_SpacerWarcaskets and UltraMechtech on all three pieces
-      (BuildableDef.IsResearchFinished, which VFEP's foundry lists by, wants every entry).
+    Tuning: VFEP's 10th-generation chassis carrying what Biotech's mechlord suit and helmet
+    carry (MechBandwidth 12 each, both UltraMechtech; the suit ComponentSpacer 8,
+    NanostructuringChip 2, PowerfocusChip 1). The resurrection is at or past the top of what
+    vanilla and VFEP offer, so the set is gated and priced as vanilla's top tier is.
+    - researchPrerequisites VFEP_SpacerWarcaskets and UltraMechtech, on all three pieces: the
+      foundry lists a part by BuildableDef.IsResearchFinished, which wants every entry.
       UltraMechtech needs a NanostructuringChip analyzed, so the set comes after the first
       apocriton, whose ability the resurrector copies.
-    - MechBandwidth 8 here and 12 on the helmet, 20 against the mechlord pair's 24: the shell
-      pays the suit's chips for two thirds of its bandwidth and the resurrector.
-    - PsychicSensitivity -0.5, the Controller's armor's and the tier's. The helmet carries
-      none (its header has why a mechanitor's suit cannot deafen its pilot), so the set leaves
-      a baseline pilot at 50% where the tier's sets leave none. A psychically dull pilot
-      (-0.5 of their own) reaches zero and can take no mechlink while suited.
-    - The helmet alone carries the aim penalty (its header); the shoulders the command range,
-      a control group and hacking speed (theirs).
-    - Sharp 2 / Blunt 1 / Heat 1 on all three pieces, the tier's shared values. Blunt 1.5 is
-      Guardian's and Brute's, paid for in plasteel; this set has no claim to it.
-    - EnergyShieldEnergyMax 1.5 at EnergyShieldRechargeRate 0.01, the tier's baseline
-      (Guardian, Controller, Sarcophagus); Siegebreaker's 2.5 and Brute's 5.0 are their
-      specialties. The bubble blocks ranged fire only.
-    - costList ComponentSpacer 8 / Plasteel 150 / Uranium 50 / NanostructuringChip 2 /
-      PowerfocusChip 1: the plasteel and uranium are the utility sets' band (145 to 150); the
-      components and chips are the mechlord suit's, the components sitting inside VFEP's
-      tech-complexity dial (the utility sets 6, Controller 12, Brute 4). Set-wide that is three
-      NanostructuringChips, two PowerfocusChips and two SignalChips, seven kills spread over
-      the apocriton, the war queen and the diabolus, against the mechlord pair's four and one,
-      which ask the apocriton four times. This piece keeps the suit's chips whole because the
-      resurrector is the apocriton's; the helmet and shoulders carry the spread (their headers).
-      Parts are untradeable and destroyed on drop, so market value, the chips'
-      1500 and 1000 each included, is colony wealth and raid points only.
+    - MechBandwidth 8, with the helmet's 12 the set's 20 against the mechlord pair's 24: the
+      shell pays the suit's chips for two thirds of its bandwidth and the resurrector.
+    - PsychicSensitivity -0.5, the tier's. The helmet carries none (its header), so a baseline
+      pilot keeps 50% where the tier's other sets leave none; a psychically dull pilot (-0.5
+      of their own) reaches zero and can take no mechlink while suited.
+    - Sharp 2 / Blunt 1 / Heat 1 on all three pieces, and EnergyShieldEnergyMax 1.5 at
+      EnergyShieldRechargeRate 0.01: the tier's baseline. Blunt 1.5 and the larger shields
+      are other sets' specialties.
+    - costList: Plasteel 150 / Uranium 50 is the tier's utility band. ComponentSpacer 8, inside
+      the tier's 4 to 12, and the chips are the mechlord suit's, kept whole here because the
+      resurrector is the apocriton's. Set-wide the chips are NanostructuringChip 3,
+      PowerfocusChip 2 and SignalChip 2: seven boss kills spread over the apocriton, the war
+      queen and the diabolus, where the mechlord pair's five chips ask the apocriton four
+      times. Parts are untradeable and destroyed on drop, so their market value counts toward
+      colony wealth, and through it raid points, and nothing else.
+    - No apparel tags, so no pawnkind's gear roll picks the set (PawnApparelGenerator matches
+      a kind's apparelTags against them): a generated pilot has no mechlink and no mechs for
+      the set to serve, and the psychic sensitivity it leaves its pilot makes that pawn an
+      easy capture where the tier's other sets deafen theirs. VFEP's slot fill reads no tags;
+      Source/1.6/Patches/PawnGenerator_GeneratePawn_Patch_Postfix.cs keeps the set out of it.
+      Save Our Ship 2's EVA tag (1.6/Patches/SOS2Patch.xml) is then the only one a part has.
 
-    Alpha Mechs (sarg.alphamechs, Workshop 2973169158) leaves the tuning above standing and
-    gets no compat root. It numbers the three vanilla chips tiers 1 to 3 and adds tiers 4 to 6
-    behind three bosses of its own, all past UltraMechtech; the tier in each chip's label
-    aside, it changes neither the mechlord pair nor any def or method this set reads, so the
-    set is its tier 3 gear, tuned against the same pair as without it. Its Mech Master warcasket (VFEP_Warcasket_MechController with
-    its shoulders and helmet, in its VFEP root) is the tier 6 counterpart rather than a peer:
-    one chip a piece from the infernus, the war empress and the apoptosis, for MechBandwidth
-    48, a 2.5 shield at twice the recharge, Blunt 1.5, a pilot who keeps most work at
-    WorkSpeedGlobal -0.6 and a helmet ability that turns a hostile mech for a day. In
-    ordinary materials it is the cheaper set (ComponentSpacer 7 and three chips against 16 and
-    seven), so pricing this set beside it could only mean its bosses, which would move the
-    apocriton's ability, tier 3 in its numbering, to tier 6. The pieces mix at the foundry as
-    any VFEP sets do: this armor and helmet under its shoulders read MechBandwidth 44 with the
-    resurrector kept.
+    Alpha Mechs (sarg.alphamechs) gets no compat root: it labels the vanilla chips tiers 1 to
+    3 and changes nothing this set reads, so the set is its tier 3 gear. Its Mech Master
+    warcasket (VFEP_Warcasket_MechController) sits behind its own tier 6 bosses, a counterpart
+    rather than a peer to price against.
 
-    No apparel tags, so no pawnkind's gear roll picks the set (PawnApparelGenerator matches
-    a kind's apparelTags against them): a generated pilot has no mechlink and no mechs for
-    the set to serve, and the psychic sensitivity it leaves its pilot makes that pawn an
-    easy capture where the tier's other sets deafen theirs. VFEP's slot fill reads no tags;
-    Source/1.6/Patches/PawnGenerator_GeneratePawn_Patch_Postfix.cs keeps the set out of it.
-    Save Our Ship 2's EVA tag (1.6/Patches/SOS2Patch.xml) is then the only one a part has.
+    Resurrect mech: VEF's CompAbilitiesApparel grants OLWC_ResurrectMech (AbilityDefs/
+    ResurrectMech.xml). The ability and the sparks comp both read the mech resurrector off
+    this apparel, so all three comps sit on this one def. The resurrector (Source/1.6/Comps/)
+    is vanilla's CompProperties_ApparelReloadable with a recharge of its own; its props class
+    sets the compClass, so none is declared here. CompDevResetCooldowns is a dev-mode cooldown
+    reset (Toxin's idiom).
 
-    Resurrect mech: VEF CompAbilitiesApparel grants OLWC_ResurrectMech (AbilityDefs/
-    ResurrectMech.xml), fed by the mech resurrector beside it. The ability reads the resurrector off
-    the apparel that grants it, so both comps must sit on this one def. The resurrector is
-    OverlordWarcasket.CompProperties_MechResurrector (Source/1.6/Comps/), vanilla's
-    CompProperties_ApparelReloadable with a recharge of its own, whose props class sets the
-    compClass, so none is declared here. It declares no verbs, so vanilla draws no command for
-    it. The resurrector starts full, vanilla's first fill. CompDevResetCooldowns is a dev-mode
-    cooldown reset for the ability (Toxin's idiom) and ships nothing in play.
-
-    The resurrector's numbers, all three mod settings defaulting to these values:
-    - maxCharges 10, the charges held when full: the apocriton holds 30, a suit of armor a
-      third. With the costs of 1 / 3 / 5 / 8 that is two heavy mechs, three medium and a
-      light, or an ultraheavy and two light, in one fight, and the capacity is what limits a
-      fight.
-    - chargesPerDay 1, the recharge: the main supply, free and unattended. Measured against the
-      vanilla route it competes with, the mech gestator's resurrect bills (Biotech/Defs/
-      RecipeDefs/Recipes_MechResurrection.xml: 25 / 50 / 100 / 150 steel and one gestation
-      cycle of two days for a light, medium, heavy or ultraheavy mech, any corpse age, fully
-      healed), a charge a day pays for a light mech in one day, a medium in three, a heavy in
-      five and an ultraheavy in eight: quicker than the gestator for a light mech and slower
-      for the rest, so the gestator keeps its place and
-      what the resurrector adds is the mech back on its feet during the fight. The rate is meant to
-      bring a resurrector spent in one raid most of the way back by the next; whether that is too
-      generous is an open entry in TODOs.md.
+    The resurrector's numbers; maxCharges, chargesPerDay and ammoCountPerCharge are mod
+    settings defaulting to the values here:
+    - maxCharges 10, a third of the apocriton's 30. At the ability's costs of 1 / 3 / 5 / 8
+      for a light, medium, heavy or ultraheavy mech that is two heavy mechs, or three medium
+      and a light, or an ultraheavy and two light, in one fight; the capacity is what limits
+      a fight.
+    - chargesPerDay 1, the main supply, free and unattended. The vanilla route it competes
+      with is the mech gestator's resurrect bills (Biotech's Recipes_MechResurrection.xml:
+      25 / 50 / 100 / 150 steel and a two-day cycle, any corpse age, fully healed). A charge a
+      day pays for a light mech in one day, a medium in three, a heavy in five and an
+      ultraheavy in eight: slower than the gestator for all but the light, so the gestator
+      keeps its place and what the resurrector adds is the mech back on its feet during the
+      fight. The rate brings a resurrector spent in one raid most of the way back by the next.
     - ammoDef ComponentSpacer at ammoCountPerCharge 1, the reload: the costly shortcut for the
       raid that follows too soon or the fight that outlasts ten charges. The item is the
-      Controller's, which this set is templated from (VFEP_Warcasket_Controller reloads its
-      drones with one advanced component a deployment), where vanilla's own reloadables take
-      chemfuel, steel or bioferrite. At 200 silver and a fabrication bench's work each, a heavy
-      mech brought back on components costs about five times its gestator bill and an
-      ultraheavy about five times its own, so components stay the exception.
-      Per charge rather than ammoCountToRefill, so a part-empty resurrector
-      reloads for what it lacks. baseReloadTicks, soundReload and chargeNoun are the family's
-      values (the Medic's suite); chargeNoun is vanilla's default, spelled out because the
-      stat sheet and the gauge's tooltip print it.
-    A pilot never fetches components unasked: the gauge's drag handle sets the level an
-    automatic reload fills to and starts at zero (CompMechResurrector's header has the two
-    ways a reload happens).
+      Controller's, which reloads its drones with one a deployment. At 200 silver each a heavy
+      or ultraheavy mech brought back on components costs about five times its gestator bill,
+      so components stay the exception. Per charge rather than ammoCountToRefill, so a
+      part-empty resurrector reloads for what it lacks.
+    - baseReloadTicks and soundReload are the family's (the Medic's suite); chargeNoun is
+      vanilla's default, spelled out because the stat sheet and the gauge's tooltip print it.
 
-    Resurrector sparks: OverlordWarcasket.CompProperties_ResurrectorSparks plays
-    OLWC_ResurrectorSparks (Effects/ResurrectorSparks.xml), the apocriton's idle red crackle, on
-    the wearer while the resurrector holds a charge and the wearer is alive, not downed and awake
-    (CompResurrectorSparks' header). onlyWhileDrafted true also requires a player's pilot to be
-    drafted and able to cast (a mechanitor while the ability's requireMechlink holds), so the
-    crackle reads as the resurrector readied for battle rather than the apocriton's constant hum;
-    an AI pilot has no draft to wait on and shows it on the charge alone, as the apocriton does,
-    until AI casting gives raiders a reason to spend charges. false plays it whenever the
-    resurrector is charged. A mod setting defaulting to this value. The comp reads the resurrector
-    off this def, so it sits beside it.
+    Resurrector sparks: OLWC_ResurrectorSparks (Effects/ResurrectorSparks.xml), the
+    apocriton's red crackle, on a wearer who holds a charge and could cast. onlyWhileDrafted
+    true, a mod setting's default, also wants a player's pilot drafted, so the crackle reads
+    as the resurrector readied for battle rather than the apocriton's constant hum.
+    CompResurrectorSparks' header has the conditions.
 
     Art: Textures/Things/Pawn/Warcasketlike/WarcasketOverlord/, laid out as VFEP's sets are.
-    The worn graphic is Graphic_Multi (the _north/_east/_south facings); the item icon is the
-    parent's Graphic_Single, read from the bare-named file, which is a copy of the _south
-    facing. No mask on the shell or the shoulders: as VFEP's Controller, the CompColorable
-    colour paints the whole piece. The helmet alone carries masks; see its header.
+    The worn graphic is Graphic_Multi (_north/_east/_south); the item icon is the parent's
+    Graphic_Single, read from the bare-named file, a copy of the _south facing. The shell and
+    the shoulders ship no mask, so the CompColorable colour paints the whole piece, as on the
+    Controller; the helmet's header has its masks.
 
-    Own trait on equip: traitsOnEquip grants OLWC_WarcasketTrait_Overlord (TraitDefs/
-    WarcasketTrait_Overlord.xml), not VFEP_WarcasketTrait, because the Overlord's work profile
-    must differ from VFEP's (Research and Smithing open) and a child ApparelExtension can only
-    add to what a granted trait blocks, never subtract; the trait is mirrored from VFEP's at
-    startup so the patch mods that reshape VFEP's profile reshape ours. traitsOnUnequip keeps
-    VFEP_Shellcasket,
-    the shared "cut out of a warcasket" state every add-on set uses, so removal surgery and
-    re-entombing in any warcasket behave as for VFEP's own sets.
+    Traits: traitsOnEquip grants OLWC_WarcasketTrait_Overlord rather than VFEP_WarcasketTrait,
+    since a child ApparelExtension can only add to what a granted trait blocks and the
+    Overlord keeps Research and Smithing open (the trait def's header). traitsOnUnequip keeps
+    VFEP_Shellcasket, the "cut out of a warcasket" state every set shares, so removal surgery
+    and re-entombing behave as for VFEP's own sets.
 
     ApparelExtension priority 1: VFEP_WarcasketArmorBase carries its own ApparelExtension and
-    inheritance appends list items, so this def resolves with two. VEF merges duplicate
-    extensions in a Def.ResolveReferences prefix, highest priority surviving, and
-    ApparelExtension.Merge does not copy every field; at equal priority the parent's copy
-    would win. At priority 1 every field of ours, from any load root, is kept. Any new
+    inheritance appends list items, so this def resolves with two. VEF merges duplicates in a
+    Def.ResolveReferences prefix, the highest priority surviving, and ApparelExtension.Merge
+    does not copy every field; at equal priority the parent's copy would win. Any new
     ApparelExtension field for this piece goes on this entry.
 
-    Compat patches reach this def from 1.6/Patches/SOS2Patch.xml (EVA tag, cold insulation),
+    Patched by 1.6/Patches/SOS2Patch.xml (EVA tag, cold insulation),
     1.6/Mods/VanillaGravshipExpanded/Patches/VacuumResistance.xml and the
-    1.6/Mods/CombatExtended/Patches/ root (plating on CE's scale, bulk, carry capacity,
-    shield, costs); see their headers.
+    1.6/Mods/CombatExtended/Patches/ root, which restates the piece on CE's scale; see their
+    headers.
   -->
   <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketArmorBase">
     <defName>OLWC_Warcasket_Overlord</defName>

@@ -1,55 +1,41 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <!--
-    Templated from VFEP's VFEP_WarcasketHelmet_Controller (VFEP v4.03,
-    1.6/Defs/ThingDefs_Misc/Apparel_Headgear.xml); fields not discussed here, uiIconScale and
-    the toxic offset included, are the Controller's, its drone module left off. Plating, tags,
-    the market-value references and the UltraMechtech gate follow the armor's header.
+    Templated from VFEP_WarcasketHelmet_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Headgear.xml), its drone module left off; a field not
+    discussed here is the Controller's. Plating, the research gate and the absent apparel
+    tags follow the armor's header.
 
-    Tuning: the piece is the set's answer to Biotech's mechlord helmet (MechBandwidth 12,
+    Tuning: the set's answer to Biotech's mechlord helmet (MechBandwidth 12,
     ShootingAccuracyPawn -5, MeleeHitChance -0.5; Plasteel 120, ComponentSpacer 6,
-    NanostructuringChip 2; UltraMechtech), which it replaces on a mechanitor's head, on the
-    tier's plating and vacuum seal in place of the mechlord's recon-grade shell.
-    - MechBandwidth 12, the mechlord helmet's. With the armor's 8 the set gives 20 against the
-      mechlord pair's 24, the gap being what the mech resurrector costs.
-    - ShootingAccuracyPawn -3 and no MeleeHitChance, vanilla's price for the bandwidth at
-      three fifths of its -5 with its -0.5 left off. The offset is skill levels added before
-      the stat's curve, not a percentage: the pilot shoots as if three Shooting levels lower.
-      A warcasket pilot still fights, at the front and within reach of whatever charges it,
-      where the mechlord pair (-10 shooting, -1 melee) makes a commander who does not, so the
-      shooting cost is lighter and the melee one is gone.
-    - No PsychicSensitivity offset, where the Controller's helmet has -0.5. A mechlink needs a
-      psychically sensitive brain: CompUseEffect_InstallImplant refuses the mechlink
-      (requiresPsychicallySensitive) to a pawn at zero sensitivity, which the Controller's -0.5
-      on helmet and armor together make of a baseline pilot. The lore has the link's psychic
-      half engineered into the helmet; the armor keeps -0.2.
-    - costList ComponentSpacer 6 / Plasteel 80 / NanostructuringChip 1 / PowerfocusChip 1: the
-      mechlord helmet's components, and its two chips with one of the apocriton's traded for
-      the war queen's, the chip Biotech's integrator headset pays for its bandwidth (9 for
-      one). The trade is what keeps the set from asking the apocriton four times (the armor's
-      header has the set's count). The plasteel is the tier's helmet 60 plus 20 for the
-      mechanitor hardware, short of the mechlord's 120 because the shell is the chassis's own.
+    NanostructuringChip 2), on the tier's plating and vacuum seal.
+    - MechBandwidth 12, the mechlord helmet's.
+    - ShootingAccuracyPawn -3 and no MeleeHitChance: three fifths of vanilla's shooting price
+      and none of its melee one, because a warcasket pilot still fights at the front where
+      the mechlord pair (-10 shooting, -1 melee) makes a commander who does not. The offset
+      is skill levels added before the stat's curve, not a percentage: the pilot shoots as
+      if three Shooting levels lower.
+    - No PsychicSensitivity offset, where the Controller's helmet has -0.5. With the armor's
+      -0.5 that would leave a baseline pilot at zero, and CompUseEffect_InstallImplant refuses
+      a mechlink (requiresPsychicallySensitive) to a pawn at zero.
+    - costList: ComponentSpacer 6 is the mechlord helmet's. Of its two NanostructuringChips
+      one is traded for the war queen's PowerfocusChip, the chip Biotech's integrator headset
+      pays for its bandwidth; the trade keeps the set from asking the apocriton four times
+      (the armor's header has the set's count). Plasteel 80 is the tier's helmet 60 plus 20
+      for the mechanitor hardware, short of the mechlord's 120 because the shell is the
+      chassis's own.
 
-    Command range: the helmet declares no CommandRangeExtension. The shoulders carry it in XML
-    (their header); it lands here at startup when the mod settings point the extended command
-    range at the helmet.
+    Art: the only piece with masks (_northm/_eastm/_southm for the worn Graphic_Multi, _m for
+    the icon's Graphic_Single), so it draws with CutoutComplex and useWornGraphicMask, as the
+    Controller's helmet does. The CompColorable colour paints the mask's red areas and the
+    black-masked trim keeps its painted colour (apparel graphics pass white as colorTwo).
 
-    Art: the helmet alone of the three pieces ships masks (_northm/_eastm/_southm for the worn
-    graphic, _m for the item icon), so it draws with CutoutComplex and useWornGraphicMask, as
-    VFEP's Controller helmet does and as vanilla's prestige armors are the pattern: the
-    CompColorable colour paints the mask's red areas and the black-masked trim keeps its painted
-    colour (apparel graphics pass white as colorTwo). Mask names differ by graphic class:
-    Graphic_Multi reads <path>_northm, Graphic_Single <path>_m.
+    ApparelExtension priority 1, for the reason in the armor's header; Merge still ORs the
+    base's isUnifiedApparel and hideHead in.
 
-    ApparelExtension priority 1, for the reason in the armor def's header: the
-    VFEP_WarcasketHelmetBase parent carries its own, and only the highest-priority copy keeps
-    its fields whole (Merge still ORs the parent's isUnifiedApparel and hideHead in). Any new
-    ApparelExtension field for this piece goes on this entry.
-
-    Compat: SOS2Patch.xml gives it the EVA tag and Insulation_Cold 100 alongside the armor;
-    the VGE vacuum patch lowers its VacuumResistance to VGE1's warcasket-helmet value; the
-    1.6/Mods/CombatExtended/Patches/ root rescales its plating and seals it against CE's
-    smoke, which reads no tox immunity.
+    Patched by 1.6/Patches/SOS2Patch.xml (EVA tag, Insulation_Cold 100), the VGE vacuum patch
+    (VGE1's warcasket-helmet VacuumResistance) and the 1.6/Mods/CombatExtended/Patches/ root,
+    which restates the piece on CE's scale; see their headers.
   -->
   <VFEPirates.WarcasketDef ParentName="VFEP_WarcasketHelmetBase">
     <defName>OLWC_WarcasketHelmet_Overlord</defName>

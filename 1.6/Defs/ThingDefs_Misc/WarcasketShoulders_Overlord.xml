@@ -1,63 +1,51 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <!--
-    Templated from VFEP's VFEP_WarcasketShoulders_Controller (VFEP v4.03,
-    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml); fields not discussed here are the
-    Controller's, its spider mine module left off. Plating, tags, the market-value references
-    and the UltraMechtech gate follow the armor's header, as does the art note.
+    Templated from VFEP_WarcasketShoulders_Controller (VFEP v4.03,
+    1.6/Defs/ThingDefs_Misc/Apparel_Various.xml), its spider mine module left off; a field not
+    discussed here is the Controller's. Plating, the research gate, the absent apparel tags
+    and the unmasked art follow the armor's header.
 
-    Tuning: the pads are the set's command piece, the one a mechanitor's vanilla utility gear
-    has no single answer to.
-    - MechControlGroups 1, Biotech's control pack (Steel 100, ComponentIndustrial 6).
-    - HackingSpeed 0.2, a fifth faster at the hacking the overlord trait leaves the pilot
-      (Research). No vanilla apparel carries it; it is the pads' processors turned on a
-      terminal, and it keeps the set's bandwidth on the helmet and the armor.
-    - No MechBandwidth: the helmet's 12 and the armor's 8 are the set's 20.
-    - costList ComponentSpacer 2 / Plasteel 60 / SignalChip 2. The first two are the
-      Controller shoulders' price, the plasteel the 10th-gen shoulder-to-armor ratio, roughly
-      0.4 (Siegebreaker 60/145, Guardian 80/200, Controller 60/150, Sarcophagus 60/145, Brute
-      60/160), of the armor's 150. The chips are the diabolus's drop at the price of Biotech's
-      bandwidth pack (SignalChip 2), the command gear a mechanitor straps on outside a
-      warcasket, so the command range has a price and the set's chips climb from the
-      diabolus's here through the war queen's on the helmet to the apocriton's on the armor.
+    Tuning: the set's command piece.
+    - MechControlGroups 1, Biotech's control pack's.
+    - HackingSpeed 0.2 for the hacking the overlord trait leaves the pilot. No vanilla apparel
+      carries the stat.
+    - No MechBandwidth: the helmet's 12 and the armor's 8 are the set's.
+    - costList: ComponentSpacer 2 / Plasteel 60 is the Controller shoulders' price, the
+      plasteel about 0.4 of the armor's as across the tier. SignalChip 2 is the price of
+      Biotech's bandwidth pack, so the command range has a price and the set's chips climb
+      from the diabolus's here through the war queen's on the helmet to the apocriton's on
+      the armor.
 
-    Command range (the CommandRangeExtension entry, Source/1.6/CommandRange/): a mechanitor
-    wearing the pads may order their drafted mechs anywhere on the map they share (scope
-    CurrentMap), where vanilla stops every move and attack order at 24.9 cells from the overseer.
-    The pads carry it as the set's command relays, leaving the helmet the bandwidth; the mod
-    settings may move the entry to the helmet, widen it to every mechanitor or switch it off,
-    and override the scope (Anywhere drops the same-map rule too; Radius keeps vanilla's shape
-    at the radius below) and the radius, which is the Radius scope's reach and the settings
-    slider's default, left at vanilla's 24.9 so switching to that scope starts from vanilla.
-    normalRadius, unset here and so vanilla's too, is the range without the set as the settings
-    window quotes it; a mod that moves the range for everyone has both written by its compat
-    root (Combat Extended's 43.9, 1.6/Mods/CombatExtended/Patches/CommandRange.xml).
-    The settings write every choice back onto this entry at startup and when the window closes;
-    CommandRange's header has the vanilla call paths and the rules.
+    Command range: the CommandRangeExtension lets a mechanitor wearing the pads order drafted
+    mechs anywhere on the map they share (scope CurrentMap), where vanilla stops every order
+    at 24.9 cells from the overseer. radius is the Radius scope's reach and the settings
+    slider's default, vanilla's 24.9 so that switching to that scope starts from vanilla.
+    normalRadius, unset here and so vanilla's, is the range without the set; a mod that moves
+    the range for everyone has both written by its compat root
+    (1.6/Mods/CombatExtended/Patches/CommandRange.xml). The settings overwrite the entry and
+    may move it to the helmet; Source/1.6/CommandRange/CommandRange.cs has the rules and the
+    vanilla call paths.
 
-    ApparelExtension priority 1, for the reason in the armor def's header: the
-    VFEP_WarcasketShoulderPadBase parent carries its own, and only the highest-priority copy
-    keeps its fields whole (Merge still ORs the parent's isUnifiedApparel in). Any new
-    ApparelExtension field for this piece goes on this entry.
+    ApparelExtension priority 1, for the reason in the armor's header; Merge still ORs the
+    base's isUnifiedApparel in.
 
-    Compat: SOS2Patch.xml and the VGE vacuum patch leave shoulder pads alone, as VFEP's and
-    VGE1's own patches do for VFEP's. The 1.6/Mods/CombatExtended/Patches/ root rescales the
-    plating and adds bulk, as CE's does for VFEP's.
+    Patched by the 1.6/Mods/CombatExtended/Patches/ root alone, which restates the piece on
+    CE's scale; see its headers.
 
-    Draw order: a worn apparel node's altitude is its drawData offset y (added verbatim by
+    Draw order: drawData's south offset 0.014 puts the pads under the helmet facing south, as
+    the art wants. A worn apparel node's altitude is its drawData offset y (added verbatim by
     PawnRenderTree.TryGetMatrix) plus PawnRenderUtility.AltitudeForLayer(layer), 0.000366 per
     layer unit, the layer being the parent's base (ApparelBody 20, ApparelHead 70) plus the
-    piece's index among that parent's apparel; the y offsets on VFEP's bases are what order the
-    pieces. Only this piece moves, so every helmet and armor, ours or VFEP's, keeps its VFEP
-    altitude and foundry mix-and-match stays consistent.
-    - South 0.014 (base 0.02, which lands at 0.027 to 0.028, just over the helmets' 0.027):
-      the art wants the helmet over the pauldron edges, so 0.021 to 0.022, at least 0.004 under
-      any helmet and 0.003 over the shell (0.017 to 0.018), above post-apparel wounds (layer
-      30, 0.011) and firefoam (40, 0.015). Hair and beard (about 0.022) can draw over them on a
-      bare head, as hair does over shoulders anyway.
-    North, east and west inherit the base's 0.2, 0.02 and 0.02: XmlInheritance merges
-    same-named elements recursively, so only the changed facing is listed. The north 0.2 and
-    the armor's 0.1 are what Odyssey's cerebrex node is slotted between
+    piece's index among that parent's apparel; the y offsets on VFEP's bases are what order
+    the pieces. The base's 0.02 lands at 0.027 to 0.028, just over the helmets' 0.027; 0.014
+    lands at 0.021 to 0.022, at least 0.004 under any helmet and 0.003 over the shell (0.017
+    to 0.018), above post-apparel wounds (layer 30, 0.011) and firefoam (40, 0.015); hair
+    and beard (about 0.022) can draw over the pads on a bare head. Only this piece moves, so
+    every helmet and armor, ours or VFEP's, keeps its altitude and foundry mixes stay
+    consistent. North, east and west inherit the base's 0.2, 0.02 and 0.02
+    (XmlInheritance merges same-named elements recursively, so only the changed facing is
+    listed); the north 0.2 and the armor's 0.1 are what the cerebrex node is slotted between
     (1.6/Mods/Odyssey/Patches/CerebrexNodeDrawOrder.xml), so a north offset on either piece
     moves against that patch's 0.134.
   -->
