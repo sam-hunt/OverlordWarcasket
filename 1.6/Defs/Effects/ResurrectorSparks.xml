@@ -18,10 +18,11 @@
     its sides and 0.83 to the shoulder pads' tips. 0.7 lets the sparks reach the shell's sides,
     where they read against the ground, while most still land on the plating and none stray far
     past the shoulder pads. positionRadiusMin 0.1, which the apocriton leaves at 0, keeps them
-    off the wearer's exact centre. chancePerTick 0.01 at a burst of 1~2 is a burst every 100
-    ticks on average at random gaps, two thirds of the apocriton's 0.015: a pilot's readied
+    off the wearer's exact centre. chancePerTick 0.0075 at a burst of 1~2 is a burst every 133
+    ticks on average at random gaps, half the apocriton's 0.015: a pilot's readied
     resurrector crackles less than a mech built around one. The spark frequency mod setting
-    overrides chancePerTick, shown as a percent of the apocriton's (this default, 67%).
+    overrides chancePerTick, shown as a percent of the apocriton's (this default, 50%, a stop
+    on its 5% slider).
   -->
   <EffecterDef>
     <defName>OLWC_ResurrectorSparks</defName>
@@ -30,7 +31,7 @@
         <subEffecterClass>SubEffecter_SprayerChance</subEffecterClass>
         <moteDef>Mote_MechSparkSimple</moteDef>
         <burstCount>1~2</burstCount>
-        <chancePerTick>0.01</chancePerTick>
+        <chancePerTick>0.0075</chancePerTick>
         <rotation>-150~-150</rotation>
         <spawnLocType>OnTarget</spawnLocType>
         <scale>0.8~1.0</scale>
