@@ -1,7 +1,8 @@
 # Brazilian Portuguese glossary: Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); the first machine-assisted pass ran 2026-11-16,
+no native review yet. Only
 mod-specific coinages and grounding decisions; family-wide mechanics and
 style live in `l10n/languages/PortugueseBrazilian.md`.
 
@@ -46,29 +47,42 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and Portuguese runs the base `Pluralize` (lookup, else the word unchanged), so every coined noun ships a `singular;plural` line in `1.6/Languages/PortugueseBrazilian/WordInfo/plural.txt`. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded and coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Brazilian Portuguese | Source or reason |
+|---|---|---|
+| overlord (set name) | Suserano, invariant noun like Guardião: `carcaça de guerra suserano`, `A série Suserano`, `O Suserano` | Coined. StarCraft's pt-BR "Suserano" for Overlord; noun kept invariant per the VFEP set-names row |
+| Workshop title / `OLWC_SettingsCategory` | Carcaça de Guerra Suserano | Workshop title row |
+| pilot | piloto | VFEP section row |
+| mechanitor | mecanizador | Biotech `MechlinkImplant.description`, `Mechanitors.helpText` |
+| mechlink | meca-conexão | Biotech `Mechlink.label` |
+| mech / mechanoid | mecanoide (both) | Biotech uses no short form (`RepairMech.label` "reparar mecanoide") |
+| bandwidth / mech bandwidth | banda-larga / banda-larga mecanoide | Biotech Keyed `Bandwidth`, `MechBandwidth.label` |
+| light / medium / heavy | leve / médio / pesado | `MechWeightClassDef` labels; `{0_indefinite}` gives "um leve" (masculine default, agrees with the elided mecanoide) |
+| resurrect mech | ressuscitar mecanoide | Biotech `ResurrectionMech.label` |
+| mech resurrector | ressuscitador mecanoide | Coined on Biotech's `gestador mecanoide` pattern |
+| charge (chargeNoun) / charges (prose) | carga / cargas | Odyssey's reloadables (`Gun_AssaultRifle_Unique` and siblings, chargeNoun "carga") and Core Keyed `Charges` "Cargas". Core's `Apparel_PsychicShockLance` has the verb "carregar" there, a vanilla slip that is not copied. Ships `carga;cargas` in `WordInfo/plural.txt`. |
+| resurrection | ressurreição | Correct spelling; Biotech's `MechResurrectionCharges` writes "ressureição" (typo, not copied) |
+| command relays | retransmissores de comando | Coined on Odyssey `OrbitalRelay` "retransmissor orbital" |
+| signal enhancers | amplificadores de sinal | Coined |
+| command range | faixa de comando | Biotech Keyed `OutOfCommandRange` "Fora da faixa de comando" |
+| control group | grupo de controle | Biotech Keyed `ControlGroup` |
+| drafted | alistado | Core Keyed `CommandDraftLabel` "Alistar", `IsNotDrafted` |
+| hacking / hack | hacking / hackear | Core `HackingSpeed.label`, `Hack.verb` |
+| work names | pesquisa, forja, fabricação, costura, constr. | Core `WorkTypeDef` `labelShort` |
+| mech gestation / subcore encoding / shredding | gestar mecanoides / codificar subnúcleos / destruir mecanoides | Biotech `SubcoreEncoder.label`, Core `ButcherCorpseMechanoid.label` |
+| machining table | mesa de usinagem | Core `TableMachining.label` |
+| apocriton | apocritão | Biotech `PawnKindDef` label |
+| cerebrex node | nó de cerebrex (lowercase mid-sentence) | Odyssey `Apparel_CerebrexNode.label` "Nó de Cerebrex", cased like `CerebrexCore` |
+| dye / to dye | corante / tingir | Core `Dye.label`, `Dye.description` |
+| mech bosses / ultra mechtech | líderes mecanoides / ultra meca-tecnologia | Biotech Keyed `CommandCallBossgroupDesc`, `UltraMechtech.label` |
+| power armor (lore) | armadura de fuzileiro | Core `Apparel_PowerArmor.label` |
+| (vanilla) suffix | (vanilla) | Kept, common pt-BR gamer usage |
 
 ## Pending native review
 
 Nothing inherited is open for the VFEP rows (they are the community pack's).
-Add this mod's own coinages here as the pass makes them.
+This mod's coinages: Suserano, ressuscitador mecanoide, retransmissores de
+comando, amplificadores de sinal, the `{1} para {0_indefinite}` cost fragment,
+and the feminine chargeNoun "carga" inside vanilla's masculine reload frames
+("um carga"), which Odyssey's own reloadables share.

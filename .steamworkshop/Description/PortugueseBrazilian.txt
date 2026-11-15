@@ -1,0 +1,49 @@
+Carcaça de Guerra Suserano
+
+Uma nova carcaça de guerra de nível espacial para o [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url].
+
+[h1]Sobre[/h1]
+
+O Suserano é uma carcaça de guerra de 10ª geração para mecanizadores, feita para liderar mecanoides da linha de frente e trazer de volta os que caírem.
+
+[hr][/hr]
+[h2]O conjunto[/h2]
+Tronco, ombreiras e capacete, integrados na fundição de carcaças de guerra. Combine as peças com os conjuntos do próprio VFE Pirates (ou do Alpha Mechs!) como quiser.
+[list]
+[*][b]Tronco:[/b] concede ressuscitar mecanoide, aumenta a banda-larga e deixa o piloto apto a forjar, pesquisar e hackear
+[*][b]Ombreiras:[/b] retransmissores de comando que permitem ao piloto dar ordens a mecanoides alistados em qualquer lugar do mapa, com um grupo de controle a mais e hacking mais rápido
+[*][b]Capacete:[/b] amplificadores de sinal que aumentam ainda mais a banda-larga, à custa de parte da pontaria do piloto
+[/list]
+
+[h2]Ressuscitar mecanoide[/h2]
+A armadura leva um ressuscitador mecanoide. Escolha um dos seus mecanoides caídos, e o piloto vai sobrecarregar o auto-reparo dele até colocá-lo de pé de novo. Mecanoides mais pesados custam mais cargas. O ressuscitador se recarrega com o tempo e, numa emergência, pode ser recarregado com componentes avançados.
+
+[h2]Tipos de trabalho ativados[/h2]
+As carcaças de guerra do VFE Pirates bloqueiam todo trabalho especializado e intelectual. O piloto do Suserano mantém a forja, que cobre a gestação e o reparo de mecanoides e a codificação de subnúcleos. Também mantém a pesquisa, da qual o hacking depende. Dá para ajustar isso nas configurações do mod.
+
+[hr][/hr]
+[h1]Compatibilidade[/h1]
+[list]
+[*]Seguro para adicionar a jogos salvos existentes.
+[*]Não é seguro remover enquanto houver um colono integrado ao conjunto.
+[*]Odyssey: uma configuração opcional do mod muda a textura do nó de cerebrex e oferece máscaras para o núcleo dele.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]: obrigatório.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]: patch embutido, com valores de armadura, volume e capacidade de carga equivalentes aos dos conjuntos espaciais do VFE Pirates.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]: segue as regras de resistência ao vácuo que esse mod define para carcaças de guerra.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url], [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url] e [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]: sim.
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]: vale como traje de EVA pelas mesmas regras dos conjuntos do próprio VFE Pirates.
+[/list]
+
+[hr][/hr]
+[h1]Perguntas frequentes[/h1]
+
+[b]P: Como faço para conseguir uma?[/b]
+R: Pesquise "carcaças de guerra espaciais" e "ultra meca-tecnologia" e depois integre o conjunto na fundição de carcaças de guerra, como qualquer outro. Cada peça custa chips dos líderes mecanoides da Biotech.
+
+[b]P: O piloto precisa ser mecanizador?[/b]
+R: Por padrão, sim. Mas uma configuração do mod permite que qualquer piloto use o ressuscitador.
+
+[hr][/hr]
+[h1]Links[/h1]
+Código-fonte, downloads manuais e rastreador de problemas: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+Arte por [url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]
