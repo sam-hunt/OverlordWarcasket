@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Resurrect mech (Source/1.6/Abilities/Ability_ResurrectMech.cs, Source/1.6/Comps/, Source/1.6/Gizmos/) -->
+  <!-- EN: No resurrection charges left. -->
+  <OLWC_NoCharges>复活充能已耗尽。</OLWC_NoCharges>
+  <!-- EN: {0} needs a mechlink to command the mech resurrector. -->
+  <OLWC_NotMechanitor>{0}需要机控中枢才能操控机械族复活器。</OLWC_NotMechanitor>
+  <!-- EN: {0} is not a mechanoid. -->
+  <OLWC_NotMechCorpse>{0}不是机械族。</OLWC_NotMechCorpse>
+  <!-- EN: {0} cannot be resurrected. -->
+  <OLWC_CannotResurrectClass>{0}无法被复活。</OLWC_CannotResurrectClass>
+  <!-- EN: {0} is not one of your mechs. -->
+  <OLWC_NotOurMech>{0}不是你的机械族。</OLWC_NotOurMech>
+  <!-- EN: {0} has been dead too long. -->
+  <OLWC_CorpseTooOld>{0}已经死去太久了。</OLWC_CorpseTooOld>
+  <!-- EN: Not enough charges to resurrect {0}. -->
+  <OLWC_NotEnoughCharges>充能不足，无法复活{0}。</OLWC_NotEnoughCharges>
+  <!-- EN: {0} does not have enough bandwidth to control {1}. -->
+  <OLWC_NotEnoughBandwidth>{0}的带宽不足以控制{1}。</OLWC_NotEnoughBandwidth>
+  <!-- EN: Charges: {0} / {1} -->
+  <OLWC_ChargesLabel>充能: {0} / {1}</OLWC_ChargesLabel>
+  <!-- EN: Cost to resurrect {0}: {1} -->
+  <OLWC_TargetCost>复活{0}的消耗: {1}</OLWC_TargetCost>
+  <!-- EN: Can be resurrected for another {0}. -->
+  <OLWC_TargetTimeLeft>仍可在{0}内复活。</OLWC_TargetTimeLeft>
+  <!-- EN: Recharge rate: {0} per day -->
+  <OLWC_GaugeRegen>恢复速度: 每天{0}点</OLWC_GaugeRegen>
+  <!-- EN: Recharge rate: none -->
+  <OLWC_GaugeNoRegen>恢复速度: 无</OLWC_GaugeNoRegen>
+  <!-- EN: Reload cost: {0} -->
+  <OLWC_GaugeReload>装填消耗: {0}</OLWC_GaugeReload>
+  <!-- EN: Automatic reload level: {0} -->
+  <OLWC_GaugeAutoReload>自动装填阈值: {0}</OLWC_GaugeAutoReload>
+  <!-- EN: Automatic reload: off -->
+  <OLWC_GaugeNoAutoReload>自动装填: 关</OLWC_GaugeNoAutoReload>
+  <!-- EN: Maximum corpse age: {0} -->
+  <OLWC_GaugeCorpseAge>最长死亡时间: {0}</OLWC_GaugeCorpseAge>
+  <!-- EN: Maximum corpse age: unlimited -->
+  <OLWC_GaugeNoCorpseAge>最长死亡时间: 无限制</OLWC_GaugeNoCorpseAge>
+  <!-- EN: Charges per mech: -->
+  <OLWC_GaugeCosts>每个机械族的充能消耗:</OLWC_GaugeCosts>
+  <!-- EN: {0}: {1} -->
+  <OLWC_GaugeCost>{0}: {1}</OLWC_GaugeCost>
+  <!-- EN: Drag the bar to set a level. The pilot will reload the resurrector whenever it falls below that level. -->
+  <OLWC_GaugeDragHint>拖动计量表可设置阈值。充能低于该阈值时，驾驶员就会为复活器装填。</OLWC_GaugeDragHint>
+
+  <!-- Mod settings (Source/1.6/Settings/) -->
+  <!-- EN: Overlord Warcasket -->
+  <OLWC_SettingsCategory>霸主型战棺</OLWC_SettingsCategory>
+  <!-- EN: These settings are unavailable. Another mod has changed the overlord warcasket, so the set will keep its built-in values. -->
+  <OLWC_SettingsUnavailable>这些设置不可用。另一个模组修改了霸主型战棺，因此这套装备将沿用内置数值。</OLWC_SettingsUnavailable>
+
+  <!-- EN: Resurrect mech -->
+  <OLWC_SectionResurrect>机械复活</OLWC_SectionResurrect>
+
+  <!-- EN: Charge capacity -->
+  <OLWC_Charges>充能容量</OLWC_Charges>
+  <!-- EN: The number of resurrection charges the armor holds when full. Default: {0}. -->
+  <OLWC_ChargesDesc>装甲充满时可储存的复活充能数量。默认：{0}。</OLWC_ChargesDesc>
+
+  <!-- EN: Charges recharged per day -->
+  <OLWC_ChargesPerDay>每天恢复的充能</OLWC_ChargesPerDay>
+  <!-- EN: The number of charges the armor recharges on its own each day. At 0, it will only gain charges by reloading. Default: {0}. -->
+  <OLWC_ChargesPerDayDesc>装甲每天自行恢复的充能数量。设为0时，只能通过装填获得充能。默认：{0}。</OLWC_ChargesPerDayDesc>
+
+  <!-- EN: Reload cost per charge -->
+  <OLWC_ReloadCost>每点充能的装填消耗</OLWC_ReloadCost>
+  <!-- EN: The number of {1} it takes to reload one charge. Default: {0}. -->
+  <OLWC_ReloadCostDesc>装填一点充能所需的{1}数量。默认：{0}。</OLWC_ReloadCostDesc>
+
+  <!-- EN: Maximum corpse age -->
+  <OLWC_CorpseAge>最长死亡时间</OLWC_CorpseAge>
+  <!-- EN: How long after a mech's death it can still be resurrected, in game time. At the highest setting, there will be no limit. Default: {0}. -->
+  <OLWC_CorpseAgeDesc>机械族死后仍可被复活的游戏时长。调到最高时不设限制。默认：{0}。</OLWC_CorpseAgeDesc>
+  <!-- EN: Unlimited -->
+  <OLWC_Unlimited>无限制</OLWC_Unlimited>
+
+  <!-- EN: Casting time -->
+  <OLWC_CastTime>释放时间</OLWC_CastTime>
+  <!-- EN: How long the pilot takes to start a resurrection. Default: {0}. -->
+  <OLWC_CastTimeDesc>驾驶员开始一次复活所需的时间。默认：{0}。</OLWC_CastTimeDesc>
+
+  <!-- EN: Cooldown -->
+  <OLWC_Cooldown>冷却时间</OLWC_Cooldown>
+  <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
+  <OLWC_CooldownDesc>驾驶员两次复活之间需要等待的时间。默认：{0}。</OLWC_CooldownDesc>
+
+  <!-- EN: Spark frequency -->
+  <OLWC_SparkFrequency>火花频率</OLWC_SparkFrequency>
+  <!-- EN: How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}. -->
+  <OLWC_SparkFrequencyDesc>驾驶员的装甲冒出红色火花的频率，100%即与憎恶毒蜂相同。设为0%时，装甲完全不会冒火花。默认：{0}。</OLWC_SparkFrequencyDesc>
+
+  <!-- EN: Require a mechlink -->
+  <OLWC_RequireMechlink>需要机控中枢</OLWC_RequireMechlink>
+  <!-- EN: When enabled, only a mechanitor pilot can use resurrect mech. When disabled, any pilot can resurrect your mechs. -->
+  <OLWC_RequireMechlinkDesc>启用后，只有身为机械师的驾驶员才能使用机械复活。禁用后，任何驾驶员都能复活你的机械族。</OLWC_RequireMechlinkDesc>
+
+  <!-- EN: Sparks only while drafted -->
+  <OLWC_SparksOnlyDrafted>仅在征召时冒火花</OLWC_SparksOnlyDrafted>
+  <!-- EN: When enabled, your pilots' armor will only crackle with red sparks while drafted and able to resurrect mechs. When disabled, the armor will spark whenever it holds a charge, as an apocriton does. -->
+  <OLWC_SparksOnlyDraftedDesc>启用后，只有在驾驶员被征召且可以复活机械族时，装甲才会冒出红色火花。禁用后，只要还有充能，装甲就会像憎恶毒蜂一样冒火花。</OLWC_SparksOnlyDraftedDesc>
+
+  <!-- EN: {1} for {0_indefinite} mech -->
+  <OLWC_SummaryCost>{0_indefinite}机械族消耗{1}点</OLWC_SummaryCost>
+  <!-- EN: recharges {0} of them each day -->
+  <OLWC_SummaryRegen>每天恢复{0}点</OLWC_SummaryRegen>
+  <!-- EN: never recharges -->
+  <OLWC_SummaryNoRegen>不会自行恢复</OLWC_SummaryNoRegen>
+  <!-- EN: {0}, and each one can be reloaded with {1} -->
+  <OLWC_SummaryReload>{0}，每点充能可用{1}装填</OLWC_SummaryReload>
+  <!-- EN: as long as it died within the last {0} -->
+  <OLWC_SummaryWindow>前提是其死亡未超过{0}</OLWC_SummaryWindow>
+  <!-- EN: no matter how long ago it died -->
+  <OLWC_SummaryNoWindow>无论其已死去多久</OLWC_SummaryNoWindow>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the cooldown after is {5}. -->
+  <OLWC_ResurrectSummary>装甲最多可储存{0}点充能，{1}。复活机械族时，{2}，{3}。每次复活的释放时间为{4}，之后的冷却时间为{5}。</OLWC_ResurrectSummary>
+  <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
+  <OLWC_ResurrectSummaryNoCooldown>装甲最多可储存{0}点充能，{1}。复活机械族时，{2}，{3}。每次复活的释放时间为{4}，下一次复活可以立即开始。</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- EN: Enabled work types -->
+  <OLWC_SectionWork>已启用的工作类型</OLWC_SectionWork>
+  <!-- EN: The work an overlord pilot can do. All other work follows VFE Pirates' warcasket rules, so mods that change those rules will change them for the overlord too. -->
+  <OLWC_SectionWorkDesc>霸主型驾驶员可以从事的工作。其他所有工作都遵循VFE海盗的战棺规则，因此其他模组对这些规则的修改也同样适用于霸主型。</OLWC_SectionWorkDesc>
+  <!-- EN: When enabled, overlord pilots can do this work, though you will need to assign it in the work tab. When disabled, they cannot. -->
+  <OLWC_WorkDesc>启用后，霸主型驾驶员可以从事这项工作，但需要你在「工作」面板中分配。禁用后则不能从事。</OLWC_WorkDesc>
+  <!-- EN: Hacking is research work, and a mechanitor needs the same skill to study the chips that unlock mechtech research. A pilot who cannot research will be unable to do either. -->
+  <OLWC_WorkNote_Research>骇入属于研究工作，机械师研究解锁机械科技的芯片时也需要同一项技能。无法从事研究的驾驶员两者都做不了。</OLWC_WorkNote_Research>
+  <!-- EN: Mech gestation, subcore encoding, mech repair and shredding mechanoids at a machining table are smithing work. -->
+  <OLWC_WorkNote_Smithing>机械培育、次核编译、维修机械族以及在机械加工台拆解机械族都属于锻造工作。</OLWC_WorkNote_Smithing>
+  <!-- EN: Default: {0}. -->
+  <OLWC_WorkDefault>默认：{0}。</OLWC_WorkDefault>
+  <!-- EN: enabled -->
+  <OLWC_WorkOpen>启用</OLWC_WorkOpen>
+  <!-- EN: disabled -->
+  <OLWC_WorkBlocked>禁用</OLWC_WorkBlocked>
+  <!-- EN: The pilot can take on {0} work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummary>驾驶员可以从事{0}工作。其他所有工作都遵循VFE海盗的战棺规则。</OLWC_WorkSummary>
+  <!-- EN: The pilot takes on none of this work. All other work follows VFE Pirates' warcasket rules. -->
+  <OLWC_WorkSummaryNone>驾驶员不从事其中任何工作。其他所有工作都遵循VFE海盗的战棺规则。</OLWC_WorkSummaryNone>
+
+  <!-- Mechanitor command range (Source/1.6/CommandRange/, Source/1.6/Settings/CommandRangeSetting.cs) -->
+  <!-- EN: Mechanitor command range -->
+  <OLWC_SectionCommandRange>机械师指挥范围</OLWC_SectionCommandRange>
+  <!-- EN: Normally, a mechanitor's drafted mechs can only be ordered to within {0} cells of the mechanitor. These settings let mechanitors command their mechs from further away. -->
+  <OLWC_SectionCommandRangeDesc>通常，机械师只能命令已征召的机械族前往自身{0}格以内的位置。这些设置可以让机械师从更远的地方指挥机械族。</OLWC_SectionCommandRangeDesc>
+
+  <!-- EN: Applies to -->
+  <OLWC_CommandRangeAppliesTo>适用对象</OLWC_CommandRangeAppliesTo>
+  <!-- EN: Which mechanitors get the extended command range. -->
+  <OLWC_CommandRangeAppliesToDesc>可以获得扩大指挥范围的机械师。</OLWC_CommandRangeAppliesToDesc>
+  <!-- EN: Mechanitors wearing the {0} -->
+  <OLWC_CommandRangeWearing>穿戴{0}的机械师</OLWC_CommandRangeWearing>
+  <!-- EN: Only mechanitors wearing the {0} will get the extended command range. Everyone else will keep the normal range. -->
+  <OLWC_CommandRangeWearingDesc>只有穿戴{0}的机械师才能获得扩大的指挥范围，其他人仍保持正常范围。</OLWC_CommandRangeWearingDesc>
+  <!-- EN: All mechanitors -->
+  <OLWC_CommandRangeAllMechanitors>所有机械师</OLWC_CommandRangeAllMechanitors>
+  <!-- EN: Every mechanitor will get the extended command range, whatever they are wearing. -->
+  <OLWC_CommandRangeAllMechanitorsDesc>所有机械师都能获得扩大的指挥范围，无论穿戴什么。</OLWC_CommandRangeAllMechanitorsDesc>
+  <!-- EN: No one -->
+  <OLWC_CommandRangeNone>无人</OLWC_CommandRangeNone>
+  <!-- EN: Mechanitors will keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeNoneDesc>机械师将保持{0}格的正常指挥范围。</OLWC_CommandRangeNoneDesc>
+
+  <!-- EN: Command range -->
+  <OLWC_CommandRangeScope>指挥范围</OLWC_CommandRangeScope>
+  <!-- EN: How far from their mechanitor drafted mechs can be ordered to move or attack. -->
+  <OLWC_CommandRangeScopeDesc>已征召的机械族可以在离机械师多远的地方接受移动或攻击命令。</OLWC_CommandRangeScopeDesc>
+  <!-- EN: Anywhere on the same map -->
+  <OLWC_CommandRangeCurrentMap>同一地图上的任何位置</OLWC_CommandRangeCurrentMap>
+  <!-- EN: Drafted mechs can be ordered anywhere on their map, as long as their mechanitor is on the same map. -->
+  <OLWC_CommandRangeCurrentMapDesc>只要机械师在同一张地图上，就可以命令已征召的机械族前往这张地图上的任何位置。</OLWC_CommandRangeCurrentMapDesc>
+  <!-- EN: Anywhere -->
+  <OLWC_CommandRangeAnywhere>任何位置</OLWC_CommandRangeAnywhere>
+  <!-- EN: Mechs can be drafted and ordered anywhere, even if their mechanitor is on another map or traveling in a caravan. -->
+  <OLWC_CommandRangeAnywhereDesc>即使机械师身处另一张地图或正随远行队出行，也可以在任何位置征召并指挥机械族。</OLWC_CommandRangeAnywhereDesc>
+  <!-- EN: Within {0} cells{1} -->
+  <OLWC_CommandRangeRadius>{0}格以内{1}</OLWC_CommandRangeRadius>
+  <!-- EN: Drafted mechs can be ordered to within this distance of their mechanitor. The normal range is {0} cells. Default: {1} cells. -->
+  <OLWC_CommandRangeRadiusDesc>可以命令已征召的机械族前往距机械师这一距离以内的位置。正常范围为{0}格。默认：{1}格。</OLWC_CommandRangeRadiusDesc>
+  <!-- EN:  (vanilla) -->
+  <OLWC_CommandRangeVanillaSuffix>（原版）</OLWC_CommandRangeVanillaSuffix>
+  <!-- EN:  (Combat Extended) -->
+  <OLWC_CommandRangeCombatExtendedSuffix>（Combat Extended）</OLWC_CommandRangeCombatExtendedSuffix>
+  <!-- EN: Moving the slider will select this range. -->
+  <OLWC_CommandRangeSliderSelects>拖动滑块时会自动切换到此范围。</OLWC_CommandRangeSliderSelects>
+  <!-- EN: This has no effect while the extended command range applies to no one. -->
+  <OLWC_CommandRangeInert>扩大的指挥范围不适用于任何人时，此项无效。</OLWC_CommandRangeInert>
+
+  <!-- EN: Mechanitors keep the normal command range of {0} cells. -->
+  <OLWC_CommandRangeSummaryNone>机械师保持{0}格的正常指挥范围。</OLWC_CommandRangeSummaryNone>
+  <!-- EN: Mechanitors wearing the {0} can order their drafted mechs {1}. -->
+  <OLWC_CommandRangeSummaryWearing>穿戴{0}的机械师可以命令已征召的机械族前往{1}。</OLWC_CommandRangeSummaryWearing>
+  <!-- EN: Every mechanitor can order their drafted mechs {0}. -->
+  <OLWC_CommandRangeSummaryAll>所有机械师都可以命令已征召的机械族前往{0}。</OLWC_CommandRangeSummaryAll>
+  <!-- EN: anywhere on the same map -->
+  <OLWC_CommandRangeReachMap>同一地图上的任何位置</OLWC_CommandRangeReachMap>
+  <!-- EN: anywhere, even on another map -->
+  <OLWC_CommandRangeReachAnywhere>任何位置，甚至另一张地图</OLWC_CommandRangeReachAnywhere>
+  <!-- EN: to within {0} cells -->
+  <OLWC_CommandRangeReachRadius>{0}格以内的位置</OLWC_CommandRangeReachRadius>
+
+  <!-- Cerebrex node art, shown with Odyssey only (Source/1.6/Settings/CerebrexArtSetting.cs, CerebrexNode.cs; the choice picks a branch of 1.6/Mods/Odyssey/Patches/CerebrexNodeArt.xml). The _<choice> keys end in a CerebrexArt name. -->
+  <!-- EN: Cerebrex node -->
+  <OLWC_SectionCerebrex>主脑节点</OLWC_SectionCerebrex>
+  <!-- EN: Cerebrex node art -->
+  <OLWC_CerebrexArt>主脑节点贴图</OLWC_CerebrexArt>
+  <!-- EN: The art used for Odyssey's cerebrex node. The new art is higher resolution, and you can choose how much of it a dye will color. Default: {0}. -->
+  <OLWC_CerebrexArtDesc>奥德赛主脑节点使用的贴图。新贴图分辨率更高，还可以选择染料为其上色的范围。默认：{0}。</OLWC_CerebrexArtDesc>
+  <!-- EN: Odyssey's art -->
+  <OLWC_CerebrexArt_Odyssey>奥德赛原版贴图</OLWC_CerebrexArt_Odyssey>
+  <!-- EN: The cerebrex node will keep Odyssey's own art. -->
+  <OLWC_CerebrexArt_OdysseyDesc>主脑节点将保留奥德赛自带的贴图。</OLWC_CerebrexArt_OdysseyDesc>
+  <!-- EN: New art, fully dyed -->
+  <OLWC_CerebrexArt_DyeAll>新贴图，整体染色</OLWC_CerebrexArt_DyeAll>
+  <!-- EN: Dye will color the whole node, as it does with Odyssey's art. -->
+  <OLWC_CerebrexArt_DyeAllDesc>染料会为整个节点上色，与奥德赛原版贴图相同。</OLWC_CerebrexArt_DyeAllDesc>
+  <!-- EN: New art, dyed frame -->
+  <OLWC_CerebrexArt_DyeFrame>新贴图，仅框架染色</OLWC_CerebrexArt_DyeFrame>
+  <!-- EN: Dye will only color the frame. The ring and the core will keep their own colors. -->
+  <OLWC_CerebrexArt_DyeFrameDesc>染料只会为框架上色。环和核心保留各自的颜色。</OLWC_CerebrexArt_DyeFrameDesc>
+  <!-- EN: New art, dyed frame and ring -->
+  <OLWC_CerebrexArt_DyeFrameAndRing>新贴图，框架和环染色</OLWC_CerebrexArt_DyeFrameAndRing>
+  <!-- EN: Dye will color the frame and the ring. Only the red core will keep its color. -->
+  <OLWC_CerebrexArt_DyeFrameAndRingDesc>染料会为框架和环上色。只有红色核心保留原色。</OLWC_CerebrexArt_DyeFrameAndRingDesc>
+  <!-- EN: In use -->
+  <OLWC_CerebrexInUse>使用中</OLWC_CerebrexInUse>
+  <!-- EN: Preview dye -->
+  <OLWC_CerebrexDye>预览染料</OLWC_CerebrexDye>
+  <!-- EN: The dye color shown on the previews above. It will not dye any cerebrex node. -->
+  <OLWC_CerebrexDyeDesc>上方预览所显示的染料颜色。不会为任何主脑节点染色。</OLWC_CerebrexDyeDesc>
+  <!-- EN: Undyed -->
+  <OLWC_CerebrexDyeNone>未染色</OLWC_CerebrexDyeNone>
+  <!-- EN: The cerebrex node uses Odyssey's own art. -->
+  <OLWC_CerebrexSummary_Odyssey>主脑节点使用奥德赛自带的贴图。</OLWC_CerebrexSummary_Odyssey>
+  <!-- EN: The cerebrex node uses the new art, and dye colors the whole node. -->
+  <OLWC_CerebrexSummary_DyeAll>主脑节点使用新贴图，染料会为整个节点上色。</OLWC_CerebrexSummary_DyeAll>
+  <!-- EN: The cerebrex node uses the new art, and dye only colors its frame. -->
+  <OLWC_CerebrexSummary_DyeFrame>主脑节点使用新贴图，染料只会为其框架上色。</OLWC_CerebrexSummary_DyeFrame>
+  <!-- EN: The cerebrex node uses the new art, and dye colors its frame and ring. -->
+  <OLWC_CerebrexSummary_DyeFrameAndRing>主脑节点使用新贴图，染料会为其框架和环上色。</OLWC_CerebrexSummary_DyeFrameAndRing>
+  <!-- EN: The change will take effect after a restart. -->
+  <OLWC_CerebrexSummaryRestart>更改将在重启后生效。</OLWC_CerebrexSummaryRestart>
+
+  <!-- EN: Default: {0}. -->
+  <OLWC_SwitchDefault>默认：{0}。</OLWC_SwitchDefault>
+  <!-- EN: on -->
+  <OLWC_SwitchOn>开</OLWC_SwitchOn>
+  <!-- EN: off -->
+  <OLWC_SwitchOff>关</OLWC_SwitchOff>
+
+  <!-- EN:  (default) -->
+  <OLWC_DefaultSuffix>（默认）</OLWC_DefaultSuffix>
+  <!-- EN:  (requires restart) -->
+  <OLWC_RequiresRestartSuffix>（需要重启）</OLWC_RequiresRestartSuffix>
+
+</LanguageData>

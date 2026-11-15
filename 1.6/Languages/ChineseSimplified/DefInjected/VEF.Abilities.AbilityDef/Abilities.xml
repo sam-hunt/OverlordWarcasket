@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- EN: Resurrect a recently killed mechanoid by externally supercharging its self-repair processes. The mech will come back under the pilot's control with some but not all of its wounds healed, so the pilot needs enough bandwidth for it. Each resurrection costs some of the armor's charges, and heavier mechs cost more. -->
+  <OLWC_ResurrectMech.description>从外部超载刚死去不久的机械族体内的自我修复系统，使其带着部分伤势复活。复活的机械族将归驾驶员控制，因此驾驶员需要有足够的带宽。每次复活都会消耗装甲的部分充能，越重的机械族消耗越多。</OLWC_ResurrectMech.description>
+  <!-- EN: Resurrecting mechs. -->
+  <OLWC_ResurrectMech.jobReportString>正在复活机械族。</OLWC_ResurrectMech.jobReportString>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.label>机械复活</OLWC_ResurrectMech.label>
+  <!-- EN: resurrect mech -->
+  <OLWC_ResurrectMech.verbProperties.label>机械复活</OLWC_ResurrectMech.verbProperties.label>
+
+</LanguageData>

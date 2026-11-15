@@ -1,7 +1,7 @@
 # Simplified Chinese glossary, Overlord Warcasket
 
 Seeded from the Shipcracker Warcasket glossary (machine-assisted there,
-pending native review); no translation pass has run here yet. Only
+pending native review); first machine-assisted pass 2026-11-16, no native review yet. Only
 mod-specific coinages and grounding decisions; family-wide mechanics and
 style live in `l10n/languages/ChineseSimplified.md`.
 
@@ -50,29 +50,34 @@ shown only through `{CHARGENOUN_plural}` and `{lookup: ...}` slots
 (`l10n/lessons.md`), and Chinese falls to the base `Pluralize` (lookup, else unchanged), so one noun serves every slot and no lookup file is needed. Shipcracker's "fuel unit" row in its glossary
 is the worked example for this language.
 
-## To ground in the first pass
+## Grounded or coined in the first pass (2026-11-16)
 
-- the trait label `warcasket` (Bio tab): VFEP's own trait label, so render it
-  exactly as the community pack renders VFEP's, else the bare inherited
-  warcasket noun; the description reuses the pilot and pain vocabulary
-  settled for the armor.
-- controller (the chassis, the Workshop page): the inherited set-name row above.
-- the 10th-generation paragraph: no community pack to mirror; follow the meaning, not VFEP's dashes.
-- overlord (this set's name) and the Workshop title.
-- pilot (the wearer, every description), where no inherited row covers it.
-- Biotech's mechanitor vocabulary, grounded against the Biotech tar: mechanitor,
-  mechlink, mechanoid / mech, bandwidth, the three weight classes (light, medium,
-  heavy) as `MechWeightClassDef` labels, "resurrect mech" (the apocriton's ability
-  label, which this ability reuses) and "Mech resurrection charges" (Biotech's
-  Keyed `MechResurrectionCharges`, the gauge's title; never re-rendered here).
-- mech resurrector (the armor's charge store), charge / charges (vanilla's
-  "Charges" Keyed word), the command visor and signal processors (the
-  helmet's and pauldrons' lore), the work-type names the settings quote (Core's work-tab labels).
-- Core work vocabulary for the settings window: crafting, smithing, the Work
-  tab's labelShort forms as the language's Core files render them.
-- This mod's coinages, once the descriptions are final.
+| English | Simplified Chinese | Grounding |
+|---|---|---|
+| overlord (set name) / Workshop title | 霸主型 / 霸主型战棺 | Coined, standard rendering of "overlord"; avoids Biotech's 机械领主 (mechlord suit). Title equals `OLWC_SettingsCategory`. |
+| pilot | 驾驶员 | Inherited row. |
+| mechanitor / mechlink | 机械师 / 机控中枢 | Biotech `Mechanitors.label`, `Mechlink.label`. |
+| mech / mechanoid | 机械族 (both) | Biotech uses 机械族 for mechs throughout (`MechResurrectionCharges`, `DesignatorMechControlGroupDesc`). |
+| bandwidth / mech bandwidth | 带宽 / 机械带宽 | Biotech Keyed `Bandwidth`, StatDef `MechBandwidth`. |
+| light / medium / heavy (weight classes) | 轻型 / 中型 / 重型 | Core `MechWeightClassDef`; `{0_indefinite}` passes the label unchanged (no zh worker). |
+| resurrect mech (ability) | 机械复活 | Biotech `ResurrectionMech.label`, verbatim; also the settings section. |
+| mech resurrector / resurrector | 机械族复活器 / 复活器 | Coined on Biotech's 机械族复活充能. |
+| charge (chargeNoun, counted) | 充能, counted as {0}点充能 | Core `Apparel_PsychicShockLance` chargeNoun; mass noun, counter in the mod's strings. |
+| command relays / signal enhancers | 指令中继器 / 信号增强器 | Coined. |
+| command range | 指挥范围 | Coined (no vanilla hit). |
+| control group | 控制组 | Biotech Keyed `ControlGroup`. |
+| drafted / cells / caravan | 征召 / 格 / 远行队 | Core Keyed (`IsNotDrafted`, `ConfirmSettleNearFactionBase`, `Caravan`). |
+| hacking | 骇入 | Core `Hack.reportString`, `HackingSpeed`. |
+| research / smithing / crafting / tailoring / construction (Work tab) | 研究 / 锻造 / 制作 / 缝制 / 建造 | Core `WorkTypeDef.labelShort`. |
+| mech gestation / subcore encoding / shredding mechanoids | 机械培育 / 次核编译 / 拆解机械族 | Biotech `MechGestator`, `SubcoreEncoder`; Core `ButcherCorpseMechanoid`. |
+| skilled / intellectual labor | 专业工作 / 智识工作 | Core Keyed `WorkTagManualSkilled`, `WorkTagIntellectual`. |
+| apocriton / mech bosses / ultra mechtech | 憎恶毒蜂 / 超级机械族 / 极致机械科技 | Biotech labels, `Mechanitors.helpText`. |
+| cerebrex node / dye / art | 主脑节点 / 染料 / 贴图 | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label`; 贴图 coined for "art". |
+| maximum corpse age | 最长死亡时间 | Coined. |
+| Biotech (DLC) | 生物技术 | Core `ExpansionDef` `Biotech.label`. |
+| warcasket (trait label) | 战棺 | Pre-filled, the inherited noun. |
 
 ## Pending native review
 
 Inherited and still open there: 呼吸器 (coined, no vanilla or community
-source). Add this mod's own coinages here as the pass makes them.
+source). This mod's: 霸主型, 机械族复活器, 指令中继器, 信号增强器, 指挥范围, 最长死亡时间, 贴图, 自动装填阈值.

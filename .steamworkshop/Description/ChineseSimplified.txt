@@ -1,0 +1,49 @@
+霸主型战棺
+
+为[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]新增一套太空时代战棺。
+
+[h1]简介[/h1]
+
+霸主型是第十代机械师战棺，驾驶员能在前线率领机械族，还能让倒下的机械族重新站起来。
+
+[hr][/hr]
+[h2]套装[/h2]
+包括躯干、护肩和头盔，在战棺铸造厂完成改造。各部件可以与VFE海盗（或Alpha Mechs！）自带的套装随意混搭。
+[list]
+[*][b]躯干：[/b]提供机械复活能力并增加带宽，驾驶员仍可从事锻造、研究和骇入。
+[*][b]护肩：[/b]装有指令中继器，驾驶员可以在地图上的任何位置指挥已征召的机械族，还能多一个控制组并加快骇入速度。
+[*][b]头盔：[/b]装有信号增强器，可进一步增加带宽，但会稍微影响驾驶员的射击精度。
+[/list]
+
+[h2]机械复活[/h2]
+装甲内装有机械族复活器。选中一个倒下的己方机械族，驾驶员就会超载其自我修复系统，让它重新站起来。越重的机械族消耗的充能越多。复活器会随时间自行恢复充能，紧急时也可以用高级零部件装填。
+
+[h2]已启用的工作类型[/h2]
+VFE海盗的战棺会禁止所有专业工作和智识工作。霸主型的驾驶员仍可从事锻造和研究，前者用于机械培育、次核编译和维修机械族，后者是骇入所需的工作。这些都可以在Mod 设置中调整。
+
+[hr][/hr]
+[h1]模组兼容性[/h1]
+[list]
+[*]可安全添加至现有存档。
+[*]仍有殖民者封在这套战棺里时，不可安全移除。
+[*]奥德赛：可在Mod 设置中选择为主脑节点换上新贴图，并为其核心提供遮罩。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2723801948]Vanilla Factions Expanded - Pirates[/url]：必需。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url]：内置补丁，护甲值、体积和体积携带能力均与VFE海盗的太空时代套装相当。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3609835606]Vanilla Gravship Expanded[/url]：遵循其战棺真空抗性规则。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730151836]Warcaskets can work![/url]、[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2730543694]Warcaskets can haul![/url]和[url=https://steamcommunity.com/sharedfiles/filedetails/?id=3535194807]VFE Pirates - Hardworking Warcaskets[/url]：兼容。
+[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=1909914131]Save Our Ship 2[/url]：与VFE海盗自带套装遵循相同规则，具备舱外活动（EVA）能力。
+[/list]
+
+[hr][/hr]
+[h1]常见问题[/h1]
+
+[b]问：怎么获得？[/b]
+答：研究「太空时代战棺」和「极致机械科技」，然后像其他套装一样在战棺铸造厂完成改造。每个部件都需要生物技术中超级机械族掉落的芯片。
+
+[b]问：驾驶员必须是机械师吗？[/b]
+答：默认是的。不过可以在Mod 设置中让任何驾驶员都能使用复活器。
+
+[hr][/hr]
+[h1]链接[/h1]
+源代码、手动下载与问题反馈：[url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
+美术由[url=https://steamcommunity.com/profiles/76561198094174176/myworkshopfiles/?appid=294100]IcingWithCheeseCake[/url]绘制

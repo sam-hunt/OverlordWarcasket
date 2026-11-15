@@ -14,12 +14,13 @@ let an agent run it.
 
 The mod targets the languages below, chosen by RimWorld's per-language
 audience size. Contributions for any other language RimWorld supports are
-welcome too. No translations exist yet.
+welcome too. Every non-English row is a machine-assisted first pass until a native
+review lands.
 
 | Language             | Status           | Credit    |
 | -------------------- | ---------------- | --------- |
 | English              | Source           | -         |
-| Simplified Chinese   | Planned          | -         |
+| Simplified Chinese   | Machine-assisted | -         |
 | Russian              | Planned          | -         |
 | Korean               | Planned          | -         |
 | German               | Planned          | -         |
