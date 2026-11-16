@@ -85,7 +85,7 @@ is the worked example for this language.
 | art (cerebrex node art) / frame / ring | 외형 / 프레임 / 고리 | Coined. |
 | (vanilla) suffix | ` (바닐라)` | Coined, common Korean modding usage. |
 | Biotech / Odyssey (DLC) | 바이오테크 / 오디세이 | Toxin Workshop; ExpansionDef. |
-| comma-and list | `A, B 그리고 C` | Core Keyed `AndLower`; the cost and work summaries are built so that joiner reads. |
+| comma-and list | `A, B, 그리고 C` | Core Keyed `ToCommaListAnd` = `{0}, 그리고 {1}`, behind a hard-coded `, ` between the earlier items; the cost and work summaries are built so that joiner reads. |
 
 ## Pending native review
 
