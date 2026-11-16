@@ -4,13 +4,10 @@
 
 [![RimWorld](https://img.shields.io/badge/RimWorld-1.6%20%7C%201.7-blue.svg)](https://rimworldgame.com/)
 [![Biotech DLC](https://img.shields.io/badge/DLC-Biotech-red.svg)](https://store.steampowered.com/app/1826140/RimWorld__Biotech/)
-
-<!-- Steam badges, added on first Workshop publish with WORKSHOP_ID from About/PublishedFileId.txt:
-[![Subscribers](https://img.shields.io/steam/subscriptions/WORKSHOP_ID?logo=steam&label=subscribers)](https://steamcommunity.com/sharedfiles/filedetails/?id=WORKSHOP_ID)
-[![Downloads](https://img.shields.io/steam/downloads/WORKSHOP_ID?logo=steam&label=downloads)](https://steamcommunity.com/sharedfiles/filedetails/?id=WORKSHOP_ID)
-[![Favorites](https://img.shields.io/steam/favorites/WORKSHOP_ID?logo=steam&label=favorites)](https://steamcommunity.com/sharedfiles/filedetails/?id=WORKSHOP_ID)
-[![Views](https://img.shields.io/steam/views/WORKSHOP_ID?logo=steam&label=views)](https://steamcommunity.com/sharedfiles/filedetails/?id=WORKSHOP_ID)
--->
+[![Subscribers](https://img.shields.io/steam/subscriptions/3841078351?logo=steam&label=subscribers)](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351)
+[![Downloads](https://img.shields.io/steam/downloads/3841078351?logo=steam&label=downloads)](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351)
+[![Favorites](https://img.shields.io/steam/favorites/3841078351?logo=steam&label=favorites)](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351)
+[![Views](https://img.shields.io/steam/views/3841078351?logo=steam&label=views)](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351)
 
 ![Preview](.steamworkshop/Preview.gif)
 
@@ -75,11 +72,9 @@ move the range to the helmet or give it to every mechanitor.
 
 ## Installation
 
-<!-- Steam Workshop section, added on first Workshop publish with WORKSHOP_ID from About/PublishedFileId.txt:
 ### Steam Workshop (Recommended)
 
-Subscribe on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=WORKSHOP_ID) and it will auto-download.
--->
+Subscribe on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351) and it will auto-download.
 
 ### Manual Installation
 

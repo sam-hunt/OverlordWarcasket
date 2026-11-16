@@ -2,8 +2,6 @@
 
 ## Features
 
-- **First Workshop publish.** Commit `About/PublishedFileId.txt` back to the source repo from the local deployment where steam writes it on first upload. Add the Workshop link and the Steam badges to the README, our other released mods are the precedent. Check README.md and CLAUDE.md are otherwise up to date.
-
 ## Maybe later
 
 - **Mech resurrector cast range mod setting**

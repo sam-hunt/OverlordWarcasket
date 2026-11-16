@@ -14,14 +14,16 @@ VFEP's 10th-generation spacer chassis. VFEP, Biotech and Harmony are the hard de
 comes with VFEP); Odyssey and other optional content load only when present. C# (.NET Framework
 4.7.2), Harmony, XML defs. Def prefix `OLWC_`.
 
-**State: scaffolded, first mechanics in, not yet released.** The resurrect mech ability (Biotech's
-apocriton ability on the armor, drawing on a mech resurrector that recharges by itself and reloads
-with advanced components, with a red gauge), the
-overlord work trait (the pilot keeps smithing and research, so mech work and hacking) and the
-helmet's command range (a wearing mechanitor orders drafted mechs anywhere on the map, vanilla's
-24.9 cells lifted behind a settings section) are implemented; the set's plating, shield and
-costs are the tier's standard pending a tuning pass.
-`TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file; the sibling
+**State: released**, live on the
+[Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3841078351) (id in
+`About/PublishedFileId.txt`). The resurrect mech ability (Biotech's apocriton ability on the
+armor, drawing on a mech resurrector that recharges by itself and reloads with advanced
+components, with a red gauge), the overlord work trait (the pilot keeps smithing and research, so
+mech work and hacking) and the shoulders' command range (a wearing mechanitor orders drafted mechs
+anywhere on the map, vanilla's 24.9 cells lifted behind a settings section that can move it to
+the helmet) are implemented, and the set's stats and costs are priced against Biotech's mechlord
+gear on the tier's standard plating and shield. Saves now carry the defNames and scribed C#
+types, so a rename needs a save migration. `TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file; the sibling
 `../MedicWarcasket/` repo (same author, same VFEP base) is the worked precedent for the own-trait
 work profile, the settings idiom and the infrastructure copied here, and `../ToxinWarcasket/` for
 the gauge and the Biotech dependency.
@@ -68,13 +70,15 @@ the DLC's defs in the local install), the only check a gated root gets short of 
 mod active; `CerebrexNodeArtTests` ties that root's art patch to its setting's choices, the path
 constants and the two shipped art folders, and `CerebrexNodeDrawOrderTests` holds its draw order
 patch between the north offsets of VFEP's armor and shoulder bases, read from the VFEP folder
-(`VFEP_PATH` or the sibling checkout); the other two files cover the settings slider arithmetic
-and the trait mirror's tag and work type rules.
+(`VFEP_PATH` or the sibling checkout). The other files cover the pure rules: the settings slider
+arithmetic, the trait mirror's tag and work type rules, the command range's distance and slider
+ladder, the resurrector's cost table, gauge count and reload rule, and the mask that keeps the
+set off generated pawns.
 
 ## Layout
 
 ```
-About/            Mod metadata, ModIcon.png, Preview.png
+About/            Mod metadata, ModIcon.png, Preview.png, PublishedFileId.txt
 1.6/              Defs, Patches, Languages/English/Keyed, Mods/<compat roots>; serves 1.6 and 1.7
 Mods/             Art compat roots, version-independent (Odyssey: the cerebrex node's art)
 Source/1.6/       C# (net472)
