@@ -39,6 +39,19 @@ namespace OverlordWarcasket;
 // mechlink, who can cast only with requireMechlink off and raises the mech uncontrolled, or to
 // a mech with no CompOverseerSubject, which no mechanitor can control. Verified on 1.7.5005.
 //
+// Draft: the mech comes back as its pilot stands, drafted beside a drafted pilot and undrafted
+// beside an undrafted one. Undrafted is how every resurrected mech stands up: a despawn drops
+// the pawn's drafter (PawnComponentsUtility.RemoveComponentsOnDespawned) and the spawn inside
+// TryResurrect gives a colony mech a new one, undrafted (AddAndRemoveDynamicComponents). For a
+// drafted pilot the cast makes the draft toggle's own write, Pawn_DraftController.Drafted, under
+// the toggle's own rule (MechanitorUtility.CanDraftMech: the mech not shut down for energy, its
+// overseer able to control mechs and holding it in ControlledPawns, which the new relation's
+// AssignPawnControlGroup refreshes before it returns), so a mech raised uncontrolled stays
+// undrafted. The pilot's state is read as the mech stands up, which is also the state the cast
+// was ordered in: the Drafted setter clears the job queue and ends the current job, so a cast
+// does not outlive a toggle (a pilot on fire aside, whose job the setter leaves running).
+// Verified on 1.7.5011 and the frozen 1.6 assembly.
+//
 // Targeting: the click is a mech corpse (targetMode Thing, corpse-only parameters), validated
 // with messages through ValidateTarget; the def sets no hasAoE, so VEF's ModifyTargets leaves
 // it the only target. The click is not
@@ -302,7 +315,8 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
         MechanitorUtility.IsMechanitor(pawn) && mech.OverseerSubject != null;
 
     // base.Cast first: the cooldown, the cast sound and the extension hooks. Then the one
-    // corpse, re-checked and paid before it comes back, and taken under the pilot's control.
+    // corpse, re-checked and paid before it comes back, taken under the pilot's control and
+    // drafted if the pilot is.
     public override void Cast(params GlobalTargetInfo[] targets)
     {
         base.Cast(targets);
@@ -320,6 +334,8 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
         ResurrectionUtility.TryResurrect(mech);
         if (!mech.Dead && TakesControlOf(mech) && mech.GetOverseer() == null)
             pawn.relations.AddDirectRelation(PawnRelationDefOf.Overseer, mech);
+        if (pawn.Drafted && mech.drafter != null && MechanitorUtility.CanDraftMech(mech))
+            mech.drafter.Drafted = true;
         if (extension.appliedEffecterDef != null && mech.MapHeld != null)
         {
             Effecter effecter = extension.appliedEffecterDef.SpawnAttached(mech, mech.MapHeld);
