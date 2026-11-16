@@ -3,12 +3,12 @@
   <name>Overlord Warcasket</name>
   <author>Sam Hunt</author>
   <packageId>shunter.overlordwarcasket</packageId>
-  <modVersion>0.1.0</modVersion>
+  <modVersion>1.0.0</modVersion>
   <description>Adds the Overlord, a 10th-generation mechanitor warcasket for Vanilla Factions Expanded - Pirates, built at the warcasket foundry like any other set.
 
 The armor carries a mech resurrector that brings dead mechs back to life. The helmet greatly increases the pilot's bandwidth, and the shoulders let them command mechs anywhere on the map. The pilot can still do smithing and research.
 
-Supports Combat Extended, Save Our Ship 2 and Vanilla Gravship Expanded.</description>
+Supports CE, Odyssey, Vanilla Gravship Expanded and SOS2.</description>
   <supportedVersions>
     <li>1.6</li>
     <li>1.7</li>
