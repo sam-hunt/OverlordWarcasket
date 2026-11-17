@@ -43,6 +43,9 @@ A: Research spacer warcaskets and ultra mechtech, then weld it on at the warcask
 [b]Q: Does the pilot need to be a mechanitor?[/b]
 A: By default, yes. A mod setting lets any pilot use the resurrector though.
 
+[b]Q: How does this compare to Alpha Mechs' Mech Master Warcasket?[/b]
+A: Overlord lands earlier/cheaper in the tech tree, has slightly higher armor, less bandwidth, more work type/speed restrictions, and different abilities. They should work well together either piece-wise or side-by-side.
+
 [hr][/hr]
 [h1]Links[/h1]
 Source code, manual downloads and issue tracker: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
