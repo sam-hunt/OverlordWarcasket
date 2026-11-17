@@ -16,6 +16,18 @@ public class TunableTests
         Assert.Equal(10f, Tunable.Snap(3f, 10f, 300f, 10f, 1f));
     }
 
+    // The range row: a cell a stop from touch, every stop ending in .9, the shipped 9.9 among
+    // them.
+    [Fact]
+    public void Snap_KeepsTheRangeOnItsTenths()
+    {
+        Assert.Equal(1.9f, Tunable.Snap(0f, 1.9f, 29.9f, 1f, 1f), 4);
+        Assert.Equal(9.9f, Tunable.Snap(9.6f, 1.9f, 29.9f, 1f, 1f), 4);
+        Assert.Equal(9.9f, Tunable.Snap(10.3f, 1.9f, 29.9f, 1f, 1f), 4);
+        Assert.Equal(10.9f, Tunable.Snap(10.5f, 1.9f, 29.9f, 1f, 1f), 4);
+        Assert.Equal(29.9f, Tunable.Snap(45f, 1.9f, 29.9f, 1f, 1f), 4);
+    }
+
     [Fact]
     public void StoredStep_RoundsToWholeShownUnitsWhenScaled()
     {

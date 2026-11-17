@@ -19,7 +19,9 @@ namespace OverlordWarcasket;
 // that row is skipped, and the field left alone, while the def does not reload by the charge
 // (another mod's patch). On the OLWC_ResurrectMech AbilityDef, the casting time and cooldown
 // override castTime (in seconds, ticks on the def) and cooldownTime (stored in game hours, shown
-// in seconds, hours or days by its size; ticks on the def), and on its ResurrectMechExtension the
+// in seconds, hours or days by its size; ticks on the def), and the range overrides
+// distanceToTarget (in cells), which the cast job's walk reads off the def every tick, so a
+// write reaches a pilot already walking. On its ResurrectMechExtension the
 // corpse window overrides maxCorpseAgeTicks (stored and shown in game hours, days from one day
 // up; ticks on the def, 0 for the slider's last stop, no limit) and the mechlink switch
 // requireMechlink. On the armor's
@@ -105,7 +107,11 @@ public class OverlordWarcasketSettings : ModSettings
 
     // The capacity in charges; the recharge in charges per day, fine at the slow end around the
     // shipped rate, coarser up to the shipped resurrector in a day; the reload cost in items of the
-    // def's ammo per charge; the casting time banded as the Medic's is.
+    // def's ammo per charge; the casting time banded as the Medic's is. The range is in cells,
+    // a cell a stop from touch, 1.9 (diagonal neighbours included, where the walk's path to
+    // touch may end), to 29.9, three times the shipped range; the stops end in .9 as vanilla's
+    // radii do, so the shipped 9.9 is one of them. The walk needs sight of the corpse as well,
+    // so a long range reaches no further than the pilot can see.
     public readonly Tunable charges = new("Charges", 1f, 30f, 1f, Whole);
     public readonly Tunable recharge = new("ChargesPerDay", 0f, 10f, 0.25f, Decimal)
     {
@@ -121,6 +127,7 @@ public class OverlordWarcasketSettings : ModSettings
         StepBands = [(3f, 0.25f), (6f, 0.5f), (10f, 1f)],
     };
     public readonly Tunable cooldown = new("Cooldown", 0f, CooldownMax, 0.25f, Period) { StepBands = CooldownBands };
+    public readonly Tunable range = new("Range", 1.9f, 29.9f, 1f, Cells);
 
     // The spark frequency in percent of the apocriton's rate, up to twice it; see the header.
     public readonly Tunable sparkFrequency = new("SparkFrequency", 0f, 200f, 5f, Percent);
@@ -158,7 +165,7 @@ public class OverlordWarcasketSettings : ModSettings
     private CerebrexArt cerebrexLive;
     private string cerebrexTip;
 
-    private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown, sparkFrequency];
+    private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown, range, sparkFrequency];
 
     private static string Whole(float v) => Mathf.RoundToInt(v).ToString();
 
@@ -170,6 +177,8 @@ public class OverlordWarcasketSettings : ModSettings
         effecter?.children?.FirstOrDefault(child => child.subEffecterClass == typeof(SubEffecter_SprayerChance));
 
     private static string Decimal(float v) => v.ToString("0.##");
+
+    private static string Cells(float v) => v.ToString("0.#");
 
     // Game hours from real seconds at normal speed.
     private static float Seconds(float s) => s * GenTicks.TicksPerRealSecond / GenDate.TicksPerHour;
@@ -239,6 +248,7 @@ public class OverlordWarcasketSettings : ModSettings
             : CorpseAgeNoLimit;
         castTime.DefaultValue = (float)defs.ability.castTime / GenTicks.TicksPerRealSecond;
         cooldown.DefaultValue = (float)defs.ability.cooldownTime / GenDate.TicksPerHour;
+        range.DefaultValue = defs.ability.distanceToTarget;
         requireMechlink.DefaultValue = defs.extension.requireMechlink;
         sparksOnlyDrafted.DefaultValue = defs.sparks.onlyWhileDrafted;
         sparkSprayer = ChanceSprayer(defs.sparks.effecterDef);
@@ -279,6 +289,7 @@ public class OverlordWarcasketSettings : ModSettings
             sparkSprayer.chancePerTick = Mathf.Max(0f, sparkFrequency.Value) / 100f * apocritonSparkChance;
         defs.ability.castTime = Mathf.RoundToInt(castTime.Value * GenTicks.TicksPerRealSecond);
         defs.ability.cooldownTime = Mathf.RoundToInt(cooldown.Value * GenDate.TicksPerHour);
+        defs.ability.distanceToTarget = range.Value;
         Generation++;
         TrimWornResurrectors();
     }
@@ -332,6 +343,7 @@ public class OverlordWarcasketSettings : ModSettings
         corpseAge.DoRow(listing);
         castTime.DoRow(listing);
         cooldown.DoRow(listing);
+        range.DoRow(listing);
         if (sparkSprayer != null)
             sparkFrequency.DoRow(listing);
         requireMechlink.DoRow(listing);

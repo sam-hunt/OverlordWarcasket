@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A mod setting for the range of resurrect mech
+
 ## [1.0.0] - 2026-11-17
 
 ### Added

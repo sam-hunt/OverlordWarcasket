@@ -57,9 +57,10 @@ namespace OverlordWarcasket;
 // it the only target. The click is not
 // range-limited (GetRangeForPawn returns a number VEF treats as unlimited) because the cast job
 // (OLWC_CastResurrectMech, JobDriver_CastResurrectMech) walks the pilot to within the def's
-// distanceToTarget, the apocriton's cast range, before the warmup; requireLineOfSight is off, as
-// on the apocriton, and the walk enforces sight itself. The corpse is re-checked at cast time,
-// since the walk may outlast the corpse window or the charges may have changed meanwhile.
+// distanceToTarget, the apocriton's cast range (a mod setting), before the warmup;
+// requireLineOfSight is off, as on the apocriton, and the walk enforces sight itself. The corpse
+// is re-checked at cast time, since the walk may outlast the corpse window or the charges may
+// have changed meanwhile.
 //
 // Orders and queueing: the cast is an ordered job of ours rather than VEF's started one (the
 // driver's header has why VEF's cannot queue). CreateCastJob, VEF's hook between the click and

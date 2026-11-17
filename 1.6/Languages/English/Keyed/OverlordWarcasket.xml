@@ -48,6 +48,8 @@
 
   <OLWC_Cooldown>Cooldown</OLWC_Cooldown>
   <OLWC_CooldownDesc>The time the pilot must wait after a resurrection before starting another. Default: {0}.</OLWC_CooldownDesc>
+  <OLWC_Range>Range</OLWC_Range>
+  <OLWC_RangeDesc>How close the pilot must be to the mech to start a resurrection, in cells. Line of sight is required. Default: {0}.</OLWC_RangeDesc>
 
   <OLWC_SparkFrequency>Spark frequency</OLWC_SparkFrequency>
   <OLWC_SparkFrequencyDesc>How often your pilots' armor crackles with red sparks, where 100% is as often as an apocriton. At 0%, the armor will not spark at all. Default: {0}.</OLWC_SparkFrequencyDesc>
