@@ -28,11 +28,13 @@ are on the smoke list); the engines live in the `l10n/` submodule. Nothing here 
   family mod but each boot loads only its own list.
 - **`preview-gif.py`** turns the artist's animated `Preview.mp4` into the Workshop
   `.steamworkshop/Preview.gif` (under 1 MiB, 640x360) by compositing the video's hero onto
-  `About/Preview.png` and gating what each frame may change; its header is the record of the
-  method and the tuning. Rerun it when the artist delivers a new MP4 or the PNG changes; version
-  bumps go through the `gif-patch` skill instead. `Docs/Research/PREVIEW_GIF_FROM_MP4.md` is
-  the guide for the next commission: what the delivery looks like, the cost model and the
-  pitfalls (a snapshot of the family primary in `../`).
+  `About/Preview.png` and holding each pixel's colour within a band of the truth; its header is
+  the record of the method and the tuning. Rerun it when the artist delivers a new MP4 or the
+  PNG changes; version bumps go through the `gif-patch` skill instead.
+  `Docs/Research/Preview-GIF-Transcode.md` records this delivery's measurements, and
+  `Docs/Research/PREVIEW_GIF_FROM_MP4.md` is the guide for the next commission: what the
+  delivery looks like, the cost model and the pitfalls (a snapshot of the family primary in
+  `../`).
 - **Translation passes are deferred until shortly before release**, one language at a time on
   explicit request, through the `/translate` skill, once the English text is final. The nine
   roster languages are machine-assisted first passes; the public roster is in `CONTRIBUTING.md`.

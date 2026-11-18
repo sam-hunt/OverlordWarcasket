@@ -28,43 +28,46 @@ Steps, each with its intermediate left in --work:
                 may ever change.
 4. c640/        The composite frames: the PNG everywhere, the tone-matched video inside the mask. The hero
                 is downscaled with a Hamming filter (Lanczos rings on a 3x reduction, and that ringing is
-                high-frequency detail LZW then pays for every frame, 10% of the file) and denoised in time:
-                a pixel whose change to both neighbouring frames is below DENOISE is averaged with them,
-                so codec noise stops flickering while anything that moves is left alone.
-5. Preview.gif  One global 256-colour palette (libimagequant over three spread frames). Frame 0 is the
+                high-frequency detail LZW then pays for every frame, 10% of the file).
+5. held/        The frames as the GIF shows them. The hero sways by up to 3 px over the loop, which at
+                12 fps is a sub-pixel shift of nearly every hero pixel every frame, and a clean encode of
+                that is 2.45 MiB. So each pixel holds one colour for as long as the true colour stays
+                within BAND of it, then moves on: every frame shows every pixel within BAND of the truth.
+                The runs are the longest possible (a run ends when the truth's spread over it would exceed
+                2 x BAND, and shows its mean, kept inside the band), which is half the repaints of holding
+                a colour until the truth has left it behind, for the same worst error. What is left is a
+                faint grain where neighbouring pixels move on at different times, worst in the dark shadow
+                under the gun; at viewing size it is far less visible than a dropped frame, which was the
+                judgement that set the rate.
+6. Preview.gif  One global 256-colour palette (libimagequant over three spread frames). Frame 0 is the
                 composite remapped with libimagequant's own gentle dithering, except the hero region, which
                 is remapped without dithering like every later frame so frame 0 -> 1 shows no texture jump.
-                Later frames carry only what changed; gifsicle -O3 turns the rest into transparency.
+                Later frames carry only the pixels whose run ended; gifsicle -O3 turns the rest into
+                transparency. Outside the mask nothing ever changes. Delays run 8/8/9 cs so 60 frames take
+                exactly 5.00 s. The badge is frame 0's PNG pixels, so the gif-patch skill can bump it in
+                place.
 
-Why the later frames need gating: the hero sways by up to 3 px over the loop, which at 12 fps is a
-sub-pixel shift of nearly every hero pixel every frame, and a clean encode of that is 2.1 MiB. The budget
-buys full frame rate only by letting a pixel keep its last emitted colour until the true colour has moved
-more than GATE from it. Every frame therefore shows every pixel within GATE of the truth, with a faint
-grain where neighbouring pixels catch up at different times, worst in the dark shadow under the gun; at
-viewing size that grain is far less visible than a dropped frame, which was the judgement that set the
-rate. Outside the mask nothing ever changes. Delays run 8/8/9 cs so 60 frames take exactly 5.00 s. The
-badge is frame 0's PNG pixels, so the gif-patch skill can bump it in place.
-
-Tuning record (640x360, 60 frames): GATE 4 2.1 MiB, 12 1.27 MiB, 16 1.03 MiB, 17 0.99 MiB (shipped),
-20 0.89 MiB. Refreshing the hero only every 2nd, 3rd or 4th frame (arcs passing every frame) fits at
-GATE 8, 6 and 4 but reads as a stutter, as does interleaving the refresh over alternating rows, which
-costs more than it saves. A lossy LZW pass (gifsicle --lossy) buys 15% at 10 and streaks the flat
-armour from 30 up; a luma-relative gate costs more at every setting; a 128-colour palette saves 18%;
-smaller frames save in proportion to their area. None of those bought a lower gate than 17 does alone.
-The build is deterministic: a rerun on the same inputs is byte-identical.
+Tuning record (640x360, 60 frames): BAND 7 1.14 MiB, 8 1.05 MiB, 9 0.98 MiB (shipped), 10 0.92 MiB.
+Holding a colour until the truth has moved a gate away from it, then snapping to the truth, needs a gate
+of 17 to fit and leaves the hero 7.7 rms from the clean frames where BAND 9 leaves it 6.1 (4.2 of either
+is the palette). Averaging quiet pixels with their neighbouring frames before the hold lets no tighter
+band fit. Refreshing the hero only every 2nd, 3rd or 4th frame reads as a stutter, as does interleaving
+the refresh over alternating rows, which costs more than it saves. A lossy LZW pass (gifsicle --lossy)
+buys 15% at 10 and streaks the flat armour from 30 up; a 128-colour palette saves 18% and bands; smaller
+frames save in proportion to their area. The build is deterministic: a rerun on the same inputs is
+byte-identical.
 
 Requires Pillow built with libimagequant (Pillow 9.0's binding returns a one-colour palette for any image
 that is not 640x360, so the palette is always learned at 640x360 and only remapped elsewhere), gifsicle,
 and ffmpeg. Nothing here ships; the MP4 stays outside the repo like the gameplay recordings.
 """
 import argparse, glob, json, os, shutil, subprocess, sys, tempfile
-from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageStat
+from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageMath, ImageStat
 
 SIZE = (640, 360)
 MOTION_THRESHOLD = 12   # /255, against frame 0 at 640x360
 MASK_LEFT_EDGE = 200    # the hero never reaches further left; shuts out codec noise on the title
-DENOISE = 12            # /255: a hero pixel changing less than this to both neighbouring frames is averaged with them
-GATE = 17               # /255: a pixel keeps its emitted colour until the truth has moved further than this
+BAND = 9                # /255: the furthest a shown pixel may sit from its true colour
 DELAYS = (8, 8, 9)      # centiseconds, repeating: 60 frames = 500 cs
 LIMIT = 1048576
 KRITA_FFMPEG = '/mnt/c/Program Files (x86)/Steam/steamapps/common/Krita/krita/bin/ffmpeg.exe'
@@ -74,10 +77,20 @@ def log(msg):
     print(f'[preview-gif] {msg}', flush=True)
 
 
+def max_channel(im):
+    r, g, b = im.split()
+    return ImageChops.lighter(ImageChops.lighter(r, g), b)
+
+
 def max_channel_diff(a, b):
-    d = ImageChops.difference(a, b)
-    r, g, bl = d.split()
-    return ImageChops.lighter(ImageChops.lighter(r, g), bl)
+    return max_channel(ImageChops.difference(a, b))
+
+
+def fresh(im):
+    """Pillow keeps RGB as four bytes per pixel, and composite() and paste() blend their mask into the
+    padding byte, which libimagequant then reads as alpha and builds a visibly worse palette from. A
+    fresh buffer pads with 255, exactly as the frame would reload from its PNG."""
+    return Image.frombytes('RGB', im.size, im.tobytes())
 
 
 def extract_frames(mp4, work, ffmpeg):
@@ -161,44 +174,66 @@ def build_mask(small, work):
 
 def composite(png, uniq, lut, feathered, work):
     out = os.path.join(work, 'c640'); os.makedirs(out, exist_ok=True)
-    heroes = [im.resize(SIZE, Image.HAMMING).point(lut) for im in uniq]
-    n, still = len(heroes), lambda a, b: max_channel_diff(a, b).point(lambda v: 255 if v < DENOISE else 0)
-    denoised = []
-    for i, c in enumerate(heroes):
-        p, q = heroes[i - 1], heroes[(i + 1) % n]
-        quiet = ImageChops.multiply(still(c, p), still(c, q))
-        denoised.append(Image.composite(Image.blend(Image.blend(p, q, 0.5), c, 0.5), c, quiet))
     frames = []
-    for i, h in enumerate(denoised):
-        c = Image.composite(h, png, feathered)
-        # Pillow keeps RGB as four bytes per pixel and composite() blends the mask into the padding byte,
-        # which libimagequant then reads as alpha and builds a visibly worse palette from. A fresh buffer
-        # pads with 255, exactly as the frame would reload from its PNG.
-        c = Image.frombytes('RGB', c.size, c.tobytes())
+    for i, im in enumerate(uniq):
+        c = fresh(Image.composite(im.resize(SIZE, Image.HAMMING).point(lut), png, feathered))
         c.save(os.path.join(out, f'c{i:02d}.png')); frames.append(c)
     return frames
 
 
-def encode(frames, binary, out_path, work):
-    n = len(frames); W, H = SIZE
+def hold(comps, work):
+    """Each pixel's colour over the loop as the fewest constant runs that stay within BAND of the truth."""
+    out = os.path.join(work, 'held'); os.makedirs(out, exist_ok=True)
+    over = lambda hi, lo: max_channel(ImageChops.subtract(hi, lo)).point(lambda v: 255 if v > 2 * BAND else 0)
+    wide = lambda im: [c.convert('I') for c in im.split()]
+
+    def colour(lo, hi, total, count):
+        """A run's mean, pulled inside the range that is within BAND of every frame in the run."""
+        return Image.merge('RGB', [
+            ImageMath.eval('convert(min(max((t + n / 2) / n, h - b), l + b), "L")', t=t, n=count, h=h, l=l, b=BAND)
+            for l, h, t in zip(wide(lo), wide(hi), total)])
+
+    lo, hi, total, count, ended = comps[0].copy(), comps[0].copy(), wide(comps[0]), Image.new('I', SIZE, 1), [None]
+    for f in comps[1:]:
+        new_lo, new_hi = ImageChops.darker(lo, f), ImageChops.lighter(hi, f)
+        brk = over(new_hi, new_lo)                              # pixels whose run cannot take this frame
+        ended.append((brk, colour(lo, hi, total, count)))       # the colour of the run that just ended
+        new_lo.paste(f, (0, 0), brk); new_hi.paste(f, (0, 0), brk)
+        lo, hi = new_lo, new_hi
+        total = [ImageMath.eval('t + c', t=t, c=c) for t, c in zip(total, wide(f))]
+        count = ImageMath.eval('n + 1', n=count)
+        for t, c in zip(total, wide(f)):
+            t.paste(c, (0, 0), brk)
+        count.paste(1, (0, 0), brk)
+    cur, held = colour(lo, hi, total, count), [None] * len(comps)
+    for i in range(len(comps) - 1, -1, -1):
+        held[i] = fresh(cur)
+        if i:
+            cur.paste(ended[i][1], (0, 0), ended[i][0])
+    worst = max(max_channel_diff(h, c).getextrema()[1] for h, c in zip(held, comps))
+    assert worst <= BAND, f'a held pixel is {worst}/255 from the truth, over BAND {BAND}'
+    for i, h in enumerate(held):
+        h.save(os.path.join(out, f'h{i:02d}.png'))
+    return held
+
+
+def encode(comps, held, binary, out_path, work):
+    n = len(comps); W, H = SIZE
     sample = Image.new('RGB', (W, H * 3))
     for k, i in enumerate((0, n // 3, 2 * n // 3)):
-        sample.paste(frames[i], (0, H * k))
+        sample.paste(comps[i], (0, H * k))
     pal = sample.quantize(256, method=Image.LIBIMAGEQUANT)
     assert len(pal.getcolors(256)) > 8, 'libimagequant returned a collapsed palette'
     remap = lambda im: im.quantize(palette=pal, dither=Image.NONE)
     outside = binary.point(lambda v: 0 if v else 255)
     tmp = os.path.join(work, 'gif'); os.makedirs(tmp, exist_ok=True)
-    paths, prev = [], None
-    for i, f in enumerate(frames):
-        if i == 0:
-            fr = pal.crop((0, 0, W, H)); fr.paste(remap(f), (0, 0), binary)
-        else:
-            cand = remap(f)
-            moved = max_channel_diff(cand.convert('RGB'), prev.convert('RGB')).point(lambda v: 255 if v > GATE else 0)
-            keep = ImageChops.lighter(moved.point(lambda v: 255 - v), outside)
-            fr = cand.copy(); fr.paste(prev, (0, 0), keep)
-        p = os.path.join(tmp, f'f{i:03d}.gif'); fr.save(p, interlace=False); paths.append(p); prev = fr
+    first = pal.crop((0, 0, W, H)); first.paste(remap(held[0]), (0, 0), binary)
+    paths = []
+    for i, h in enumerate(held):
+        fr = first
+        if i:
+            fr = remap(h); fr.paste(first, (0, 0), outside)
+        p = os.path.join(tmp, f'f{i:03d}.gif'); fr.save(p, interlace=False); paths.append(p)
     args = ['gifsicle', '-O3', '--no-warnings', '--loopcount=forever']
     for i, p in enumerate(paths):
         args += [f'-d{DELAYS[i % len(DELAYS)]}', p]
@@ -222,7 +257,8 @@ def main():
     lut = fit_lut(png, uniq[0], work)
     binary, feathered = build_mask([im.resize(SIZE, Image.BOX) for im in uniq], work)
     frames = composite(png, uniq, lut, feathered, work)
-    size = encode(frames, binary, a.out + '.tmp', work)
+    held = hold(frames, work)
+    size = encode(frames, held, binary, a.out + '.tmp', work)
     if size >= LIMIT:
         os.remove(a.out + '.tmp')
         sys.exit(f'[preview-gif] {size} bytes is over the {LIMIT} byte Workshop limit; nothing written')
