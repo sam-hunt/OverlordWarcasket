@@ -75,6 +75,27 @@
     as the resurrector readied for battle rather than the apocriton's constant hum.
     CompResurrectorSparks' header has the conditions.
 
+    Mech stun pulse: CompProperties_MechStunPulse, the apocriton's "mech stun pulse on death"
+    (its CompProperties_Explosive, Biotech's Races_Mechanoids_SuperHeavy.xml, 1.7.5013) fired
+    from the pilot. It stuns every mech it reaches, the pilot's own included, by decision: a
+    pilot standing among their support mechs pays for falling there, and one who falls on a
+    mech raid's front line takes that line with them. CompMechStunPulse's header has the call
+    paths and what the pulse reaches. trigger and radius are mod settings defaulting to the
+    values here:
+    - trigger Death, the apocriton's. Downed, the setting's other choice, fires at the fall
+      and not at the death. The player's own pawns never die as they are downed (vanilla
+      skips the death on downed roll for the player's faction, Pawn_HealthTracker.
+      CheckForStateChange), so a pilot sent to fall among the enemy is downed there and dies,
+      if at all, once the line has moved on; Downed is the choice that makes that play.
+    - radius 9.9, the resurrect ability's cast distance, against the apocriton's 30.9. At 30.9
+      the pulse covers most of a fight wherever the pilot stood; at 9.9 where the pilot stood
+      decides which mechs it takes. Walls stop it either way.
+    - damageDef MechBandShockwave and propagationSpeed 0.5 are the apocriton's. The def stuns
+      for its constantStunDurationTicks, 1200, and it is the one def vanilla's stun rule
+      admits for mechanoids alone, so the 20 seconds are not this set's to scale.
+    - Last in comps: a translation may address a comp's text by its index in the list, so a
+      comp added to a released def goes after the ones already there.
+
     Art: Textures/Things/Pawn/Warcasketlike/WarcasketOverlord/, laid out as VFEP's sets are.
     The worn graphic is Graphic_Multi (_north/_east/_south); the item icon is the parent's
     Graphic_Single, read from the bare-named file, a copy of the _south facing. The shell and
@@ -102,7 +123,7 @@
     <defName>OLWC_Warcasket_Overlord</defName>
     <label>overlord warcasket</label>
     <shortDescription>Specialized spacer-tech warcasket shell with standard protection, equipped with a mech resurrector that can bring recently killed mechs back to life.</shortDescription>
-    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mech resurrector that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The resurrector in the shell holds a few charges and regains them slowly, so they are best saved for whichever mechs are needed most at the time. The helmet greatly increases the pilot's bandwidth at some cost to their aim, and the shoulders carry command relays that reach mechs anywhere on the map. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.</description>
+    <description>Specialized spacer-tech warcasket shell with standard protection, equipped with a mech resurrector that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The resurrector in the shell holds a few charges and regains them slowly, so they are best saved for whichever mechs are needed most at the time. The helmet greatly increases the pilot's bandwidth at some cost to their aim, and the shoulders carry command relays that reach mechs anywhere on the map. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs. If the pilot falls, the armor will release a pulse that stuns every mech nearby, including their own.</description>
     <graphicData>
       <texPath>Things/Pawn/Warcasketlike/WarcasketOverlord/WarcasketOverlord</texPath>
     </graphicData>
@@ -182,6 +203,12 @@
         <minShieldSize>2.1</minShieldSize>
         <maxShieldSize>2.7</maxShieldSize>
         <disableRotation>true</disableRotation>
+      </li>
+      <li Class="OverlordWarcasket.CompProperties_MechStunPulse">
+        <trigger>Death</trigger>
+        <radius>9.9</radius>
+        <damageDef>MechBandShockwave</damageDef>
+        <propagationSpeed>0.5</propagationSpeed>
       </li>
     </comps>
     <modExtensions>

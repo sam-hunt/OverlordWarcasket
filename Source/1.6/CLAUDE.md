@@ -55,6 +55,12 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   the call paths). The ability reads the resurrector off `holder` and `CompResurrectorSparks` off
   its own parent, so all three comps share the armor def. `CompMechResurrector`'s header has the
   arithmetic, the two reloads and the trim rules.
+- **The mech stun pulse is a comp on the armor and one postfix.** Vanilla tells worn apparel
+  of its wearer's death (`ThingComp.Notify_WearerDied`) and never of a downing, so
+  `Patches/Pawn_Notify_Downed` passes the downing on to `CompMechStunPulse`, which decides what
+  either event means from its props (the settings' trigger and radius). The comp saves nothing
+  and calls `GenExplosion.DoExplosion` itself with no instigator; its header has the call paths,
+  why a damage def of our own could not stun a mech, and why the pilot is not named.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target, and with the extension's cost table alone deciding which weight classes come

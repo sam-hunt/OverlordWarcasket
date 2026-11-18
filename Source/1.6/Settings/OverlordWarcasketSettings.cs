@@ -39,6 +39,14 @@ namespace OverlordWarcasket;
 // iconPath in a deferred step at the end of loading, and a play-data reload replaces the def and
 // its texture together.
 //
+// The stun pulse section is a radio group and a slider (StunPulseSetting), what sets the armor's
+// mech stun pulse off and how far it reaches, written onto the armor's
+// CompProperties_MechStunPulse (trigger and radius), which the comp reads as a pilot falls. Its
+// header carries the section's own text and the apocriton as its icon, the mech the pulse is
+// taken from, read off its race def at draw time as the ability's is: a pawn def's uiIcon is
+// its kind's body graphic facing east (ThingDef.ResolveIcon, 1.7.5013 decompile), replaced with
+// the def on a play-data reload. The section is skipped while the armor lacks the comp.
+//
 // The command range section is two radio groups and a slider (CommandRangeSetting), who the
 // set's extended mechanitor command range applies to and how far it reaches, written through
 // CommandRange.Apply onto the set's CommandRangeExtension (its scope and radius), onto the piece
@@ -74,6 +82,7 @@ public class OverlordWarcasketSettings : ModSettings
 {
     private const string AbilityDefName = "OLWC_ResurrectMech";
     private const string ArmorDefName = "OLWC_Warcasket_Overlord";
+    private const string ApocritonDefName = "Mech_Apocriton";
 
     // The whitespace above every section header but the first, and below the last row.
     private const float SectionGap = 28f;
@@ -86,6 +95,7 @@ public class OverlordWarcasketSettings : ModSettings
     public readonly CerebrexArtSetting cerebrexArt = new();
     public readonly WorkSetting work = new();
     public readonly CommandRangeSetting commandRange = new();
+    public readonly StunPulseSetting stunPulse = new();
 
     // The cooldown is game hours up to ten days, banded so one slider spans a gap between casts
     // in a fight and one between raids: real seconds at normal speed up to ten (quarter, then
@@ -212,13 +222,15 @@ public class OverlordWarcasketSettings : ModSettings
         cerebrexArt.ExposeData();
         work.ExposeData();
         commandRange.ExposeData();
+        stunPulse.ExposeData();
         foreach (Tunable tunable in All)
             tunable.ExposeData();
     }
 
     // Reads the def-backed defaults before the first ApplyToDefs overwrites them; defs must be
     // loaded, so ModInit's static constructor calls this, never the Mod constructor. The cerebrex
-    // node's and the command range's come first, needing none of the ability's defs.
+    // node's, the command range's and the stun pulse's come first, needing none of the ability's
+    // defs.
     public void LoadDefaultsFromDefs()
     {
         cerebrexNode = CerebrexNode.Def;
@@ -229,6 +241,7 @@ public class OverlordWarcasketSettings : ModSettings
             cerebrexArt.LoadDefaults();
         }
         commandRange.LoadDefaults();
+        stunPulse.LoadDefaults();
         if (!TryGetDefs(out Defs defs))
             return;
         charges.DefaultValue = defs.resurrector.maxCharges;
@@ -267,13 +280,14 @@ public class OverlordWarcasketSettings : ModSettings
         defaultsLoaded = true;
     }
 
-    // The work profile and the command range go first: they need none of the ability's defs, so
-    // a saved choice still holds while they are missing, though the page is unavailable to
-    // change it. The cerebrex art choice writes nothing here; its patch read it at startup.
+    // The work profile, the command range and the stun pulse go first: they need none of the
+    // ability's defs, so a saved choice still holds while they are missing, though the page is
+    // unavailable to change it. The cerebrex art choice writes nothing here; its patch read it at startup.
     public void ApplyToDefs()
     {
         WorkProfile.Apply(work.IsOpen);
         commandRange.Apply();
+        stunPulse.Apply();
         if (!defaultsLoaded || !TryGetDefs(out Defs defs))
             return;
         defs.resurrector.maxCharges = Mathf.Max(1, charges.IntValue);
@@ -348,6 +362,13 @@ public class OverlordWarcasketSettings : ModSettings
             sparkFrequency.DoRow(listing);
         requireMechlink.DoRow(listing);
         sparksOnlyDrafted.DoRow(listing);
+        if (stunPulse.Available)
+        {
+            SectionHeader(listing, "OLWC_SectionStunPulse", DefDatabase<ThingDef>.GetNamedSilentFail(ApocritonDefName)?.uiIcon,
+                HeaderTip("OLWC_SectionStunPulse".Translate(), "OLWC_SectionStunPulseDesc".Translate()));
+            SummaryRow(listing, StunPulseSummary);
+            stunPulse.DoRows(listing);
+        }
         if (commandRange.Available)
         {
             SectionHeader(listing, "OLWC_SectionCommandRange", TexCommand.Draft,
@@ -380,6 +401,7 @@ public class OverlordWarcasketSettings : ModSettings
             cerebrexArt.Reset();
             work.Reset();
             commandRange.Reset();
+            stunPulse.Reset();
             foreach (Tunable tunable in All)
                 tunable.Reset();
         }
@@ -404,6 +426,12 @@ public class OverlordWarcasketSettings : ModSettings
             return "OLWC_ResurrectSummaryNoCooldown".Translate(charges.IntValue, rate, costs, window, casting);
         return "OLWC_ResurrectSummary".Translate(charges.IntValue, rate, costs, window, casting, Period(cooldown.Value));
     }
+
+    // What the stun pulse's rows amount to: what sets it off, how far it reaches and how long it
+    // stuns, the length in real seconds at normal speed as the casting time is.
+    private string StunPulseSummary() =>
+        ("OLWC_StunPulseSummary_" + stunPulse.Trigger).Translate(
+            Cells(stunPulse.radius.Value), RealSeconds((float)stunPulse.StunTicks / GenTicks.TicksPerRealSecond));
 
     // What the work section's boxes amount to: the work the pilot may take on, named as the
     // work tab names it, or that there is none; the rest is VFEP's rule either way.

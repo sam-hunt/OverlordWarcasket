@@ -19,11 +19,14 @@ comes with VFEP); Odyssey and other optional content load only when present. C# 
 `About/PublishedFileId.txt`). The resurrect mech ability (Biotech's apocriton ability on the
 armor, drawing on a mech resurrector that recharges by itself and reloads with advanced
 components, with a red gauge), the overlord work trait (the pilot keeps smithing and research, so
-mech work and hacking) and the shoulders' command range (a wearing mechanitor orders drafted mechs
+mech work and hacking), the shoulders' command range (a wearing mechanitor orders drafted mechs
 anywhere on the map, vanilla's 24.9 cells lifted behind a settings section that can move it to
-the helmet) are implemented, and the set's stats and costs are priced against Biotech's mechlord
+the helmet) and the armor's mech stun pulse (the apocriton's death pulse fired from the pilot,
+stunning every mech in reach, the pilot's own included, on the pilot's death or, by a setting,
+their downing) are implemented, and the set's stats and costs are priced against Biotech's mechlord
 gear on the tier's standard plating and shield. Saves now carry the defNames and scribed C#
-types, so a rename needs a save migration. `TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file; the sibling
+types, so a rename needs a save migration. `TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file (the stun
+pulse's is in `CompMechStunPulse`'s header and the armor def's); the sibling
 `../MedicWarcasket/` repo (same author, same VFEP base) is the worked precedent for the own-trait
 work profile, the settings idiom and the infrastructure copied here, and `../ToxinWarcasket/` for
 the gauge and the Biotech dependency.
@@ -72,8 +75,8 @@ constants and the two shipped art folders, and `CerebrexNodeDrawOrderTests` hold
 patch between the north offsets of VFEP's armor and shoulder bases, read from the VFEP folder
 (`VFEP_PATH` or the sibling checkout). The other files cover the pure rules: the settings slider
 arithmetic, the trait mirror's tag and work type rules, the command range's distance and slider
-ladder, the resurrector's cost table, gauge count and reload rule, and the mask that keeps the
-set off generated pawns.
+ladder, the resurrector's cost table, gauge count and reload rule, the stun pulse's trigger rule
+and def wiring, and the mask that keeps the set off generated pawns.
 
 ## Layout
 

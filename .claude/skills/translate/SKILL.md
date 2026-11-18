@@ -109,7 +109,12 @@ notes for the shim or flow edit this repo owes before continuing.
     `OLWC_CommandRangeRadius` `{0}` cells and `{1}` empty or one of the two
     range suffixes; `OLWC_CommandRangeRadiusDesc` `{0}` the normal range and
     `{1}` the default; `OLWC_CommandRangeNoneDesc` and
-    `OLWC_CommandRangeSummaryNone` `{0}` cells. Cerebrex node art (shown with
+    `OLWC_CommandRangeSummaryNone` `{0}` cells. Mech stun pulse:
+    `OLWC_StunPulseRadiusDesc` `{0}` the default radius in cells; the two
+    `OLWC_StunPulseSummary_*` keys `{0}` the radius in cells and `{1}` the
+    length of the stun, already carrying its unit letter; "mech stun pulse"
+    as Biotech renders its `MechStunPulseWarning` key, and "is downed" as
+    Core's `AbilityCantApplyDowned` does. Cerebrex node art (shown with
     Odyssey only): `OLWC_CerebrexArtDesc` `{0}` the default choice's label,
     one of the `OLWC_CerebrexArt_*` labels; the node and dye are named as
     Odyssey's `Apparel_CerebrexNode` and Core's `Dye` are.

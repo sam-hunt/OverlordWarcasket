@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - A mod setting for the range of resurrect mech
+- Mech stun pulse: when the pilot dies, the armor stuns every mech nearby, friend or foe, as an apocriton does
+- Mod settings for the stun pulse's radius, and to release it when the pilot is downed instead
 
 ## [1.0.0] - 2026-11-17
 
