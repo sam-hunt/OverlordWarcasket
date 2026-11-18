@@ -23,7 +23,11 @@ public static class ModInit
     {
         // The Harmony id only needs to be unique; convention is the mod's packageId.
         var harmony = new Harmony("shunter.overlordwarcasket");
-        harmony.PatchAll();
+        // The assembly is named through a type of ours: Harmony 3 obsoletes the
+        // parameterless PatchAll(), whose caller detection can fail after inlining or
+        // tail calls, and Assembly.GetExecutingAssembly() has returned Harmony's own
+        // assembly from a constructor another mod patched (HarmonyRimWorld #52).
+        harmony.PatchAll(typeof(ModInit).Assembly);
 
         Startup.Run();
     }
