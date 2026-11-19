@@ -1,6 +1,6 @@
 {
   "meta": {
-    "gameBuild": "1.7.5013 rev95",
+    "gameBuild": "1.7.5013 rev802",
     "activeDlcs": [
       "Core",
       "Biotech",
@@ -66,7 +66,7 @@
         "normalized": "OLWC_Warcasket_Overlord.comps.6.shieldTexPath"
       },
       "OLWC_Warcasket_Overlord.description": {
-        "english": "Specialized spacer-tech warcasket shell with standard protection, equipped with a mech resurrector that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The resurrector in the shell holds a few charges and regains them slowly, so they are best saved for whichever mechs are needed most at the time. The helmet greatly increases the pilot's bandwidth at some cost to their aim, and the shoulders carry command relays that reach mechs anywhere on the map. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs. If the pilot falls, the armor will release a pulse that stuns every mech nearby, including their own.",
+        "english": "Specialized spacer-tech warcasket shell with standard protection, equipped with a mech resurrector that can bring recently killed mechs back to life.\n\nA 10th-generation design from the government program that rebuilt captured pirate rigs around its own power armor and gave them to veterans who could no longer serve any other way. The Overlord was its rig for veteran mechanitors, who would command their own mechs in the field rather than join a squad.\n\nThe Overlord series is meant for a mechanitor who goes into battle alone, with only their mechs beside them. The resurrector in the shell holds a few charges and regains them slowly, so they are best saved for whichever mechs are needed most at the time. The helmet greatly increases the pilot's bandwidth at some cost to their aim, and the shoulders carry command relays that reach mechs anywhere on the map. Because the plating is far tougher than a mechanitor's usual armor, the pilot can lead from the front line rather than from behind the mechs.",
         "required": true
       },
       "OLWC_Warcasket_Overlord.label": {
