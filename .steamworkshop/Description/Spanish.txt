@@ -43,6 +43,9 @@ R: Investiga los proyectos "ataúdes de guerra de la era espacial" y "tecnologí
 [b]P: ¿El piloto tiene que ser mecanitor?[/b]
 R: Por defecto, sí, pero una opción del mod permite que cualquier piloto use el resucitador.
 
+[b]P: ¿Cómo se compara con el Mech Master Warcasket de Alpha Mechs?[/b]
+R: El Soberano llega antes y más barato en el árbol tecnológico, tiene algo más de armadura, menos ancho de banda, más restricciones de tipos y velocidad de trabajo, y habilidades distintas. Deberían funcionar bien juntos, ya sea combinando piezas o con cada serie en un piloto distinto.
+
 [hr][/hr]
 [h1]Enlaces[/h1]
 Código fuente, descargas manuales y seguimiento de incidencias: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]

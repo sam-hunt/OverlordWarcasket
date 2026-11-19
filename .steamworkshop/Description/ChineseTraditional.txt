@@ -43,6 +43,9 @@ VFE Pirates的戰棺會封鎖所有技術性和智力勞動。霸主型的駕駛
 [b]問：駕駛員一定要是御機使嗎？[/b]
 答：預設是的。不過模組設定可以讓任何駕駛員使用復活器。
 
+[b]問：和Alpha Mechs的Mech Master Warcasket相比如何？[/b]
+答：霸主型在科技樹中更早解鎖，成本也更低，護甲稍高，頻寬較少，工作類型和工作速度的限制較多，能力也不同。兩者應該能搭配得很好，無論是混搭各個部件，還是由不同駕駛員分別穿戴。
+
 [hr][/hr]
 [h1]連結[/h1]
 原始碼、手動下載與問題回報：[url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]

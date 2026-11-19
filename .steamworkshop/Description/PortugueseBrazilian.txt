@@ -43,6 +43,9 @@ R: Pesquise "carcaças de guerra espaciais" e "ultra meca-tecnologia" e depois i
 [b]P: O piloto precisa ser mecanizador?[/b]
 R: Por padrão, sim. Mas uma configuração do mod permite que qualquer piloto use o ressuscitador.
 
+[b]P: Como ele se compara à Mech Master Warcasket do Alpha Mechs?[/b]
+R: O Suserano chega mais cedo e mais barato na árvore tecnológica, tem armadura um pouco maior, menos banda-larga, mais restrições de tipos e velocidade de trabalho e habilidades diferentes. Os dois conjuntos devem funcionar bem juntos, tanto misturando peças quanto lado a lado.
+
 [hr][/hr]
 [h1]Links[/h1]
 Código-fonte, downloads manuais e rastreador de problemas: [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]

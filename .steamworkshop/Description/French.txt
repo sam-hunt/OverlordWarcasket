@@ -43,6 +43,9 @@ R : Recherchez « spacer warcaskets » (warcaskets spatiaux) et « mechtech de p
 [b]Q : Le pilote doit-il être un méchanitor ?[/b]
 R : Par défaut, oui. Une option du mod permet toutefois à n'importe quel pilote d'utiliser le résurrecteur.
 
+[b]Q : Que vaut-il face au Mech Master Warcasket d'Alpha Mechs ?[/b]
+R : Le Suzerain arrive plus tôt dans l'arbre technologique et coûte moins cher. Il offre une armure légèrement meilleure, moins de bande passante, plus de restrictions sur les types de tâches et la vitesse de travail, et des capacités différentes. Les deux ensembles devraient bien fonctionner ensemble, pièce par pièce ou côte à côte sur des pilotes différents.
+
 [hr][/hr]
 [h1]Liens[/h1]
 Code source, téléchargements manuels et suivi des problèmes : [url=https://github.com/sam-hunt/OverlordWarcasket]GitHub[/url]
