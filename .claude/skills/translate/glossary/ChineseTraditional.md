@@ -79,6 +79,10 @@ is the worked example for this language.
 | (vanilla) suffix | (原版) | Coined, ASCII parens set solid like (預設). |
 | mech bosses / chips | 超級機械族 / 晶片 | Biotech `Mechanitors.helpText`, `Bossgroup` letters. |
 | apocriton | 阿布機頓 | Biotech `Mech_Apocriton.label`. |
+| mech stun pulse / pulse | 機械族暈眩脈衝 / 脈衝 | Biotech Keyed `MechStunPulseWarning` 機械族死亡時發出暈眩脈衝 (the apocriton's death pulse). Not `MechBandShockwave` 機頻衝擊波, the damage's own label. |
+| stun (verb) | 使…暈眩, duration after: 暈眩{1} | Odyssey 可以使目標短暫暈眩; Core `Stun.label` 昏迷 reads as a coma, so not used in prose. |
+| downed / falls (pilot) | 倒地 (downed) / 倒下 (falls, death or downed) | Core `Downed.label` 倒地, 救援倒地的人員. |
+| resurrect mech range (setting) | 距離 | Core `Ability_Range.label`; Keyed `Range` 射程 is the weapon slot. Line of sight phrased 位於駕駛員的視線內. |
 
 ## Pending native review
 

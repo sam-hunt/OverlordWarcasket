@@ -76,6 +76,10 @@ is the worked example for this language.
 | cerebrex node / dye | узел церебрекса / краситель | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label` |
 | (vanilla) suffix | (обычный) | Coined; matches `обычный радиус` in the same section |
 | reportString / jobReportString | воскрешает TargetA / воскрешает механоидов | Core reportString form, Core `Resurrect.reportString` verb |
+| mech stun pulse / pulse | шоковый разряд / разряд (`испускает разряд`) | Biotech Keyed `MechStunPulseWarning` ("Mech stun pulse on death") = `Шоковый разряд при смерти`; Biotech `MechBandShockwave.label` = `механоидный разряд` |
+| stun (verb) | оглушать | Core `Stun.label` = `оглушение` |
+| downed | обездвижен | Core Keyed `DownedLower` |
+| (the pilot) falls, death or downed | выходит из строя | Coined to cover both triggers; `падёт` would read as death only |
 
 ## Pending native review
 

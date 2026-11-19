@@ -86,6 +86,9 @@ is the worked example for this language.
 | (vanilla) suffix | ` (바닐라)` | Coined, common Korean modding usage. |
 | Biotech / Odyssey (DLC) | 바이오테크 / 오디세이 | Toxin Workshop; ExpansionDef. |
 | comma-and list | `A, B, 그리고 C` | Core Keyed `ToCommaListAnd` = `{0}, 그리고 {1}`, behind a hard-coded `, ` between the earlier items; the cost and work summaries are built so that joiner reads. |
+| mech stun pulse / pulse / stun | 메카노이드 기절 파동 / 파동 / 기절시키다 | Biotech Keyed `MechStunPulseWarning` = `사망 시 메카노이드 기절 파동 방출`; Core DamageDef `Stun.label` = `기절`. |
+| (the pilot) falls / is downed / dies | 쓰러지다 / 쓰러지다 / 사망하다 | Core `Downed.label` = 쓰러짐; `사망 시` from `MechStunPulseWarning`. "Falls" in prose covers both, as 쓰러지면 does. |
+| Triggered when (dropdown) | 발동 조건, values `조종사가 사망할 때` / `조종사가 쓰러질 때` | Coined; the values read as completions of the label. |
 
 ## Pending native review
 

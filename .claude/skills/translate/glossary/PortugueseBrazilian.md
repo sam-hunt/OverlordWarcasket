@@ -78,6 +78,9 @@ is the worked example for this language.
 | mech bosses / ultra mechtech | líderes mecanoides / ultra meca-tecnologia | Biotech Keyed `CommandCallBossgroupDesc`, `UltraMechtech.label` |
 | power armor (lore) | armadura de fuzileiro | Core `Apparel_PowerArmor.label` |
 | (vanilla) suffix | (vanilla) | Kept, common pt-BR gamer usage |
+| mech stun pulse / stun | pulso de atordoamento mecanoide / atordoar | Biotech Keyed `MechStunPulseWarning` "Pulso de atordoamento mecanoide ao morrer", Core `Stun.label` "atordoamento" |
+| downed (the pilot is downed) | fica incapacitado | Core `DownedRefugee.label` "refugiado incapacitado", Keyed `CantRomanceTargetDowned`. "If the pilot falls" (death or downing) stays the verb `cair` |
+| range (ability) / line of sight | alcance / linha de visão | Core Keyed `Range`, `AbilityRequiresLOS` |
 
 ## Pending native review
 

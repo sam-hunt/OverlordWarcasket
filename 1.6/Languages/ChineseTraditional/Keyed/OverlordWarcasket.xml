@@ -85,6 +85,10 @@
   <OLWC_Cooldown>冷卻時間</OLWC_Cooldown>
   <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
   <OLWC_CooldownDesc>駕駛員復活機械族後，必須等待這段時間才能再次復活。預設值：{0}。</OLWC_CooldownDesc>
+  <!-- EN: Range -->
+  <OLWC_Range>距離</OLWC_Range>
+  <!-- EN: How close the pilot must be to the mech to start a resurrection, in cells. Line of sight is required. At the highest setting, the pilot can resurrect a mech anywhere on the map. Default: {0}. -->
+  <OLWC_RangeDesc>開始復活時，駕駛員與機械族之間所能相隔的最遠距離，以格計算。機械族必須位於駕駛員的視線內。調到最高時，駕駛員可以復活地圖上任何地方的機械族。預設值：{0}。</OLWC_RangeDesc>
 
   <!-- EN: Spark frequency -->
   <OLWC_SparkFrequency>火花頻率</OLWC_SparkFrequency>
@@ -117,6 +121,35 @@
   <OLWC_ResurrectSummary>裝甲最多可儲存{0}次充能，{1}。復活機械族時，{2}，{3}。施放復活需要{4}，之後的冷卻時間為{5}。</OLWC_ResurrectSummary>
   <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
   <OLWC_ResurrectSummaryNoCooldown>裝甲最多可儲存{0}次充能，{1}。復活機械族時，{2}，{3}。施放復活需要{4}，下一次復活可以立即開始。</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- Mech stun pulse (Source/1.6/Comps/CompMechStunPulse.cs, Source/1.6/Settings/StunPulseSetting.cs). The _<choice> keys end in a StunPulseTrigger name. -->
+  <!-- EN: Mech stun pulse -->
+  <OLWC_SectionStunPulse>機械族暈眩脈衝</OLWC_SectionStunPulse>
+  <!-- EN: When an apocriton dies, it releases a pulse that stuns the mechs around it. The armor releases the same pulse when its pilot falls, and it will stun your own mechs as well as hostile ones. -->
+  <OLWC_SectionStunPulseDesc>阿布機頓死亡時會發出脈衝，使周圍的機械族暈眩。駕駛員倒下時，裝甲也會發出同樣的脈衝，不只敵方機械族，你自己的機械族也會跟著暈眩。</OLWC_SectionStunPulseDesc>
+
+  <!-- EN: Triggered when -->
+  <OLWC_StunPulseTrigger>觸發時機</OLWC_StunPulseTrigger>
+  <!-- EN: What must happen to the pilot for the armor to release its pulse. -->
+  <OLWC_StunPulseTriggerDesc>裝甲會在駕駛員發生哪種狀況時發出脈衝。</OLWC_StunPulseTriggerDesc>
+  <!-- EN: The pilot dies -->
+  <OLWC_StunPulseTrigger_Death>駕駛員死亡時</OLWC_StunPulseTrigger_Death>
+  <!-- EN: The armor will release its pulse when the pilot dies, as an apocriton does. -->
+  <OLWC_StunPulseTrigger_DeathDesc>駕駛員死亡時，裝甲會像阿布機頓一樣發出脈衝。</OLWC_StunPulseTrigger_DeathDesc>
+  <!-- EN: The pilot is downed -->
+  <OLWC_StunPulseTrigger_Downed>駕駛員倒地時</OLWC_StunPulseTrigger_Downed>
+  <!-- EN: The armor will release its pulse each time the pilot is downed, but not when they die. -->
+  <OLWC_StunPulseTrigger_DownedDesc>駕駛員每次倒地時，裝甲都會發出脈衝，但駕駛員死亡時不會。</OLWC_StunPulseTrigger_DownedDesc>
+
+  <!-- EN: Pulse radius -->
+  <OLWC_StunPulseRadius>脈衝範圍</OLWC_StunPulseRadius>
+  <!-- EN: How far the pulse reaches from the pilot, in cells. Walls will block it. Default: {0}. -->
+  <OLWC_StunPulseRadiusDesc>脈衝從駕駛員身上向外擴散的距離，以格計算。牆壁會擋住脈衝。預設值：{0}。</OLWC_StunPulseRadiusDesc>
+
+  <!-- EN: When the pilot dies, the armor stuns every mech within {0} cells for {1}, including your own. -->
+  <OLWC_StunPulseSummary_Death>駕駛員死亡時，裝甲會使{0}格內的所有機械族暈眩{1}，連你自己的機械族也不例外。</OLWC_StunPulseSummary_Death>
+  <!-- EN: When the pilot is downed, the armor stuns every mech within {0} cells for {1}, including your own. -->
+  <OLWC_StunPulseSummary_Downed>駕駛員倒地時，裝甲會使{0}格內的所有機械族暈眩{1}，連你自己的機械族也不例外。</OLWC_StunPulseSummary_Downed>
 
   <!-- EN: Enabled work types -->
   <OLWC_SectionWork>已啟用的工作類型</OLWC_SectionWork>

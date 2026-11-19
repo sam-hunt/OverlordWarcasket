@@ -85,6 +85,10 @@
   <OLWC_Cooldown>재사용 대기</OLWC_Cooldown>
   <!-- EN: The time the pilot must wait after a resurrection before starting another. Default: {0}. -->
   <OLWC_CooldownDesc>조종사가 소생시킨 뒤 다시 소생을 시작하기까지 기다려야 하는 시간입니다. 기본값: {0}.</OLWC_CooldownDesc>
+  <!-- EN: Range -->
+  <OLWC_Range>사거리</OLWC_Range>
+  <!-- EN: How close the pilot must be to the mech to start a resurrection, in cells. Line of sight is required. At the highest setting, the pilot can resurrect a mech anywhere on the map. Default: {0}. -->
+  <OLWC_RangeDesc>조종사가 소생을 시작하려면 메카노이드가 이 거리 안에 있어야 하며, 단위는 칸입니다. 시야가 확보되어야 합니다. 최댓값으로 설정하면 지도 어디에 있는 메카노이드든 소생시킬 수 있습니다. 기본값: {0}.</OLWC_RangeDesc>
 
   <!-- EN: Spark frequency -->
   <OLWC_SparkFrequency>불꽃 빈도</OLWC_SparkFrequency>
@@ -117,6 +121,35 @@
   <OLWC_ResurrectSummary>갑옷에는 충전이 최대 {0}회분 들어가며, {1}. 메카노이드 소생에 드는 충전은 체급별로 {2}이며, {3} 소생시킬 수 있습니다. 소생을 시전하는 데 {4} 걸리며, 재사용 대기 시간은 {5}입니다.</OLWC_ResurrectSummary>
   <!-- EN: The armor holds up to {0} charges and {1}. Resurrecting a mech costs {2}, {3}. Resurrection takes {4} to cast, and the next can start at once. -->
   <OLWC_ResurrectSummaryNoCooldown>갑옷에는 충전이 최대 {0}회분 들어가며, {1}. 메카노이드 소생에 드는 충전은 체급별로 {2}이며, {3} 소생시킬 수 있습니다. 소생을 시전하는 데 {4} 걸리며, 다음 소생은 바로 시작할 수 있습니다.</OLWC_ResurrectSummaryNoCooldown>
+
+  <!-- Mech stun pulse (Source/1.6/Comps/CompMechStunPulse.cs, Source/1.6/Settings/StunPulseSetting.cs). The _<choice> keys end in a StunPulseTrigger name. -->
+  <!-- EN: Mech stun pulse -->
+  <OLWC_SectionStunPulse>메카노이드 기절 파동</OLWC_SectionStunPulse>
+  <!-- EN: When an apocriton dies, it releases a pulse that stuns the mechs around it. The armor releases the same pulse when its pilot falls, and it will stun your own mechs as well as hostile ones. -->
+  <OLWC_SectionStunPulseDesc>아포크리톤은 파괴될 때 주변 메카노이드를 기절시키는 파동을 방출합니다. 갑옷도 조종사가 쓰러지면 같은 파동을 방출하며, 적대 메카노이드뿐 아니라 내 메카노이드도 기절시킵니다.</OLWC_SectionStunPulseDesc>
+
+  <!-- EN: Triggered when -->
+  <OLWC_StunPulseTrigger>발동 조건</OLWC_StunPulseTrigger>
+  <!-- EN: What must happen to the pilot for the armor to release its pulse. -->
+  <OLWC_StunPulseTriggerDesc>조종사에게 어떤 일이 생겨야 갑옷이 파동을 방출하는지 정합니다.</OLWC_StunPulseTriggerDesc>
+  <!-- EN: The pilot dies -->
+  <OLWC_StunPulseTrigger_Death>조종사가 사망할 때</OLWC_StunPulseTrigger_Death>
+  <!-- EN: The armor will release its pulse when the pilot dies, as an apocriton does. -->
+  <OLWC_StunPulseTrigger_DeathDesc>아포크리톤처럼 조종사가 사망하면 갑옷이 파동을 방출합니다.</OLWC_StunPulseTrigger_DeathDesc>
+  <!-- EN: The pilot is downed -->
+  <OLWC_StunPulseTrigger_Downed>조종사가 쓰러질 때</OLWC_StunPulseTrigger_Downed>
+  <!-- EN: The armor will release its pulse each time the pilot is downed, but not when they die. -->
+  <OLWC_StunPulseTrigger_DownedDesc>조종사가 쓰러질 때마다 갑옷이 파동을 방출하지만, 사망할 때는 방출하지 않습니다.</OLWC_StunPulseTrigger_DownedDesc>
+
+  <!-- EN: Pulse radius -->
+  <OLWC_StunPulseRadius>파동 범위</OLWC_StunPulseRadius>
+  <!-- EN: How far the pulse reaches from the pilot, in cells. Walls will block it. Default: {0}. -->
+  <OLWC_StunPulseRadiusDesc>조종사를 중심으로 파동이 닿는 거리를 칸 단위로 나타냅니다. 파동은 벽에 막힙니다. 기본값: {0}.</OLWC_StunPulseRadiusDesc>
+
+  <!-- EN: When the pilot dies, the armor stuns every mech within {0} cells for {1}, including your own. -->
+  <OLWC_StunPulseSummary_Death>조종사가 사망하면 갑옷이 내 메카노이드를 포함해 {0}칸 이내의 모든 메카노이드를 {1} 동안 기절시킵니다.</OLWC_StunPulseSummary_Death>
+  <!-- EN: When the pilot is downed, the armor stuns every mech within {0} cells for {1}, including your own. -->
+  <OLWC_StunPulseSummary_Downed>조종사가 쓰러지면 갑옷이 내 메카노이드를 포함해 {0}칸 이내의 모든 메카노이드를 {1} 동안 기절시킵니다.</OLWC_StunPulseSummary_Downed>
 
   <!-- EN: Enabled work types -->
   <OLWC_SectionWork>활성화된 작업 유형</OLWC_SectionWork>

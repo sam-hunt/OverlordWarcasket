@@ -81,6 +81,9 @@ is the worked example for this language.
 | art (settings) | gráficos | Coined, reads better than `arte` for textures. |
 | maximum corpse age | plazo (máximo) tras la muerte | Coined, fits the 40-character gauge line. |
 | (vanilla) suffix | (juego base) | Coined; vanilla es has no "vanilla". |
+| mech stun pulse (setting section) / pulse | pulso aturdidor de mecas / pulso | Coined on Core `pulsos PEM` and Biotech `pulso de señal meca`; parallels `resucitador de mecas`. |
+| stun / apocriton / downed | aturdir / apocritón / quedar incapacitado | Core `Stun.label` aturdido, Biotech `Mech_Apocriton.label`, Core `MechControllerDowned`. |
+| range (resurrect mech setting) | Alcance | Siblings' settings rows (`l10n/languages/Spanish.md` Range note); `Requiere línea de visión` from Core `Apparel_PsychicShockLance`. |
 
 ## Pending native review
 

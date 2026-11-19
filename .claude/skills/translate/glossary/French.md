@@ -93,6 +93,11 @@ is the worked example for this language.
 | mech bosses | boss mécanoïdes | **Coined**; no vanilla French rendering found. |
 | helmet/shoulders label in a `{0}` slot | `portant "{0}"` | ASCII-quoted cited label, so neither article nor agreement depends on casque (m.) vs épaulières (f. pl.). |
 | (vanilla) suffix | (jeu de base) | **Coined.** |
+| mech stun pulse / pulse | impulsion d'étourdissement (section header) / impulsion | Biotech Keyed `MechStunPulseWarning` (`Impulsion d'étourdissement lors de la mort du mécanoïde`). |
+| stun (verb) | étourdir | Core `Stun.label` `étourdissement`, Core `Gun_EmpLauncher.description` (`étourdissant les cibles mécaniques`). |
+| downed | à terre (`le pilote se retrouve à terre`) | Core Keyed `DownedLower`, `ColonistsNeedRescueDesc`. |
+| falls (pilot dies or is downed) | tombe | **Coined**, kept as vague as the English on purpose. |
+| line of sight is required | Une ligne de vue est requise. | Core Keyed `AbilityRequiresLOS` (`Ligne de vue requise`). |
 
 ## Pending native review
 

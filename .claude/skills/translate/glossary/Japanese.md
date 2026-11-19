@@ -89,6 +89,13 @@ is the worked example for this language.
 | art (cerebrex setting) | 外観 | Coined; avoids modder words. |
 | (vanilla) suffix | ` (バニラ)` | Coined; community usage. |
 | Enabled work types (Workshop h2) | 有効な作業 | Pre-filled sibling `MDWC_SectionWork`. |
+| mech stun pulse | メカのスタンパルス | Biotech Keyed `MechStunPulseWarning` (死亡時のメカのスタンパルス, "Mech stun pulse on death"). |
+| stun (verb, in prose) | 麻痺させる | Core `TrapIED_EMP.description` (メカノイドを数秒間,麻痺させる); Core `Stun.label` 麻痺. |
+| apocriton | アポクリトン | Biotech `Mech_Apocriton.label`. |
+| pilot falls / is downed | パイロットが倒れる | Main language file's downed row (倒れた, never 失神 in prose); one verb for both "falls" and "downed". |
+| pulse radius | パルスの半径 | Core Keyed `radius` 半径. |
+| Triggered when (dropdown) | 発動タイミング, choices 〜したとき | Coined; the choices read as label: value. |
+| range (resurrect mech) | 射程 | Core Keyed `Range`, as Medic's `MDWC_Range`. |
 
 ## Pending native review
 

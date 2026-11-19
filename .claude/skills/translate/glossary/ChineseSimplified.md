@@ -76,8 +76,14 @@ is the worked example for this language.
 | maximum corpse age | 最长死亡时间 | Coined. |
 | Biotech (DLC) | 生物技术 | Core `ExpansionDef` `Biotech.label`. |
 | warcasket (trait label) | 战棺 | Pre-filled, the inherited noun. |
+| mech stun pulse / pulse | 机械眩晕脉冲 / 脉冲 | Biotech Keyed `MechStunPulseWarning` (死亡后释放机械眩晕脉冲。), the apocriton's own warning. |
+| stun (verb) | 击晕 | Core `Stun.label`, Keyed `StunnedByEMP` (被EMP击晕); 眩晕 stays inside the pulse's name. |
+| downed (pilot state) / falls | 倒地 / 倒下 | Core `TimeDowned.label` (倒地时间), `DoctorRescue.label` (救援倒地的殖民者); 倒下 for "falls", which covers death or downing. |
+| pulse radius | 脉冲半径 | Core Keyed `radius` 半径, as `AbilityEffectRadius` 效果半径. |
+| Triggered when (dropdown) | 触发条件 | Coined; its values 驾驶员死亡 / 驾驶员倒地 read as completions. |
+| range (resurrect mech setting) / line of sight required | 射程 / 目标必须可视 | Core Keyed `Range`, `AbilityRequiresLOS`, the vanilla ability-range terms. |
 
 ## Pending native review
 
 Inherited and still open there: 呼吸器 (coined, no vanilla or community
-source). This mod's: 霸主型, 机械族复活器, 指令中继器, 信号增强器, 指挥范围, 最长死亡时间, 贴图, 自动装填阈值.
+source). This mod's: 霸主型, 机械族复活器, 指令中继器, 信号增强器, 指挥范围, 最长死亡时间, 贴图, 自动装填阈值, 触发条件.

@@ -83,6 +83,10 @@ is the worked example for this language.
 | cerebrex node / dye | Cerebrex-Knoten / Farbstoff | Odyssey `Apparel_CerebrexNode.label`, Core `Dye.label`. |
 | art (texture option) | Grafik | Family Workshop "Grafik von"; **coined** for the settings. |
 | vanilla (range suffix) | Vanilla | Loan as German players use it. |
+| mech stun pulse / pulse | Mechbetäubungsimpuls / Impuls (sendet einen Impuls aus) | **Coined** as a closed compound after Biotech's Mechsignalimpuls (`BurnoutMechlinkBooster.description`) and Mechbandschockwelle; stun per Biotech Keyed `MechStunPulseWarning` "Betäubt nahe Mechs bei Tod". |
+| stun | betäuben | Biotech Keyed `MechStunPulseWarning`, Core `Stun.label` Betäubung. |
+| downed (event) | zu Boden gehen (state: am Boden liegen) | Core Keyed `DownedLower` "liegt am Boden". The "Triggered when" dropdown is "Ausgelöst, wenn" with verb-final choices "Der Pilot stirbt" / "Der Pilot zu Boden geht". |
+| pulse radius | Impulsradius | Core Keyed `radius` Radius. |
 
 ## Pending native review
 
