@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-11-19
+
 ### Added
 
 - A mod setting for the range of resurrect mech, from 1.9 cells up to anywhere on the map
@@ -45,5 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vanilla Gravship Expanded and Save Our Ship 2 support
 - Machine-assisted translations for nine languages
 
-[Unreleased]: https://github.com/sam-hunt/OverlordWarcasket/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/sam-hunt/OverlordWarcasket/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/sam-hunt/OverlordWarcasket/releases/tag/v1.1.0
 [1.0.0]: https://github.com/sam-hunt/OverlordWarcasket/releases/tag/v1.0.0
