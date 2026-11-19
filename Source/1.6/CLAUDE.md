@@ -72,7 +72,10 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   an ordered job of ours (`OLWC_CastResurrectMech`, `Jobs/JobDriver_CastResurrectMech`), never
   VEF's started one, so that casts queue: VEF keeps the cast in one slot per pawn, which the
   driver fills only as its job starts. Medic Warcasket's `JobDriver_MedicCast` is the precedent;
-  the driver's header has the order-time trap.
+  the driver's header has the order-time trap. Its range is the def's `distanceToTarget`, which
+  VEF never reads for this ability: `Abilities/CastRange` owns what the number means (0 or less
+  is no limit, and drops the sight check with it), the settings slider's stops and the ring, so
+  the walk, the settings and the ring all ask it and none compares the field itself.
 - **The overlord trait is mirrored from VFEP's at startup** by `WorkProfile.Mirror`, first in
   `Startup.Run`, so editing or patching its work tags, work types, degree effects or VEF
   extension on our def does not stick, and VFEP's 1.6/1.7 differences need no version check.

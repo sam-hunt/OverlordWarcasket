@@ -70,7 +70,8 @@ notes for the shim or flow edit this repo owes before continuing.
     range (Core's `Range`), the mechlink switch). Labels carry no unit: the
     row's value shows it, as Core's short period form does (`LetterSecond`,
     `LetterHour`, `LetterDay`; a count as "1"; the range a bare number of
-    cells, which its tooltip names). Each tooltip takes one `{0}`, the default
+    cells, which its tooltip names, or `OLWC_Unlimited` at its last stop, as
+    the corpse window shows). Each tooltip takes one `{0}`, the default
     value as the row shows it; keep it. The reload cost's also takes `{1}`,
     the reload item's plural label.
     The switch's tooltip takes none; `OLWC_SwitchDefault` takes `{0}`, the

@@ -20,7 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- A mod setting for the range of resurrect mech
+- A mod setting for the range of resurrect mech, from 1.9 cells up to anywhere on the map
+- Resurrect mech shows its range as a ring around the pilot while its button is hovered or a target is being chosen
 - Mech stun pulse: when the pilot dies, the armor stuns every mech nearby, friend or foe, as an apocriton does
 - Mod settings for the stun pulse's radius, and to release it when the pilot is downed instead
 

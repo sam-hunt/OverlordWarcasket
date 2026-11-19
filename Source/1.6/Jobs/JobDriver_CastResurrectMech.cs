@@ -35,11 +35,13 @@ namespace OverlordWarcasket;
 // vanilla reports queued jobs through the cached driver, before any binding.
 //
 // The walk is modelled on VEF's JobDriver_GotoTargetAndCastAbilityOnce: toward the corpse until
-// it is within the ability def's distanceToTarget with line of sight and not mid-door. It
+// it is within the ability def's distanceToTarget with line of sight and not mid-door
+// (Ability_ResurrectMech.InCastRange). It
 // paths to touch the corpse, and one the pilot cannot reach ends the job, where VEF's goto,
 // finding no cell beside it, would move on and cast from wherever the pilot stood. A pilot who
 // arrives beside the corpse casts from there whatever the sight check says, rather than
-// repathing every tick.
+// repathing every tick. A range with no limit (CastRange) is in range from the first tick, so
+// the pilot never walks, and a corpse they could not reach is cast on all the same.
 //
 // The corpse is checked as the job starts and again before the warmup, with the ability's own
 // message: a queued cast may start long after its order, and the cast's own re-check comes only
@@ -95,8 +97,9 @@ public class JobDriver_CastResurrectMech : JobDriver_CastAbilityOnce
             Map map = pawn.Map;
             pawn.rotationTracker.FaceTarget(cell);
             bool moving = pawn.pather.Moving;
-            bool inRange = pawn.Position.DistanceTo(cell) <= (Casting?.def.distanceToTarget ?? 0f)
-                && GenSight.LineOfSight(pawn.Position, cell, map, skipFirstCell: true)
+            Ability_ResurrectMech ability = Casting;
+            bool inRange = ability != null
+                && ability.InCastRange(pawn.Position, cell, map)
                 && (!moving || pawn.pather.nextCell.GetDoor(map) == null);
             if (inRange || (!moving && pawn.Position.AdjacentTo8WayOrInside(cell)))
             {

@@ -58,7 +58,11 @@ namespace OverlordWarcasket;
 // range-limited (GetRangeForPawn returns a number VEF treats as unlimited) because the cast job
 // (OLWC_CastResurrectMech, JobDriver_CastResurrectMech) walks the pilot to within the def's
 // distanceToTarget, the apocriton's cast range (a mod setting), before the warmup;
-// requireLineOfSight is off, as on the apocriton, and the walk enforces sight itself. The corpse
+// requireLineOfSight is off, as on the apocriton, and the walk enforces sight itself
+// (InCastRange, which also answers for a range with no limit: CastRange has the rule). The
+// range shows as a ring around the pilot while the gizmo is hovered and while the targeter is
+// open, drawn here because VEF's own two rings are at GetRangeForPawn and so never draw
+// (CastRange's header has the ring). The corpse
 // is re-checked at cast time, since the walk may outlast the corpse window or the charges may
 // have changed meanwhile.
 //
@@ -122,6 +126,37 @@ public class Ability_ResurrectMech : Ability, ITargetingSource
     }
 
     public override float GetRangeForPawn() => UnlimitedRange;
+
+    // Whether the pilot standing at from may start the cast on a corpse at cell: the walk's
+    // stopping rule, within the def's range with line of sight, or anywhere while the range has
+    // no limit.
+    public bool InCastRange(IntVec3 from, IntVec3 cell, Map map)
+    {
+        float range = def.distanceToTarget;
+        if (!CastRange.Limited(range))
+            return true;
+        return CastRange.Within(range, from.DistanceTo(cell))
+            && GenSight.LineOfSight(from, cell, map, skipFirstCell: true);
+    }
+
+    public override void GizmoUpdateOnMouseover()
+    {
+        base.GizmoUpdateOnMouseover();
+        DrawRangeRing();
+    }
+
+    public override void DrawHighlight(LocalTargetInfo target)
+    {
+        base.DrawHighlight(target);
+        DrawRangeRing();
+    }
+
+    // The cast range around the pilot, on the map on screen only (CastRange.DrawRing).
+    private void DrawRangeRing()
+    {
+        if (pawn is { Spawned: true } && pawn.Map == Find.CurrentMap)
+            CastRange.DrawRing(pawn.Position, def.distanceToTarget, def.rangeRingColor);
+    }
 
     public override bool CanAutoCast => false;
 
