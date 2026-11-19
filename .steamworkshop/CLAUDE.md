@@ -33,7 +33,8 @@ them before the first feature.
 - `[h1]` for the page sections (About, Mod Compatibility, FAQ, Links), `[h2]` for the
   features inside About, `[hr][/hr]` between sections.
 - Short paragraphs of one to three sentences; bullet lists for anything parallel (the pieces,
-  the compat lines); `[b]Piece:[/b]` leads on list items so the eye can scan.
+  the compat lines); `[b]Piece:[/b]` leads on the pieces list, and only there, so the eye
+  can find each piece.
 - The FAQ answers questions players actually ask (how do I get it); it is not a place to
   store caveats.
 
@@ -46,7 +47,8 @@ player's attention stays on the mod and not on how its page was written.
 - Avoid the patterns that mark machine-written copy: em dashes (already banned for all
   player-facing text), "not X, but Y" contrasts, three-item flourishes, rhetorical questions,
   "whether you're ... or ...", "seamlessly", "elevate", "unleash", "say goodbye to", a bolded
-  phrase that opens every bullet with a colon, and a closing sign-off line.
+  phrase with a colon opening the bullets of any list but the pieces, and a closing sign-off
+  line.
 - No enumerated edge cases or disclaimers in prose; a caveat that matters is one short line
   in the compat list.
 - Match the register of VFE Pirates' own page: it is the set's neighbour on the Workshop.

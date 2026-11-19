@@ -1,7 +1,7 @@
 # Contributing
 
 Bug reports, fixes, and features are welcome. Open an issue or pull request.
-Build instructions are in README.md; the mod builds with
+Build instructions are in CLAUDE.md; the mod builds with
 `dotnet build OverlordWarcasket.sln -c Release`.
 
 If you work in Claude Code, the repo ships a Stop hook (`.claude/hooks/sync-mod.sh`,
