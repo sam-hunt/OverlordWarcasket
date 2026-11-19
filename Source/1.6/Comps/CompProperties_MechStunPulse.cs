@@ -13,7 +13,8 @@ public enum StunPulseTrigger
 }
 
 // The armor's mech stun pulse (see CompMechStunPulse). Values live in the armor def, rationale
-// in its header; trigger and radius are mod settings defaulting to them, written back here.
+// in its header; trigger and radius are mod settings defaulting to them, written back here, and
+// the radius onto centerEffecter's sizes with it.
 public class CompProperties_MechStunPulse : CompProperties
 {
     public StunPulseTrigger trigger = StunPulseTrigger.Death;
@@ -28,6 +29,13 @@ public class CompProperties_MechStunPulse : CompProperties
 
     // Cells per tick over 1.5: how fast the wave travels out from the pilot.
     public float propagationSpeed = 0.5f;
+
+    // The pulse's display, played in place of damageDef's own explosionCenterEffecter
+    // (CompMechStunPulse's header), and the radius its sizes are drawn for as the XML has them.
+    // The settings shrink those sizes to the radius above (StunPulseSetting). With none, the
+    // damage def's plays, at the one size it has.
+    public EffecterDef centerEffecter;
+    public float centerEffecterRadius = 30.9f;
 
     public CompProperties_MechStunPulse()
     {
@@ -44,5 +52,7 @@ public class CompProperties_MechStunPulse : CompProperties
             yield return $"radius must be positive, is {radius}";
         if (propagationSpeed <= 0f)
             yield return $"propagationSpeed must be positive, is {propagationSpeed}";
+        if (centerEffecter != null && centerEffecterRadius <= 0f)
+            yield return $"centerEffecterRadius must be positive, is {centerEffecterRadius}";
     }
 }

@@ -75,8 +75,8 @@ constants and the two shipped art folders, and `CerebrexNodeDrawOrderTests` hold
 patch between the north offsets of VFEP's armor and shoulder bases, read from the VFEP folder
 (`VFEP_PATH` or the sibling checkout). The other files cover the pure rules: the settings slider
 arithmetic, the trait mirror's tag and work type rules, the command range's distance and slider
-ladder, the resurrector's cost table, gauge count and reload rule, the stun pulse's trigger rule
-and def wiring, and the mask that keeps the set off generated pawns.
+ladder, the resurrector's cost table, gauge count and reload rule, the stun pulse's trigger rule,
+display scale and def wiring, and the mask that keeps the set off generated pawns.
 
 ## Layout
 

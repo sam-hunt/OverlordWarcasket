@@ -41,7 +41,8 @@ namespace OverlordWarcasket;
 //
 // The stun pulse section is a radio group and a slider (StunPulseSetting), what sets the armor's
 // mech stun pulse off and how far it reaches, written onto the armor's
-// CompProperties_MechStunPulse (trigger and radius), which the comp reads as a pilot falls. Its
+// CompProperties_MechStunPulse (trigger and radius), which the comp reads as a pilot falls, and
+// the radius onto the sizes of the pulse's display with it (StunPulseSetting's header). Its
 // header carries the section's own text and the apocriton as its icon, the mech the pulse is
 // taken from, read off its race def at draw time as the ability's is: a pawn def's uiIcon is
 // its kind's body graphic facing east (ThingDef.ResolveIcon, 1.7.5013 decompile), replaced with

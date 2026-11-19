@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Verse;
 
@@ -12,6 +13,14 @@ namespace OverlordWarcasket;
 // name (so a name this version does not know reads as the default) and the radius as a Tunable
 // saves one; both are written back onto the props by Apply through the settings' ApplyToDefs,
 // where the comp reads them at the moment a pilot falls.
+//
+// The radius also sizes the pulse's display, the props' centerEffecter, whose XML is drawn for
+// the props' centerEffecterRadius: LoadDefaults keeps each child's scale and each child's
+// fleck's growthRate as the XML has them, and Apply writes them back multiplied by
+// CompMechStunPulse.DisplayScale, so the sub-effecters and the flecks read the size off their
+// own defs (the effecter def's header has why both fields). A fleck reads its def's growthRate
+// every tick, so a write reaches a pulse already on screen. Motes are spawned at their child's
+// scale and none of the display's grows.
 //
 // The radius runs from a cell past touch to the apocriton's own, in whole cells ending in .9 as
 // vanilla's radii do, so the shipped 9.9 and the apocriton's 30.9 are both stops. The length of
@@ -38,6 +47,10 @@ public sealed class StunPulseSetting
 
     private string triggerName;
     private CompProperties_MechStunPulse props;
+
+    // The display's sizes as the XML has them, drawn for props.centerEffecterRadius.
+    private readonly List<(SubEffecterDef child, FloatRange scale)> displayScales = [];
+    private readonly List<(FleckDef fleck, float growthRate)> displayGrowth = [];
 
     // False while the armor or its pulse is missing (another mod's patch); the section is skipped.
     public bool Available => props != null;
@@ -67,6 +80,8 @@ public sealed class StunPulseSetting
     // first Apply of every load.
     public void LoadDefaults()
     {
+        displayScales.Clear();
+        displayGrowth.Clear();
         props = DefDatabase<ThingDef>.GetNamedSilentFail(ArmorDefName)?.GetCompProperties<CompProperties_MechStunPulse>();
         if (props == null)
             return;
@@ -74,6 +89,15 @@ public sealed class StunPulseSetting
         radius.DefaultValue = props.radius;
         DamageDef damage = props.damageDef;
         StunTicks = damage == null ? 0 : damage.constantStunDurationTicks ?? Mathf.RoundToInt(damage.defaultDamage * 30f);
+        if (props.centerEffecter?.children == null)
+            return;
+        foreach (SubEffecterDef child in props.centerEffecter.children)
+        {
+            displayScales.Add((child, child.scale));
+            FleckDef fleck = child.fleckDef;
+            if (fleck != null && !displayGrowth.Exists(kept => kept.fleck == fleck))
+                displayGrowth.Add((fleck, fleck.growthRate));
+        }
     }
 
     public void Apply()
@@ -82,6 +106,11 @@ public sealed class StunPulseSetting
             return;
         props.trigger = Trigger;
         props.radius = radius.Value;
+        float displayScale = CompMechStunPulse.DisplayScale(props.radius, props.centerEffecterRadius);
+        foreach ((SubEffecterDef child, FloatRange scale) in displayScales)
+            child.scale = scale * displayScale;
+        foreach ((FleckDef fleck, float growthRate) in displayGrowth)
+            fleck.growthRate = growthRate * displayScale;
     }
 
     public void DoRows(Listing_Standard listing)

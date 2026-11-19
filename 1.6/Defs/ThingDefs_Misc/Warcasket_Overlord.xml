@@ -93,6 +93,11 @@
     - damageDef MechBandShockwave and propagationSpeed 0.5 are the apocriton's. The def stuns
       for its constantStunDurationTicks, 1200, and it is the one def vanilla's stun rule
       admits for mechanoids alone, so the 20 seconds are not this set's to scale.
+    - centerEffecter OLWC_MechStunPulse (Effects/MechStunPulse.xml) at centerEffecterRadius
+      30.9: the damage def's red ring and distortion wave over again, which Biotech draws at
+      the one size, the apocriton's, and the settings shrink with the radius, so a pulse of a
+      third the reach is drawn a third the size. 30.9 is the radius that effecter's XML is
+      drawn for, the apocriton's, and not a second radius of the pulse.
     - Last in comps: a translation may address a comp's text by its index in the list, so a
       comp added to a released def goes after the ones already there.
 
@@ -209,6 +214,8 @@
         <radius>9.9</radius>
         <damageDef>MechBandShockwave</damageDef>
         <propagationSpeed>0.5</propagationSpeed>
+        <centerEffecter>OLWC_MechStunPulse</centerEffecter>
+        <centerEffecterRadius>30.9</centerEffecterRadius>
       </li>
     </comps>
     <modExtensions>

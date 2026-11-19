@@ -1,4 +1,5 @@
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace OverlordWarcasket;
@@ -14,8 +15,8 @@ namespace OverlordWarcasket;
 // - The apocriton's is a stock CompExplosive with explodeOnKilled, radius 30.9, propagationSpeed
 //   0.5. That comp fires from its own parent's PostDestroy, and worn armor outlives its pilot,
 //   so this comp calls GenExplosion.DoExplosion itself, with the same arguments left at their
-//   defaults. Calling it directly also keeps the pulse off Combat Extended's transpiler on
-//   CompExplosive.Detonate, which swaps in its own explosion.
+//   defaults but for the display (below). Calling it directly also keeps the pulse off Combat
+//   Extended's transpiler on CompExplosive.Detonate, which swaps in its own explosion.
 // - Death: Apparel.Notify_PawnKilled calls Notify_WearerDied on every comp, from Pawn.Kill's
 //   PreDeathPawnModifications, before DropBeforeDying takes the pawn out of a carrier's arms
 //   and before it despawns, so the wearer's held position and map are still the place of death.
@@ -36,6 +37,26 @@ namespace OverlordWarcasket;
 //   of full fillage blocks, an open door does not), fixed when the explosion starts. The wave
 //   then reaches a cell at distance d after d * 1.5 / propagationSpeed ticks and stuns what
 //   stands there then.
+//
+// The display is the one thing not left to the explosion. Its flash, smoke and camera shake
+// are sized by the radius, but the damage def's explosionCenterEffecter, the red ring and the
+// distortion wave, is one size, the apocriton's: DamageWorker.ExplosionVisualEffectCenter
+// spawns it at scale 1 whatever the radius. Props.centerEffecter is that effecter over again
+// with sizes the settings shrink to the pulse's radius (DisplayScale; the effecter def's header
+// has the rule). An explosion offers no way to leave out the centre effecter alone, and
+// swapping ours onto Biotech's def for the call would be a write to a def other mods read, so
+// the explosion is asked for no display at all (doVisualEffects false) and PlayDisplay plays
+// what that turns off, with ours at the centre. The switch is read in three places:
+// - DamageWorker.ExplosionStart: the white flash, the camera shake, and
+//   ExplosionVisualEffectCenter's four puffs of smoke and centre effecter. PlayDisplay repeats
+//   each with vanilla's own arithmetic.
+// - Explosion.StartExplosion: the splash on water, repeated too.
+// - DamageWorker.ExplosionAffectCell: the def's explosionCellFleck or explosionCellMote, of
+//   which MechBandShockwave has neither, as it has no centre or interior fleck or mote for
+//   ExplosionVisualEffectCenter to play; one another mod's patch gave it would not show here.
+// The electric arcs, the def's explosionCellEffecter, are not behind the switch and nor is the
+// sound, so both stay the explosion's. With no centerEffecter on the props the explosion keeps
+// its whole display and PlayDisplay is not called.
 //
 // The instigator is left null, where the apocriton's is the apocriton. A pilot named as the
 // instigator would be blamed for the pulse: Faction.Notify_MemberTookDamage costs the player
@@ -74,6 +95,11 @@ public class CompMechStunPulse : ThingComp
     public static bool Fires(StunPulseTrigger setting, StunPulseTrigger happened, bool atRest) =>
         setting == happened && !(happened == StunPulseTrigger.Downed && atRest);
 
+    // How large the pulse's display is drawn against the sizes in its def, which are drawn for
+    // drawnForRadius: a pulse of a third the reach is a third the size. Pure, for the tests.
+    public static float DisplayScale(float radius, float drawnForRadius) =>
+        drawnForRadius > 0f ? radius / drawnForRadius : 1f;
+
     public override void Notify_WearerDied()
     {
         base.Notify_WearerDied();
@@ -92,7 +118,26 @@ public class CompMechStunPulse : ThingComp
         bool atRest = wearer.InBed() || wearer.health.hediffSet.HasHediff(HediffDefOf.Anesthetic);
         if (!Fires(Props.trigger, happened, atRest))
             return;
-        GenExplosion.DoExplosion(wearer.PositionHeld, map, Props.radius, Props.damageDef, instigator: null,
-            propagationSpeed: Props.propagationSpeed);
+        IntVec3 cell = wearer.PositionHeld;
+        bool ownDisplay = Props.centerEffecter != null;
+        if (ownDisplay)
+            PlayDisplay(cell, map);
+        GenExplosion.DoExplosion(cell, map, Props.radius, Props.damageDef, instigator: null,
+            doVisualEffects: !ownDisplay, propagationSpeed: Props.propagationSpeed);
+    }
+
+    // What doVisualEffects false takes from the explosion (the header has the three reads), as
+    // vanilla plays it, with Props.centerEffecter where the damage def's centre effecter was.
+    private void PlayDisplay(IntVec3 cell, Map map)
+    {
+        float radius = Props.radius;
+        Vector3 center = cell.ToVector3Shifted();
+        FleckMaker.Static(cell, map, FleckDefOf.ExplosionFlash, radius * 6f);
+        if (map == Find.CurrentMap)
+            Find.CameraDriver.shaker.DoShake(4f * radius / (center - Find.Camera.transform.position).magnitude);
+        for (int i = 0; i < 4; i++)
+            FleckMaker.ThrowSmoke(center + Gen.RandomHorizontalVector(radius * 0.7f), map, radius * 0.6f);
+        Props.centerEffecter.Spawn(cell, map, Vector3.zero);
+        FleckMaker.WaterSplash(center, map, radius * 6f, 20f);
     }
 }

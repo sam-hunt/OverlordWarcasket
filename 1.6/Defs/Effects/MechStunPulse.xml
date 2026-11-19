@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The mech stun pulse's display, the centerEffecter of the armor's
+    CompProperties_MechStunPulse (ThingDefs_Misc/Warcasket_Overlord.xml): Biotech's
+    BlastMechBandShockwave (1.7.5013, Biotech Defs/Effects/Effecter_Misc.xml), the
+    explosionCenterEffecter of the MechBandShockwave damage def, with its three flecks swapped
+    for copies of our own. OverlordWarcasket.CompMechStunPulse plays it in place of Biotech's
+    (its header has how).
+
+    Biotech's is one size, the apocriton's, whatever the radius of the explosion: vanilla
+    spawns it at scale 1 and nothing in it reads the radius. Ours shrinks with the pulse, by
+    the pulse's radius over the armor's centerEffecterRadius (30.9, the apocriton's), so a pulse
+    of a third the apocriton's reach is drawn a third the size and one of the same reach is
+    the apocriton's exactly. It is not sized to the cells the pulse stuns, as the apocriton's
+    is not either: it keeps the apocriton's proportion to them.
+
+    The values here are the apocriton's and are never what plays. At startup and whenever the
+    settings window closes, StunPulseSetting multiplies each child's scale, and the growthRate
+    of each child's fleck, by that ratio:
+    - scale is where a fleck or mote starts: left at 1 on the three flecks, as Biotech's, and
+      24 on the red flash, a mote that does not grow.
+    - A fleck's growth is added to its scale each second whatever scale it was spawned at
+      (FleckStatic.TimeInterval, 1.7.5013 and 1.6 decompiles), so the scale alone would shrink
+      where the wave and the ring start and not how far they spread. Their growthRate has to
+      shrink with it, which is why the flecks are our own: the write would otherwise land on
+      Biotech's, and on the apocriton's pulse with them.
+    How long each part lasts is untouched, so the display plays in the apocriton's time, and so
+    is the sound, the damage def's.
+
+    The four children, in Biotech's order, with their size across at the apocriton's radius
+    and at the shipped 9.9:
+    - OLWC_MechStunPulseWave, the distortion wave: 21 cells growing to 51, 6.7 to 16 at 9.9.
+    - OLWC_MechStunPulseRing, the red line: 6 cells growing to 143, 1.9 to 46 at 9.9.
+    - OLWC_MechStunPulseFlash, the red glow at the centre: 16 cells shrinking to nothing, 5.1.
+    - Mote_RedFlashStrong, Biotech's own, the flash over it: 24 cells, 7.7.
+    Those are the sizes of the quads; the line sits inside its texture.
+
+    The rest of an explosion's display is sized by the radius already, the white flash, the
+    smoke and the camera shake, and the electric arcs spark on cells the pulse reaches.
+  -->
+  <EffecterDef>
+    <defName>OLWC_MechStunPulse</defName>
+    <children>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>OLWC_MechStunPulseWave</fleckDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>OLWC_MechStunPulseRing</fleckDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <fleckDef>OLWC_MechStunPulseFlash</fleckDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <absoluteAngle>true</absoluteAngle>
+        <rotation>0~0</rotation>
+      </li>
+      <li>
+        <subEffecterClass>SubEffecter_SprayerTriggered</subEffecterClass>
+        <moteDef>Mote_RedFlashStrong</moteDef>
+        <burstCount>1</burstCount>
+        <spawnLocType>OnSource</spawnLocType>
+        <scale>24</scale>
+      </li>
+    </children>
+  </EffecterDef>
+</Defs>

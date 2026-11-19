@@ -60,7 +60,11 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   `Patches/Pawn_Notify_Downed` passes the downing on to `CompMechStunPulse`, which decides what
   either event means from its props (the settings' trigger and radius). The comp saves nothing
   and calls `GenExplosion.DoExplosion` itself with no instigator; its header has the call paths,
-  why a damage def of our own could not stun a mech, and why the pilot is not named.
+  why a damage def of our own could not stun a mech, and why the pilot is not named. The
+  display is `OLWC_MechStunPulse`, Biotech's centre effecter with flecks of our own: the comp
+  asks the explosion for no display and plays vanilla's itself with that effecter at the
+  centre, never writing to Biotech's damage def. The settings write the radius onto its
+  children's `scale` and its flecks' `growthRate`, so those flecks serve no other effecter.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target, and with the extension's cost table alone deciding which weight classes come

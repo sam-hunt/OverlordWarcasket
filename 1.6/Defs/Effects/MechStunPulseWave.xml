@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The distortion wave of OLWC_MechStunPulse (Effects/MechStunPulse.xml): Biotech's
+    Fleck_BlastMechBandShockwave (1.7.5013, Biotech Defs/Effects/Fleck_Visual.xml), every
+    field the apocriton's. It is a def of our own only so that its growthRate can be written:
+    the value here is the apocriton's, and StunPulseSetting scales it to the pulse's radius
+    (the effecter's header has the rule and the sizes).
+  -->
+  <FleckDef ParentName="FleckBase">
+    <defName>OLWC_MechStunPulseWave</defName>
+    <altitudeLayer>MoteOverheadLow</altitudeLayer>
+    <fadeInTime>0.04</fadeInTime>
+    <fadeOutTime>0.1</fadeOutTime>
+    <solidTime>0.8</solidTime>
+    <growthRate>1.5</growthRate>
+    <drawOffscreen>true</drawOffscreen>
+    <graphicData>
+      <graphicClass>Graphic_FleckPulse</graphicClass>
+      <texPath>Things/Mote/Black</texPath>
+      <shaderType>MoteLargeDistortionWave</shaderType>
+      <shaderParameters>
+        <_DistortionTex>/Things/Mote/PsychicDistortionCurrents</_DistortionTex>
+        <_NoiseTex>/Things/Mote/PsycastNoise</_NoiseTex>
+        <_distortionIntensity>0.066</_distortionIntensity>
+        <_brightnessMultiplier>1.15</_brightnessMultiplier>
+      </shaderParameters>
+      <drawSize>21</drawSize>
+    </graphicData>
+  </FleckDef>
+</Defs>

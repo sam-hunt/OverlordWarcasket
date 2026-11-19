@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <!--
+    The red glow at the centre of OLWC_MechStunPulse (Effects/MechStunPulse.xml): Biotech's
+    FlashMechBand (1.7.5013, Biotech Defs/Effects/Fleck_Visual.xml), every field the
+    apocriton's. It is a def of our own only so that its growthRate can be written: the value
+    here is the apocriton's, and StunPulseSetting scales it to the pulse's radius (the
+    effecter's header has the rule and the sizes). The rate is negative, so the glow shrinks,
+    and is gone a third of a second in at any radius.
+  -->
+  <FleckDef ParentName="FleckBase">
+    <defName>OLWC_MechStunPulseFlash</defName>
+    <growthRate>-3</growthRate>
+    <graphicData>
+      <texPath>Things/Mote/RedGlowBrightCore</texPath>
+      <shaderType>MoteGlow</shaderType>
+      <drawSize>(16, 16)</drawSize>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.01</fadeInTime>
+    <solidTime>0.25</solidTime>
+    <fadeOutTime>0.15</fadeOutTime>
+  </FleckDef>
+</Defs>
