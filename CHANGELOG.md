@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pawns no longer fail to generate when another warcasket mod also keeps its parts off generated pawns
+
 ## [1.1.0] - 2026-11-19
 
 ### Added
