@@ -18,13 +18,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-11-21
+
 ### Added
 
 - A mod setting, off by default, that puts the overlord warcasket on the long-dead mechanitor in a crashed mechanitor ship and on 30% of those in ancient mechanitor complexes
 
+### Changed
+
+- The settings sliders are wider, as their label column now fits the longest label instead of taking a fixed share
+
 ### Fixed
 
 - Pawns no longer fail to generate when another warcasket mod also keeps its parts off generated pawns
+- A slider set to 100% or more no longer wraps "(default)" onto a second line
 
 ## [1.1.0] - 2026-11-19
 
@@ -55,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vanilla Gravship Expanded and Save Our Ship 2 support
 - Machine-assisted translations for nine languages
 
-[Unreleased]: https://github.com/sam-hunt/OverlordWarcasket/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/sam-hunt/OverlordWarcasket/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/sam-hunt/OverlordWarcasket/releases/tag/v1.2.0
 [1.1.0]: https://github.com/sam-hunt/OverlordWarcasket/releases/tag/v1.1.0
 [1.0.0]: https://github.com/sam-hunt/OverlordWarcasket/releases/tag/v1.0.0
