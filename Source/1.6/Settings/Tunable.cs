@@ -23,18 +23,34 @@ public sealed class Tunable
     // is, with a gap below it so neighbouring rows read apart, indented so it sits under its
     // section header (Listing.Indent only moves the cursor and would push the row off the right)
     // and padded on the right so it does not run up against the scrollbar.
+    // The label column is as wide as the widest label of any row in the window, in the active
+    // language, plus LabelPad, so every slider starts on one line and takes all the room the
+    // labels leave: a longer slider puts more pixels under each step. It stops at MaxLabelShare
+    // of the row, where a longer label wraps, so a long translation cannot squeeze the slider.
     // The value column is sized to the widest value a row can show, so the slider runs out to
-    // it and the row ends near the window's edge; every format here is at most four digits and
-    // a point, or fewer digits and a unit letter or "x" narrower than a digit ("2.75s", "x2.5"),
-    // so "00.00" with the default suffix (as translated) bounds it.
+    // it and the row ends near the window's edge. Every format here has one of two shapes: at
+    // most four digits and a point, or fewer digits and a unit letter or "x" narrower than a
+    // digit ("2.75s", "x2.5"), which "00.00" bounds, or at most three digits and a percent
+    // sign ("150%"), which "000%" bounds. Which of the two is wider is the font's to say (in
+    // Arial a percent sign is a little wider than a digit and a point), so the column takes the
+    // wider as measured, each with the default suffix (as translated). A value even a pixel
+    // over its column wraps the suffix onto a second line.
     // The settings' summary and checkbox rows lay out with these constants too.
     internal const float RowHeight = 30f;
     internal const float RowGap = 6f;
     internal const float RowIndent = Listing.DefaultIndent;
     internal const float RowEndPad = Listing.DefaultIndent;
-    private const float LabelShare = 0.4f;
-    private const string WidestValue = "00.00";
+    private const float MaxLabelShare = 0.4f;
+    private const float LabelPad = 14f;
+    private static readonly string[] WidestValues = { "00.00", "000%" };
     private const float SliderPad = 10f;
+
+    // Every label the shared column covers: each Tunable's, and that of any other row kind
+    // laid out as a Tunable row (AddLabel), read afresh when measured since a language switch
+    // or a LabelArg changes them. Measured once a frame.
+    private static readonly List<Func<string>> Labels = new();
+    private static int widestLabelFrame = -1;
+    private static float widestLabel;
 
     private readonly string key;
     private readonly float min;
@@ -53,6 +69,7 @@ public sealed class Tunable
         this.step = step;
         this.format = format;
         DefaultValue = Unset;
+        Labels.Add(Label);
     }
 
     public float DefaultValue { get; set; }
@@ -147,8 +164,8 @@ public sealed class Tunable
         Rect row = listing.GetRect(RowHeight);
         row.xMin += RowIndent;
         row.xMax -= RowEndPad;
-        Rect labelRect = row.LeftPart(LabelShare);
-        float valueWidth = Text.CalcSize(WidestValue + "OLWC_DefaultSuffix".Translate()).x;
+        Rect labelRect = row.LeftPartPixels(LabelWidth(row.width));
+        float valueWidth = ValueWidth();
         var valueRect = new Rect(row.xMax - valueWidth, row.y, valueWidth, row.height);
         var sliderRect = new Rect(labelRect.xMax + SliderPad, row.y,
             valueRect.x - labelRect.xMax - 2f * SliderPad, row.height);
@@ -161,7 +178,7 @@ public sealed class Tunable
             shown += "OLWC_DefaultSuffix".Translate();
         TextAnchor anchor = Text.Anchor;
         Text.Anchor = TextAnchor.MiddleLeft;
-        Widgets.Label(labelRect, LabelArg == null ? ("OLWC_" + key).Translate() : ("OLWC_" + key).Translate(LabelArg));
+        Widgets.Label(labelRect, Label());
         Widgets.Label(valueRect, shown);
         Text.Anchor = anchor;
 
@@ -190,6 +207,35 @@ public sealed class Tunable
             isDefault = index == Nearest(stops, DefaultValue);
         }
         value = isDefault ? Unset : snapped;
+    }
+
+    // For a row kind of a mod's own that lays out as a Tunable row: its label joins the shared
+    // column's measure, and LabelWidth gives it the column.
+    internal static void AddLabel(Func<string> label) => Labels.Add(label);
+
+    // The label column's width in a row of the given width, by the layout rule above.
+    internal static float LabelWidth(float rowWidth)
+    {
+        if (widestLabelFrame != Time.frameCount)
+        {
+            widestLabelFrame = Time.frameCount;
+            widestLabel = 0f;
+            foreach (Func<string> label in Labels)
+                widestLabel = Mathf.Max(widestLabel, Text.CalcSize(label()).x);
+        }
+        return Mathf.Min(widestLabel + LabelPad, rowWidth * MaxLabelShare);
+    }
+
+    private string Label() =>
+        LabelArg == null ? ("OLWC_" + key).Translate() : ("OLWC_" + key).Translate(LabelArg);
+
+    private static float ValueWidth()
+    {
+        string suffix = "OLWC_DefaultSuffix".Translate();
+        float width = 0f;
+        foreach (string widest in WidestValues)
+            width = Mathf.Max(width, Text.CalcSize(widest + suffix).x);
+        return width;
     }
 
     private string Format(float stored) => format(stored / DisplayScale);
