@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>重新啟動後才會生效。</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>雜項</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>遠古御機使穿戴霸主型戰棺</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>啟用時，墜毀的御機使戰艦中那位逝世已久的御機使會穿戴霸主型戰棺，在遠古御機使陵墓中發現的御機使也有30%會穿戴。停用時，他們會穿著自己的衣服。\n\n戰棺無法從屍體上脫下。</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>預設值：{0}。</OLWC_SwitchDefault>
   <!-- EN: on -->

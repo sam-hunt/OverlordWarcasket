@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>El cambio se aplicará tras reiniciar.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>Varios</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>Los mecanitores ancestrales llevan el ataúd de guerra soberano</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>Si está activado, el mecanitor muerto hace tiempo en una nave de mecanitor estrellada llevará un ataúd de guerra soberano, igual que el 30% de los que se encuentran en complejos de mecanitor ancestrales. Si está desactivado, llevarán su propia ropa.\n\nNo se le puede quitar el ataúd de guerra a un cadáver.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>Por defecto: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

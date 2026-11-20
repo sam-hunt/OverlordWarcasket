@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>変更は再起動後に反映されます.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>その他</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>古代のメカニターがオーバーロード・ウォーキャスケットを装着する</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>有効にすると,墜落したメカニター船で遠い昔に死んだメカニターがオーバーロード・ウォーキャスケットを装着します.古代のメカニターの遺跡で見つかるメカニターは,30%が装着します.無効にすると,自分の服を着たままになります.\n\nウォーキャスケットは死体から外せません.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>デフォルト: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

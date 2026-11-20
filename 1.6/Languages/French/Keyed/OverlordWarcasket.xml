@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>Le changement prendra effet après un redémarrage.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>Divers</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>Les méchanitors anciens portent le warcasket suzerain</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>Si cette option est activée, le méchanitor mort depuis longtemps à bord d'un vaisseau de méchanitor écrasé portera un warcasket suzerain, tout comme 30% de ceux qu'on trouve dans les anciens complexes de méchanitor. Si elle est désactivée, ils porteront leurs propres vêtements.\n\nLe warcasket ne peut pas être retiré d'un cadavre.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>Par défaut : {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

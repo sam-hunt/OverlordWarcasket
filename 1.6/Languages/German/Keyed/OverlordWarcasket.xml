@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>Die Änderung wird nach einem Neustart wirksam.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>Sonstiges</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>Antike Mechanitoren tragen den Gebieter-Kriegssarg</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>Wenn aktiviert, trägt der längst verstorbene Mechanitor in einem abgestürzten Mechanitor-Schiff einen Gebieter-Kriegssarg, ebenso 30% der Mechanitoren in antiken Mechanitor-Komplexen. Wenn deaktiviert, tragen sie ihre eigene Kleidung.\n\nEiner Leiche lässt sich der Kriegssarg nicht abnehmen.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>Standard: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

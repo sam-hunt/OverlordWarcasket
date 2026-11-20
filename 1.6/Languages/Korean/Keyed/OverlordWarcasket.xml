@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>변경 사항은 재시작한 뒤 적용됩니다.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>기타</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>고대 메카나이터의 대군주 워캐스킷 착용</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>켜면 추락한 메카나이터 함선에서 오래전에 사망한 메카나이터가 대군주 워캐스킷을 착용하고, 고대 메카나이터 유적에서 발견되는 메카나이터 중 30%도 착용합니다. 끄면 원래 입던 옷을 입습니다.\n\n워캐스킷은 시체에서 벗길 수 없습니다.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>기본값: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>Изменение вступит в силу после перезапуска.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>Разное</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>Древние механиторы носят командирскую броню мертвеца</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>Если включено, давно умерший механитор на разбившемся корабле механитора будет носить командирскую броню мертвеца, как и 30% механиторов из древних механиторских комплексов. Если отключено, они останутся в своей одежде.\n\nБроню мертвеца нельзя снять с трупа.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>По умолчанию: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->

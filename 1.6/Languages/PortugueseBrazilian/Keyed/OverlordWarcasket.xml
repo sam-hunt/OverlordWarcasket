@@ -275,6 +275,13 @@
   <!-- EN: The change will take effect after a restart. -->
   <OLWC_CerebrexSummaryRestart>A mudança terá efeito depois que o jogo for reiniciado.</OLWC_CerebrexSummaryRestart>
 
+  <!-- EN: Miscellaneous -->
+  <OLWC_SectionMisc>Diversos</OLWC_SectionMisc>
+  <!-- EN: Ancient mechanitors wear the overlord warcasket -->
+  <OLWC_AncientPilot>Mecanizadores ancestrais vestem a carcaça de guerra suserano</OLWC_AncientPilot>
+  <!-- EN: When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse. -->
+  <OLWC_AncientPilotDesc>Quando ativado, o mecanizador morto há muito tempo em uma nave de mecanizador acidentada vestirá uma carcaça de guerra suserano, assim como 30% dos que forem encontrados em complexos de mecanizador ancestrais. Quando desativado, eles vestirão as próprias roupas.\n\nA carcaça de guerra não pode ser removida de um cadáver.</OLWC_AncientPilotDesc>
+
   <!-- EN: Default: {0}. -->
   <OLWC_SwitchDefault>Padrão: {0}.</OLWC_SwitchDefault>
   <!-- EN: on -->
