@@ -76,6 +76,14 @@ namespace OverlordWarcasket;
 // that CerebrexNode.Icon re-resolves after a reload. The section needs none of the set's defs
 // and is skipped without Odyssey.
 //
+// The miscellaneous section is last and holds what belongs to no part of the set: one switch
+// (ancientPilot) that overrides enabled on the armor's AncientPilotExtension, which AncientPilot
+// reads as a dead mechanitor is made, so a corpse already made keeps what it wore. It has no
+// summary and no tooltip, a heading over unrelated rows having nothing to sum up. Its header's
+// icon is the ancient mechanitor complex's world map icon, Biotech's art, read off the site
+// part def at draw time as the ability's is. The section is skipped while the armor lacks the
+// extension.
+//
 // What a write leaves on live instances is caught up by them: a running cooldown on the next
 // gizmo request, keyed on Generation (Ability_ResurrectMech.ReconcileSettings); charges above a
 // lowered capacity are trimmed off the worn resurrectors at once (TrimWornResurrectors), and a
@@ -85,6 +93,7 @@ public class OverlordWarcasketSettings : ModSettings
     private const string AbilityDefName = "OLWC_ResurrectMech";
     private const string ArmorDefName = "OLWC_Warcasket_Overlord";
     private const string ApocritonDefName = "Mech_Apocriton";
+    private const string MechanitorComplexDefName = "AncientComplex_Mechanitor";
 
     // The whitespace above every section header but the first, and below the last row.
     private const float SectionGap = 28f;
@@ -94,6 +103,7 @@ public class OverlordWarcasketSettings : ModSettings
 
     public readonly BoolSetting requireMechlink = new("RequireMechlink");
     public readonly BoolSetting sparksOnlyDrafted = new("SparksOnlyDrafted");
+    public readonly BoolSetting ancientPilot = new("AncientPilot");
     public readonly CerebrexArtSetting cerebrexArt = new();
     public readonly WorkSetting work = new();
     public readonly CommandRangeSetting commandRange = new();
@@ -178,6 +188,9 @@ public class OverlordWarcasketSettings : ModSettings
     private CerebrexArt cerebrexLive;
     private string cerebrexTip;
 
+    // The armor's extension the ancient pilot switch writes; null hides the miscellaneous section.
+    private AncientPilotExtension ancientPilotProps;
+
     private IEnumerable<Tunable> All => [charges, recharge, reloadCost, corpseAge, castTime, cooldown, range, sparkFrequency];
 
     private static string Whole(float v) => Mathf.RoundToInt(v).ToString();
@@ -226,6 +239,7 @@ public class OverlordWarcasketSettings : ModSettings
         base.ExposeData();
         requireMechlink.ExposeData();
         sparksOnlyDrafted.ExposeData();
+        ancientPilot.ExposeData();
         cerebrexArt.ExposeData();
         work.ExposeData();
         commandRange.ExposeData();
@@ -236,8 +250,8 @@ public class OverlordWarcasketSettings : ModSettings
 
     // Reads the def-backed defaults before the first ApplyToDefs overwrites them; defs must be
     // loaded, so ModInit's static constructor calls this, never the Mod constructor. The cerebrex
-    // node's, the command range's and the stun pulse's come first, needing none of the ability's
-    // defs.
+    // node's, the command range's, the stun pulse's and the ancient pilot's come first, needing
+    // none of the ability's defs.
     public void LoadDefaultsFromDefs()
     {
         cerebrexNode = CerebrexNode.Def;
@@ -249,6 +263,9 @@ public class OverlordWarcasketSettings : ModSettings
         }
         commandRange.LoadDefaults();
         stunPulse.LoadDefaults();
+        ancientPilotProps = AncientPilot.Extension;
+        if (ancientPilotProps != null)
+            ancientPilot.DefaultValue = ancientPilotProps.enabled;
         if (!TryGetDefs(out Defs defs))
             return;
         charges.DefaultValue = defs.resurrector.maxCharges;
@@ -287,14 +304,16 @@ public class OverlordWarcasketSettings : ModSettings
         defaultsLoaded = true;
     }
 
-    // The work profile, the command range and the stun pulse go first: they need none of the
-    // ability's defs, so a saved choice still holds while they are missing, though the page is
-    // unavailable to change it. The cerebrex art choice writes nothing here; its patch read it at startup.
+    // The work profile, the command range, the stun pulse and the ancient pilot go first: they
+    // need none of the ability's defs, so a saved choice still holds while they are missing,
+    // though the page is unavailable to change it. The cerebrex art choice writes nothing here; its patch read it at startup.
     public void ApplyToDefs()
     {
         WorkProfile.Apply(work.IsOpen);
         commandRange.Apply();
         stunPulse.Apply();
+        if (ancientPilotProps != null)
+            ancientPilotProps.enabled = ancientPilot.Value;
         if (!defaultsLoaded || !TryGetDefs(out Defs defs))
             return;
         defs.resurrector.maxCharges = Mathf.Max(1, charges.IntValue);
@@ -395,6 +414,12 @@ public class OverlordWarcasketSettings : ModSettings
             SummaryRow(listing, CerebrexSummary);
             cerebrexArt.DoRows(listing, cerebrexLive);
         }
+        if (ancientPilotProps != null)
+        {
+            SectionHeader(listing, "OLWC_SectionMisc",
+                DefDatabase<SitePartDef>.GetNamedSilentFail(MechanitorComplexDefName)?.ExpandingIconTexture, tooltip: null);
+            ancientPilot.DoRow(listing);
+        }
         listing.Gap(SectionGap);
         contentHeight = listing.CurHeight;
         listing.End();
@@ -405,6 +430,7 @@ public class OverlordWarcasketSettings : ModSettings
         {
             requireMechlink.Reset();
             sparksOnlyDrafted.Reset();
+            ancientPilot.Reset();
             cerebrexArt.Reset();
             work.Reset();
             commandRange.Reset();

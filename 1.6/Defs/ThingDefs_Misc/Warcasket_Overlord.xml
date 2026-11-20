@@ -33,6 +33,7 @@
       the set to serve, and the psychic sensitivity it leaves its pilot makes that pawn an
       easy capture where the tier's other sets deafen theirs. VFEP's slot fill reads no tags;
       Source/1.6/Patches/PawnGenerator_GeneratePawn_Patch_Postfix.cs keeps the set out of it.
+      The one generated pawn that may wear the set is dead (Ancient pilot, below).
       Save Our Ship 2's EVA tag (1.6/Patches/SOS2Patch.xml) is then the only one a part has.
 
     Alpha Mechs (sarg.alphamechs) gets no compat root: it labels the vanilla chips tiers 1 to
@@ -118,6 +119,43 @@
     Def.ResolveReferences prefix, the highest priority surviving, and ApparelExtension.Merge
     does not copy every field; at equal priority the parent's copy would win. Any new
     ApparelExtension field for this piece goes on this entry.
+
+    Ancient pilot: AncientPilotExtension, the set on the long-dead mechanitors Biotech leaves
+    for the player to find, the one exception to keeping it off generated pawns and flavour
+    only. Source/1.6/AncientPilot/AncientPilot.cs has how the corpse is dressed. enabled is a
+    mod setting defaulting to the value here; the two chances are def-only, and the setting's
+    tooltip quotes them.
+    - enabled false: the set appears on no generated pawn unless the player asks for it.
+    - shipChance 1, the crashed ship of the mechanitor ship quest: with the setting on, its
+      corpse always wears the set.
+    - podChance 0.3, the cryptosleep pod of an ancient mechanitor complex: most of those
+      mechanitors still died in their own clothes.
+    - otherPieces: with this def, the set the corpse wears, whole or not at all.
+    Why it hands the player nothing (vanilla 1.7.5014, VFEP v4.03's source, and on the frozen
+    1.6 assemblies the VFEP prefixes and GenDrop's rule):
+    - The set cannot be taken off the corpse. VFEP's prefix on Pawn.AnythingToStrip answers
+      false for any pawn wearing a warcasket piece, alive or dead, which closes the strip
+      order on the corpse. The vanilla lock would not: Pawn.Strip drops locked apparel off a
+      dead pawn. A strip forced past the order still yields no piece, since
+      GenDrop.TryDropSpawn destroys a destroyOnDrop thing and VFEP's prefix on GenSpawn.Spawn
+      refuses any WarcasketDef. The corpse's destruction (cremation, decay) destroys what it
+      wears (Corpse.PostCorpseDestroy).
+    - The same prefix keeps the corpse's inventory on it, the item or two it was generated
+      with, so a dressed corpse gives up less than an undressed one. Taking the mechlink is a
+      job of its own (JobDriver_RemoveMechlink) and no strip.
+    - Colony wealth does not count it: the dead pawn is of the ancients' faction, and
+      WealthWatcher.WealthItemsFilter skips what a pawn of another faction holds.
+    - Next to nothing vanilla brings the pilot back alive. Both sources age the corpse by a
+      random span of up to 360,000,000 ticks against the 300,000 it takes to desiccate, and
+      the resurrector serum and the apocriton-style resurrect refuse a desiccated corpse.
+    Accepted, by decision: about one corpse in 1,200 is aged short of desiccated, and a
+    resurrector serum brings that one back as a living pilot in the set, as it brings back
+    the mechanitor in vanilla. With Anomaly, deadlife dust and a death pall raise a desiccated
+    corpse left outdoors as a shambler (MutantUtility.CanResurrectAsShambler reads no rot
+    stage), which keeps what the corpse wore, so the pilot walks again in the set and its
+    second death sets off the stun pulse. Its corpse is as unstrippable as the first. A mod
+    that resurrects desiccated corpses hands over a living pilot in the set, on top of the
+    mechanitor that mod already gives away.
 
     Patched by 1.6/Patches/SOS2Patch.xml (EVA tag, cold insulation),
     1.6/Mods/VanillaGravshipExpanded/Patches/VacuumResistance.xml and the
@@ -237,6 +275,15 @@
             <minLevel>0.7</minLevel>
           </li>
         </pawnCapacityMinLevels>
+      </li>
+      <li Class="OverlordWarcasket.AncientPilotExtension">
+        <enabled>false</enabled>
+        <shipChance>1</shipChance>
+        <podChance>0.3</podChance>
+        <otherPieces>
+          <li>OLWC_WarcasketShoulders_Overlord</li>
+          <li>OLWC_WarcasketHelmet_Overlord</li>
+        </otherPieces>
       </li>
     </modExtensions>
   </VFEPirates.WarcasketDef>

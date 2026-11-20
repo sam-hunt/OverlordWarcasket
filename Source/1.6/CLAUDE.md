@@ -65,6 +65,15 @@ comments cover install-path detection, the compile-only VFEP/VEF references (`VF
   asks the explosion for no display and plays vanilla's itself with that effecter at the
   centre, never writing to Biotech's damage def. The settings write the radius onto its
   children's `scale` and its flecks' `growthRate`, so those flecks serve no other effecter.
+- **The ancient pilot is one rule and two postfixes.** `AncientPilot/AncientPilot.TryDress` puts
+  the whole set on a dead mechanitor by the chances on the armor's `AncientPilotExtension`, and
+  is called only from the postfixes on the two vanilla methods that make those corpses
+  (`Patches/QuestNode_Root_MechanitorShip_RunInt`,
+  `Patches/LayoutWorkerComplex_Mechanitor_TryPlaceDeceasedMechanitor`), both bound by name with
+  a stand-down. Never dress a pawn from a `PawnGenerator` patch: the pawn must have left
+  generation, past VFEP's slot fill and the generator's death notice, and it must be dead.
+  `AncientPilot`'s header has the order of events and what the corpse is left as; the armor
+  def's has why the set gives the player nothing this way.
 - **The ability is a thin VEF `Ability`** whose rules mirror Biotech's
   `CompAbilityEffect_ResurrectMech` (the file header quotes the build they were verified on), but
   single-target, and with the extension's cost table alone deciding which weight classes come

@@ -21,12 +21,15 @@ armor, drawing on a mech resurrector that recharges by itself and reloads with a
 components, with a red gauge), the overlord work trait (the pilot keeps smithing and research, so
 mech work and hacking), the shoulders' command range (a wearing mechanitor orders drafted mechs
 anywhere on the map, vanilla's 24.9 cells lifted behind a settings section that can move it to
-the helmet) and the armor's mech stun pulse (the apocriton's death pulse fired from the pilot,
+the helmet), the armor's mech stun pulse (the apocriton's death pulse fired from the pilot,
 stunning every mech in reach, the pilot's own included, on the pilot's death or, by a setting,
-their downing) are implemented, and the set's stats and costs are priced against Biotech's mechlord
+their downing) and the ancient pilot (an opt-in setting that dresses Biotech's long-dead
+mechanitors, the ship quest's and the complex pod's, in the set, the one generated pawn that may
+wear it) are implemented, and the set's stats and costs are priced against Biotech's mechlord
 gear on the tier's standard plating and shield. Saves now carry the defNames and scribed C#
 types, so a rename needs a save migration. `TODOs.md` is the ledger. Each feature's design rationale is a `Docs/Specs/` file (the stun
-pulse's is in `CompMechStunPulse`'s header and the armor def's); the sibling
+pulse's is in `CompMechStunPulse`'s header and the armor def's, the ancient pilot's in
+`AncientPilot`'s and the armor def's); the sibling
 `../MedicWarcasket/` repo (same author, same VFEP base) is the worked precedent for the own-trait
 work profile, the settings idiom and the infrastructure copied here, and `../ToxinWarcasket/` for
 the gauge and the Biotech dependency.
@@ -77,7 +80,8 @@ patch between the north offsets of VFEP's armor and shoulder bases, read from th
 arithmetic, the trait mirror's tag and work type rules, the command range's distance and slider
 ladder, the resurrector's cost table, gauge count and reload rule, the cast range's no-limit
 rule, slider stops and ring cells, the stun pulse's trigger rule, display scale and def wiring,
-and the mask that keeps the set off generated pawns.
+the ancient pilot's chance rule, def wiring and the two vanilla methods its patches bind by
+name, and the mask that keeps the set off generated pawns.
 
 ## Layout
 

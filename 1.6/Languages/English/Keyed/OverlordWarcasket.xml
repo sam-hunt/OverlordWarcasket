@@ -152,6 +152,11 @@
   <OLWC_CerebrexSummary_DyeFrameAndRing>The cerebrex node uses the new art, and dye colors its frame and ring.</OLWC_CerebrexSummary_DyeFrameAndRing>
   <OLWC_CerebrexSummaryRestart>The change will take effect after a restart.</OLWC_CerebrexSummaryRestart>
 
+  <!-- Miscellaneous (Source/1.6/AncientPilot/). The tooltip quotes the two chances on the armor's AncientPilotExtension. -->
+  <OLWC_SectionMisc>Miscellaneous</OLWC_SectionMisc>
+  <OLWC_AncientPilot>Ancient mechanitors wear the overlord warcasket</OLWC_AncientPilot>
+  <OLWC_AncientPilotDesc>When enabled, the long-dead mechanitor in a crashed mechanitor ship will wear an overlord warcasket, and so will 30% of those found in ancient mechanitor complexes. When disabled, they will wear their own clothes.\n\nThe warcasket cannot be removed from a corpse.</OLWC_AncientPilotDesc>
+
   <OLWC_SwitchDefault>Default: {0}.</OLWC_SwitchDefault>
   <OLWC_SwitchOn>on</OLWC_SwitchOn>
   <OLWC_SwitchOff>off</OLWC_SwitchOff>

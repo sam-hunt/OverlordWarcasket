@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A mod setting, off by default, that puts the overlord warcasket on the long-dead mechanitor in a crashed mechanitor ship and on 30% of those in ancient mechanitor complexes
+
 ### Fixed
 
 - Pawns no longer fail to generate when another warcasket mod also keeps its parts off generated pawns
